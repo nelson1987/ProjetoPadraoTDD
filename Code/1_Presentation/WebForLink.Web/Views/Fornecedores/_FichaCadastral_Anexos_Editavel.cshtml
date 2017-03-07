@@ -1,0 +1,97 @@
+﻿@model IEnumerable<WebForLink.Web.ViewModels.SolicitacaoDocumentosVM>
+
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".upload").change(function () {
+            var obj = $(this).parent('div').parent('div').children('span').text($(this)[0].files[0].name);
+            var displayforName = $(this).attr('id').substr();
+            displayforName = '#' + displayforName.substr(0, displayforName.indexOf('__'));
+
+            if ($(displayforName + "__UsadoEmOutroContratante").val() == "True")
+                $(displayforName + "_divPerguntaAtualizacaoDoc").toggleClass("hidden");
+        });
+
+        var habilitaEdicao = $("#HabilitaEdicao").val() == "True";
+        if (habilitaEdicao) {
+            var objDivPai = $("#divDocumentos").parent(),
+                objDivBotoesEdicao = objDivPai.children(".text-right")[0];
+
+            $(objDivBotoesEdicao).toggleClass("hidden");
+        }
+    });
+
+    function validaSalvarAnexos() {
+        if (uploads > 0) {
+            $('#ConfirmacaoAnexos').removeClass();
+            $('#ConfirmacaoAnexos').addClass("alert alert-danger");
+            $('#ConfirmacaoAnexos span').text('Ainda existe(m) arquivo(s) em processo de upload. Favor aguardar...');
+            $('#btnSimDoc').prop('disabled', true);
+            $('#btnNaoDoc').prop('disabled', false);
+
+            setTimeout(function () { $('#ConfirmacaoAnexos').fadeOut('fast'); }, 10000);
+        }
+        else {
+            $('#ConfirmacaoAnexos').removeClass();
+            $('#ConfirmacaoAnexos').addClass("alert alert-warning");
+            $('#ConfirmacaoAnexos span').text('Tem certeza que deseja abrir uma solicitação de atualização de arquivo para este documento?');
+            $('#btnSimDoc').prop('disabled', false);
+            $('#btnNaoDoc').prop('disabled', false);
+        }
+
+        $('#ConfirmacaoAnexos').fadeIn('fast');
+        $('#btnSimDoc').focus();
+    }
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="popover"]').popover({
+            container: 'body',
+            html: true,
+            content: function () {
+                return $("#relatorioSelecionados").html();
+            },
+            placement: "right"
+        }).click(function (e) {
+            e.preventDefault();
+        });
+    });
+    </script>
+
+}
+@if (ViewBag.HabilitaEdicao == null) { ViewBag.HabilitaEdicao = true; }
+<div id="boxGrid" class="box box-primary">
+    <div class="box-header">
+        <h3 class="box-title">Documentos</h3>
+        @if (ViewBag.DataProrrogacao != null)
+        {
+            <h2 class="box-title">@string.Format("Esta solicitação foi prorrogada para: {0}", ViewBag.DataProrrogacao) </h2>
+        }
+    </div>
+    <div class="box-body">
+        <div id="divDocumentos">
+            @Html.ValidationMessage("AnexosValidation", "", new { @class = "text-danger" })
+            @Html.EditorForModel()
+        </div>
+        <br>
+        @if (ViewBag.HabilitaEdicao)
+        {
+            <div class="text-right text-nowrap hidden">
+                <button type="button" class="btn btn-primary" onclick="validaSalvarAnexos();">Salvar</button>
+                <button type="button" class="btn btn-danger" onclick="cancelarDados('Documentos', '@Url.Action("CancelarDocumentos", "ModificacaoDocumento")');">Cancelar</button>
+            </div>
+            <div id="ConfirmacaoAnexos" class="alert alert-warning" role="alert" style="display: none;">
+                <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="submit" id="btnSimDoc" class="btn btn-primary btn-xs" onclick="">Sim</button>&nbsp;&nbsp;&nbsp;
+                <button type="button" id="btnNaoDoc" class="btn btn-default btn-xs" onclick="$('#ConfirmacaoAnexos').fadeOut('fast');">Não</button>
+            </div>
+        }
+        else
+        {
+            <div class="text-right text-nowrap hidden">
+                <button type="button" class="btn btn-danger" onclick="$('#dv_viewdocumento').addClass('hidden');">Cancelar</button>
+            </div>
+        }
+        <div class="clearfix"></div>
+    </div>
+</div>
+

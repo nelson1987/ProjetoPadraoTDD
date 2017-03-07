@@ -1,0 +1,137 @@
+@using WebForLink.Web.Helpers
+@using WebForLink.Web.ViewModels
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.png" />
+    <style>
+        /* Sticky footer styles
+        -------------------------------------------------- */
+        html {
+            min-height: 100%;
+            position: relative;
+        }
+
+        body {
+            /* Margin bottom by footer height */
+            margin-bottom: 50px;
+        }
+
+        .footer {
+            bottom: 0;
+            position: absolute;
+            width: 100%;
+        }
+
+        /* Custom page CSS
+        -------------------------------------------------- */
+
+        /* Not required for template or sticky footer method. */
+
+        .container {
+            width: auto;
+        }
+
+            .container .text-muted {
+                margin: 20px 0;
+            }
+    </style>
+
+    @if (IsSectionDefined("styles"))
+    {
+        @RenderSection("styles")
+    }
+</head>
+<body>
+    @{
+        var usuario = User as TranspetroPrincipal;
+    }
+    <div id="aguarde" class="hidden">
+        Aguarde...<img src="~/Content/images/loading.gif" />
+    </div>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="height: 30px;">
+        @*<div class="container">*@
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @*@Html.ActionLink("Application name", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})*@
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav" style="height: 30px; padding-top: 0px;">
+                <li>@Html.ActionLink("Acesso", "Index", "Acesso")</li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style="height: 30px; padding-top: 2px;">
+                @{
+                    if (usuario != null)
+                    {
+                        <li> @usuario.Chave</li>
+                    }
+                }
+                <li>@Html.Acessar()</li>
+            </ul>
+        </div>
+        @*</div>*@
+    </div>
+    <div id="divAcesso">
+        <div class="modal fade" id="acessoModal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                @*@Html.Partial("~/Views/Login/_Logar.cshtml")*@
+            </div>
+        </div>
+    </div>
+    @RenderBody()
+    <footer class="footer">
+        <div class="container">
+            <p class="pull-left">
+                Copyright &copy; CH Consultoria 2016
+            </p>
+        </div> <!-- /.container -->
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $.ajaxSetup({
+            beforSend: function () {
+                alert("COMEÇOU");
+                $('#aguarde').show();
+            },
+            complete: function (data) {
+                $('#aguarde').hide();
+            }
+        });
+        $(function () {
+            $('.carousel').carousel();
+            $("#btnAcesso").click(function () {
+                $.ajax({
+                    url: "@Url.Action("Index", "Login")",
+                    method: "GET",
+                    datatype: "application/html; charset=utf-8",
+                    sucess: function (data) {
+                        $("#acessoModal .modal-dialog").html(data);
+                        $
+                        ("#acessoModal").modal("show");
+                        $
+                        (".modal-dialog form").removeData("validator");
+                        $
+                        (".modal-dialog form").removeData("unobtrusiveValidation");
+                        jQuery.validator.unobtrusive.parse(".modal-dialog form");
+                    },
+                    complete: function (data) {
+                        console.log(data);
+                    }
+                });
+            });
+        });
+    </script>
+    @RenderSection("scripts", false)
+</body>
+</html>

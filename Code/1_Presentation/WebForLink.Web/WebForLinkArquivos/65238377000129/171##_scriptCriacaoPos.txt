@@ -1,0 +1,54 @@
+CREATE SCHEMA 'dbo' ;
+CREATE TABLE 'dbo'.'fornecedor' (
+  'idFornecedor' INT NOT NULL AUTO_INCREMENT,
+  'RazaoSocial' VARCHAR(100) NULL,
+  PRIMARY KEY ('idFornecedor'))
+COMMENT = 'Tabela de Fornecedores';
+CREATE TABLE 'dbo'.'material' (
+  'idMaterial' INT NOT NULL AUTO_INCREMENT,
+  'Nome' VARCHAR(100) NULL,
+  'Sku' VARCHAR(45) NULL,
+  PRIMARY KEY ('idMaterial'))
+COMMENT = 'Tabela de Materiais';
+CREATE TABLE 'dbo'.'fabricante' (
+  'idFabricante' INT NOT NULL AUTO_INCREMENT,
+  'Nome' VARCHAR(100) NULL,
+  PRIMARY KEY ('idFabricante'))
+COMMENT = 'Tabela de Fabricantes';
+CREATE TABLE 'dbo'.'fornecedormaterial' (
+  'idFornecedorMaterial' INT NOT NULL AUTO_INCREMENT,
+  'IdFornecedor' INT NOT NULL,
+  'IdMaterial' INT NOT NULL,
+  PRIMARY KEY ('idFornecedorMaterial'),
+  INDEX 'FornecedorMaterial_Fornecedor_idx' ('IdFornecedor' ASC),
+  INDEX 'FornecedorMaterial_Material_idx' ('IdMaterial' ASC),
+  CONSTRAINT 'FornecedorMaterial_Fornecedor'
+    FOREIGN KEY ('IdFornecedor')
+    REFERENCES 'dbo'.'fornecedor' ('idFornecedor')
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT 'FornecedorMaterial_Material'
+    FOREIGN KEY ('IdMaterial')
+    REFERENCES 'dbo'.'material' ('idMaterial')
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+COMMENT = 'Tabela Relacional entre Fornecedores e Materiais';
+CREATE TABLE 'dbo'.'fabricantematerial' (
+  'idFabricanteMaterial' INT NOT NULL AUTO_INCREMENT,
+  'IdFabricante' INT NOT NULL,
+  'IdMaterial' INT NOT NULL,
+  PRIMARY KEY ('idFabricanteMaterial'),
+  INDEX 'FabricanteMaterial_Fabricante_idx' ('IdFabricante' ASC),
+  INDEX 'FabricanteMaterial_Material_idx' ('IdMaterial' ASC),
+  CONSTRAINT 'FabricanteMaterial_Fabricante'
+    FOREIGN KEY ('IdFabricante')
+    REFERENCES 'dbo'.'fabricante' ('idFabricante')
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT 'FabricanteMaterial_Material'
+    FOREIGN KEY ('IdMaterial')
+    REFERENCES 'dbo'.'material' ('idMaterial')
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+COMMENT = 'Tabela Relacional entre Fabricante e Material	';
+

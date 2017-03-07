@@ -1,0 +1,465 @@
+﻿@model WebForLink.Web.ViewModels.FornecedoresSolicitacaoDocumentosVM
+
+<link href="~/Content/css/bootstrap3-wysihtml5.css" rel="stylesheet" />
+
+<style>
+    .fileUpload {
+        position: relative;
+        overflow: hidden;
+        margin: 0px;
+        height: 30px;
+        float: left;
+    }
+
+        .fileUpload input.upload {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+
+    #uploadFile {
+        border: 0;
+        background-color: transparent;
+    }
+</style>
+
+<section class="content-header">
+    <h1>
+        Cadastro de Lista de Documentos
+        <!-- small>Control panel</small -->
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> Fornecedores</li>
+        <li class="active">Cadastro de Lista de Documentos</li>
+    </ol>
+</section>
+
+<!-- FORM -->
+<section class="content">
+    <div id="divTipoDocumento" class="box box-primary" style="display: none;"></div>
+    <div id="divDescricaoDocumento" class="box box-primary" style="display: none;"></div>
+    <div class="row">
+        <div class="alert alert-danger" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick="$(this).fadeOut('fast')"></div>
+    </div>
+    <div id="boxForm" class="box box-primary">
+        <div class="box-body">
+            @using (Html.BeginForm("ConfirmarFornecedoresSolicitacaoDocumento", "Fornecedores", FormMethod.Post))
+            {
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <label>Selecionados:</label>
+                            <label class="badge">@Model.listPJPF.Count()</label>
+                            <button type="button" class="btn btn-xs btn-default" data-toggle="popover" title="" data-original-title="Fornecedores" data-trigger="focus">Ver</button>
+                        </div>
+                    </div>
+                    <div id="relatorioSelecionados" class="hidden">
+                        <ul class="list-unstyled">
+                            @{string fornecedores = "";
+                                var lastItem = Model.listPJPF.Last();
+                            }
+
+                            @foreach (var item in Model.listPJPF)
+                            {
+                                <li>
+                                    <b>@item.CNPJ</b><br />
+                                    @item.RAZAO_SOCIAL
+                                </li>
+                                if (!item.Equals(lastItem))
+                                {
+                                    fornecedores += item.ID + "|";
+                                }
+                                else
+                                {
+                                    fornecedores += item.ID;
+                                }
+                            }
+                        </ul>
+                        <input type="hidden" id="hdnFornecedores" name="hdnFornecedores" value="@fornecedores" />
+                        @Html.HiddenFor(x => x.CNPJContratante)
+                        <input type="hidden" class="form-control" id="recipient-name">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tipo de Documento</label>&nbsp;<span class="text-danger" style="font-weight:bold;">*</span><br />
+                            @Html.DropDownList("TipoDocumentos", null, "Selecione...", htmlAttributes: new { @class = "form-control input-sm", disable_input = "" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Documento</label>&nbsp;<span class="text-danger" style="font-weight:bold;">*</span><br />
+                            @Html.DropDownList("DescricaoDeDocumentos", null, htmlAttributes: new { @class = "form-control input-sm", disable_input = "" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="radio">
+                                <label class="radio-inline">
+                                    @Html.RadioButtonFor(model => model.Obrigatorio, false) <b>Necessário</b>
+                                </label>
+                                <label class="radio-inline">
+                                    @Html.RadioButtonFor(model => model.Obrigatorio, true) <b>Exigível</b>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="clearfix"></div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label>Este documento será atualizado?</label>
+                            <div class="radio">
+                                <label class="radio-inline">
+                                    @Html.RadioButtonFor(model => model.TipoAtualizacao, 1, new { onclick = "$('#divPeriodicidade').hide(); $('#Periodicidade').val('');", @checked = true }) Não será atualizado
+                                </label>
+                                <label class="radio-inline">
+                                    @Html.RadioButtonFor(model => model.TipoAtualizacao, 2, new { onclick = "$('#divPeriodicidade').hide(); $('#Periodicidade').val('');" }) Por Validade
+                                </label>
+                                <label class="radio-inline">
+                                    @Html.RadioButtonFor(model => model.TipoAtualizacao, 3, new { onclick = "$('#divPeriodicidade').show();" }) Por Período
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2" id="divPeriodicidade" style="display:none;">
+                        <div class="form-group">
+                            <label>Periodicidade</label>&nbsp;<span class="text-danger" style="font-weight:bold;">*</span><br />
+                            @Html.DropDownList("Periodicidade", null, "Selecione...", htmlAttributes: new { @class = "form-control input-sm", disable_input = "" })
+                            @Html.ValidationMessageFor(model => model.Periodicidade, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-default pull-right" onclick="window.location.href = '/Fornecedores/FornecedoresLst'" style="margin-left:5px;">Voltar</button>
+                        <button id="btnAdicionar" type="button" class="btn btn-primary pull-right" onclick="adicionarGrid();">Adicionar</button>
+                    </div>
+                </div>
+                <br />
+                <div id="gridDocumentos" style="display:none;">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-condensed" id="grid">
+                            <thead>
+                                <tr>
+                                    <th>Tipo de Documento</th>
+                                    <th>Documento</th>
+                                    <th>Necessário/Exigível</th>
+                                    <th>Este documento será atualizado?</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <br />
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Solicitar documentos</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- Modal -->
+                                <div id="myModal" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Envio de documentos solicitados</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Data Validade</label>&nbsp;<span class="text-danger" style="font-weight:bold;">*</span><br />
+                                                            @Html.Hidden("DataHoje", string.Format("{0:dd/MM/yyyy}", DateTime.Now))
+                                                            @Html.TextBoxFor(model => model.ExpiracaoDocumento, "{0:dd/MM/yyyy}", new { @class = "form-control input-sm", data_inputmask = "'alias': 'dd/mm/yyyy'", data_mask = "" })
+                                                            @Html.ValidationMessageFor(model => model.ExpiracaoDocumento, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Assunto</label>
+                                                            @Html.TextBoxFor(x => x.Assunto, new { @class = "form-control input-sm", disable_input = "" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Mensagem</label>
+                                                            @Html.TextAreaFor(x => x.Mensagem, new { @class = "form-control input-sm", disable_input = "", rows = "7" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <div class="col-md-4">
+                                                                <label>&nbsp;</label><br />
+                                                                <div class="fileUpload btn btn-default">
+                                                                    <span>Anexar Arquivo</span>
+                                                                    @Html.TextBoxFor(x => x.Arquivo, new { @class = "upload", type = "file", origemArquivo = "Doc", onchange = "$(this).parent().parent().parent().find('[nomearquivo]').text($(this)[0].files[0].name);" })
+                                                                    @Html.ValidationMessageFor(x => x.Arquivo, "", new { @class = "text-danger" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <label>&nbsp;</label><br />
+                                                                <span class="help-block" style="float: none;">
+                                                                    @Html.HiddenFor(x => x.ArquivoSubido, new { ArquivoSubido = "" })
+                                                                    @Html.HiddenFor(x => x.TipoArquivoSubido, new { TipoArquivoSubido = "" })
+                                                                    @Html.HiddenFor(x => x.ArquivoSubidoOriginal, new { ArquivoSubidoOriginal = "" })
+                                                                    <span percentual>@Html.Raw(!String.IsNullOrEmpty(Model.ArquivoSubido) ? "<span style='color: #00a65a;' title='Arquivo subido com Sucesso!'><i class='fa fa-check-circle'></i></span>" : "")</span>
+                                                                    <span nomearquivo>@Html.Raw(!String.IsNullOrEmpty(Model.ArquivoSubido) ? Model.ArquivoSubidoOriginal : "Nenhum Comprovante Selecionado!")</span>
+                                                                    <span cancelarupload class="badge bg-red-gradient hidden text-center cancelarupload">
+                                                                        Interromper upload?
+                                                                        <button cancelaruploadSim type="button" class="btn btn-default btn-xs">Sim</button>
+                                                                        <button cancelaruploadNao type="button" class="btn btn-default btn-xs" onclick="$(this).parent().toggleClass('hidden')">Não</button>
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                    <dic class="clearfix"></dic>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                                        <button type="button" class="btn btn-primary" onclick="exibirConfirmacao(true);">Confirmar</button>
+                                                        <div id="confirmacao" class="alert-warning text-center hidden" role="alert">
+                                                            <span>Deseja confirmar o envio dos documento(s)?</span>&nbsp;&nbsp;<br />
+                                                            <button type="button" class="btn btn-primary btn-xs" onclick="submitForm(this);">Sim</button>&nbsp;
+                                                            <button type="button" class="btn btn-default btn-xs" onclick="exibirConfirmacao(false);">Não</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Fim Modal -->
+                                </div>
+                                }
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/Scripts/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <script src="~/Scripts/plugins/jqueryUiWidget/jquery.ui.widget.js"></script>
+    <script src="~/Scripts/jquery.fileupload.js"></script>
+    <script src="~/Scripts/Views/Shared/FileUpload.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover({
+                container: 'body',
+                html: true,
+                content: function () {
+                    return $("#relatorioSelecionados").html();
+                },
+                placement: "right"
+            }).click(function (e) {
+                e.preventDefault();
+            });
+
+            $("#Mensagem").wysihtml5();
+
+            $.ajaxSetup({ cache: false });
+
+            AdicionaAcao($('#TipoDocumentos'), AcaoTipoDocumento);
+            if ($('#DescricaoDeDocumentos option').length > 1) {
+                AdicionaAcao($('#DescricaoDeDocumentos'), AcaoDescricaoDocumento);
+            }
+
+            $("#TipoDocumentos").change(function () {
+                montaListaDescricaoDocumento();
+                if ($(this).val() == '-1') {
+                    $('#boxForm').hide();
+                    $('#divTipoDocumento').html('<div class="box-body"><div class="text-center"><i class="fa fa-refresh fa-spin"></i> Aguarde...</div></div>').fadeIn('fast');
+                    $('#divTipoDocumento').load('@Url.Action("TipoDocumento", "MeusDocumentos")');
+                }
+            });
+
+            $("#DescricaoDeDocumentos").change(function () {
+                if ($(this).val() == '-1') {
+                    $('#boxForm').hide();
+                    $('#divDescricaoDocumento').html('<div class="box-body"><div class="text-center"><i class="fa fa-refresh fa-spin"></i> Aguarde...</div></div>').fadeIn('fast');
+                    var urlDesc = '@Url.Action("DescricaoDocumento", "MeusDocumentos")' + '/?tipoDocumentoId=' + encodeURIComponent($('#TipoDocumentos').val()) + "&DescricaoDocumento=" + encodeURIComponent($('#TipoDocumentos option:selected').text());
+                    $('#divDescricaoDocumento').load(urlDesc);
+                }
+            });
+
+            $("#SemValidade").on('click', SemValidade);
+
+            SemValidade();
+
+            aplicarPluginUpload("#Arquivo", "#CNPJContratante");
+        });
+
+        var AcaoTipoDocumento = "[Criar, Editar, Deletar]";
+        var AcaoDescricaoDocumento = "[Criar, Editar, Deletar]";
+
+        function AdicionaAcao(obj, texto) {
+            $(obj).append("<optgroup label='Ação'><option value='-1'>" + texto + "</option></optgroup>");
+        }
+
+        function montaListaDescricaoDocumento() {
+            $.getJSON('@Url.Action("ListaDescricaoDocumento","MeusDocumentos")',
+            {
+                tipoDocumento: $('#TipoDocumentos').val(),
+                tipo: "Frm",
+                cache: false
+            },
+            function (data) {
+                $('#DescricaoDeDocumentos').empty();
+                $.each(data, function (index, optionData) {
+                    $('#DescricaoDeDocumentos').append("<option value='" + optionData.Value + "'>" + optionData.Text + "</option>");
+                });
+                if ($('#TipoDocumentos').val() != '' && $('#TipoDocumentos').val() != '-1')
+                    AdicionaAcao($('#DescricaoDeDocumentos'), AcaoDescricaoDocumento);
+            });
+        }
+
+        function SemValidade() {
+            if ($('#SemValidade').is(':checked')) {
+                $('#DataValidade').prop('disabled', true)
+                $('#DataValidade').val('');
+                $('#DataValidade').datepicker('update');
+            }
+            else {
+                $('#DataValidade').prop('disabled', false)
+            }
+        }
+
+        function TipoAtualizacao(p) {
+            $("input[name=TipoAtualizacao][value=" + p + "]").prop('checked', true);
+
+            if (p == 3)
+                $('#divPeriodicidade').show();
+        }
+
+
+        function compararDataFutura(dataHoje, dataAnterior) {
+            var diaHoje = dataHoje.substring(0, 2);
+            var mesHoje = dataHoje.substring(3, 5);
+            var anoHoje = dataHoje.substring(6, 10);
+            var diaAnterior = dataAnterior.substring(0, 2);
+            var mesAnterior = dataAnterior.substring(3, 5);
+            var anoAnterior = dataAnterior.substring(6, 10);
+
+            var anterior = new Date(anoAnterior, mesAnterior - 1, diaAnterior);
+            var hoje = new Date(anoHoje, mesHoje - 1, diaHoje);
+
+            if (anterior > hoje) {
+                console.log("Entered date is maior than today's date ");
+                return true;
+            }
+            else {
+                console.log("Entered date is MENOR than today's date ");
+                return false;
+            }
+        }
+
+        function adicionarGrid() {
+            var grupoDoc = $("#TipoDocumentos"),
+                doc = $("#DescricaoDeDocumentos"),
+                radTipoAtualizacao = $("#TipoAtualizacao"),
+                dropPeriodicidade;
+
+            /* Validações */
+            if (grupoDoc.val() === "") {
+                $('.alert').fadeIn('slow');
+                $('.alert').text('Necessário selecionar um Tipo de Documento.');
+                setTimeout('$(".alert").fadeOut("slow")', 10000);
+                return false;
+            }
+
+            if (doc.val() === "") {
+                $('.alert').fadeIn('slow');
+                $('.alert').text('Necessário selecionar um documento.');
+                setTimeout('$(".alert").fadeOut("slow")', 10000);
+                return false;
+            }
+
+            if ($('input[name="TipoAtualizacao"]:checked').val() == 3) {
+                dropPeriodicidade = $("#Periodicidade");
+                if (dropPeriodicidade.val() === "") {
+                    $('.alert').fadeIn('slow');
+                    $('.alert').text('Necessário selecionar uma periodicidade.');
+                    setTimeout('$(".alert").fadeOut("slow")', 10000);
+                    return false;
+                }
+            }
+            /* ----------*/
+
+            /* Criação do Grid */
+            var grid = $("#grid > tbody"), row, textObrigatorio, textTipoAtualizacao, textPeriodo, valorPeriodo;
+            textObrigatorio = $('input[name="Obrigatorio"]:checked').parent().text();
+            textTipoAtualizacao = $('input[name="TipoAtualizacao"]:checked').parent().text();
+
+            if ($('input[name="TipoAtualizacao"]:checked').val() == 3) {
+                textPeriodo = dropPeriodicidade.find('option:selected').text();
+            }
+
+            if (textPeriodo == undefined) {
+                textPeriodo = "";
+                valorPeriodo = 0;
+            } else {
+                valorPeriodo = dropPeriodicidade.find('option:selected').val();
+            }
+
+            row = "<tr><td>" + grupoDoc.find('option:selected').text() + "<input type='hidden' name='grupoDoc' value='" + grupoDoc.find('option:selected').val() + "' /></td><td>" + doc.find('option:selected').text() + "<input type='hidden' name='doc' value='" + doc.find('option:selected').val() + "' /></td><td>" + textObrigatorio + " <input type='hidden' name='hdnObrigatorio' value='" + $('input[name="Obrigatorio"]:checked').val() + "' /></td><td>" + textTipoAtualizacao + textPeriodo + "<input type='hidden' name='hdnTipoAtualizacao' value='" + $('input[name="TipoAtualizacao"]:checked').val() + "|" + valorPeriodo + "' /></td><td  class='text-center'><button class='btn btn-danger btn-xs' onclick='removeGrid(this);'>Excluir</button></td></tr>";
+            grid.append(row);
+
+            $("#gridDocumentos").show();
+            /* --------------- */
+
+        }
+
+        function removeGrid(param) {
+            /* remove a linhas clicada */
+            $(param).parent().parent().remove();
+
+            /* Verifica se existe algum tr na tabela, caso não exista, seta display:none para a div */
+            var rowCount = $('#grid tr').length;
+            if (rowCount === 1)
+                $("#gridDocumentos").hide();
+        }
+
+        function exibirConfirmacao(param) {
+            if (param) {
+                $("#confirmacao").toggleClass("hidden");
+                $("#confirmacao").fadeIn("fast");
+            } else {
+                $("#confirmacao").fadeOut("fast");
+                $("#confirmacao").toggleClass("hidden");
+            }
+        }
+        $("[data-mask]").inputmask();
+        function submitForm(e) {
+            $(e).attr("disabled", "disabled");
+            var expiracaoDocumento = $("#ExpiracaoDocumento"),
+                dataHoje = $("#DataHoje");
+            /* Validações */
+            if (expiracaoDocumento.val() === "") {
+                $('span[data-valmsg-for="ExpiracaoDocumento"]').text('Necessário o prazo de entrega.');
+                $(e).removeAttr("disabled");
+                return false;
+            }
+            if (!compararDataFutura(dataHoje.val(), expiracaoDocumento.val())) {
+                $('span[data-valmsg-for="ExpiracaoDocumento"]').text('O prazo de entrega não deve ser anterior a hoje.');
+                $(e).removeAttr("disabled");
+                return false;
+            }
+            $("form").submit();
+            $(e).removeAttr("disabled");
+        }
+
+    </script>
+}

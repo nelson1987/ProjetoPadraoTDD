@@ -1,0 +1,167 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+
+@{ bool estrangeiro = false; }
+
+@if (Model != null)
+{
+    if (Model.TipoFornecedor != 1)
+    {
+        estrangeiro = true;
+    }
+}
+
+@if (Model != null)
+{
+    <div class="box box-primary">
+        <div class="box-header"><h3 class="box-title">Dados de Endereço</h3></div>
+        <div class="box-body">
+            @*<div class="col-md-2">
+                    <div class="form-group">
+                        <label>@Html.DisplayNameFor(model => model.TipoLogradouro)</label><br />
+                        @if(estrangeiro)
+                        {
+                            @Html.TextBoxFor(model => model.TipoLogradouro, new { @class = "form-control input-sm" })
+                        }
+                        else
+                        {
+                            <span>@Html.DisplayFor(model => model.TipoLogradouro)</span>
+                        }
+                    </div>
+                </div>*@
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>@Html.DisplayNameFor(model => model.Endereco)</label>
+                    @if (estrangeiro)
+                    {
+                        <span class="text-danger" style="font-weight:bold;">*</span><br />
+                        @Html.TextBoxFor(model => model.Endereco, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(model => model.Endereco, "", new { @class = "text-danger" })
+                    }
+                    else
+                    {
+                        <br />
+                        <span>@Html.DisplayFor(model => model.Endereco)</span>
+                        @Html.HiddenFor(model => model.Endereco)
+                    }
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>@Html.DisplayNameFor(model => model.Numero)</label>
+                    @if (estrangeiro)
+                    {
+                        <span class="text-danger" style="font-weight:bold;">*</span>
+                        @Html.TextBoxFor(model => model.Numero, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(model => model.Numero, "", new { @class = "text-danger" })
+                    }
+                    else
+                    {
+                        <br />
+                        <span>@Html.DisplayFor(model => model.Numero)</span>
+                        @Html.HiddenFor(model => model.Numero)
+                    }
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>@Html.DisplayNameFor(model => model.Complemento)</label><br />
+                    @if (estrangeiro)
+                    {
+                        @Html.TextBoxFor(model => model.Complemento, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(model => model.Complemento, "", new { @class = "text-danger" })
+                    }
+                    else
+                    {
+                        <span>@Html.DisplayFor(model => model.Complemento)</span>
+                        @Html.HiddenFor(model => model.Complemento)
+                    }
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>@Html.DisplayNameFor(model => model.Cep)</label><br />
+                    @if (estrangeiro)
+                    {
+                        @Html.TextBoxFor(model => model.Cep, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(model => model.Cep, "", new { @class = "text-danger" })
+                    }
+                    else
+                    {
+                        <span>@Html.DisplayFor(model => model.Cep)</span>
+                        @Html.HiddenFor(model => model.Cep)
+                    }
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>@Html.DisplayNameFor(model => model.Bairro)</label>
+                    @if (estrangeiro)
+                    {
+                        <span class="text-danger" style="font-weight:bold;">*</span><br />
+                        @Html.TextBoxFor(model => model.Bairro, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(model => model.Bairro, "", new { @class = "text-danger" })
+                    }
+                    else
+                    {
+                        <br />
+                        <span>@Html.DisplayFor(model => model.Bairro)</span>
+                        @Html.HiddenFor(model => model.Bairro)
+                    }
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>@Html.DisplayNameFor(model => model.Cidade)</label>
+                    @if (estrangeiro)
+                    {
+                        <span class="text-danger" style="font-weight:bold;">*</span><br />
+                        @Html.TextBoxFor(model => model.Cidade, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
+                    }
+                    else
+                    {
+                        <br />
+                        <span>@Html.DisplayFor(model => model.Cidade)</span>
+                        @Html.HiddenFor(model => model.Cidade)
+                    }
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>@Html.DisplayNameFor(model => model.Estado)</label>
+                    @if (estrangeiro)
+                    {
+                        <span class="text-danger" style="font-weight:bold;">*</span><br />
+                        @Html.TextBoxFor(model => model.Estado, new { @class = "form-control input-sm", maxlength = "2" })
+                        @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+                    }
+                    else
+                    {
+                        <br />
+                        <span>@Html.DisplayFor(model => model.Estado)</span>
+                        @Html.HiddenFor(model => model.Estado)
+                    }
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>@Html.DisplayNameFor(model => model.Pais)</label>
+                    @if (estrangeiro)
+                    {
+                        <span class="text-danger" style="font-weight:bold;">*</span><br />
+                        @Html.TextBoxFor(model => model.Pais, new { @class = "form-control input-sm", maxlength = "2" })
+                        @Html.ValidationMessageFor(model => model.Pais, "", new { @class = "text-danger" })
+                    }
+                    else
+                    {
+                        <br />
+                        <span>@Html.DisplayFor(model => model.Pais)</span>
+                        @Html.HiddenFor(model => model.Pais)
+                    }
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+}

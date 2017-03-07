@@ -1,0 +1,21 @@
+﻿@using WebForLink.Domain.Enums
+
+@model WebForLink.Web.ViewModels.FornecedorBaseListaVM
+
+@switch (Model.TipoFuncionalidade)
+{
+    case EnumTiposFuncionalidade.Categorizar:
+        <div class="col-md-3">
+            <div class="form-group">
+                <br />
+                <label>Categoria</label><br />
+                @*@Html.DropDownListFor(x => x.Filtro.CategoriaId, (SelectList)ViewBag.Categorias, "Selecione uma Categoria", new { @class = "form-control input-sm" })*@
+                @Html.Partial("_CategoriasTreeView", (List<WebForLink.Web.ViewModels.CategoriaVM>)ViewBag.Categorias)
+            </div>
+        </div>
+        break;
+}
+
+
+
+

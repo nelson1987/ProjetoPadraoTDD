@@ -1,0 +1,77 @@
+﻿@model WebForLink.Web.ViewModels.RelatorioImportacaoVM
+
+<section class="content-header">
+    <h1>
+        Importação de Fornecedores
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> Fornecedores</li>
+        <li class="active">Cadastro de Fornecedores</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-header"><h3 class="box-title">Relatório de Importação do Arquivo Excel</h3></div>
+        <div class="box-body">
+            <p>
+                Os fornecedores abaixo foram importados com sucesso: 
+            </p>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-condensed">
+                    <thead>
+                        @if (Model.Colunas.Any())
+                        {
+                            <tr>
+                                @foreach (var item in Model.Colunas)
+                                {
+                                    <th class="text-center">
+                                        @item
+                                    </th>
+                                }
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <th colspan="4">
+                                    &nbsp;
+                                </th>
+                            </tr>
+                        }
+                    </thead>
+                    <tbody>
+                        @if (Model.Linhas.Any())
+                        {
+                            foreach (var item in Model.Linhas)
+                            {
+                                <tr>
+                                    <td>@item.ExcelRow.Row</td>
+                                    @foreach (var celula in item.Celulas)
+                                    {
+                                        <td class="@celula.ClasseCSS">
+                                            @celula.ValorOriginal
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr class="warning">
+                                <td colspan="10" class="text-warning text-center">
+                                    A pesquisa não retornou nenhum resultado!
+                                </td>
+                            </tr>
+                        }                       
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="box-footer">
+            <div class="text-right text-nowrap">
+                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Listar", "Importacao")'">Ir para Lista</button>
+            </div>
+        </div>
+    </div>
+</section>

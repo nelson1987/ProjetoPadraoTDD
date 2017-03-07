@@ -1,0 +1,193 @@
+﻿@model WebForLink.Web.ViewModels.SolicitacaoFornecedorVM
+
+@{
+    List<WebForLink.Web.ViewModels.SolicitacaoFornecedoresVM> fornecedores = ViewBag.Fornecedores;
+}
+
+@Styles.Render("~/style/date")
+@Scripts.Render("~/bundles/date")
+<link href="~/Content/css/bootstrap-tagsinput.css" rel="stylesheet" />
+<link href="~/Content/css/typeahead.css" rel="stylesheet" />
+
+@section Scripts {
+<script src="~/Scripts/bloodhound.min.js"></script>
+<script src="~/Scripts/typeahead.jquery.min.js"></script>
+<script src="~/Scripts/typeahead.bundle.js"></script>
+
+<script src="~/Scripts/bootstrap-tagsinput.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        if ('@(ViewBag.MensagemSucesso)' != '') {
+            $('.alert').fadeIn('slow');
+            $('.alert').text('@Html.Raw(ViewBag.MensagemSucesso)');
+            setTimeout('$(".alert").fadeOut("slow")', 10000);
+        }
+
+        $("[data-mask]").inputmask();
+
+        var elt = $('#Fornecedores')
+        elt.tagsinput({
+            itemValue: 'value',
+            itemText: 'text',
+            tagClass: 'label label-default',
+            typeaheadjs: [{
+                name: 'Fornecedores',
+                displayKey: 'text',
+                source: function (request, response) {
+                    if (request.length >= 2) {
+                        $.getJSON('@Url.Action("BuscaFornecedores","Documento")', {
+                            chave: request
+                        },
+                        response);
+                    }
+                }
+            }]
+        });
+
+        elt.tagsinput('input')
+        .css("width", "")
+        .keypress(function (e) {
+            if (e.which == 13) {
+                if ($(this).val().trim() != "") {
+                    //elt.tagsinput('add', { "value": "EmailAvulso:" + $(this).val(), "text": $(this).val() });
+                    elt.tagsinput('input').typeahead('val', '');
+                }
+                return false;
+            }
+        })
+        .change(function () {
+            if ($(this).val().trim() != "") {
+                elt.tagsinput('input').typeahead('val', '');
+            }
+        });
+
+    });
+</script>
+    }
+<section class="content-header">
+    <h1>
+        Solicitação de Documentos
+        <!-- small>Control panel</!--small -->
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> Fornecedores</li>
+        <li class="active">Solicitação de Documentos</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="alert alert-success" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick="$(this).fadeOut('fast')"></div>
+    </div>
+    @*@Html.Partial("SolicitacaoPassos","Fornecedores")*@
+    <br /><br /><br /><br />
+    @using (Html.BeginForm("SolicitacaoFornecedores"))
+    {
+        @Html.Hidden("Pagina", (int)ViewBag.Pagina)
+        <input type="hidden" name="Acao" id="Acao" value="" />
+        <input type="hidden" name="FornecedoresSelecionados" id="FornecedoresSelecionados" value="" />
+        <div class="row">
+            <div class="col-md-6">
+                <div id="boxGrid" class="box box-primary">
+                    <div class="box-header"><h3 class="box-title">Selecione os Fornecedores por Categoria</h3></div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label class="control-label">Categoria</label>
+                                    @Html.DropDownList("Categorias", null, "Selecione...", htmlAttributes: new { @class = "form-control", disable_input = "" })
+                                    @Html.ValidationMessage("Categorias", "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-12 text-center">
+                                    <label>&nbsp;</label><br />
+                                    <button type="submit" class="btn btn-primary" onclick="$('#Acao').val('AdicionarFornecedoresPorCategoria');">Adicionar na Lista</button>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div id="boxGrid" class="box box-primary">
+                    <div class="box-header"><h3 class="box-title">Selecione os Fornecedores por Nome ou CNPJ</h3></div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Fornecedor/CNPJ</label><br />
+                                    <input type="text" id="Fornecedores" name="Fornecedores" class="form-control input-sm" value="@ViewBag.Fornecedor" placeholder="Digite parte do nome do Fornecedor ou CNPJ" />
+                                    @Html.ValidationMessage("Fornecedores", "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-12 text-center">
+                                    <label>&nbsp;</label><br />
+                                    <button type="submit" class="btn btn-primary" onclick="$('#Acao').val('AdicionarFornecedoresPorNome');">Adicionar na Lista</button>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    
+        if (fornecedores.Any())
+        {
+            <div id="boxGrid" class="box box-primary">
+                <div class="box-header"><h3 class="box-title">Fornecedores Selecionados</h3></div>
+                <div class="box-body">
+                    @Html.ValidationMessage("Remocao", "", new { @class = "text-danger" })
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-condensed">
+                            <thead>
+                                <tr>
+                                    <th class="text-center col-md-1">&nbsp;</th>
+                                    <th class="text-center">
+                                        Fornecedores
+                                    </th>
+                                    <th class="text-center col-md-2">
+                                        CNPJ
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (WebForLink.Web.ViewModels.SolicitacaoFornecedoresVM item in fornecedores)
+                                {
+                                    <tr>
+                                        <td class="text-center text-nowrap">
+                                            <input type="checkbox" name="FornecedoresRemover" id="FornecedoresRemover" value="@item.ID">
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NomeFornecedor)
+                                        </td>
+                                        <td class="text-center">
+                                            @Convert.ToUInt64(item.CNPJ).ToString(@"00\.000\.000\/0000\-00")
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3">
+                                        <button type="submit" class="btn btn-warning" onclick="$('#Acao').val('Remover');">Remover da Lista</button>
+                                        <button type="submit" class="btn btn-danger" onclick="$('#Acao').val('RemoverTodos');">Remover todos da Lista</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        @Html.Partial("_Paginacao")
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary" onclick="$('#Acao').val('Proximo');">Próximo</button>
+                </div>
+            </div><!-- /.box -->
+        }
+    }
+</section><!-- /.content -->

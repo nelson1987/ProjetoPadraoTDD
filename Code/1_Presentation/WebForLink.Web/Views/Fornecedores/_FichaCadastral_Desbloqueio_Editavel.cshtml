@@ -1,0 +1,74 @@
+﻿@using WebForLink.Data.Models
+@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+
+@Styles.Render("~/style/date")
+@section Scripts {
+@Scripts.Render("~/bundles/date")
+}
+@using (Html.BeginForm())
+{
+    <div class="box box-primary">
+        <div class="box-header"><h3 class="box-title">Desbloqueio</h3></div>
+        <div class="box-body">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Bloqueio de Lançamento</label>
+                    <div class="radio">
+                        @Html.RadioButtonFor(model => model.DadosBloqueio.Lancamento, "1", new { id = "todas", value = "Todas as Empresas", style = "margin-left:0px;", @checked = "checked" })
+                        @Html.Label("todas", "Todas as Empresa", new { })
+                    </div>
+                    <div class="radio">
+                        @Html.RadioButtonFor(model => model.DadosBloqueio.Lancamento, "2", new { id = "selecionada", style = "margin-left:0px;" })
+                        @Html.Label("selecionada", "Empresa Selecionada", new { })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.DadosBloqueio.Lancamento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Bloqueio de Compras</label><br />
+                    <div class="checkbox">
+                        @*@Html.CheckBoxFor(m => (bool)m.DadosBloqueio.Compra, new { style = "margin-left:0px;" })*@
+                        @{
+                        var checkMotivo = (bool)Model.DadosBloqueio.Compra ?
+                        (object)new { @class = "mySpecialClass", @checked = "checked" } :
+                        (object)new { @class = "mySpecialClass" };
+                        }
+                        @Html.CheckBox("Compra", checkMotivo)
+                        Todas as organizações de compras
+                        @*@Html.LabelFor(m => (bool)m.DadosBloqueio.Compra)*@
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Bloqueio por Motivo de Qualidade</label><br />
+                    @*@Html.DropDownListFor(s => s.Motivo, (SelectList)ViewBag.Motivos, new { @class = "form-control input-sm" })*@
+                    <select id="Motivo" name="Motivo" class="form-control input-sm">
+                        @{
+                            List<TipoDeFuncaoDuranteBloqueio> Motivos = ViewBag.BloqueioMotivoQualidade;
+                        }
+                        <option value="">Selecione...</option>
+                        @foreach (TipoDeFuncaoDuranteBloqueio motivo in Motivos)
+                        {
+                            <option value="@motivo.ID" @((@Model.DadosBloqueio.Motivo == motivo.ID) ? "selected" : "")>@motivo.FUNCAO_BLOQ_DSC</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Motivo da Solicitação do Desbloqueio</label><br />
+                    @Html.TextAreaFor(s => s.DadosBloqueio.MotivoSolicitacao, new
+                       {
+                           @class = "form-control",
+                           MaxLength = 200,
+                           data_maxsize = 200,
+                           @style = "height: 100px;"
+                       })
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
+}

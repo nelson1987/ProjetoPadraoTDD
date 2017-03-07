@@ -1,0 +1,124 @@
+﻿@using OfficeOpenXml;
+
+@model WebForLink.Web.ViewModels.DadosImportacaoVM
+
+@Styles.Render("~/style/date")
+@Scripts.Render("~/bundles/date")
+
+<style>
+    .fileUpload {
+        position: relative;
+        overflow: hidden;
+        margin: 0px;
+        height: 34px;
+        float: left;
+    }
+
+        .fileUpload input.upload {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+
+    #uploadFile {
+        border: 0;
+        background-color: transparent;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('[disable-input]').prop('disabled', @(ViewBag.Acao == "Excluir" ? "true" : "false"));
+
+        $("[data-mask]").inputmask();
+
+        $("#Arquivo").change(function() {
+            $('#labelArquivo').text($(this)[0].files[0].name);
+        });
+    });
+
+</script>
+
+<section class="content-header">
+    <h1>
+        Importação de Fornecedores
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> Fornecedores</li>
+        <li class="active">Cadastro de Fornecedores</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div id="boxForm" class="box box-primary">
+        <div class="box-header"><h3 class="box-title">Importe uma Lista do Excel</h3></div>
+
+        <div class="box-body">
+            @using (Html.BeginForm("CarregarArquivo", "Importacao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                //@Html.HiddenFor(model => model.ID)
+                //@Html.Hidden("Acao", (string)ViewBag.Acao)
+
+                <div class="col-md-4">
+                    <div class="box box-default">
+                        <div class="box-body">
+                            <p class="text-center" style="color: #3c8dbc;">
+                                <a href="~/ModeloImportacaoFornecedores.xlsx" class="btn btn-app"><i class="fa fa-file-excel-o"></i>Modelo</a>
+                            </p>
+                            <p class="help-block text-center">
+                                <small>Obtenha o modelo de arquivo Excel para importação.</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <div class="fileUpload btn btn-default">
+                            <span>Buscar Arquivo</span>
+                            @Html.TextBoxFor(x => x.Arquivo, new { @type = "file", @class = "upload" })
+                        </div>
+                        <span id="labelArquivo" style="padding-left: 5px; float: left; padding-top: 7px;">Nenhum Arquivo Selecionado</span><div class="clearfix"></div>
+                        @Html.ValidationMessageFor(x => x.Arquivo, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Categoria, new { @class = "control-label" })
+                        @*@Html.DropDownListFor(x => x.Categoria, (SelectList)ViewBag.Categorias, "Selecione uma Categoria", new { @class = "form-control input-sm" })*@
+                        @Html.Partial("_CategoriasTreeView", (List<WebForLink.Web.ViewModels.CategoriaVM>)ViewBag.Categorias)
+                        @Html.ValidationMessageFor(x => x.Categoria, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="box-footer">
+                    <div class="text-right text-nowrap">
+                        <button type="submit" class="btn btn-primary" @*onclick="$('#alert_confirm span').text('Tem certeza que deseja executar a importação de fornecedores?'); $('#alert_confirm').fadeIn('fast');"*@>Importar</button>
+                        <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Listar")'">Cancelar</button>
+                    </div>
+                </div>
+            }
+            @Html.ValidationMessage("ImportacaoValidation", "", new { @class = "text-danger" })
+        </div>
+
+        @if (ViewBag.TotalFornecedoresImportados != null)
+        {
+            <div>Total de Fornecedores importados: @ViewBag.TotalFornecedoresImportados</div>
+        }
+        @if (ViewBag.Dicionario != null)
+        {
+            foreach (var item in ((List<string>)ViewBag.Dicionario))
+            {
+                <div>@item</div><br />
+            }
+        }
+    </div>
+</section>

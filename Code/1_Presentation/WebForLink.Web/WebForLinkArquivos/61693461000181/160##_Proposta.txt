@@ -1,0 +1,15 @@
+Fornecedores estrangeiros - Validar regras
+Internet Explorer - Qual versão?
+Conceito de Perfil
+Configurar WorkFlow
+
+Restrições técnicas:
+Requisitos Mínimos:
+Internet Explorer 10 ou Superior
+Chrome 20 ou superior
+A implementar 
+.Criação de usuário de um fornecedor
+.Login para um fornecedor
+o fornecedor criar um usuário para ele, poder entrar no sistema.
+.Reclassificar cliente
+

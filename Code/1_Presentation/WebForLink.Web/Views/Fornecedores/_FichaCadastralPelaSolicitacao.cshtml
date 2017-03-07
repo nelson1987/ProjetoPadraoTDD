@@ -1,0 +1,143 @@
+﻿@using WebForLink.Domain.Enums
+@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+
+@{
+    int tramite = ViewBag.StatusTramite;
+}
+
+@*@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        aplicarPluginUpload('.upload', '#CNPJ_CPF');
+    });
+
+    function validaSalvar(apenasSalvar) {
+        if (uploads > 0) {
+            $('#alert_confirm').removeClass();
+            $('#alert_confirm').addClass("alert alert-danger");
+            $('#alert_confirm span').text('Ainda existe(m) arquivo(s) em processo de upload. Favor aguardar...');
+            $('#btnSimFicha').prop('disabled', true);
+            $('#btnNaoFicha').prop('disabled', false);
+
+            setTimeout(function () { $('#alert_confirm').fadeOut('fast'); }, 10000);
+        }
+        else {
+            $('#alert_confirm').removeClass();
+            $('#alert_confirm').addClass("alert alert-warning");
+            $('#alert_confirm span').text('Tem certeza que deseja salvar esses dados cadastrais?');
+            $('#btnSimFicha').prop('disabled', false);
+            $('#btnNaoFicha').prop('disabled', false);
+        }
+
+        $('#alert_confirm').fadeIn('fast');
+        $('#ApenasSalvar').val(apenasSalvar);
+        $('#btnSimFicha').focus();
+    }
+</script>
+    }*@
+@using (Html.BeginForm("FichaCadastral", "Documento", FormMethod.Post, new { defaultbutton = "btnNaoFicha" }))
+{
+    @Html.HiddenFor(x => x.ContratanteID)
+    @Html.HiddenFor(x => x.NomeEmpresa)
+    @Html.HiddenFor(x => x.TipoFornecedor)
+    @Html.HiddenFor(x => x.SolicitacaoFornecedor.ID)
+    @Html.HiddenFor(x => x.SolicitacaoFornecedor.SolicitacaoCriacaoID)
+    @Html.HiddenFor(x => x.SolicitacaoFornecedor.Aprovado)
+    @Html.HiddenFor(x => x.Solicitacao.Fluxo.ID)
+    @Html.HiddenFor(x => x.Solicitacao.ID)
+    @Html.HiddenFor(x => x.TipoPreenchimento)
+    @Html.HiddenFor(x => x.CategoriaId)
+    @Html.HiddenFor(x => x.ApenasSalvar)
+    @Html.HiddenFor(x => x.HabilitaEdicao)
+    @Html.HiddenFor(x => x.ContratanteFornecedorID)
+    @Html.HiddenFor(x => x.PJPFID, new { id = "FornecedorID" })
+    @Html.HiddenFor(x => x.SolicitacaoID)
+    @Html.HiddenFor(x => x.ProrrogacaoPrazo.PrazoPreenchimento)
+    @Html.HiddenFor(x => x.ChaveUrl)
+
+    @Html.Hidden("Estilo", (object)@ViewBag.Estilo)
+    @Html.Hidden("SolicitaFichaCadastral", (object)@Html.Raw(ViewBag.SolicitaFichaCadastral))
+
+    if (tramite != (int)EnumStatusTramite.Aguardando)
+    {
+        @Html.Partial("../Fornecedores/_FichaCadastral_DadosGerais", Model)
+
+        @Html.Partial("../Fornecedores/_FichaCadastral_DadosEnderecos", Model)
+
+        <div id="dadosBancarios">
+            @Html.Partial("../Fornecedores/_FichaCadastral_DadosBancario", Model.DadosBancarios)
+        </div>
+
+        <div id="dadosContatos">
+            @Html.Partial("../Fornecedores/_FichaCadastral_Contatos", Model.DadosContatos)
+        </div>
+
+        <div id="documentos">
+            @Html.Partial("../Fornecedores/_FichaCadastral_Anexos", Model.SolicitacaoFornecedor)
+        </div>
+
+        <div id="Unspsc">
+            @Html.Partial("../Fornecedores/_FichaCadastral_ServicosMaterias", Model.FornecedoresUnspsc)
+        </div>
+
+        @Html.Partial("../Fornecedores/_FichaCadastral_Observacao", Model)
+
+        if (Model.Questionarios.QuestionarioDinamicoList.Any())
+        {
+            <div id="dadosQuestionarioDinamico">
+                @Html.Partial("~/Views/Fornecedores/_FichaCadastral_QuestionarioDinamico.cshtml", Model.Questionarios)
+            </div>
+        }
+    }
+    else
+    {
+        <div class="dvAceite" id="formularioDv">
+            <!--PRORROGAÇÃO PRAZO-->
+            @Html.Partial("../Fornecedores/_FichaCadastral_Prorrogacao_Editavel", Model.ProrrogacaoPrazo)
+
+            <!--DADOS GERAIS-->
+            @Html.Partial("../Fornecedores/_FichaCadastral_DadosGerais_Editavel", Model)
+
+            <!--ENDEREÇO-->
+            @Html.Partial("../Fornecedores/_FichaCadastral_DadosEnderecos_Editavel", Model)
+
+            <!--BANCARIOS-->
+            @Html.Partial("../Fornecedores/_FichaCadastral_DadosBancario_Editavel", Model.DadosBancarios)
+
+            <!--CONTATOS-->
+            @Html.Partial("../Fornecedores/_FichaCadastral_Contatos_Editavel", Model.DadosContatos)
+
+            <!--ANEXOS-->
+            @Html.Partial("../Fornecedores/_FichaCadastral_Anexos_Editavel", Model.SolicitacaoFornecedor.Documentos)
+
+            <!--OBSERVAÇÃO-->
+            @Html.Partial("../Fornecedores/_FichaCadastral_Observacao_Editavel", Model)
+
+            <!--MATERIAIS E SERVIÇOS-->
+            @Html.Partial("../Fornecedores/_FichaCadastral_ServicosMaterias_Editavel", Model.FornecedoresUnspsc)
+
+            <!--QUESTIONÁRIO DINAMICO-->
+            @if (Model.Questionarios.QuestionarioDinamicoList.Any())
+            {
+                @Html.Partial("~/views/fornecedores/_fichacadastral_questionariodinamico_editavel.cshtml", Model.Questionarios)
+            }
+            <div class="box box-primary">
+                <div class="box-body">
+                    @if (!Model.SolicitacaoFornecedor.Aprovado)
+                    {
+                        <div class="text-center text-nowrap">
+                            <button type="button" class="btn btn-primary" onclick="validaSalvar(true);">Salvar</button>
+                            <button type="button" class="btn btn-warning" onclick="validaSalvar(false);">Salvar e Finalizar</button>
+                        </div>
+                    }
+
+                    <div id="alert_confirm" class="alert alert-warning" role="alert" style="display: none;">
+                        <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" id="btnSimFicha" class="btn btn-primary btn-xs" onclick="$('form').submit();">Sim</button>&nbsp;&nbsp;&nbsp;
+                        <button type="button" id="btnNaoFicha" class="btn btn-default btn-xs" onclick="$('#alert_confirm').fadeOut('fast');">Não</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

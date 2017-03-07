@@ -1,0 +1,47 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+
+<div class="box box-primary">
+    <div class="box-header">
+        <h3 class="box-title">
+            Desbloqueio
+        </h3>
+    </div>
+    <div class="box-body">
+        @if (ViewBag.QtdGrupoEmpresa > 1)
+        {
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Bloqueio de Lançamento</label><br />
+                    @Html.RadioButtonFor(x => x.DadosBloqueio.Lancamento, "1", new { disabled = "disabled" })
+                    Todas as Empresa<br />
+                    @Html.RadioButtonFor(x => x.DadosBloqueio.Lancamento, "2", new { disabled = "disabled" })
+                    Empresa Selecionada
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Bloqueio de Compras</label><br />
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBoxFor(x => x.DadosBloqueio.Compra, new { name = "rdCompras", disabled = "disabled" })
+                            Todas as Organizações de Compras
+                        </label>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Função do Bloqueio</label><br />
+                @Model.DadosBloqueio.MotivoQualidade
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Motivo da Solicitação do Desbloqueio</label><br />
+                <span>@Model.DadosBloqueio.MotivoSolicitacao</span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div><!-- /.box-body -->
+</div><!-- /.box -->

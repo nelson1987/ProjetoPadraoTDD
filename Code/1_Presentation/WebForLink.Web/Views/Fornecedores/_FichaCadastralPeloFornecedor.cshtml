@@ -1,0 +1,100 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+
+@Html.HiddenFor(x => x.ContratanteID)
+@Html.Hidden("FornecedorID", Model.ID)
+@Html.HiddenFor(x => x.ContratanteFornecedorID)
+@Html.HiddenFor(x => x.HabilitaEdicao)
+@Html.HiddenFor(x => x.HabilitaEdicaoUnspsc)
+@Html.HiddenFor(x => x.PJPFID)
+@Html.Hidden("CategoriaContratanteID", Model.CategoriaId)
+@Html.Hidden("TpPapel", 50)
+
+@Html.Partial("../Fornecedores/_FichaCadastral_DadosGerais", Model)
+
+@using (Html.BeginForm("Salvar", "DadosEndereco", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.ID)
+    @Html.HiddenFor(x => x.ContratanteID)
+    @Html.HiddenFor(x => x.ContratanteFornecedorID)
+    @Html.HiddenFor(x => x.PJPFID)
+    @Html.HiddenFor(x => x.SolicitacaoID)
+    @Html.HiddenFor(x => x.ActionOrigem)
+    @Html.HiddenFor(x => x.ControllerOrigem)
+
+    <div id="dadosEnderecos">
+        @Html.Partial("../Fornecedores/_FichaCadastral_DadosEnderecos", Model)
+    </div>
+}
+
+@using (Html.BeginForm("Salvar", "DadosBancario", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.ID)
+    @Html.HiddenFor(x => x.ContratanteID)
+    @Html.HiddenFor(x => x.ContratanteFornecedorID)
+    @Html.HiddenFor(x => x.PJPFID)
+    @Html.HiddenFor(x => x.SolicitacaoID)
+    @Html.HiddenFor(x => x.ActionOrigem)
+    @Html.HiddenFor(x => x.ControllerOrigem)
+
+    <div id="dadosBancarios">
+        @Html.Partial("../Fornecedores/_FichaCadastral_DadosBancario", Model.DadosBancarios)
+    </div>
+}
+
+@using (Ajax.BeginForm("Salvar", "DadosContatos", new AjaxOptions { OnSuccess = "renderizarDadosAjaxBeginForm(data, status, 'DadosContatos')" }))
+{
+    @Html.HiddenFor(x => x.ID)
+    @Html.HiddenFor(x => x.ContratanteID)
+    @Html.HiddenFor(x => x.ContratanteFornecedorID)
+
+    <div id="dadosContatos">
+        @Html.Partial("../Fornecedores/_FichaCadastral_Contatos", Model.DadosContatos)
+    </div>
+
+}
+    
+@using (Html.BeginForm("SalvarDocumentos", "Documento", FormMethod.Post))
+{ 
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.ID)
+    @Html.HiddenFor(x => x.ContratanteID)
+    @Html.HiddenFor(x => x.ContratanteFornecedorID)
+    @Html.HiddenFor(x => x.PJPFID)
+    @Html.HiddenFor(x => x.ChaveUrl)
+    @Html.HiddenFor(x => x.SolicitacaoID)
+    @Html.HiddenFor(x => x.ActionOrigem)
+    @Html.HiddenFor(x => x.ControllerOrigem)
+
+    <div id="documentos">
+        @Html.Partial("../Fornecedores/_FichaCadastral_Anexos", Model.SolicitacaoFornecedor)
+    </div>
+}
+
+@using (Ajax.BeginForm("SalvarUnspsc", "ModificacaoUnspsc", new AjaxOptions { OnSuccess = "renderizarDadosAjaxBeginForm(data, status, 'Unspsc')" }))
+{
+    @Html.HiddenFor(x => x.ID)
+    @Html.HiddenFor(x => x.ContratanteID)
+    @Html.HiddenFor(x => x.ContratanteFornecedorID)
+    @Html.HiddenFor(x => x.PJPFID)
+
+    <div id="Unspsc">
+        @Html.Partial("../Fornecedores/_FichaCadastral_ServicosMaterias", Model.FornecedoresUnspsc)
+    </div>
+
+}
+
+@Html.Partial("../Fornecedores/_FichaCadastral_Observacao", Model)
+@using (Ajax.BeginForm("SalvarQuestionarioDinamico", "ModificacaoQuestionarioDinamico", new AjaxOptions { OnSuccess = "renderizarDadosAjaxBeginForm(data, status, 'QuestionarioDinamico')" }))
+{
+    @Html.HiddenFor(x => x.ID)
+    @Html.HiddenFor(x => x.ContratanteID)
+    @Html.HiddenFor(x => x.ContratanteFornecedorID)
+    @Html.HiddenFor(x => x.Solicitacao.ID)
+    @Html.HiddenFor(x => x.CategoriaId)
+
+    <div id="dadosQuestionarioDinamico">
+        @Html.Partial("../Fornecedores/_FichaCadastral_QuestionarioDinamico", Model.Questionarios)
+    </div>
+}    

@@ -1,0 +1,109 @@
+﻿@model WebForLink.Web.ViewModels.FornecedorBaseListaVM
+@using WebForLink.Domain.Enums
+<style>
+    .popover ul {
+        width: 160px;
+        max-height: 100px;
+        overflow-y: auto;
+        list-style: none;
+        padding: 0;
+    }
+</style>
+
+<section class="content-header">
+    <h1>
+        Importação de Fornecedores
+    </h1>
+</section>
+
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-header"><h3 class="box-title">Pesquisar Fornecedor</h3></div>
+        <div class="box-body">
+            @using (Html.BeginForm("ExecutarFuncionalidade", "Importacao", new { TipoFuncionalidade = Model.TipoFuncionalidade }))
+            {
+                @Html.HiddenFor(x => x.Pagina)
+                @Html.HiddenFor(x => x.Selecionados)
+                @Html.HiddenFor(x => x.SelecionadosDetalhes)
+                @Html.HiddenFor(x => x.TipoFuncionalidade)
+                <div class="row">
+                    @Html.Partial("_FiltroFixo", Model)
+                    @Html.Partial("_FiltroEspecifico")
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>&nbsp;</label><br />
+                            <button type="submit" class="btn btn-primary" onclick="$('#Pagina').val('1');"><i class="fa fa-search"></i> Pesquisar</button>
+                        </div>
+                    </div>
+                    <br /><br />
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="hidden" name="Funcao" id="Funcao" />
+                            @if (Model.TipoFuncionalidade == EnumTiposFuncionalidade.AprovarPrazo)
+                            {
+                                <button type="button" class="btn btn-primary" id="BotaoFuncionalidade" data-toggle="modal" data-target="#myModal" disabled="disabled" data-whatever="Aprovar" onclick="$('#Funcao').val('AprovarPrazo')">@Model.NomeFuncionalidade</button>
+                                <button type="button" class="btn btn-danger" id="BotaoFuncionalidadeFalse" data-toggle="modal" data-target="#myModal" disabled="disabled" data-whatever="Reprovar" onclick="$('#Funcao').val('ReprovarPrazo')">Reprovar</button>
+                            }
+                            else if (Model.TipoFuncionalidade == EnumTiposFuncionalidade.Bloquear)
+                            {
+                                <button type="button" class="btn btn-primary" id="BotaoFuncionalidadeFake" data-toggle="modal" data-target="#myModal" disabled="disabled" data-whatever="Bloquear" onclick="$('#Funcao').val('Bloquear');">
+                                    Bloquear
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-primary" id="BotaoFuncionalidade" data-toggle="modal" data-target="#myModal" disabled="disabled" onclick="$('#Funcao').val('@Model.TipoFuncionalidade')">@Model.NomeFuncionalidade</button>
+
+                            }
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    @Html.Partial("_Modal", Model)
+                </div>
+                @Html.Partial("_FuncionalidadesGrid")
+                @Html.Hidden("Pagina", (int)ViewBag.Pagina)
+                @Html.Partial("_Paginacao")
+            }
+        </div>
+        <div class="box-footer">
+            <div class="col-md-12 text-right">
+                <div class="form-group">
+                    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Listar", "Importacao")';">Voltar</button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/Scripts/Views/Importacao/Importacao.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myModal').on('show.bs.modal', function (event) {
+
+                var button = $(event.relatedTarget);
+                var recipient = button.data('whatever');
+                var modal = $(this);
+                modal.find('.modal-title').text(recipient);
+                modal.find('#AprovaPrazo').val(recipient == "Aprovar");
+            });
+
+                $('[data-toggle="tooltip"]').tooltip();
+
+                $('[data-toggle="popover"]').popover({
+                    container: 'body',
+                    html: true,
+                    content: function () {
+                        return $("#relatorioSelecionados").html();
+                    },
+                    placement: "right"
+                }).click(function (e) {
+                    e.preventDefault();
+                });
+            selecionarCheckBoxes();
+        });
+    </script>
+}

@@ -1,0 +1,99 @@
+﻿@using WebForLink.Domain.Enums
+
+@model WebForLink.Web.ViewModels.FornecedorBaseTopoVM
+
+<div class="box box-primary">
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-3 col-lg-2 col-lg-offset-2">
+                <div class="small-box bg-light-blue-gradient">
+                    <div class="inner" style="height: 130px;">
+                        <h4>@Model.TotalSemValidacao</h4>
+                        <p>Sem Validação em Órgãos Públicos</p>
+                    </div>
+                    <a href="@Url.Action("ExecutarFuncionalidade", "Importacao", new RouteValueDictionary(new { TipoFuncionalidade = EnumTiposFuncionalidade.ValidarEmOrgaosPublicos }))" class="small-box-footer">
+                        Validar <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-2">
+                <div class="small-box bg-light-blue-gradient">
+                    <div class="inner" style="height: 130px;">
+                        <h4>@Model.TotalSemCategoria</h4>
+                        <p>Sem Categoria</p>
+                    </div>
+                    <a href="@Url.Action("ExecutarFuncionalidade", "Importacao", new RouteValueDictionary(new { TipoFuncionalidade = EnumTiposFuncionalidade.Categorizar }))" class="small-box-footer">
+                        Categorizar <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-2">
+                <div class="small-box bg-light-blue-gradient">
+                    <div class="inner" style="height: 130px;">
+                        <h4>@Model.TotalSemConvite</h4>
+                        <p>Não enviado ao Fornecedor</p>
+                    </div>
+                    <a href="@Url.Action("ExecutarFuncionalidade", "Importacao", new RouteValueDictionary(new { TipoFuncionalidade = EnumTiposFuncionalidade.Convidar }))" class="small-box-footer">
+                        Convidar <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-2">
+                <div class="small-box bg-light-blue-gradient">
+                    <div class="inner" style="height: 130px;">
+                        <h4>@Model.TotalSemDados</h4>
+                        <p>Para Confirmação de Bloqueio</p>
+                    </div>
+                    <a href="@Url.Action("ExecutarFuncionalidade", "Importacao", new RouteValueDictionary(new { TipoFuncionalidade = EnumTiposFuncionalidade.Bloquear }))" class="small-box-footer">
+                        Confirmar <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-3 col-lg-2 col-lg-offset-2">
+                <div class="small-box bg-light-blue-gradient">
+                    <div class="inner" style="height: 130px;">
+                        <h4>@Model.TotalSemPrazo</h4>
+                        <p>Com prazo vencido</p>
+                    </div>
+                    <a href="@Url.Action("ExecutarFuncionalidade", "Importacao", new RouteValueDictionary(new { TipoFuncionalidade = EnumTiposFuncionalidade.ProrrogarPrazo }))" class="small-box-footer">
+                        Prorrogar Prazo <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-2">
+                <div class="small-box bg-light-blue-gradient">
+                    <div class="inner" style="height: 130px;">
+                        <h4>@Model.TotalEmProrrogacao</h4>
+                        <p>Solicitações de prorrogação</p>
+                    </div>
+                    <a href="@Url.Action("ExecutarFuncionalidade", "Importacao", new RouteValueDictionary(new { TipoFuncionalidade = EnumTiposFuncionalidade.AprovarPrazo }))" class="small-box-footer">
+                        Aprovar <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-2">
+                <div class="small-box bg-light-blue-gradient">
+                    <div class="inner" style="height: 130px;">
+                        <h4>@Model.TotalSemCarga</h4>
+                        <p>Sem Carga no ERP</p>
+                    </div>
+                    <a href="@Url.Action("ExecutarFuncionalidade", "Importacao", new RouteValueDictionary(new { TipoFuncionalidade = EnumTiposFuncionalidade.GerarCarga }))" class="small-box-footer">
+                        Gerar Carga <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-2">
+                <div class="small-box bg-light-blue-gradient">
+                    <div class="inner" style="height: 130px;">
+                        <h4>@Model.TotalSemDados</h4>
+                        <p>Fornecedores com Dados Incompletos</p>
+                    </div>
+                    <a href="@Url.Action("ExecutarFuncionalidade", "Importacao", new RouteValueDictionary(new { TipoFuncionalidade = EnumTiposFuncionalidade.CompletarDados }))" class="small-box-footer">
+                        Visualizar <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

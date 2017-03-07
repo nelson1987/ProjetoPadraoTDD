@@ -1,0 +1,106 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+
+<div id="boxGrid" class="box box-primary">
+    <div class="box-header"><h3 class="box-title">Orgãos Públicos</h3></div>
+    @if (Model.FornecedorRobo.Rf_Certificado_Html != null || Model.FornecedorRobo.Sint_Certificado_Html != null)
+    {
+        <div class="box-body">
+            <div class="panel-group" id="accordion-robo">
+                @*******************************************RECEITA FEDERAL CPF************************************************@
+                @if (Model.TipoFornecedor == 3)
+                {
+                    <div id="callReceitaCPF" class="panel panel-default">
+                        <div id="callReceitaCPFHeading" class="panel-heading panel-heading-default">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#bodyReceitaCPF">
+                                    <b>Receita Federal Pessoa Física:</b><span></span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="bodyReceitaCPF" class="panel-collapse collapse" role="tabpanel">
+                            <div class="panel-body">
+                                @if (Model.FornecedorRobo.Rf_Certificado_Html != null)
+                                {
+                                @Html.Raw(Model.FornecedorRobo.Rf_Certificado_Html.Replace("<div>", "<span>").Replace("</div>", "</span>"))
+                                }
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @******************************************RECEITA FEDERAL CNPJ************************************************@
+                @if (Model.TipoFornecedor == 1)
+                {
+                    <div id="callReceita" class="panel panel-default">
+                        <div id="callReceitaHeading" class="panel-heading panel-heading-default">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#bodyReceita">
+                                    <b>Receita Federal:</b><span></span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="bodyReceita" class="panel-collapse collapse" role="tabpanel">
+                            <div class="panel-body">
+                                @if (Model.FornecedorRobo.Rf_Certificado_Html != null)
+                                {
+                                    @Html.Raw(Model.FornecedorRobo.Rf_Certificado_Html.Replace("<div>", "<span>").Replace("</div>", "</span>"))
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    @*******************************************SINTEGRA***********************************************************@
+
+                    <div id="callReceitaSintegra" class="panel panel-default">
+                        <div id="callReceitaSintegraHeading" class="panel-heading panel-heading-default">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#bodySintegra">
+                                    <b>Sintegra:</b><span></span>
+                                </a>
+                            </h4>
+                        </div>@*
+                            <div id="bodySintegra" class="panel-collapse collapse in" role="tabpanel">
+                                <div class="panel-body">
+                                    @if (sintegra != null)
+                                    {
+                                        @Html.Raw(sintegra)
+                                    }
+                                </div>
+                            </div>*@
+                    </div>
+
+                    @*******************************************SIMPLES NACIONAL***************************************************@
+                    <div id="callSimples" class="panel panel-default">
+                        <div id="callSimplesHeading" class="panel-heading panel-heading-default">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#bodySimples">
+                                    <b>Simples:</b><span></span>
+                                </a>
+                            </h4>
+                        </div>@*
+                            <div id="bodySimples" class="panel-collapse collapse in" role="tabpanel">
+                                <div class="panel-body">
+
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>*@
+                    </div>
+                }
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    }
+    else
+    {
+        <div class="box-body">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                    @("Não existe nenhum documento da Receita Federal para este Fornecedor.")
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    }
+</div>
+

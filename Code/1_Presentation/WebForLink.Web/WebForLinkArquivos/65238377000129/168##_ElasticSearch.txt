@@ -1,0 +1,30 @@
+GET --http://paas:b027479395328b5d93e67cdce04b8423@dori-us-east-1.searchly.com/cliente/samarco/_search
+POST--http://paas:b027479395328b5d93e67cdce04b8423@dori-us-east-1.searchly.com/cliente/samarco
+{
+  "Cliente": {
+    "Nome": "Samarco",
+    "Fornecedor": [{
+      "Nome":"Sorteq",
+      "Material":[{
+        "Nome":"Prego"
+      },{
+        "Nome":"Aço Galvanizado"
+      }]
+    },
+    {
+      "Nome":"BellaVista",
+      "Material":[{
+        "Nome":"Pneu"
+      }]
+    }],
+    "Material": [{
+        "Nome":"Prego"
+      },{
+        "Nome":"Aço Galvanizado"
+      },{
+        "Nome":"Pneu"
+      },{
+        "Nome":"Aro de Roda"
+    }]
+  }
+}

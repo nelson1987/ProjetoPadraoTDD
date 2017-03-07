@@ -1,0 +1,58 @@
+﻿@using WebForLink.Domain.Infrastructure
+
+@model WebForLink.Web.ViewModels.FornecedorBaseListaVM
+
+<div class="table-responsive">
+    <table class="table table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th class="text-center"><input type="checkbox" id="select-all" name="select-all" onclick="selecionarTodos(this);" data-container="body" data-toggle="tooltip" title="Selecionar Todos" data-placement="top" /></th>
+                <th class="text-center">CNPJ / CPF</th>
+                <th>Razão Social / Nome</th>
+                @if (Model.NomeColunas.Any())
+                {
+                    foreach (var coluna in Model.NomeColunas)
+                    {
+                        <th class="text-center">@coluna</th>
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.FornecedoresBaseFuncionalidade.Any())
+            {
+                foreach (var item in Model.FornecedoresBaseFuncionalidade)
+                {
+                    <tr id="Fornecedor_@item.ID">
+                        <td class="text-center">
+                            <input type="checkbox" name="Selecionados" id="@item.ID" onclick="gerenciarSelecionados('@item.ID', this);" />
+                        </td>
+                        <td class="text-center" id="CNPJ_CPF_@item.ID">
+                            @(!string.IsNullOrEmpty(item.CNPJ) ? Mascara.MascararCNPJouCPF(item.CNPJ) : Mascara.MascararCNPJouCPF(item.CPF))
+                        </td>
+                        <td id="RazaoSocial_Nome_@item.ID">
+                            @(!string.IsNullOrEmpty(item.RazaoSocial) ? item.RazaoSocial : item.Nome)
+                        </td>
+                        @if (item.Colunas != null && item.Colunas.Any())
+                        {
+                            foreach (var col in item.Colunas)
+                            {
+                                <td class="@col.CSS" data-container="body" data-toggle="tooltip" title="@col.Titulo" data-placement="left">
+                                    @col.Valor
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr class="warning">
+                    <td colspan="10" class="text-warning text-center">
+                        A pesquisa não retornou nenhum resultado!
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

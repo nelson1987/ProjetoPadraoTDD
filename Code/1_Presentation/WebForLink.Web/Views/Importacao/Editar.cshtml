@@ -1,0 +1,126 @@
+﻿@using WebForLink.Domain.Enums
+
+@model WebForLink.Web.ViewModels.FornecedorBaseVM
+
+<section class="content-header">
+    <h1>
+        Importação de Fornecedores
+    </h1>
+</section>
+
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-header"><h3 class="box-title">Edição de Fornecedor</h3></div>
+        <div class="box-body">
+            @using (Html.BeginForm("Editar", "Importacao"))
+            {
+                @Html.HiddenFor(x => x.ID);
+                @Html.HiddenFor(x => x.ContratanteID);
+                @Html.HiddenFor(x => x.CNPJ);
+                @Html.HiddenFor(x => x.CPF);
+                @Html.HiddenFor(x => x.DataImportacao);
+                @Html.HiddenFor(x => x.TipoFornecedor);
+                @Html.HiddenFor(x => x.PlanilhaId);
+
+                switch ((EnumTiposFornecedor)Model.TipoFornecedor)
+                {
+                    case EnumTiposFornecedor.EmpresaNacional:
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.CNPJ, htmlAttributes: new { @class = "control-label" })
+                                @Html.TextBoxFor(x => x.CNPJ, new { @class = "form-control input-sm", disabled = "disabled" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.RazaoSocial, htmlAttributes: new { @class = "control-label" })
+                                @Html.TextBoxFor(x => x.RazaoSocial, new { @class = "form-control input-sm" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        break;
+                    case EnumTiposFornecedor.PessoaFisica:
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.CPF, htmlAttributes: new { @class = "control-label" })
+                                @Html.TextBoxFor(x => x.CPF, new { @class = "form-control input-sm", disabled = "disabled" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Nome, htmlAttributes: new { @class = "control-label" })
+                                @Html.TextBoxFor(x => x.Nome, new { @class = "form-control input-sm" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.DataNascimento, htmlAttributes: new { @class = "control-label" })
+                                @Html.TextBoxFor(x => x.DataNascimento, new { @class = "form-control input-sm" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        break;
+                    case EnumTiposFornecedor.EmpresaEstrangeira:
+                        break;
+                }
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.NomeContato, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(x => x.NomeContato, new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Email, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(x => x.Email, new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.CategoriaId, htmlAttributes: new { @class = "control-label" })
+                        @*@Html.DropDownListFor(x => x.CategoriaId, (SelectList)ViewBag.Categorias, "Selecione uma Categoria", new { @class = "form-control input-sm" })*@
+                        @Html.Partial("_CategoriasTreeView", (List<WebForLink.Web.ViewModels.CategoriaVM>)ViewBag.Categorias)
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Telefone, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(x => x.Telefone, new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Celular, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(x => x.Celular, new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="box-footer">
+                    <div class="text-right text-nowrap">
+                        <button type="button" class="btn btn-primary" onclick="exibirConfirmacao('Tem certeza que deseja atualizar os dados deste fornecedor?');">Salvar</button>
+                        <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Listar", "Importacao")'">Cancelar</button>
+                    </div>
+                    <div id="confirmacao" class="alert alert-warning hidden" role="alert">
+                        <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-primary btn-xs">Sim</button>&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-default btn-xs" onclick="ocultarConfirmacao();">Não</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/Scripts/Views/Importacao/Importacao.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //$("#Telefone").inputmask('(99) 9999-9999', { greedy: false });
+            //$("#Celular").inputmask('(99) 9999[9]-9999', { greedy: false });
+            $('#Celular, #Telefone').inputmask({mask: ['(99) 9999-9999', '(99) 99999-9999']});
+            $("#DataNascimento").inputmask('99/99/9999', { greedy: false });
+        });
+    </script>
+}

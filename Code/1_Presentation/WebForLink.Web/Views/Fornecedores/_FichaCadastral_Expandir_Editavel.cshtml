@@ -1,0 +1,50 @@
+﻿@model WebForLink.Web.ViewModels.ExpansaoVM
+
+<div class="box box-primary">
+    <div class="box-header"><h3 class="box-title">Expandir Para</h3></div>
+    <div class="box-body">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Empresa</label>
+                @Html.DropDownListFor(s => s.Empresa, (SelectList)ViewBag.Empresa, new { @class = "form-control input-sm"})
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Organização de Compras</label>
+                @Html.DropDownListFor(s => s.Organizacao, (SelectList)ViewBag.Organizacao, new { @class = "form-control input-sm" })
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div><!-- /.box-body -->
+</div><!-- /.box -->
+
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#Empresa").change(function () {
+            $.ajax({
+                url: '/OrganizacaoCompra/Listar',
+                data: {
+                    empresa: $("#Empresa").val()
+                },
+                type: "POST",
+                dataType: "json",
+                async: true,
+                success: function (data) {
+                    //console.log(data);
+                    $('#Organizacao').empty();
+                    $.each(data, function (index, data) {
+                        $('#Organizacao').append('<option value="' + data.Value + '">' + data.Text + ' </option>');
+                    });
+                    $("#Organizacao option").show();
+                },
+                error: function (xhr, textStatus, error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+    }

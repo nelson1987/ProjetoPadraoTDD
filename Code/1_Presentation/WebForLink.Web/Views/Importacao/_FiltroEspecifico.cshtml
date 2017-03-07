@@ -1,0 +1,94 @@
+﻿@using WebForLink.Domain.Enums
+@model WebForLink.Web.ViewModels.FornecedorBaseListaVM
+
+@switch (Model.TipoFuncionalidade)
+{
+    case EnumTiposFuncionalidade.ValidarEmOrgaosPublicos:
+        <div class="col-md-3">
+            <label class="control-label">Fornecedores</label>
+            <div class="radio">
+                <div class="radio-inline">
+                    @Html.RadioButtonFor(model => model.Filtro.Validados, false) Sem Validação
+                </div>
+
+                <div class="radio-inline">
+                    @Html.RadioButtonFor(model => model.Filtro.Validados, true) Validados
+                </div>
+            </div>
+        </div>
+        break;
+    case EnumTiposFuncionalidade.Categorizar:
+    <div class="col-md-3">
+        <label class="control-label">Fornecedores</label>
+        <div class="radio">
+            <div class="radio-inline">
+                @Html.RadioButtonFor(model => model.Filtro.Categorizados, false, new { onclick = "exibirOcultarCategoria();" }) Sem Categoria
+            </div>
+            <div class="radio-inline">
+                @Html.RadioButtonFor(model => model.Filtro.Categorizados, true, new { onclick = "exibirOcultarCategoria();" }) Categorizados
+            </div>
+        </div>
+    </div>
+        break;
+    case EnumTiposFuncionalidade.Convidar:
+    <div class="col-md-3">
+        <label class="control-label">Fornecedores</label>
+        <div class="radio">
+            <div class="radio-inline">
+                @Html.RadioButtonFor(model => model.Filtro.Convidados, false) Sem Convite
+            </div>
+            <div class="radio-inline">
+                @Html.RadioButtonFor(model => model.Filtro.Convidados, true) Convidados
+            </div>
+        </div>
+    </div>
+        break;
+    case EnumTiposFuncionalidade.ProrrogarPrazo:
+    <div class="col-md-3">
+        <label class="control-label">Fornecedores</label>
+        <div class="radio">
+            <div class="radio-inline">
+                @Html.RadioButtonFor(model => model.Filtro.Prorrogados, false) Sem Prorrogação
+            </div>
+            <div class="radio-inline">
+                @Html.RadioButtonFor(model => model.Filtro.Prorrogados, true) Prorrogados
+            </div>
+        </div>
+    </div>
+        break;
+    @*case EnumTiposFuncionalidade.AprovarPrazo:
+        <div class="col-md-4">
+            <label class="control-label">Fornecedores</label>
+            <div class="radio">
+                <div class="radio-inline">
+                    @Html.RadioButtonFor(model => model.Filtro.Aprovados, 1) Sem Aprovação
+                </div>
+                <div class="radio-inline">
+                    @Html.RadioButtonFor(model => model.Filtro.Aprovados, 2) Reprovados
+                </div><br />
+                <div class="radio-inline">
+                    @Html.RadioButtonFor(model => model.Filtro.Aprovados, 3) Aprovados
+                </div>
+            </div>
+        </div>
+        break;*@
+    case EnumTiposFuncionalidade.Bloquear:
+    <div class="col-md-12">
+        <label class="control-label">Bloqueios</label>
+        <div class="radio">
+            <div class="radio-inline">
+                <label>@Html.RadioButtonFor(model => model.Filtro.Bloqueados, 0) Sem Bloqueio</label>
+            </div>
+            <div class="radio-inline">
+                <label>@Html.RadioButtonFor(model => model.Filtro.Bloqueados, 1) Cadastro/Atualização com bloqueio posterior</label>
+            </div>
+            <div class="radio-inline">
+                <label>@Html.RadioButtonFor(model => model.Filtro.Bloqueados, 2) Cadastro/Atualização com bloqueio ignorado</label>
+            </div>
+            <div class="radio-inline">
+                <label>@Html.RadioButtonFor(model => model.Filtro.Bloqueados, 3) Bloqueados</label>
+            </div>
+        </div>
+    </div>
+        break;
+}

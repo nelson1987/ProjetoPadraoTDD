@@ -1,0 +1,13 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+@using WebForLink.Web.Interfaces;
+@using WebForLink.Web.Infrastructure;
+@using WebForLink.Domain.Infrastructure;
+@{
+    IGeral _metodosGerais = new Geral();
+    string key = _metodosGerais.ValorKey();
+    EncryptDecryptQueryString cripto = new EncryptDecryptQueryString();
+}
+
+@Html.Partial("../Fornecedores/_FichaCadastral_DadosEnderecos", Model.DadosEnderecos)
+
+

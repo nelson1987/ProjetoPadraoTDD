@@ -1,0 +1,54 @@
+﻿@model WebForLink.Web.ViewModels.FornecedorBaseListaVM
+
+<div class="col-md-4 col-lg-3">
+    <div class="form-group">
+        <label class="control-label">Tipo</label>
+        <div class="radio">
+            <div class="radio-inline">
+                <input type="radio" name="TipoFornecedor" value="PJ" checked onclick="alternarCampos('PessoaJuridica')">Pessoa Jurídica
+            </div>
+            <div class="radio-inline">
+                <input type="radio" name="TipoFornecedor" value="PF" onclick="alternarCampos('PessoaFisica')">Pessoa Física
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="clearfix"></div>
+<div id="camposPessoaJuridica">
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>CNPJ</label><br />
+            @Html.TextBoxFor(x => x.Filtro.CNPJ, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="form-group">
+            <label>Razão Social</label><br />
+            @Html.TextBoxFor(x => x.Filtro.RazaoSocial, new { @class = "form-control" })
+        </div>
+    </div>
+</div>
+<div id="camposPessoaFisica" class="hidden">
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>CPF</label><br />
+            @Html.TextBoxFor(x => x.Filtro.CPF, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="form-group">
+            <label>Nome</label><br />
+            @Html.TextBoxFor(x => x.Filtro.Nome, new { @class = "form-control" })
+        </div>
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div class="form-group">
+        <label>Arquivo importado</label><br />
+        @Html.DropDownListFor(x => x.Filtro.ArquivoImportado,Model.Arquivos, new { @class = "form-control" })
+    </div>
+</div>
+
+
