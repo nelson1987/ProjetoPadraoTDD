@@ -1,0 +1,18 @@
+﻿@model WebForLink.Web.ViewModels.AbaVM
+<div class="box box-primary">
+    <div class="box-header">
+        <h3 class="box-title">@Html.DisplayFor(x => x.Titulo)</h3>
+        <h6 class="box-subtitle pull-right">@Html.DisplayFor(x => x.Descricao)</h6>
+    </div>
+    <div class="box-body abas">
+        <div class="row">
+            @Html.HiddenFor(x => x.Id)
+            @Html.HiddenFor(x => x.Titulo)
+            @Html.HiddenFor(x => x.QuestionarioId)
+            @Html.HiddenFor(x => x.Descricao)
+            @Html.DisplayFor(x => x.PerguntaList)
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<WebForLink.Web.ViewModels.DadosBancariosVM>
+@using WebForLink.Domain.Enums;
+@using WebForLink.Web.Interfaces;
+@using WebForLink.Web.Infrastructure;
+@using WebForLink.Domain.Infrastructure;
+@{
+    IGeral _metodosGerais = new Geral();
+    string key = _metodosGerais.ValorKey();
+    EncryptDecryptQueryString cripto = new EncryptDecryptQueryString();
+}
+<div class="box box-primary">
+    <div class="box-change">
+        <div id="alertaSucessoDadosBancarios" class="alert alert-success" role="alert" onclick="ocultarMensagem(this)"></div>
+        <div id="alertaErroDadosBancarios" class="alert alert-danger" role="alert" onclick="ocultarMensagem(this)"></div>
+    </div>
+    <div class="box-header"><h3 class="box-title">Dados Bancários</h3></div>
+    <div class="box-body">
+        <div class="aguarde-interno" id="divAguardeDadosBancarios">
+            <div>
+                <i class="fa fa-refresh fa-spin"></i> Aguarde...
+            </div>
+        </div>
+        <div id="divBancos">
+            @Html.DisplayForModel()
+        </div>
+        <br>
+        <div class="text-right text-nowrap hidden">
+            <button id="btnEditarDadosBancarios" type="button" class="btn btn-primary" onclick="consultarSolicitacoesEmAberto('DadosBancarios', @Convert.ToInt32(EnumTiposFluxo.ModificacaoDadosBancarios));">Editar</button>
+        </div>
+        <div id="confirmacaoDadosBancarios" class="alert alert-warning hidden" role="alert">
+            <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-primary btn-xs" onclick="editarDados('DadosBancarios', '@Url.Action("Editar", "DadosBancarios")');">Sim</button>&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-default btn-xs" onclick="ocultarJanelaConfirmacao('DadosBancarios')">Não</button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

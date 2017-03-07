@@ -1,0 +1,4 @@
+2017-01-25 08:29:24,155 [1] ERROR WebForLink.Web.MvcApplication - Aplicação Iniciada
+2017-01-25 08:29:27,031 [1] ERROR WebForLink.Web.Mappers.MappingProfile - Mapper not initialized. Call Initialize with appropriate configuration. If you are trying to use mapper instances through a container or otherwise, make sure you do not have any calls to the static Mapper.Map methods, and if you're using ProjectTo or UseAsDataSource extension methods, make sure you pass in the appropriate IConfigurationProvider instance.
+2017-01-25 08:29:30,435 [9] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Index, UsuarioId: 0
+2017-01-25 08:37:47,363 [10] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.

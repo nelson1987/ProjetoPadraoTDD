@@ -1,0 +1,99 @@
+﻿@model WebForLink.Web.ViewModels.SolicitacaoConviteVM
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="btn pull-right" data-dismiss="modal">
+            <i class="glyphicon glyphicon-floppy-disk" style="color:@ViewBag.BotaoColor;"></i>
+        </button>
+        <h4 class="modal-title">Ficha Cadastral&nbsp;&nbsp;<small><span class="cnpjask">@Model.Cnpj</span> - @Model.RazaoSocial</small></h4>
+    </div>
+
+    <div class="modal-body">
+        @if (Model.FichaCadastral != null && Model.FichaCadastral.Enderecos != null)
+        {
+            <div class="row" id="enderecoForm">
+                @using (Ajax.BeginForm("FirstStep", "Convite", FormMethod.Post, new AjaxOptions
+                {
+                    UpdateTargetId = "gameContainer",
+                    InsertionMode = InsertionMode.Replace,
+                    OnSuccess = "afterFirst"
+                }, null))
+                {
+                    <div class="row">
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.IdCriptografado)
+                        @Html.HiddenFor(model => model.IdFichaCadastral)
+                        @Html.HiddenFor(model => model.PassoAtual)
+                        @Html.HiddenFor(model => model.EhValido)
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="col-md-12">
+                            <h3> Endereco</h3>
+                            <button class="btn btn-xs pull-right" type="button" onclick="adicionarEnderecoEmModal('@Model.Id');">+</button>
+                                @Html.EditorFor(model => model.FichaCadastral.Enderecos)
+                            <button class="btn btn-warning nextBtn pull-right" type="submit">Próximo</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        @if (Model.FichaCadastral != null && Model.FichaCadastral.Contatos != null)
+            {
+            <div class="row" id="contatoForm" style="display:none;">
+                @using (Ajax.BeginForm("secondStep", "Convite", FormMethod.Post, new AjaxOptions
+                {
+                    UpdateTargetId = "gameContainer",
+                    InsertionMode = InsertionMode.Replace,
+                    OnSuccess = "afterSecond"
+                }, null))
+                {
+                    <div class="row">
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.IdCriptografado)
+                        @Html.HiddenFor(model => model.FichaCadastral.Id)
+                        @Html.HiddenFor(model => model.PassoAtual)
+                        @Html.HiddenFor(model => model.EhValido)
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="col-md-12">
+                            <h3> Contato</h3>
+                            <button class="btn btn-xs pull-right" type="button" onclick="adicionarContatoEmModal('@Model.Id');">+</button>
+                            @Html.EditorFor(model => model.FichaCadastral.Contatos)
+                            <button class="btn btn-warning lastBtn pull-left" type="button">Anterior</button>
+                            <button class="btn btn-warning nextBtn pull-right" type="submit">Próximo</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        @if (Model.FichaCadastral != null && Model.FichaCadastral.Bancos != null)
+            {
+            <div class="row" id="bancoForm" style="display:none;">
+                @using (Ajax.BeginForm("lastStep", "Convite", FormMethod.Post, new AjaxOptions
+                {
+                    UpdateTargetId = "gameContainer",
+                    InsertionMode = InsertionMode.Replace,
+                    OnSuccess = "afterThird"
+                }, null))
+                {
+                    <div class="row">
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.IdCriptografado)
+                        @Html.HiddenFor(model => model.FichaCadastral.Id)
+                        @Html.HiddenFor(model => model.PassoAtual)
+                        @Html.HiddenFor(model => model.EhValido)
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="col-md-12">
+                            <h3>Banco</h3>
+                            <button class="btn btn-xs pull-right" type="button" onclick="adicionarBancoEmModal('@Model.Id');">+</button>
+                            @Html.EditorFor(model => model.FichaCadastral.Bancos)
+                            <button class="btn btn-warning lastBtn btn-lg pull-right" type="button">Anterior</button>
+                            <button class="btn btn-primary endBtn btn-lg pull-right" type="submit">Finalizar</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>

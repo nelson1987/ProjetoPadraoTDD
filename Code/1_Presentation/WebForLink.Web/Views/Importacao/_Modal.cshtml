@@ -1,0 +1,86 @@
+﻿@using WebForLink.Domain.Enums;
+@using WebForLink.Web.ViewModels;
+@model WebForLink.Web.ViewModels.FornecedorBaseListaVM
+
+@{
+    string mensagem = string.Empty;
+}
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@Model.NomeFuncionalidade</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <label>Selecionados:</label>
+                            <label class="badge">0</label>
+                            <button type="button" class="btn btn-xs btn-default" data-toggle="popover" title="" data-original-title="Fornecedores" data-trigger="focus">Ver</button>
+                        </div>
+                    </div>
+                    <div id="relatorioSelecionados" class="hidden">
+                        <ul></ul>
+
+                        <input type="hidden" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="clearfix"></div>
+                    @switch (Model.TipoFuncionalidade)
+                    {
+                        case EnumTiposFuncionalidade.Categorizar:
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Categoria</label><br />
+                                    @Html.Partial("_CategoriasTreeView", (List<WebForLink.Web.ViewModels.CategoriaVM>)ViewBag.Categorias)
+                                </div>
+                            </div>
+                            mensagem = "Tem certeza que deseja alterar a categoria do(s) fornecedor(es) selecionados?";
+                            break;
+                        case EnumTiposFuncionalidade.ValidarEmOrgaosPublicos:
+                            mensagem = "Tem certeza que deseja ativar a validação do(s) fornecedor(es) selecionados?";
+                            break;
+                        case EnumTiposFuncionalidade.Convidar:
+                        @Html.Partial("_EnviarEmail", Model.MensagemImportacao)
+                            mensagem = "Tem certeza que deseja convidar o(s) fornecedor(es) selecionados?";
+                            break;
+                        case EnumTiposFuncionalidade.ProrrogarPrazo:
+                        @Html.Partial("_ProrrogarPrazo", Model.ProrrogacaoPrazo)
+                            mensagem = "Tem certeza que deseja prorrogar o prazo do(s) fornecedor(es) selecionados?";
+                            break;
+                        case EnumTiposFuncionalidade.AprovarPrazo:
+                        @Html.Partial("_AprovarProrrogacao", Model.AprovacaoProrrogacao)
+                            mensagem = "Tem certeza que deseja finalizar a prorrogação de prazo do(s) fornecedor(es) selecionados?";
+                            break;
+                        case EnumTiposFuncionalidade.Bloquear:
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="radio-inline">
+                                    <label style="font-weight : normal;">@Html.RadioButtonFor(model => model.BloqueioId, 1) Permitir Cadastro/Atualização com Bloqueio posterior</label>
+                                    <br />
+                                    <label style="font-weight : normal;">@Html.RadioButtonFor(model => model.BloqueioId, 2) Permitir Cadastro/Atualização e ignorar Bloqueio</label>
+                                    <br />
+                                    <label style="font-weight : normal;">@Html.RadioButtonFor(model => model.BloqueioId, 3) Bloquear</label>
+                                </div>
+                            </div>
+                        </div>
+                            mensagem = "Tem certeza que deseja Bloquear o(s) fornecedor(es) selecionados?";
+                            break;
+
+                    }
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" onclick="exibirConfirmacao('@mensagem');">Executar</button>
+                <div id="confirmacao" class="alert alert-warning hidden text-center" role="alert">
+                    <span></span>&nbsp;&nbsp;<br />
+                    <button type="submit" class="btn btn-primary btn-xs">Sim</button>&nbsp;
+                    <button type="button" class="btn btn-default btn-xs" onclick="ocultarConfirmacao();">Não</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+﻿@model WebForLink.Web.ViewModels.IDadoEndereco
+<div class="box-body">
+    <div class="col-md-3">
+        <div class="form-group">
+            @Html.LabelFor(model => model.TipoEndereco, htmlAttributes: new {@class = "control-label"})
+            @Html.DisplayFor(model => model.TipoEndereco, new {@class = "form-control input-sm", disabled = true})
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿@model WebForLink.Web.ViewModels.ContatoVM
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="contatoVMs">
+            <div class="col-md-4">
+                @Html.HiddenFor(Model => Model.Id)
+                @Html.LabelFor(Model => Model.NomeContato, htmlAttributes: new { @class = "" })<br />
+                @Html.TextBoxFor(Model => Model.NomeContato, new { @class = "form-control input-sm" })
+                @Html.ValidationMessageFor(Model => Model.NomeContato, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(Model => Model.Email, htmlAttributes: new { @class = "" })<br />
+                @Html.TextBoxFor(Model => Model.Email, new { @class = "form-control input-sm" })
+                @Html.ValidationMessageFor(Model => Model.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2">
+                @Html.LabelFor(Model => Model.Telefone, htmlAttributes: new { @class = "" })<br />
+                @Html.TextBoxFor(Model => Model.Telefone, new { @class = "form-control input-sm phoneMask" })
+                @Html.ValidationMessageFor(Model => Model.Telefone, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2">
+                @Html.LabelFor(Model => Model.Celular, htmlAttributes: new { @class = "" })<br />
+                @Html.TextBoxFor(Model => Model.Celular, new { @class = "form-control input-sm cellMask" })
+                @Html.ValidationMessageFor(Model => Model.Celular, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-xs btn-warning" type="button" onclick="apagarContato(this);">
+                    <i class="glyphicon glyphicon-trash">&nbsp;</i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,134 @@
+﻿@using WebForLink.Web.Infrastructure;
+@using WebForLink.Web.Interfaces;
+@{
+    //IGeral metodosGerais = new Geral();
+    string estilo = (string)Geral.PegaAuthTicket("Estilo");
+
+    if (estilo == null)
+    {
+        estilo = "lilas";
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <title>WebForLink</title>
+    @Styles.Render("~/style/bootstrap")
+    @Styles.Render("~/style/" + estilo)
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js.js"></script>
+
+        <style>
+            .knob {
+                display: none;
+            }
+        </style>
+
+    <![endif]-->
+    <!--[if lt IE 8]>
+        <script>
+            location.href = 'Compatibilidade.html'
+        </script>
+    <![endif]-->
+    @RenderSection("header", required: false)
+
+    <style>
+        .logo-rodape {
+            position: fixed;
+            bottom: 2px;
+            width: 220px;
+            background-color: #f1f1f2;
+            padding-left: 5px;
+        }
+    </style>
+</head>
+<body class="skin-blue">
+    <div class="aguarde">
+        <div>
+            <i class="fa fa-refresh fa-spin"></i> Aguarde...
+        </div>
+    </div>
+    <header class="header">
+        <div class="nome-cliente-mobile col-md-12">
+            <img src="~/Content/images/webforlink3_171x35_ed.png" />
+        </div>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <div class="col-xs-1 col-md-1">
+                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+            </div>
+            <div class="navbar-right">
+                <ul class="nav navbar-nav">
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu dropdown-li-custom">
+                        <a href="#" class="dropdown-toggle dropdown-a-custom" data-toggle="dropdown">
+                            <i class="glyphicon glyphicon-user"></i>
+                            <span>@Geral.PegaAuthTicket("NomeReduzidoUsuario") <i class="caret"></i></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="@Url.Action("MinhaContaFrm", new { area = "Administracao", controller = "Usuario" })" class="btn btn-default btn-flat">Minha Conta</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="@Url.Action("Index", new { area = "", controller = "Home" })" class="btn btn-default btn-flat">Sair</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- MENU -->
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+        <aside class="left-side sidebar-offcanvas">
+            <section class="sidebar">
+                <div class="user-panel">
+                    <div class="logo-cliente">
+                        @if (User.IsInRole("ADM.LOGO"))
+                        {
+                            <button type="button" class="btn btn-default" onclick="window.location.href='@Url.Action("LogoFoto", new {area = "", controller = "HomeAdmin"})';"><i class=" fa fa-pencil"></i> Inserir Logo</button>
+                        }
+                        @if (System.IO.File.Exists(Server.MapPath("/ImagensUsuarios/") + Geral.PegaAuthTicket("Imagem").ToString()))
+                        {
+                            <img src='~/ImagensUsuarios/@Geral.PegaAuthTicket("Imagem").ToString()' />
+                        }
+                        else
+                        {
+                            <img src='~/Content/images/@((Geral.PegaAuthTicket("TipoContratante").ToString() == "1") ? "semlogo.png" : "semfoto.png")' />
+                        }
+                    </div>
+                </div>
+                <ul class="sidebar2-menu">
+                    @Html.Partial("_menuAdministracao")
+                </ul>
+                <div class="logo-rodape">
+                    <img src="~/Content/images/logo-ch.png" />
+                </div>
+            </section>
+        </aside>
+        <aside class="right-side">
+            @RenderBody()
+        </aside>
+    </div>
+
+        @RenderSection("Footer", false)
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+</body>
+</html>

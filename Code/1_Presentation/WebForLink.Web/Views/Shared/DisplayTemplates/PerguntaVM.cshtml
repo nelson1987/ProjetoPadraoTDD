@@ -1,0 +1,46 @@
+﻿@model WebForLink.Web.ViewModels.PerguntaVM
+<div class="col-md-4">
+    <div class="form-group perguntas" id="perguntaTab_@Model.Id">
+        @Html.HiddenFor(x => x.Id)
+        @Html.HiddenFor(x => x.AbaId)
+        @Html.HiddenFor(x => x.TipoDado)
+        @Html.HiddenFor(x => x.ExibeNome)
+        @Html.HiddenFor(x => x.Escrita)
+        @Html.HiddenFor(x => x.SolicitacaoId)
+        @Html.HiddenFor(x => x.RespostaId)
+        @Html.HiddenFor(x => x.RespostaFornecedorId)
+        @Html.HiddenFor(x => x.PerguntaPai)
+        @Html.LabelFor(x => x.Resposta, Model.Titulo)
+        <br/>
+        @{
+            if (Model.SolicitacaoId > 0) 
+            { 
+                if (Model.DominioList.Count > 0 && Model.Resposta != null)
+                {
+                    var respostaList = Model.DominioList.Find(x => x.Text == Model.Resposta.ToString());
+                    <span>@respostaList.Text</span>
+                }
+                else
+                {
+                    @Html.DisplayTextFor(x => x.Resposta)
+                }
+            }
+            else
+            {
+                if (Model.DominioList.Count > 0 && Model.RespostaFornecedor != null)
+                {
+                    var respostaList = Model.DominioList.Find(x => x.Value == Model.RespostaFornecedor);
+                    <span>@respostaList.Text</span>
+                }
+                else
+                {
+                    @Html.DisplayTextFor(x => x.RespostaFornecedor)
+                }
+            }
+}
+    </div>
+</div>
+@if (Model.PulaLinha)
+{
+    <div class="clearfix"></div>
+}

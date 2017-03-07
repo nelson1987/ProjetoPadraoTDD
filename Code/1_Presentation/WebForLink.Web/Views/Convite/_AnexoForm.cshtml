@@ -1,0 +1,99 @@
+﻿@model List<WebForLink.Web.ViewModels.ArquivoAnexadoVM>
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Anexar Documentos</h4>
+    </div>
+    <div class="modal-body">
+        <div class="panel-group">
+            @foreach (var item in Model)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="@string.Format("#collapse{0}",item.Id)">@item.ArquivoAnexado</a>
+                        </h4>
+                    </div>
+                    <div id="@string.Format("collapse{0}",item.Id)" class="panel-collapse collapse">
+                        <div class="panel-body" style="padding-bottom: 5px;">
+                            @Html.Partial("~/Views/UploadArquivo/_Files.cshtml", item)
+                        </div>
+                    </div>
+                </div>
+
+            }
+            <script id="template-upload" type="text/x-tmpl">
+                {%
+                for (var i=0, file; file=o.files[i]; i++) {
+                %}
+                <div class="row template-upload fade">
+                    <div class="col-lg-2">
+                        <span class="preview"></span>
+                    </div>
+                    <div class="col-lg-7">
+                        <p class="name">{%=file.name%}</p>
+                        <strong class="error text-danger"></strong>
+                    </div>
+                    <div class="col-lg-3">
+                        {% if (!i && !o.options.autoUpload) { %}
+                        <button class="btn btn-primary start" disabled>
+                            <i class="glyphicon glyphicon-upload"></i>
+                            <span>Começar</span>
+                        </button>
+                        {% } %}
+                        {% if (!i) { %}
+                        <button class="btn btn-warning cancel pull-right">
+                            <i class="glyphicon glyphicon-ban-circle"></i>
+                            <span>Cancelar</span>
+                        </button>
+                        {% } %}
+                    </div>
+                </div>
+                {% } %}
+            </script>
+            <!-- The template to display files available for download -->
+            <script id="template-download" type="text/x-tmpl">
+                {% for (var i=0, file; file=o.files[i]; i++) { %}
+                <div class="row template-download fade">
+                    <div class="col-lg-2">
+                        <span class="preview">
+                            {% if (file.thumbnailUrl) { %}
+                            <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                            {% } %}
+                        </span>
+                    </div>
+                    <div class="col-lg-6">
+                        <p class="name">
+                            {% if (file.url) { %}
+                            <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                            {% } else { %}
+                            <span>{%=file.name%}</span>
+                            {% } %}
+                        </p>
+                        {% if (file.error) { %}
+                        <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+                        {% } %}
+                    </div>
+                    <div class="col-lg-1">
+                        <span class="size">{%=o.formatFileSize(file.size)%}</span>
+                    </div>
+                    <div class="col-lg-3">
+                        {% if (file.deleteUrl) { %}
+                        <button class="btn btn-danger delete pull-right" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}" {% if (file.deletewithcredentials) { %} data-xhr-fields='{"withCredentials":true}' {% } %}>
+                            <i class="glyphicon glyphicon-trash"></i>
+                            <span>Delete</span>
+                        </button>
+                        <input type="checkbox" name="delete" value="1" class="toggle hidden">
+                        {% } else { %}
+                        <button class="btn btn-warning cancel pull-right">
+                            <i class="glyphicon glyphicon-ban-circle"></i>
+                            <span>Cancel</span>
+                        </button>
+                        {% } %}
+                    </div>
+                </div>
+                {% } %}
+            </script>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+﻿@model WebForLink.Web.ViewModels.CadastrarUsuarioFornecedorVM
+@{
+    Layout = null;
+    if (Model.TextoTermoAceite != null)
+    {
+        Session["TermoAceite"] = Model.TextoTermoAceite;
+    }
+}
+
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <title>WebForLink</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/AdminAzul.css" rel="stylesheet" type="text/css" />
+
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js" type="text/javascript"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+        <script>
+            location.href = 'Compatibilidade.html'
+        </script>
+    <![endif]-->
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/plugins/input-mask/jquery.inputmask.js"></script>
+</head>
+<body>
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "target" }))
+    {
+        <div class="form-box" id="login-box">
+            <div class="header">Cadastrar Usuário</div>
+            <div class="text-center bg-gray" style="padding-top: 15px;">
+                <img src="~/Content/images/webforlink3_200x45_ed.png" />
+            </div>
+            @Html.AntiForgeryToken()
+            <div class="body bg-gray" style="@ViewBag.DisplayForm">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(x => x.SolicitacaoId)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DocumentoPjPf, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.DocumentoPjPf, new { htmlAttributes = new { @class = "form-control cnpjMask", disabled = "disabled" } })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmailAlternativo, new { @class = "control-label" })<span class="text-danger">*</span>
+                    @Html.EditorFor(model => model.EmailAlternativo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EmailAlternativo, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Senha, new { @class = "control-label" })
+                    @Html.PasswordFor(model => model.Senha, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ConfirmaSenha, new { @class = "control-label" })
+                    @Html.PasswordFor(model => model.ConfirmaSenha, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ConfirmaSenha, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary btn-block" onclick="abrirTermoDeAceite();">Enviar</button>
+        </div>
+        <div id="dvTermoAceite" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"><strong>TERMO DE ACEITE PARA UTILIZAÇÃO DO PORTAL DE CADASTRO DE FORNECEDORES - WEBFORLINK</strong></h4>
+                    </div>
+                    <div class="modal-body" style="height: 250px; overflow: auto;">
+                        @{
+                            @*@Model.NomeFornecedor
+                            @Model.NomeEmpresa*@
+                            @Html.Raw(Session["TermoAceite"].ToString())
+                    }
+                    </div>
+                    <div class="modal-footer">
+                        <p>@Html.RadioButtonFor(m => m.TermoAceite, true) Declaro estar ciente e concordo com os conteúdos, termos e condições estabelecidos acima.</p>
+                        @*Sim:
+                            Não:
+                            @Html.RadioButtonFor(m => m.TermoAceite, false)*@
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Sair</button>
+                        <button type="button" class="btn btn-primary" id="enviar">Enviar</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    }
+    <script type="text/javascript">
+        function abrirTermoDeAceite() {
+            //$("#spTermoAceite").html();
+            $("#dvTermoAceite").modal();
+        }
+        $(function () {
+            $('.cnpjMask').inputmask({ mask: ['99.999.999/9999-99'] });
+            $("#dvTermoAceite").hide();
+            $("#enviar").click(function (event) {
+                $("#DocumentoPjPf").removeAttr("disabled");
+                $("#Email").removeAttr("disabled");
+                $("#dvTermoAceite").hide();
+                $("#target").submit();
+                $("#DocumentoPjPf").attr("disabled", "disabled");
+                $("#Email").attr("disabled", "disabled");
+                event.preventDefault();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿@model WebForLink.Web.Areas.Administracao.Models.UsuarioAdministracaoModel
+
+@Html.ValidationMessage("ValidationPerfil", "", new { @class = "text-danger" })
+<ul class="span4">
+    <li>@*<input type="checkbox" id="all" name="check-all" />*@ <b>Perfis</b> </li>
+    @for (var i = 0; i < Model.PerfilList.Count; i++)
+    {
+        var perfil = Model.PerfilList[i];
+        <li class="checkbox">
+            &emsp;
+            <label>
+                @Html.Hidden("PerfilList[" + @i + "].Id", perfil.Id)
+                @Html.Hidden("PerfilList[" + @i + "].Nome", perfil.Nome)
+                <input type="checkbox"
+                       name="SelectedGroupsPerfil"
+                       value="@perfil.Id" id="@perfil.Id"
+                       @{
+                            if (Model.SelectedGroupsPerfil != null) { 
+                                if (Model.SelectedGroupsPerfil.Contains(perfil.Id)) { 
+                                    <text> checked='checked' </text>      
+                                } 
+                            }
+                       }
+
+                       @(ViewBag.Acao == "Excluir" ? "Disabled" : "") />
+
+                @perfil.Nome
+            </label>
+        </li>
+    }
+</ul>
+
+@*<script type="text/javascript">
+    $("li.parent-list ul").hide(); //hide the child lists
+    $("li.parent-list i").click(function () {
+        $(this).toggleClass('fa-caret-down'); // toggle the font-awesome icon class on click
+        $(this).addClass('fa-caret-up'); // toggle the font-awesome icon class on click
+        $(this).next("ul").toggle(); // toggle the visibility of the child list on click
+    });
+    // check-uncheck all
+    $(document).on('change', 'input[id="all"]', function () {
+        $('.canine').prop("checked", this.checked);
+    });
+    // parent/child check-uncheck all
+    $(function () {
+        $('.parent').on('click', function () {
+            $(this).closest('ul li').find(':checkbox').prop('checked', this.checked);
+        });
+    });
+</script>*@

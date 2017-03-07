@@ -1,0 +1,118 @@
+﻿@model WebForLink.Web.ViewModels.RoboReceitaTesteVM
+@if (Model != null)
+{
+    <div id="callReceita" class="panel panel-success">
+        <div id="callReceitaHeading" class="panel-heading panel-heading-success">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#bodyReceita">
+                    <b>Receita Federal:</b><span> @Html.Raw(Model.RF_CODE_ROBO != null ? Model.MotivoSituacaoCadastral : "")</span>
+                </a>
+            </h4>
+        </div>
+        <div id="bodyReceita" class="panel-collapse collapse" role="tabpanel">
+            <div class="panel-body">
+                @Html.HiddenFor(model => Model.RF_CODE_ROBO)
+                @Html.HiddenFor(model => Model.MotivoSituacaoCadastral)
+                @if (!string.IsNullOrEmpty(Model.ExecucaoRobo.ToString()))
+                {
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(x => Model.ExecucaoRobo)<br />
+                            @Html.DisplayFor(model => Model.ExecucaoRobo)
+                        </div>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.RazaoSocial))
+                {
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(x => Model.RazaoSocial)<br />
+                            @Html.DisplayFor(model => Model.RazaoSocial)
+                        </div>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.NomeFantasia))
+                {
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(x => Model.NomeFantasia)<br />
+                            @Html.DisplayFor(model => Model.NomeFantasia)
+                        </div>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.SituacaoCadastral))
+                {
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(x => Model.SituacaoCadastral)<br />
+                            @Html.DisplayFor(model => Model.SituacaoCadastral)
+                        </div>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.MotivoSituacaoCadastral))
+                {
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(x => Model.MotivoSituacaoCadastral)<br />
+                            @Html.DisplayFor(model => Model.MotivoSituacaoCadastral)
+                        </div>
+                    </div>
+                }
+                @if (Model.DataSituacaoCadastral.HasValue)
+                {
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(x => Model.DataSituacaoCadastral)<br />
+                            @Html.DisplayFor(model => Model.DataSituacaoCadastral)
+                        </div>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.MatrizFilial))
+                {
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(x => Model.MatrizFilial)<br />
+                            @Html.DisplayFor(model => Model.MatrizFilial)
+                        </div>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.CnaePrincipal))
+                {
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(x => Model.CnaePrincipal)<br />
+                            @Html.DisplayFor(model => Model.CnaePrincipal) -  @Html.DisplayFor(model => Model.CnaeDescricaoPrincipal)
+                        </div>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.CodigoNaturezaJuridica))
+                {
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(x => Model.CodigoNaturezaJuridica)<br />
+                            @Html.DisplayFor(model => Model.CodigoNaturezaJuridica) - @Html.DisplayFor(model => Model.DescricaoNaturezaJuridica)
+                        </div>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.SituacaoEspecial))
+                {
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(x => Model.SituacaoEspecial)<br />
+                            @Html.DisplayFor(model => Model.SituacaoEspecial)
+                        </div>
+                    </div>
+                }
+                @if (Model.DataSituacaoEspecial.HasValue)
+                {
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(x => Model.DataSituacaoEspecial)<br />
+                            @Html.DisplayFor(model => Model.DataSituacaoEspecial)
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

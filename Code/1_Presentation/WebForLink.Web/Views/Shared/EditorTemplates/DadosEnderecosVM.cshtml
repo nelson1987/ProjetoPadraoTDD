@@ -1,0 +1,88 @@
+﻿@model WebForLink.Web.ViewModels.DadosEnderecosVM
+
+
+@using (Html.BeginCollectionItem("DadosEnderecos"))
+{
+    <div class="Endereco" name="Endereco" style="border: solid 1px silver; padding-top: 7px;">
+        @Html.HiddenFor(x => x.ID, new { @name = "EnderecoID" })
+        @*<div class="col-md-3">
+                 <div class="form-group">
+                     <label>Tipo de Endereço</label><br />
+                     @Html.DropDownListFor(x => x.TipoEnderecoId, (SelectList)ViewBag.TipoEndereco, "Selecione um Endereço", new
+            {
+                @class = "form-control input-sm",@onchange = "obterNomeTipoEndereco(this);" })
+                     @Html.ValidationMessageFor(x => x.ListTipoEndereco, "", new { @class = "text-danger" })
+                 </div>
+             </div> *@
+        <div class="col-xs-4 col-md-2">
+            <div class="form-group">
+                <label>CEP</label>&nbsp;<span class="btn-link" onclick="buscarCEP($(this).parent().find('input[type=text]'));">Buscar Cep</span><br />
+                @Html.TextBoxFor(x => x.CEP, new { @class = "form-control input-sm cepMask", maxlength = "9" })
+                @Html.ValidationMessageFor(x => x.CEP, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-xs-4 col-md-3">
+            <div class="form-group">
+                <label>Estado</label><br />
+                @Html.DropDownListFor(x => x.T_UF.UF_SGL, (SelectList)ViewBag.UF, "Selecione o Estado", new { @class = "form-control input-sm estadoTxt" })
+            </div>
+        </div>
+        <div class="col-xs-4 col-md-3">
+            <div class="form-group">
+                <label>Cidade</label><br />
+                @Html.TextBoxFor(x => x.Cidade, new { @class = "form-control input-sm cidadeTxt", maxlength = "100" })
+                @Html.ValidationMessageFor(x => x.Cidade, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-xs-4 col-md-3">
+            <div class="form-group">
+                <label>Bairro</label><br />
+                @Html.TextBoxFor(x => x.Bairro, new { @class = "form-control input-sm bairroTxt", maxlength = "100" })
+                @Html.ValidationMessageFor(x => x.Bairro, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-xs-8 col-md-5">
+            <div class="form-group">
+                <label>Endereço</label><br />
+                @Html.TextBoxFor(x => x.Endereco, new { @class = "form-control input-sm enderecoTxt", maxlength = "255" })
+                @Html.ValidationMessageFor(x => x.Endereco, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-xs-4 col-md-1">
+            <div class="form-group">
+                <label>Número</label><br />
+                @Html.TextBoxFor(x => x.Numero, new { @class = "form-control input-sm numeroTxt", maxlength = "50" })
+                @Html.ValidationMessageFor(x => x.Numero, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-xs-8 col-md-4">
+            <div class="form-group">
+                <label>Complemento</label><br />
+                @Html.TextBoxFor(x => x.Complemento, new { @class = "form-control input-sm complementoTxt", maxlength = "255" })
+                @Html.ValidationMessageFor(x => x.Complemento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @*<div class="col-xs-4 col-md-2">
+            <div class="form-group">
+                <label>País</label><br />
+                @Html.TextBoxFor(x => x.Pais, new { @class = "form-control input-sm paisTxt", maxlength = "100" })
+                @Html.ValidationMessageFor(x => x.Pais, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        <div class="col-md-1">
+            <label>&nbsp;</label><br />
+            <button type="button" class="btn btn-danger" onclick="exibirConfirmacaoExclusao(this)"><i class="fa fa-trash-o fa-lg"></i></button>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-12">
+            <div id="exclusaoDadosEnderecos" class="alert alert-warning text-center hidden" role="alert" style="Height:10%">
+                <span>Tem certeza que deseja excluir este Endereço?</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-primary btn-xs" onclick="excluirDados(this);">Sim</button>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-default btn-xs" onclick="$(this).parent('div').hide();">Não</button>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+}
+

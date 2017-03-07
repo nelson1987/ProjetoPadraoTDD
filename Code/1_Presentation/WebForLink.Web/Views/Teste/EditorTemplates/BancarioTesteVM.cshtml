@@ -1,0 +1,115 @@
+﻿@model WebForLink.Web.ViewModels.BancarioTesteVM
+@*<div>
+    <span>Bancario</span>
+    @Model.Id
+    @Model.BancoId
+    @Model.Agencia
+    @Model.AgenciaDigitoVerificador
+    @Model.Conta
+    @Model.ContaDigitoVerificador
+    @Model.Ativo
+    @Model.ContratantePjPfId
+    @Model.ArquivoId
+    @Model.NomeArquivo
+</div>*@
+<div class="panel panel-default">
+    <div class="panel-body">
+        @Html.HiddenFor(x => x.Id)
+        <div class="col-md-12 col-lg-5">
+            <div class="form-group">
+                @Html.LabelFor(x => x.Conta)<br />
+                @*@Html.DropDownListFor(x => x.Banco, (SelectList)ViewBag.Bancos, "Selecione um Banco", new { @class = "form-control input-sm", @onchange = "obterNomeBanco(this);" })*@
+                @Html.HiddenFor(x => x.BancoId)
+                @Html.ValidationMessageFor(x => x.BancoId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-xs-8 col-md-3 col-lg-2">
+            <div class="form-group">
+                @Html.LabelFor(x => x.Agencia)<br />
+                @Html.TextBoxFor(x => x.Agencia, new { @class = "form-control input-sm", maxlength = "4" })
+                @Html.ValidationMessageFor(x => x.Agencia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-xs-4 col-md-2 col-lg-1">
+            <div class="form-group">
+                @Html.LabelFor(x => x.AgenciaDigitoVerificador)<br />
+                @Html.TextBoxFor(x => x.AgenciaDigitoVerificador, new { @class = "form-control input-sm", maxlength = "1" })
+                @Html.ValidationMessageFor(x => x.AgenciaDigitoVerificador, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-xs-8 col-md-3 col-lg-2">
+            <div class="form-group">
+                @Html.LabelFor(x => x.Conta)<br />
+                @Html.TextBoxFor(x => x.Conta, new { @class = "form-control input-sm", maxlength = "18" })
+                @Html.ValidationMessageFor(x => x.Conta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-xs-4 col-md-2 col-lg-1">
+            <div class="form-group">
+                @Html.LabelFor(x => x.ContaDigitoVerificador)<br />
+                @Html.TextBoxFor(x => x.ContaDigitoVerificador, new { @class = "form-control input-sm", maxlength = "2" })
+                @Html.ValidationMessageFor(x => x.ContaDigitoVerificador, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-1 col-lg-1 hidden-xs">
+            <label>&nbsp;</label><br />
+            <button type="button" class="btn btn-danger" onclick="exibirConfirmacaoExclusao(this)"><i class="fa fa-trash-o fa-lg"></i></button>
+        </div>
+        <div class="clearfix"></div>
+        @*
+            <div class="col-xs-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-4">
+                            <label class="control-label hidden-xs hidden-md">&nbsp;</label><br class="hidden-xs hidden-md" />
+                            <div class="fileUpload btn btn-default">
+                                <span style="padding-left: 5px; float: none; text-align: center;">Buscar Comprovante</span>
+                                @Html.TextBoxFor(x => x.Arquivo, new { @class = "upload", type = "file", origemArquivo = "CB" })
+                                @Html.ValidationMessageFor(x => x.Arquivo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-8">
+                            <label class="hidden-md hidden-xs">&nbsp;</label><br class="hidden-md hidden-xs" />
+                            <span class="help-block" style="float: none;">
+                                @Html.HiddenFor(x => x.ArquivoSubido, new { ArquivoSubido = "" })
+                                @Html.HiddenFor(x => x.TipoArquivoSubido, new { TipoArquivoSubido = "" })
+                                @Html.HiddenFor(x => x.ArquivoSubidoOriginal, new { ArquivoSubidoOriginal = "" })
+                                <span percentual>@Html.Raw(!String.IsNullOrEmpty(Model.ArquivoSubido) ? "<span style='color: #00a65a;' title='Arquivo subido com Sucesso!'><i class='fa fa-check-circle'></i></span>" : "")</span>
+                                <span nomearquivo>@Html.Raw(!String.IsNullOrEmpty(Model.ArquivoSubido) ? Model.ArquivoSubidoOriginal : "Nenhum Comprovante Selecionado!")</span>
+                                <span cancelarupload class="badge bg-red-gradient hidden text-center cancelarupload">
+                                    Interromper upload?
+                                    <button cancelaruploadSim type="button" class="btn btn-default btn-xs">Sim</button>
+                                    <button cancelaruploadNao type="button" class="btn btn-default btn-xs" onclick="$(this).parent().toggleClass('hidden')">Não</button>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-10 col-md-6 col-lg-5">
+                <div class="form-group">
+                    @if (Model.NomeArquivo != null)
+                    {
+                        @Html.HiddenFor(x => x.NomeArquivo)
+                        @Html.HiddenFor(x => x.ArquivoID)
+                        @Html.HiddenFor(x => x.DataUpload)
+                        <label class="control-label">Arquivo</label><br />
+                            <a href="@Url.Action("FornecedorArquivo", "Fornecedores", new { chaveurl = cripto.Criptografar(string.Format("ArquivoID={0}", Model.ArquivoID), key) })" class="btn-link">@Model.NomeArquivo</a>
+                    }
+                </div>
+            </div>
+            <div class="col-xs-2 hidden-md hidden-lg">
+                <label>&nbsp;</label><br />
+                <button type="button" class="btn btn-danger" onclick="exibirConfirmacaoExclusao(this)"><i class="fa fa-trash-o fa-lg"></i></button>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-12">
+                <div id="exclusaoDadosBancarios" class="alert alert-warning text-center hidden" role="alert">
+                    <span>Tem certeza que deseja excluir este Banco?</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary btn-xs" onclick="excluirDados(this);">Sim</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-default btn-xs" onclick="$(this).parent().toggleClass('hidden');">Não</button>
+                </div>
+            </div>
+            <div class="clearfix"></div>*@
+    </div>
+</div>

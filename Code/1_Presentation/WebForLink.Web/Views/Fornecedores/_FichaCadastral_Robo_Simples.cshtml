@@ -1,0 +1,72 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FornecedoresVM
+
+@if (Model != null)
+{
+    <div id="callSimples" class="panel panel-@Model.RoboSimples.cssCor">
+        <div id="callSimplesHeading" class="panel-heading panel-heading-@Model.RoboSimples.cssCor">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#bodySimples">
+                    <b>Simples:</b><span> @Html.Raw(Model.RoboSimples.Code != null ? Model.RoboSimples.Data.Message : "")</span>
+                </a>
+            </h4>
+        </div>
+        <div id="bodySimples" class="panel-collapse collapse" role="tabpanel">
+            <div class="panel-body">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Razão Social</label><br />
+                        <span id="span_RoboSimples_Data_RazaoSocial">@Html.DisplayTextFor(model => model.RoboSimples.Data.RazaoSocial)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSimples.Data.RazaoSocial)
+                        @Html.HiddenFor(model => model.RoboSimples.Code)
+                        @Html.HiddenFor(model => model.RoboSimples.Data.Message)
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Eventos Futuros</label><br />
+                        <span id="span_RoboSimples_Data_EventosFuturosSimplesNacional">@Html.DisplayTextFor(model => model.RoboSimples.Data.EventosFuturosSimplesNacional)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSimples.Data.EventosFuturosSimplesNacional)
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Periodos Anteriores</label><br />
+                        <span id="span_RoboSimples_Data_SimplesNacionalPeriodosAnteriores">@Html.DisplayTextFor(model => model.RoboSimples.Data.SimplesNacionalPeriodosAnteriores)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSimples.Data.SimplesNacionalPeriodosAnteriores)
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Simei Periodos Anteriores</label><br />
+                        <span id="span_RoboSimples_Data_SIMEIPeriodosAnteriores">@Html.DisplayTextFor(model => model.RoboSimples.Data.SIMEIPeriodosAnteriores)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSimples.Data.SIMEIPeriodosAnteriores)
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Situação Simei</label><br />
+                        <span id="span_RoboSimples_Data_SituacaoSIMEI">@Html.DisplayTextFor(model => model.RoboSimples.Data.SituacaoSIMEI)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSimples.Data.SituacaoSIMEI)
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Situação</label><br />
+                        <span id="span_RoboSimples_Data_SituacaoSimplesNacional">@Html.DisplayTextFor(model => model.RoboSimples.Data.SituacaoSimplesNacional)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSimples.Data.SituacaoSimplesNacional)
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+}
+
+                

@@ -1,0 +1,127 @@
+﻿@using WebForLink.Domain.Models
+@model WebForLink.Web.ViewModels.FichaCadastralVM
+
+@Styles.Render("~/style/date")
+@Scripts.Render("~/bundles/date")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+    });
+</script>
+
+<section class="content-header">
+    <h1>
+        Cadastro de Fornecedores
+        <!-- small>Control panel</!--small -->
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> Fornecedores</li>
+        <li class="active">Cadastro de Fornecedores</li>
+    </ol>
+</section>
+
+<!-- FORM -->
+<section class="content">
+    <div id="boxGrid" class="box box-primary">
+        <div class="box-body">
+            <h4>Empresa: <small>@Model.NomeEmpresa</small></h4>
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
+    @********** DADOS GERAIS **********@
+    @Html.Partial("_FichaCadastral_DadosGerais", Model)
+
+    @Html.ValidationMessage("FornecedoresBloqueioValidation", "", new { @class = "text-danger" })
+    @using (Html.BeginForm("FornecedoresBloqueioFrm", "Bloqueio"))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.ContratanteID)
+        @Html.HiddenFor(model => model.Solicitacao.Fluxo.ID)
+        @Html.HiddenFor(model => model.ContratanteFornecedorID)
+
+
+        <div class="box box-primary">
+            <div class="box-header"><h3 class="box-title">Bloqueio</h3></div>
+            <div class="box-body">
+                @if (ViewBag.QtdGrupoEmpresa > 1)
+                {
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Bloqueio de Lançamento</label><br />
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="rdLancamento" value="1" /> Todas as Empresa
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="rdLancamento" value="2" checked /> Empresa Selecionada
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <input type="hidden" name="rdLancamento" value="2" />
+                }
+
+                @if (ViewBag.QtdGrupoEmpresa > 1)
+                {
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Bloqueio de Compras</label><br />
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="rdCompras" /> Todas as Organizações de Compras
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <input type="hidden" name="rdCompras" value="false" />
+                }
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Função do Bloqueio</label><br />
+                        <select id="bloqueioMotivoQualidade" name="bloqueioMotivoQualidade" class="form-control input-sm">
+                            @{ List<WFD_T_FUNCAO_BLOQUEIO> bloqueiosMotivos = ViewBag.BloqueioMotivoQualidade; }
+                            <option value="">Selecione...</option>
+                            @foreach (WFD_T_FUNCAO_BLOQUEIO bm in bloqueiosMotivos)
+                            {
+                                <option value="@bm.ID">@bm.FUNCAO_BLOQ_DSC</option>
+                            }
+                        </select>
+
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Motivo da Solicitação do Bloqueio</label><br />
+                        <textarea class="form-control" rows="4" name="txtAreaMotivoBloqueio" id="txtAreaMotivoBloqueio" maxlength="255"></textarea>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+                                <div class="box box-primary">
+
+                                    <div class="box-body">
+                                        <div class="text-center text-nowrap">
+                                            <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("FornecedorModificacaoFrm","Fornecedores", new{chaveUrl = ViewBag.ChaveUrl})'">Voltar</button>
+                                            <button type="button" class="btn btn-primary" onclick="$('#alert_confirm span').text('Tem certeza que deseja solicitar o Bloqueio deste fornecedor?'); $('#alert_confirm').fadeIn('fast');">&nbsp;&nbsp;&nbsp;Solicitar Bloqueio&nbsp;&nbsp;&nbsp;</button>
+                                        </div>
+
+                                        <div id="alert_confirm" class="alert alert-warning" role="alert" style="display: none;">
+                                            <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <button type="submit" class="btn btn-primary btn-xs">Sim</button>&nbsp;&nbsp;&nbsp;
+                                            <button type="button" class="btn btn-default btn-xs" onclick="$('#alert_confirm').fadeOut('fast');">Não</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+
+</section>

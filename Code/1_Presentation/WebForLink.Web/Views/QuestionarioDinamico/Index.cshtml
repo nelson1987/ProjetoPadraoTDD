@@ -1,0 +1,137 @@
+﻿@model List<WebForLink.Web.ViewModels.QuestionarioVM>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="content-header">
+    <h1>Informações Complementares</h1>
+    <ol class="breadcrumb">
+        <li class="active">Questionário</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="box box-primary">
+        @{
+            if (Model != null)
+            {
+                <div class="box-header">
+                    <h3 class="box-title">
+                        Informações Complementares
+                    </h3>
+                    <ul class="nav nav-tabs">
+                        @{
+                            var contadorTabs = 0;
+                            foreach (var questionarioTitulos in Model)
+                            {
+                                var reference = "#quest_" + questionarioTitulos.Id;
+                                if (contadorTabs == 0)
+                                {
+                                    <li class="active"><a href=@reference data-toggle="tab">@questionarioTitulos.Titulo</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href=@reference data-toggle="tab">@questionarioTitulos.Titulo</a></li>
+                                }
+                                contadorTabs++;
+                            }
+                        }
+                    </ul>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="tab-content">
+                                @{
+                                    var contadorAbas = 0;
+                                    foreach (var item in Model)
+                                    {
+                                        var local = "quest_" + item.Id;
+                                        var classesAtivo = "tab-pane fade in active";
+                                        var classesConvencional = "tab-pane fade";
+                                        var classeQuestionario = classesConvencional;
+                                        if (contadorAbas == 0)
+                                        {
+                                            classeQuestionario = classesAtivo;
+                                        }
+                                        <div class="@classeQuestionario" id=@local>
+                                            @using (Html.BeginForm())
+                                            {
+                                                @Html.ValidationSummary(true)@Html.Partial("_PerguntaResposta", item)
+                                                <input type="submit" value="SUBMIT" />
+                                            }
+                                        </div>
+                                        <input type="button" value="Click" id="btnClick" />
+                                    }
+                                    contadorAbas++;
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @section Scripts{
+                    <script type="text/javascript">
+                    function alterarListaDominio(elemento, idPergunta) {
+                        console.log(elemento, idPergunta);
+                    }
+                    $(function () {
+                        $('#btnClick').click(function (data) {
+                            $('.aguarde').show();
+                            var perguntas2 = new Array();
+                            var form = $('form');
+                            var questionarioEnviado = {};
+                            questionarioEnviado.Id = form.find("#IdQuestionario").val();
+                            questionarioEnviado.AbaList = new Array();
+                            $(".abas").each(function () {
+                                var perguntas = new Array();
+                                $(this).find(".perguntas").each(function () {
+                                    perguntas.push({
+                                        Resposta: $(this).find(".Resposta").val(),
+                                        Id: $(this).find("#IdPergunta").val(),
+                                        Obrigatorio: $(this).find("#Obrigatorio").val(),
+                                        Leitura: $(this).find("#Leitura").val(),
+                                        Escrita: $(this).find("#Escrita").val(),
+                                        SolicitacaoId: $(this).find("#SolicitacaoId").val(),
+                                        Titulo: $(this).find("#Titulo").val(),
+                                        TipoDado: $(this).find("#TipoDado").val()
+                                    });
+                                    perguntas2.push({
+                                        Resposta: $(this).find(".Resposta").val(),
+                                        Id: $(this).find("#IdPergunta").val(),
+                                        Obrigatorio: $(this).find("#Obrigatorio").val(),
+                                        Leitura: $(this).find("#Leitura").val(),
+                                        Escrita: $(this).find("#Escrita").val(),
+                                        SolicitacaoId: $(this).find("#SolicitacaoId").val(),
+                                        Titulo: $(this).find("#Titulo").val()
+                                    });
+                                });
+                                questionarioEnviado.AbaList.push({
+                                    Id: $(this).find('#IdAba').val(),
+                                    PerguntaList: perguntas
+                                });
+                            });
+                            $.ajax({
+                                url: '@Url.Action("Index", "QuestionarioDinamico")',
+                                type: 'POST',
+                                cache: false,
+                                data: {
+                                    modelo: questionarioEnviado
+                                }
+                            }).done(function (result) {
+                                $('#boxGrid').html(result);
+                                $('.aguarde').hide();
+                            });
+                        });
+                    });
+                    </script>
+                }
+                                    }
+                                    else
+                                    {
+                                        <div id="boxGrid" class="box box-primary">
+                                            Não existe questionário disponível
+                                        </div>
+                                    }
+        }
+    </div>
+</section>

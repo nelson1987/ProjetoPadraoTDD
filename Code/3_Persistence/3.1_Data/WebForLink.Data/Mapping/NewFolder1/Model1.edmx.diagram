@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cc89f77da8ca486f98f0c84c492a31ad" Name="Diagram1">
+        <EntityTypeShape EntityType="ChMasterDataModel.Arquivo" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChMasterDataModel.Banco" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChMasterDataModel.Carrinho" Width="1.5" PointX="8.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChMasterDataModel.Contato" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChMasterDataModel.DocumentoAnexado" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChMasterDataModel.DocumentosSolicitacao" Width="1.5" PointX="8.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChMasterDataModel.Endereco" Width="1.5" PointX="3" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChMasterDataModel.FichaCadastral" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChMasterDataModel.ListaDocumento" Width="1.5" PointX="8.25" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChMasterDataModel.ListasSolicitante" Width="1.5" PointX="6" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChMasterDataModel.Responsavel" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChMasterDataModel.Solicitacao" Width="1.5" PointX="6" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChMasterDataModel.Solicitado" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChMasterDataModel.Solicitante" Width="1.5" PointX="3.75" PointY="18.5" IsExpanded="true" />
+        <AssociationConnector Association="ChMasterDataModel.FK_Arquivo_DocumentoAnexado" ManuallyRouted="false" />
+        <AssociationConnector Association="ChMasterDataModel.FK_Banco_FichaCadastral" ManuallyRouted="false" />
+        <AssociationConnector Association="ChMasterDataModel.FK_Contato_FichaCadastral" ManuallyRouted="false" />
+        <AssociationConnector Association="ChMasterDataModel.FK_DocumentoAnexado_FichaCadastral" ManuallyRouted="false" />
+        <AssociationConnector Association="ChMasterDataModel.FK_DocumentosSolicitacao_Solicitacao" ManuallyRouted="false" />
+        <AssociationConnector Association="ChMasterDataModel.FK_Endereco_FichaCadastral" ManuallyRouted="false" />
+        <AssociationConnector Association="ChMasterDataModel.FK_Solicitacao_FichaCadastral" ManuallyRouted="false" />
+        <AssociationConnector Association="ChMasterDataModel.FK_ListaDocumento_ListasSolicitante" ManuallyRouted="false" />
+        <AssociationConnector Association="ChMasterDataModel.FK_ListasSolicitante_Solicitante" ManuallyRouted="false" />
+        <AssociationConnector Association="ChMasterDataModel.FK_Responsavel_Solicitado" ManuallyRouted="false" />
+        <AssociationConnector Association="ChMasterDataModel.FK_Solicitacao_Solicitado" ManuallyRouted="false" />
+        <AssociationConnector Association="ChMasterDataModel.FK_Solicitacao_Solicitante" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

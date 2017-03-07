@@ -1,0 +1,259 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+@section Header {
+    @Styles.Render("~/style/date")
+    <link href="~/Content/css/bootstrap3-wysihtml5.css" rel="stylesheet" />
+}
+@{
+    int acao = ViewBag.fluxo;
+}
+
+<section class="content">
+    <div id="boxGrid" class="box box-primary">
+        <div class="box-header"><h3 class="box-title">Solicitação</h3></div>
+        <div class="box-body">
+            <div class="col-md-1 col-xs-6">
+                <div class="form-group">
+                    <label>Código</label><br />
+                    <span>@Model.Aprovacao.ID</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-6">
+                <div class="form-group">
+                    <label>Tipo Solicitação</label><br />
+                    <span>@Model.Aprovacao.NomeSolicitacao</span>
+                </div>
+            </div>
+            <div class="col-md-2 col-xs-6">
+                <div class="form-group">
+                    <label>Data Solicitação</label><br />
+                    <span>@Model.Aprovacao.Solicitacao_Dt_Cria.ToString("dd/MM/yyyy")</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label>Solicitante</label><br />
+                    <span>@Model.Aprovacao.Login</span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-4 col-xs-6">
+                <div class="form-group">
+                    <label>Receita Federal</label><br />
+                    <span>@Model.RoboReceita</span>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-6">
+                <div class="form-group">
+                    <label>Sintegra</label><br />
+                    <span>@Model.RoboSintegra</span>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-6">
+                <div class="form-group">
+                    <label>Simples Nacional</label><br />
+                    <span>@Model.RoboSimples</span>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-6">
+                <div class="form-group">
+                    <label>Prazo de entrega</label><br />
+                    <span>@Model.ProrrogacaoPrazo.PrazoPreenchimento</span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            @if (Model.ProrrogacaoPrazo.DataSolicitacaoProrrogacao != null)
+            {
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.Partial("_AlertProrrogacao", Model.ProrrogacaoPrazo)
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            }
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-condensed">
+                    <thead>
+                        <tr>
+                            <th class="text-center">
+                                Situação
+                            </th>
+                            <th class="text-center">
+                                Status
+                            </th>
+                            <th class="text-center">
+                                Data
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Aprovacao.Solicitacao_Tramites != null && Model.Aprovacao.Solicitacao_Tramites.Count > 0)
+                        {
+                            foreach (var item in Model.Aprovacao.Solicitacao_Tramites)
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        @item.Papel.PAPEL_NM
+                                    </td>
+                                    <td class="text-center">
+                                        @item.WFD_SOLICITACAO_STATUS.NOME
+                                    </td>
+                                    <td class="text-center">
+                                        @if (item.TRMITE_DT_FIM != null)
+                                        {
+                                            @item.TRMITE_DT_FIM.Value.ToString("dd/MM/yyyy HH:mm:ss")
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+                <div class="clearfix"></div>
+            </div>
+            @if (acao == 10 || acao == 30)
+            {
+                using (Html.BeginForm("ReenviarFicha", "Acompanhamento", new { TipoFuncionalidade = Model.TipoFuncionalidade, idSolicitacao = Model.SolicitacaoFornecedor.SolicitacaoCriacaoID, CNPJ = Model.CNPJ_CPF, EmailContato = Model.DadosContatos.FirstOrDefault(x => x.EmailContato == x.EmailContato).EmailContato, Model }))
+                {
+                    <div class="col-md-4">
+                        <label>&nbsp;</label><br />
+                        <button type="button" class="btn btn-primary" id="BotaoFuncionalidade" data-toggle="modal" data-target="#myModal" onclick="$('#Funcao').val('@Model.TipoFuncionalidade')">Reenviar Ficha Cadastral</button>
+                        @Html.Partial("_Modal", Model)
+                    </div>
+                }
+            }
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    @if (ViewBag.QtdGrupoEmpresa > 1)
+    {
+        <div id="boxGrid2" class="box box-primary">
+            <div class="box-body">
+                <h4>Empresa: <small>@Model.Aprovacao.NomeContratante</small></h4>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+    }
+
+    @{
+        //********** DADOS ROBO RECEITA **********//
+        @Html.Partial("../Fornecedores/_FichaCadastral_FornecedorRobo", Model)
+
+        //********** DADOS GERAIS **********//
+        @Html.Partial("../Fornecedores/_FichaCadastral_DadosGerais", Model)
+
+        //********** ENDEREÇO **********//
+        if (acao == 10 || acao == 20 || acao == 30 || acao == 40 || acao == 50 || acao == 60 || acao == 150)
+        {
+            @Html.Partial("../Fornecedores/_FichaCadastral_DadosEnderecos", Model)
+        }
+
+        //********** DADOS BANCARIOS **********//
+        if (acao == 10 || acao == 20 || acao == 30 || acao == 40 || acao == 50 || acao == 60 || acao == 90)
+        {
+            @Html.Partial("../Fornecedores/_FichaCadastral_DadosBancario", Model.DadosBancarios)
+        }
+
+        //********** CONTATOS **********//
+        if (acao == 10 || acao == 20 || acao == 30 || acao == 40 || acao == 50 || acao == 60 || acao == 100)
+        {
+            @Html.Partial("../Fornecedores/_FichaCadastral_Contatos", Model.DadosContatos)
+        }
+
+        //********** OBSERVAÇÃO **********//
+        if (acao == 10 || acao == 20 || acao == 30 || acao == 40)
+        {
+            @Html.Partial("../Fornecedores/_FichaCadastral_Observacao", Model)
+        }
+
+        //********** ANEXOS **********//
+        if (acao == 10 || acao == 50 || acao == 60 || acao == 30 || acao == 20 || acao == 40 || acao == 130)
+        {
+            @Html.Partial("../Fornecedores/_FichaCadastral_Anexos", Model.SolicitacaoFornecedor)
+        }
+
+        //********** SERVICOS E MATERIAIS **********//
+        if (acao == 10 || acao == 50 || acao == 60 || acao == 30 || acao == 20 || acao == 40 || acao == 160)
+        {
+            @Html.Partial("../Fornecedores/_FichaCadastral_ServicosMaterias", Model.FornecedoresUnspsc)
+        }
+
+        //********** QUESTIONÁRIO DINÂMICO **********//
+        if (acao == 10 || acao == 20 || acao == 30 || acao == 40 || acao == 50 || acao == 60 || acao == 140)
+        {
+            if (Model.Questionarios.QuestionarioDinamicoList.Any())
+            {
+                @Html.Partial("../Fornecedores/_FichaCadastral_QuestionarioDinamico", Model.Questionarios)
+            }
+        }
+
+        //********** EXPANDIR **********//
+        if (acao == 50)
+        {
+            @*@Html.Partial("_FichaCadastral_Expandir", Model)*@
+        }
+        //********** Modificação Geral **********//
+        if (acao == 70)
+        {
+            @Html.Partial("../Fornecedores/_FichaCadastral_OutrosDados", Model)
+        }
+
+        //********** Dados Fiscais **********//
+        if (acao == 80)
+        {
+            @Html.Partial("../Fornecedores/_FichaCadastral_DadosFiscais", Model)
+        }
+
+        //********** Bloqueio **********//
+        if (acao == 110)
+        {
+            @Html.Partial("../Fornecedores/_FichaCadastral_Bloqueio", Model)
+        }
+
+        //********** Desbloqueio **********//
+        if (acao == 120)
+        {
+            @Html.Partial("../Fornecedores/_FichaCadastral_DesBloqueio", Model)
+        }
+
+    }
+
+    <div class="box box-primary">
+        <div class="box-body">
+            <div class="text-center text-nowrap">
+                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("FornecedoresControleSolicitacoesLst")'">Voltar</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/date")
+    <script src="~/Scripts/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <script src="~/Scripts/Views/Importacao/Importacao.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Mensagem").wysihtml5();
+            
+            $('#myModal').on('show.bs.modal', function (event) {
+
+                var button = $(event.relatedTarget);
+                var recipient = button.data('whatever');
+                var modal = $(this);
+                modal.find('.modal-title').text(recipient);
+                modal.find('#AprovaPrazo').val(recipient == "Aprovar");
+            });
+
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $('[data-toggle="popover"]').popover({
+                container: 'body',
+                html: true,
+                content: function () {
+                    return $("#relatorioSelecionados").html();
+                },
+                placement: "right"
+            }).click(function (e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+}

@@ -1,0 +1,67 @@
+﻿@model WebForLink.Web.ViewModels.FichaCadastral.FichaCadastralDadosEnderecosVM
+<div class="EnderecoReceita" style="border: solid 1px silver; padding-top: 7px;">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Tipo De Endereço</label><br />
+            <span>OBTIDO NA RECEITA FEDERAL</span>
+        </div>
+    </div>
+    <div class="col-xs-8 col-md-5">
+        <div class="form-group">
+            <label>Endereco</label><br />
+            <span>@Html.DisplayTextFor(x => x.Endereco) &nbsp;</span>
+            @Html.HiddenFor(x => x.Endereco)
+        </div>
+    </div>
+    <div class="col-xs-4 col-md-1">
+        <div class="form-group">
+            <label>Número</label><br />
+            <span>@Html.DisplayTextFor(x => x.Numero) &nbsp;</span>
+            @Html.HiddenFor(x => x.Numero)
+        </div>
+    </div>
+    <div class="col-xs-8 col-md-3">
+        <div class="form-group">
+            <label>Complemento</label><br />
+            <span>@Html.DisplayTextFor(x => x.Complemento) &nbsp;</span>
+            @Html.HiddenFor(x => x.Complemento)
+        </div>
+    </div>
+
+    <div class="col-xs-4 col-md-2">
+        <div class="form-group">
+            <label>CEP</label><br />
+            <span>@Html.DisplayTextFor(x => x.CEP) &nbsp;</span>
+            @Html.HiddenFor(x => x.CEP)
+        </div>
+    </div>
+    <div class="col-xs-4 col-md-2">
+        <div class="form-group">
+            <label>Bairro</label><br />
+            <span>@Html.DisplayTextFor(x => x.Bairro) &nbsp;</span>
+            @Html.HiddenFor(x => x.Bairro)
+        </div>
+    </div>
+    <div class="col-xs-4 col-md-2">
+        <div class="form-group">
+            <label>Cidade</label><br />
+            <span>@Html.DisplayTextFor(x => x.Cidade) &nbsp;</span>
+            @Html.HiddenFor(x => x.Cidade)
+        </div>
+    </div>
+    <div class="col-xs-4 col-md-3">
+        <div class="form-group">
+            <label>Estado</label><br />
+            <span>@Html.DisplayTextFor(x => x.UF) &nbsp;</span>
+            @Html.HiddenFor(x => x.UF)
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>País</label><br />
+            <span>@Html.DisplayTextFor(x => x.Pais) &nbsp;</span>
+            @Html.HiddenFor(x => x.Pais)
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>

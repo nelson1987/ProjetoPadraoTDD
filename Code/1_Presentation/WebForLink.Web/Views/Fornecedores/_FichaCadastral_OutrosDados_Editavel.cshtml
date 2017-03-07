@@ -1,0 +1,88 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+
+@section Scripts {
+<script type="text/javascript">
+    function getOutrosDadosGrupo() {
+        $.getJSON('@Url.Action("ListarOutrosDadosGrupo","OutrosDados")',
+        {
+            outrosDadosVisao: $('#OutrosDadosVisao').val()
+        },
+        function (data) {
+            $('#OutrosDadosGrupo').empty();
+            $('#OutrosDadosGrupo').append("<option value=''>Selecione...</option>");
+            $.each(data, function (index, optionData) {
+                $('#OutrosDadosGrupo').append("<option value='" + optionData.Value + "'>" + optionData.Text + "</option>");
+            });
+        });
+    }
+
+    function getOutrosDadosDescricao() {
+        $.getJSON('@Url.Action("ListarOutrosDadosDescricao", "OutrosDados")',
+        {
+            outrosDadosGrupo: $('#OutrosDadosGrupo').val()
+        },
+        function (data) {
+            $('#OutrosDadosDescricao').empty();
+            $('#OutrosDadosDescricao').append("<option value=''>Selecione...</option>");
+            $.each(data, function (index, optionData) {
+                $('#OutrosDadosDescricao').append("<option value='" + optionData.Value + "'>" + optionData.Text + "</option>");
+            });
+        });
+    }
+
+    $(document).ready(function () {
+        $("#OutrosDadosVisao").change(function () {
+            getOutrosDadosGrupo();
+
+            if ($(this).val() == '') {
+                $('#OutrosDadosGrupo').val('');
+                $('#OutrosDadosDescricao').val('');
+            }
+            });
+
+        $("#OutrosDadosGrupo").change(function () {
+            getOutrosDadosDescricao();
+
+            if ($(this).val() == ''){
+                $('#OutrosDadosDescricao').val('');
+            }
+            });
+    });
+</script>
+    }
+<div class="box box-primary">
+    <div class="box-header"><h3 class="box-title">Campo a ser alterado</h3></div>
+    <div class="box-body">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.OutrosDadosVisao, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownList("OutrosDadosVisao", null, "Selecione...", htmlAttributes: new { @class = "form-control input-sm" })
+                @Html.ValidationMessage("OutrosDadosVisaoValidation", "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.OutrosDadosGrupo, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownList("OutrosDadosGrupo", null, "Selecione...", htmlAttributes: new { @class = "form-control input-sm" })
+                @Html.ValidationMessage("OutrosDadosGrupoValidation", "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.OutrosDadosDescricao, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownList("OutrosDadosDescricao", null, "Selecione...", htmlAttributes: new { @class = "form-control input-sm" })
+                @Html.ValidationMessage("OutrosDadosDescricaoValidation", "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.OutrosDadosDescricaoMudança, htmlAttributes: new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.OutrosDadosDescricaoMudança, htmlAttributes: new { @class = "form-control", rows = "3" })
+                @Html.ValidationMessage("OutrosDadosDescricaoMudançaValidation", "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div><!-- /.box-body -->
+</div><!-- /.box -->

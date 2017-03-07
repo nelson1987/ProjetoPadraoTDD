@@ -1,0 +1,46 @@
+﻿@model WebForLink.Web.ViewModels.BancoVM
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="bancoVMs">
+            <div class="col-md-4">
+                @Html.HiddenFor(Model => Model.Id)
+                @Html.LabelFor(Model => Model.Banco, htmlAttributes: new { @class = "" })
+                @Html.DropDownListFor(m => m.Banco, Model.BancoList, new { @class = "form-control input-sm" })
+                @Html.ValidationMessageFor(Model => Model.Banco, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-10">
+                        @Html.LabelFor(Model => Model.Agencia, htmlAttributes: new { @class = "" })
+                        @Html.TextBoxFor(Model => Model.Agencia, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(Model => Model.Agencia, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-2" style="padding-left: 5px; padding-right: 5px;">
+                        <br />
+                        @Html.TextBoxFor(Model => Model.AgenciaDV, new { @class = "form-control input-sm", style = "margin-top: 5px" })
+                        @Html.ValidationMessageFor(Model => Model.AgenciaDV, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-10">
+                        @Html.LabelFor(Model => Model.ContaCorrente, htmlAttributes: new { @class = "" })
+                        @Html.TextBoxFor(Model => Model.ContaCorrente, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(Model => Model.ContaCorrente, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-2" style="padding-left: 5px; padding-right: 5px;">
+                        <br />
+                        @Html.TextBoxFor(Model => Model.ContaCorrenteDV, new { @class = "form-control input-sm", style = "margin-top: 5px" })
+                        @Html.ValidationMessageFor(Model => Model.ContaCorrenteDV, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-xs btn-warning" type="button" onclick="apagarBanco(this);">
+                    <i class="glyphicon glyphicon-trash">&nbsp;</i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

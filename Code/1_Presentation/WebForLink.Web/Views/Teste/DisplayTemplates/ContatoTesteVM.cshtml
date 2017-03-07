@@ -1,0 +1,46 @@
+﻿@model WebForLink.Web.ViewModels.ContatoTesteVM
+@if (Model != null)
+{
+    <tr>
+        <td>
+            <div class="ckbox">
+                <input type="checkbox" id="checkbox1">
+                <label for="checkbox1"></label>
+            </div>
+        </td>
+        <td>
+            <div class="col-md-12">
+                @Html.HiddenFor(Model => Model.Id)
+                @Html.HiddenFor(Model => Model.ContratantePjPfId)
+                @if (!string.IsNullOrEmpty(Model.Nome))
+                {
+                    <div class="col-md-4">
+                        @Html.LabelFor(Model => Model.Nome, htmlAttributes: new { @class = "" })<br />
+                        @Html.DisplayFor(Model => Model.Nome, new { @class = "form-control input-sm" })
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.Email))
+                {
+                    <div class="col-md-3">
+                        @Html.LabelFor(Model => Model.Email, htmlAttributes: new { @class = "" })<br />
+                        @Html.DisplayFor(Model => Model.Email, new { @class = "form-control input-sm" })
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.Telefone))
+                {
+                    <div class="col-md-2">
+                        @Html.LabelFor(Model => Model.Telefone, htmlAttributes: new { @class = "" })<br />
+                        @Html.DisplayFor(Model => Model.Telefone, new { @class = "form-control input-sm phoneMask" })
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.Celular))
+                {
+                    <div class="col-md-2">
+                        @Html.LabelFor(Model => Model.Celular, htmlAttributes: new { @class = "" })<br />
+                        @Html.DisplayFor(Model => Model.Celular, new { @class = "form-control input-sm cellMask" })
+                    </div>
+                }
+            </div>
+        </td>
+    </tr>
+}

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<WebForLink.Web.Areas.Externo.Models.LinkExternoVM>
+
+@{
+    ViewBag.Title = "LinkLst";
+}
+
+<div class="container">
+    <br />
+    <br />
+    <table class="table table-condensed">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdContratante)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeContratante)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdContratante)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeContratante)
+                </td>
+                <td>
+                    <a href="@item.Link">Ir</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

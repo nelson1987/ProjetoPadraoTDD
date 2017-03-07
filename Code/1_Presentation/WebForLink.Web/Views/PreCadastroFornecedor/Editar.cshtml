@@ -1,0 +1,105 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+
+@{
+    ViewBag.Title = "Editar";
+}
+
+<section class="content-header">
+    <h1>Pré-Cadastro</h1>
+</section>
+
+    <section class="content">
+        <div id="formPrecadastro">
+            @Html.Partial("~/Views/PreCadastroFornecedor/_PreCadastro_FichaCadastral.cshtml", Model)
+        </div>
+    </section>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.TelefoneMask').inputmask({ mask: ['(99) 9999-9999', '(99) 99999-9999'] });
+
+            if ($("input[name='isCPF']:disabled") != null) {
+                if ($("input[name='isCPF']:checked").val() === "True") {
+                    $('#cnpjLabelValidacao').text('CPF');
+                    $('#cnpjInputValidacao').inputmask('999.999.999-99');
+                }
+                else {
+                    $('#cnpjLabelValidacao').text('CNPJ');
+                    $('#cnpjInputValidacao').inputmask('99.999.999/9999-99');
+                }
+            }
+
+            $('#formPrecadastro form').submit(function () {
+                if ($(this).valid())
+                    $('.aguarde').show();
+                else
+                    $('.aguarde').hide();
+            });
+        });
+        $("input[name='isCPF']").click(function () {
+            $('#cnpjInputValidacao').removeAttr("disabled");
+            if ($(this).val() === "True") {
+                $('#cnpjLabelValidacao').text('CPF');
+                $('#cnpjInputValidacao').inputmask('999.999.999-99');
+            }
+            else {
+                $('#cnpjLabelValidacao').text('CNPJ');
+                $('#cnpjInputValidacao').inputmask('99.999.999/9999-99');
+            }
+        });
+        function excluirDados(objBotao) {
+            var objItemLista = $(objBotao).parent().parent().parent();
+            objItemLista.remove();
+        }
+
+        var renderizarFichaCadastralForm = function (data, status, name) {
+            if (data.url != null) location.href = data.url;
+            $("#" + name).html(data);
+            $('form').removeData('validator');
+            $('form').removeData('unobtrusiveValidation');
+            $.validator.unobtrusive.parse('form');
+            $(".aguarde").hide();
+            $('#divDadosGerais').parent().removeClass("hidden");
+            $('#alertaSucessoDadosGerais').text('Solicitação de atualização dos dados de endereços realizada com sucesso!');
+            $('#alertaSucessoDadosGerais').removeClass('hidden');
+            $('#alertaSucessoDadosGerais').fadeIn('fast');
+            setTimeout("$('#divDadosGerais').parent().addClass('hidden')", 10000);
+            setTimeout("$('#alertaSucessoDadosGerais').fadeOut('fast')", 10000);
+            //$(window).scrollTop($('#divDadosGerais').offset().top);
+        };
+        function ocultarMensagem(objDivOrigem) {
+            $(objDivOrigem).fadeOut('fast');
+        }
+        function ocultarJanelaConfirmacao(strTipo) {
+            var strNomeJanela = '#confirmacao' + strTipo;
+            $(strNomeJanela).fadeOut('fast');
+            $(strNomeJanela).toggleClass("hidden");
+        }
+        function exibirConfirmacaoExclusao(obj) {
+            var objli = $(obj).parent().parent()
+            var alert = $(objli).find(".alert");
+            $(alert).toggleClass("hidden");
+        }
+
+        var incluirDados = function (localAppend, actionResult, elemento) {
+            $(elemento).attr("disabled", "disabled");
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: actionResult,
+                data: {
+                },
+                success: function (data) {
+                    $("#" + localAppend).append(data);
+                    $(".aguarde").hide();
+                    $(elemento).removeAttr("disabled");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    $(".aguarde").hide();
+                    $(elemento).removeAttr("disabled");
+                }
+            });
+        };
+    </script>
+}

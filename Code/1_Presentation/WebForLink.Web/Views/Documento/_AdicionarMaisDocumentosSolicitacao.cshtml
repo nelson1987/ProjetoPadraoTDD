@@ -1,0 +1,263 @@
+﻿@model WebForLink.Web.ViewModels.SolicitacaoFornecedorVM
+
+@{
+    Layout = null;
+}
+
+<div id="boxGrid" class="box box-primary">
+    <div class="box-header">
+        <h3 class="box-title">
+            Documentos
+            <label id="bdQtdDocs" class="badge">@Model.Documentos.Count</label>
+            <input type="hidden" id="hdnQtdDocs" name="hdnQtdDocs" value="@Model.Documentos.Count" />
+            <button type="button" class="btn btn-default btn-xs" onclick="$('#divDocumentos').toggle();">Adicionar Mais Documentos</button>
+        </h3>
+    </div>
+    <div class="box-body">
+        <div id="divDocumentos" class="row" style="display: none;">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label>Tipo de Documento</label>&nbsp;<span class="text-danger" style="font-weight:bold;">*</span><br />
+                    @*@Html.DropDownList("TipoDocumentos", null, "Selecione...", htmlAttributes: new { @class = "form-control input-sm", disable_input = "" })*@
+                    <span class="field-validation-error text-danger" id="errorAdicionarDocumento" style="display: none;"></span>
+                    <span class="field-validation-error text-danger" id="errorTipoDocumentos" style="display: none;">Selecione o Tipo de Documento!</span>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label>Documento</label>&nbsp;<span class="text-danger" style="font-weight:bold;">*</span><br />
+                    @*@Html.DropDownList("DescricaoDeDocumentos", null, htmlAttributes: new { @class = "form-control input-sm", disable_input = "" })*@
+                    <span class="field-validation-error text-danger" id="errorDescricaoDocumentos" style="display: none;">Selecione o Documento!</span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>&nbsp;</label><br />
+                    <button id="btnAdicionar" type="button" class="btn btn-primary btn-sm" onclick="$('#ConfirmaAdicionar').fadeIn('fast');">Adicionar</button>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div id="ConfirmaAdicionar" class="alert alert-warning" role="alert" style="display: none;">
+                    <span>Tem certeza que deseja adicionar este novo documento na Solicitação?</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary btn-xs" onclick="$('#ConfirmaAdicionar').fadeOut('fast'); fAdicionar();">Sim</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-default btn-xs" onclick="$('#ConfirmaAdicionar').fadeOut('fast');">Não</button>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table id="tblDocumentos" class="table table-bordered table-striped table-condensed">
+                        <thead>
+                            <tr>
+                                <th class="text-center">
+                                    Grupo Documento
+                                </th>
+                                <th class="text-center">
+                                    Documento
+                                </th>
+                                <th class="text-center">Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Documentos)
+                            {
+                                <tr id="@Html.Raw("tr" + item.DescricaoDocumentoId)">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.GrupoDocumento)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Documento)
+                                    </td>
+                                    <td class="text-center text-nowrap">
+                                        @if (item.ListaDocumentosID == null)
+                                        {
+                                            <button id="@Html.Raw("btnRemover" + item.DescricaoDocumentoId)" type="button" class="btn btn-danger btn-xs" onclick="$('#hdnRemoverDocId').val(@item.DescricaoDocumentoId); $('#ConfirmaRemover').fadeIn('fast');">Remover</button>
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw("&nbsp;");
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <span class="field-validation-error text-danger" id="errorRemoverDocumento" style="display: none;"></span>
+                    <div id="ConfirmaRemover" class="alert alert-warning" role="alert" style="display: none;">
+                        <input type="hidden" id="hdnRemoverDocId" value="">
+                        <span>Tem certeza que deseja remover o documento da Solicitação?</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-primary btn-xs" onclick="$('#ConfirmaRemover').fadeOut('fast'); fRemover();">Sim</button>&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-default btn-xs" onclick="$('#ConfirmaRemover').fadeOut('fast');">Não</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        function montaListaTipoDocumento() {
+            $.getJSON('@Url.Action("ListaTipoDocumento", "MeusDocumentos")',
+            {
+                tipo: "Frm"
+            },
+            function (data) {
+                $('#TipoDocumentos').empty();
+                $.each(data, function (index, optionData) {
+                    $('#TipoDocumentos').append("<option value='" + optionData.Value + "'>" + optionData.Text + "</option>");
+                });
+            });
+        }
+
+        function montaListaDescricaoDocumento() {
+            $.getJSON('@Url.Action("ListaDescricaoDocumento","MeusDocumentos")',
+            {
+                tipoDocumento: $('#TipoDocumentos').val(),
+                tipo: "Frm",
+                cache: false
+            },
+            function (data) {
+                $('#DescricaoDeDocumentos').empty();
+                $.each(data, function (index, optionData) {
+                    $('#DescricaoDeDocumentos').append("<option value='" + optionData.Value + "'>" + optionData.Text + "</option>");
+                });
+            });
+        }
+
+        function fAdicionar() {
+            escondeAlertas();
+
+            if ($('#TipoDocumentos').val() == '') {
+                $('#errorTipoDocumentos').show();
+                return;
+            }
+
+            if ($('#DescricaoDeDocumentos').val() == '') {
+                $('#errorDescricaoDocumentos').show();
+                return;
+            }
+
+            bloqueiaCampos();
+
+            $.getJSON('@Url.Action("AdicionarDocumento", "Documento")',
+            {
+                SolicitacaoId: $('#SolicitacaoCriacaoID').val(),
+                DescricaoDocumentoId: $('#DescricaoDeDocumentos').val(),
+                cache: false
+            },
+            function (data) {
+                $.each(data, function (index, optionData) {
+
+                    if (optionData.value != '-1') {
+                        var tr = '';
+                        tr += '<tr id="tr' + $('#DescricaoDeDocumentos').val() + '">';
+                        tr += '<td>' + $('#TipoDocumentos :selected').text() + '</td>';
+                        tr += '<td>' + $('#DescricaoDeDocumentos :selected').text() + '</td>';
+                        tr += '<td class="text-center text-nowrap"><button type="button" class="btn btn-danger btn-xs" onclick="$(\'#hdnRemoverDocId\').val(' + $('#DescricaoDeDocumentos').val() + '); $(\'#ConfirmaRemover\').fadeIn(\'fast\');">Remover</button></td>';
+                        tr += '</tr>';
+
+                        $('#tblDocumentos tr:last').after(tr);
+                        $('#errorAdicionarDocumento').hide();
+                        $('#errorAdicionarDocumento').text('');
+
+                        $('#TipoDocumentos').val('');
+                        $('#DescricaoDeDocumentos').val('');
+
+                        var qtdDocs = parseInt($('#hdnQtdDocs').val()) + 1;
+                        $('#hdnQtdDocs').val(qtdDocs);
+                        $('#bdQtdDocs').text(qtdDocs);
+                    }
+                    else {
+                        $('#errorAdicionarDocumento').text(optionData.text);
+                        $('#errorAdicionarDocumento').show();
+                    }
+
+                    desbloqueiaCampos();
+                });
+            });
+        }
+
+        function fRemover() {
+            escondeAlertas();
+
+            $('#btnRemover' + $('#hdnRemoverDocId').val()).prop('disabled', true);
+
+            $.getJSON('@Url.Action("RemoverDocumento", "Documento")',
+            {
+                SolicitacaoId: $('#SolicitacaoCriacaoID').val(),
+                DescricaoDocumentoId: $('#hdnRemoverDocId').val(),
+                cache: false
+            },
+            function (data) {
+                $.each(data, function (index, optionData) {
+
+                    if (optionData.value != '-1') {
+                        $('#tr' + $('#hdnRemoverDocId').val()).remove();
+
+                        var qtdDocs = parseInt($('#hdnQtdDocs').val()) - 1;
+                        $('#hdnQtdDocs').val(qtdDocs);
+                        $('#bdQtdDocs').text(qtdDocs);
+                    }
+                    else {
+                        $('#errorRemoverDocumento').text(optionData.text);
+                        $('#errorRemoverDocumento').show();
+                        $('#btnRemover' + $('#hdnRemoverDocId').val()).prop('disabled', false);
+                    }
+
+                    $('#hdnRemoverDocId').val('');
+                });
+            });
+        }
+
+        function bloqueiaCampos() {
+            $('#btnAdicionar').prop('disabled', true);
+            $('#btnAdicionar').text('Aguarde...');
+            $('#TipoDocumentos').prop('disabled', true);
+            $('#DescricaoDeDocumentos').prop('disabled', true);
+        }
+
+        function desbloqueiaCampos() {
+            $('#btnAdicionar').prop('disabled', false);
+            $('#btnAdicionar').text('Adicionar');
+            $('#TipoDocumentos').prop('disabled', false);
+            $('#DescricaoDeDocumentos').prop('disabled', false);
+        }
+
+        function escondeAlertas() {
+            $('#errorTipoDocumentos').hide();
+            $('#errorDescricaoDocumentos').hide();
+            $('#ConfirmaRemover').hide();
+            $('#ConfirmaAdicionar').hide();
+            $('#errorRemoverDocumento').hide();
+            $('#errorAdicionarDocumento').hide();
+        }
+
+        $(document).ready(function () {
+            $.ajaxSetup({ cache: false });
+
+            $("#TipoDocumentos").change(function () {
+                montaListaDescricaoDocumento();
+
+                if ($(this).val() == '-1') {
+                    $('#boxForm').hide();
+                    $('#divTipoDocumento').html('<div class="box-body"><div class="text-center"><i class="fa fa-refresh fa-spin"></i> Aguarde...</div></div>').fadeIn('fast');
+                    $('#divTipoDocumento').load('@Url.Action("TipoDocumento", "MeusDocumentos")');
+                }
+            });
+
+            $("#DescricaoDeDocumentos").change(function () {
+                if ($(this).val() == '-1') {
+                    $('#boxForm').hide();
+                    $('#divDescricaoDocumento').html('<div class="box-body"><div class="text-center"><i class="fa fa-refresh fa-spin"></i> Aguarde...</div></div>').fadeIn('fast');
+                    var urlDesc = '@Url.Action("DescricaoDocumento", "MeusDocumentos")' + '/?tipoDocumentoId=' + encodeURIComponent($('#TipoDocumentos').val()) + "&DescricaoDocumento=" + encodeURIComponent($('#TipoDocumentos option:selected').text());
+                    $('#divDescricaoDocumento').load(urlDesc);
+                }
+            });
+        });
+
+    </script>
+}

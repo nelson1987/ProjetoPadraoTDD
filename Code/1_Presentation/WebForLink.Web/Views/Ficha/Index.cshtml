@@ -1,0 +1,94 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+@{
+    ViewBag.Title = "Ficha Cadastral";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+}
+@section styles{
+    @Styles.Render("~/Content/jQuery-File-Upload")
+}
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="/@ViewBag.NomeController">
+                <i class="fa fa-envelope"></i>@ViewBag.NomeController
+            </a>
+        </li>
+        <li class="active">@ViewBag.NomeAcao</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div id="FichaAlertaSucessoTop" class="alert alert-success" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick=" $(this).fadeOut('fast') "></div>
+    </div>
+    <div class="row">
+        <div id="FichaAlertaErroTop" class="alert alert-danger" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick=" $(this).fadeOut('fast') "></div>
+    </div>
+    @Html.Partial("_DadosGerais", Model.DadoGeral)
+    @Html.Partial("_DadosEnderecos", Model.DadosEnderecos)
+    @Html.Partial("_DadosBancarios", Model.DadosBancarios)
+</section>
+@section scripts{
+    <script>
+        var $form = null;
+        $(function() {
+            $("#btnAdicionarEndereco").click(function() {
+                $("#boxGridDadosEnderecos .overlay").toggleClass("hidden");
+                $.ajax({
+                    url: "@Url.Action(\
+                              "PartialViewEndereco\",\"Ficha\")",
+                              false,
+                              function(html)
+    {
+    $
+        ("#dvEnderecos").append(html);
+        $
+        ("#boxGridDadosEnderecos .overlay").toggleClass("hidden");
+    }
+});
+                    return false;
+            });
+
+            $(".btn-excluir-endereco").click(function() {
+                var esse = $(this);
+                $("#boxGridDadosEnderecos .overlay").toggleClass("hidden");
+                $.ajax({
+                    url: "@Url.Action(\
+                              "ExcluirEndereco\", \"Ficha\")",
+    {
+        1
+    }
+                              ,
+                              false,
+                              function(html)
+    {
+    $
+        (esse).parents(".box-endereco").remove();
+        $
+        ("#boxGridDadosEnderecos .overlay").toggleClass("hidden");
+    }
+                              ,
+                              function(html)
+    {
+        alert(html);
+    }
+}
+
+    );
+                    return false;
+            });
+
+            $(".btn-minimizar").click(function() {
+                $(this).parents(".box-endereco").find(".box-body").toggleClass("hidden");
+            });
+            $form = $("#fileupload").fileupload({
+                dataType: "json"
+            });
+        });
+        $("#fileupload").addClass("fileupload-processing");
+    </script>
+    @Scripts.Ren der ("~/bundles/jQuery-File-Upload")
+
+    }

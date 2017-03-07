@@ -1,0 +1,152 @@
+﻿@model WebForLink.Web.ViewModels.EnderecoTesteVM
+
+@using (Html.BeginCollectionItem("EnderecoList"))
+{
+    @Model.Id
+    @*<div>
+        <span>Endereco</span>
+        @Model.Endereco
+        @Model.Numero
+        @Model.Complemento
+        @Model.CEP
+        @Model.Bairro
+        @Model.Cidade
+        @Model.UF
+        @Model.Pais
+        @Model.ContratantePjpfId
+    </div>*@
+    if (Model.EnderecoReceita)
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Tipo De Endereço</label><br />
+                        <span>OBTIDO NA RECEITA FEDERAL</span>
+                    </div>
+                </div>
+                <div class="col-xs-8 col-md-5">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Endereco)<br />
+                        @Html.DisplayTextFor(x => x.Endereco)
+                        @Html.HiddenFor(x => x.Endereco)
+                    </div>
+                </div>
+                <div class="col-xs-4 col-md-1">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Numero) <br />
+                        <span>@Html.DisplayTextFor(x => x.Numero) &nbsp;</span>
+                        @Html.HiddenFor(x => x.Numero)
+                    </div>
+                </div>
+                <div class="col-xs-8 col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Complemento)<br />
+                        <span>@Html.DisplayTextFor(x => x.Complemento) &nbsp;</span>
+                        @Html.HiddenFor(x => x.Complemento)
+                    </div>
+                </div>
+
+                <div class="col-xs-4 col-md-2">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.CEP) <br />
+                        <span>@Html.DisplayTextFor(x => x.CEP) &nbsp;</span>
+                        @Html.HiddenFor(x => x.CEP)
+                    </div>
+                </div>
+                <div class="col-xs-4 col-md-2">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Bairro)<br />
+
+                        <span>@Html.DisplayTextFor(x => x.Bairro) &nbsp;</span>
+                        @Html.HiddenFor(x => x.Bairro)
+                    </div>
+                </div>
+                <div class="col-xs-4 col-md-2">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Cidade) <br />
+                        <span>@Html.DisplayTextFor(x => x.Cidade) &nbsp;</span>
+                        @Html.HiddenFor(x => x.Cidade)
+                    </div>
+                </div>
+                <div class="col-xs-4 col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.UF)<br />
+                        <span>@Html.DisplayTextFor(x => x.UF) &nbsp;</span>
+                        @Html.HiddenFor(x => x.UF)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Pais) <br />
+                        <span>@Html.DisplayTextFor(x => x.Pais) &nbsp;</span>
+                        @Html.HiddenFor(x => x.Pais)
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    }
+
+    else {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @Html.HiddenFor(x => x.Id)
+                <div class="col-xs-4 col-md-2">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.CEP)&nbsp;<span class="btn-link" onclick="buscarCEP($(this).parent().find('input[type=text]'));">Buscar Cep</span><br />
+                        @Html.TextBoxFor(x => x.CEP, new { @class = "form-control input-sm cepMask", maxlength = "9" })
+                        @Html.ValidationMessageFor(x => x.CEP, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-xs-4 col-md-3">
+                    <div class="form-group">
+                        <label>Estado</label><br />
+                        @*@Html.DropDownListFor(x => x.T_UF.UF_SGL, (SelectList)ViewBag.UF, "Selecione o Estado", new { @class = "form-control input-sm estadoTxt" })*@
+                    </div>
+                </div>
+                <div class="col-xs-4 col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Cidade)<br />
+                        @Html.TextBoxFor(x => x.Cidade, new { @class = "form-control input-sm cidadeTxt", maxlength = "100" })
+                        @Html.ValidationMessageFor(x => x.Cidade, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-xs-4 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Bairro)<br />
+                        @Html.TextBoxFor(x => x.Bairro, new { @class = "form-control input-sm bairroTxt", maxlength = "100" })
+                        @Html.ValidationMessageFor(x => x.Bairro, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-xs-8 col-md-5">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Endereco)<br />
+                        @Html.TextBoxFor(x => x.Endereco, new { @class = "form-control input-sm enderecoTxt", maxlength = "255" })
+                        @Html.ValidationMessageFor(x => x.Endereco, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-xs-4 col-md-1">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Numero)<br />
+                        @Html.TextBoxFor(x => x.Numero, new { @class = "form-control input-sm numeroTxt", maxlength = "50" })
+                        @Html.ValidationMessageFor(x => x.Numero, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-xs-8 col-md-5">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Complemento)<br />
+                        @Html.TextBoxFor(x => x.Complemento, new { @class = "form-control input-sm complementoTxt", maxlength = "255" })
+                        @Html.ValidationMessageFor(x => x.Complemento, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <label>&nbsp;</label><br />
+                    <button type="button" class="btn btn-danger" onclick="exibirConfirmacaoExclusao(this)"><i class="fa fa-trash-o fa-lg"></i></button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    }
+}

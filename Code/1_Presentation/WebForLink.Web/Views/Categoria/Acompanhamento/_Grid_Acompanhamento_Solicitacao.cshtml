@@ -1,0 +1,103 @@
+﻿@model IEnumerable<WebForLink.Web.ViewModels.AprovacaoVM>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-condensed">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    Solicitação
+                </th>
+                <th class="text-center">
+                    Tipo de Solicitação
+                </th>
+                <th class="text-center">
+                    Grupo de Contas
+                </th>
+                <th class="text-center">
+                    Razão Social/Nome
+                </th>
+                <th class="text-center">
+                    CNPJ/CPF
+                </th>
+                <th class="text-center">
+                    Data Solicitação
+                </th>
+                <th class="text-center">
+                    Empresa
+                </th>
+                <th class="text-center">
+                    Etapa
+                </th>
+                <th class="text-center col-md-1">
+                    &nbsp;
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center">
+                        @Html.DisplayFor(x => item.IdSolicitacao)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(x => item.NomeSolicitacao)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(x => item.GrupoContas)
+                    </td>
+                    <td class="text-center">
+                        @if (item.Fornecedor != null)
+                        {
+                            if (item.Fornecedor.PJPF_TIPO != 3)
+                            {
+                                if (item.FluxoId == 1 || item.FluxoId == 2)
+                                {
+                                    @Html.DisplayFor(x => item.Fornecedor.RAZAO_SOCIAL)
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(x => item.NomeFornecedor)
+                                }
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(x => item.Fornecedor.NOME)
+                            }
+                        }
+                        else
+                        {
+                            @item.NomeFornecedor
+                        }
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(x => item.CNPJ_CPF)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(x => item.Solicitacao_Dt_Cria)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(x => item.Contratante.NOME_FANTASIA)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(x => item.Etapa)
+                    </td>
+                    <td class="text-center text-nowrap">
+                        <button class="btn btn-primary btn-xs" onclick="location.href='@item.UrlAprovacao'">Selecionar</button>
+                    </td>
+                </tr>
+            }
+            @if (!Model.Any())
+            {
+                <tr class="warning">
+                    <td colspan="10" class="text-warning text-center">
+                        A pesquisa não retornou nenhum resultado!
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.Partial("_Paginacao")
+    <div class="clearfix"></div>
+</div>
+

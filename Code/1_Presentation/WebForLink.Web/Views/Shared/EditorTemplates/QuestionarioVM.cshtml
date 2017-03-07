@@ -1,0 +1,24 @@
+﻿@model  WebForLink.Web.ViewModels.QuestionarioVM
+@using (Html.BeginCollectionItem("Questionarios.QuestionarioDinamicoList"))
+{
+    <div id="@Model.EstiloIdCss">
+        @Html.HiddenFor(x => x.Id)
+        @Html.HiddenFor(x => x.Titulo)
+        @Html.HiddenFor(x => x.ContratanteId)
+        @Html.HiddenFor(x => x.Descricao)
+        @Html.HiddenFor(x => x.ExibeDadosBancarios)
+        @Html.HiddenFor(x => x.ExibeDadosContato)
+        @Html.HiddenFor(x => x.ExibeDadosGerais)
+        @Html.HiddenFor(x => x.ExibeInformacaoComplementar)
+        @Html.EditorFor(x => x.AbaList)
+    </div>
+    @section Scripts{
+        <script>
+            $(function () {
+                $("#@Model.EstiloIdCss").parent().parent().addClass("tab-content");
+                $("#@Model.EstiloIdCss").parent().addClass("@Model.EstiloClassCss");
+                $("#@Model.EstiloIdCss").parent().attr("id", "@Model.EstiloIdCss");
+            });
+        </script>
+    }
+}

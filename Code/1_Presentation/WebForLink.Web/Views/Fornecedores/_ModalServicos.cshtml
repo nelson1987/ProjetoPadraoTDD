@@ -1,0 +1,34 @@
+﻿<div id="modalServicos" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="ServicoModalLabel">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="ServicoModalLabel">Serviços</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="padding: 0px 10px 0px 10px;">
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <input type="text" id="BuscaServico" class="form-control input-sm" placeholder="Buscar o serviço por uma palavra" autocomplete="off" />
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-default btn-sm" onclick="BuscaServicosPorChave();">Pesquisar</button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="row" style="padding: 0px 10px 0px 10px; max-height: 300px; overflow-y: auto;">
+                    <div class="col-md-12">
+                        <ul id="ListaServicos" class="list-unstyled"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" onclick="selecionaServicos();">Adicionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

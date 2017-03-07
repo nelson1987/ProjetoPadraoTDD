@@ -1,0 +1,106 @@
+﻿@using WebForLink.Web.ViewModels
+
+@model IEnumerable<DadosBancariosVM>
+
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        var habilitaEdicao = $("#HabilitaEdicao").val() == "True";
+        if (habilitaEdicao) {
+            var objDivPai = $("#divBancos").parent(),
+                objDivBotoesEdicao = objDivPai.children(".text-right")[0];
+
+            $(objDivBotoesEdicao).toggleClass("hidden");
+        }
+
+        $(".upload").change(function () {
+            var obj = $(this).parent('div').parent('div').children('span').text($(this)[0].files[0].name);
+            var displayforName = $(this).attr('id').substr();
+            displayforName = '#' + displayforName.substr(0, displayforName.indexOf('__'));
+        });
+
+    });
+
+    function obterNomeBanco(objDropdownList) {
+        if (objDropdownList != null) {
+            var strDropdownListID = $(objDropdownList).attr("id"),
+                strInputTextHiddenID = strDropdownListID.replace("__Banco", "__NomeBanco");
+
+            if (strInputTextHiddenID != null && strInputTextHiddenID != "") {
+                var objInputTextHidden = $("#" + strInputTextHiddenID);
+
+                if (objInputTextHidden != null) {
+                    $(objInputTextHidden).val($("#" + strDropdownListID + " option:selected").text());
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    function excluirBanco(objBotao) {
+        var objItemLista = $(objBotao).parents('li');
+
+        objItemLista.remove();
+    }
+
+    function habilitaCampos() {
+        $("#divBancos :input").attr("disabled", false);
+    }
+
+    function validaSalvarBancos() {
+        if (uploads > 0) {
+            $('#ConfirmacaoBancos').removeClass();
+            $('#ConfirmacaoBancos').addClass("alert alert-danger");
+            $('#ConfirmacaoBancos span').text('Ainda existe(m) arquivo(s) em processo de upload. Favor aguardar...');
+            $('#btnSimBancos').prop('disabled', true);
+            $('#btnNaoBancos').prop('disabled', false);
+
+            setTimeout(function () { $('#ConfirmacaoBancos').fadeOut('fast'); }, 10000);
+        }
+        else {
+            $('#ConfirmacaoBancos').removeClass();
+            $('#ConfirmacaoBancos').addClass("alert alert-warning");
+            $('#ConfirmacaoBancos span').text('Tem certeza que deseja abrir uma solicitação de atualização de Dados Bancários?');
+            $('#btnSimBancos').prop('disabled', false);
+            $('#btnNaoBancos').prop('disabled', false);
+        }
+
+        $('#ConfirmacaoBancos').fadeIn('fast');
+        $('#btnSimBancos').focus();
+    }
+</script>
+    }
+<div class="box box-primary">
+    <div class="box-header">
+        <h3 class="box-title">Dados Bancários</h3><span class="text-danger" style="font-weight:bold;">*</span>
+        @Html.ValidationMessage("DadosBancariosValidation", "", new { @class = "text-danger" })
+    </div>
+
+    <div class="box-body">
+        <input type="hidden" id="BancosExcluir" name="BancosExcluir" value="" />
+
+        <div id="divBancos">
+            @Html.EditorForModel()
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="form-group" style="padding-top: 7px;">
+            <button type="button" class="btn btn-default" onclick="incluirDados('DadosBancarios', '@Url.Action("Incluir", "DadosBancarios")');" disable-input="">Adicionar Dados Bancários</button>
+        </div>        
+        <br>        
+        <div class="text-right text-nowrap hidden">
+            <button type="button" class="btn btn-primary" onclick="validaSalvarBancos();">Salvar</button>
+            <button type="button" class="btn btn-danger" onclick="cancelarDados('DadosBancarios', '@Url.Action("Cancelar", "DadosBancarios")');">Cancelar</button>
+        </div>
+        <div id="ConfirmacaoBancos" class="alert alert-warning" role="alert" style="display: none;">
+            <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="submit" id="btnSimBancos" class="btn btn-primary btn-xs" onclick="">Sim</button>&nbsp;&nbsp;&nbsp;
+            <button type="button" id="btnNaoBancos" class="btn btn-default btn-xs" onclick="$('#ConfirmacaoBancos').fadeOut('fast');">Não</button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

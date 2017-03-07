@@ -1,0 +1,658 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>CAIXA - Extrato eCaixaPostal</title>
+<base href="http://novoecaixapostal.caixa/siecpstatic/">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style>
+                  body { background-color: #002884; margin: 0px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; color: #666666; text-align: center; }
+                  body.popup { background-color: #FFFFFF; margin: 0px; padding: 10px 10px 0px 5px; }
+                  body.impressao { background-color: #FFFFFF; font-family: "Times New Roman"; }
+                  body.impressao table, body.impressao .txt01{ font-size: 13px!important; }
+                  body.popup table{ margin: 0px; padding: 10px; font-weight: bold; line-height: 12px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #0039BA; }
+                  table{ font-size: 11px; margin: 0 auto; }
+                  select { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; color: #0039BA; background: #FFFFFF ; }
+                  a{ font-family: Verdana, Arial, Helvetica, sans-serif; color: #0039BA; text-decoration: none; }
+                  a:hover{ text-decoration: underline; }
+                  /* AREAS */
+                  .bkgLogo{ background: #002885 url(_images/lgoCaixa.jpg) no-repeat left top; height: 57px; vertical-align: middle; padding-right: 10px; }
+                  .rodape{background-color: #0039BA;}
+                  .meio{padding-left: 9px; background-color: #FFFFFF;}
+                  .bkgAzul01{background-color: #0039BA;}
+                  .bkgAzul02{background-color: #C7D1E8;}
+                  .bkgAzul03{background: url(_images/bkgBarra01.gif) repeat-x left top;}
+                  .bkgAzul04{background: url(_images/bkgBarra01.gif) repeat-x left top; color: #FFFFFF;}
+                  .banner{padding-left: 15px;}
+                  .divisa{margin: 10px 0px 10px 0px;}
+                  a.menu{font-size: 11px;}
+                  /* TOPO */
+                  .bkgTopoInterna{ background: #FFFFFF url(_images/bkgTopoInterna.gif) no-repeat right top; height: 79px; padding-bottom: 5px; padding-left: 13px; vertical-align: bottom; }
+                  .topoTitulo{margin-bottom: 8px;}
+                  select.navegue{margin-top: 2px; margin-left: 2px;}
+                  .bkgTopoInstit1{ height: 79px; padding-bottom: 5px; padding-left: 13px; vertical-align: bottom; background-color: #C7D1E8; }
+                  .bkgTopoInstit2{ height: 79px; padding: 5px; background-color: #C7D1E8; }
+                  .bkgTopoInstit3{ background: #FFFFFF url(_images/bkgTopoInstit.gif) no-repeat right top; height: 79px; padding: 5px; background-color: #C7D1E8; }
+                  /* CONTEUDO */
+                  .conteudoInterna{ background-color: #E4E7EE; padding: 5px 5px 5px 10px; }
+                  .conteudoInterna table.info td{ padding-left: 5px; }
+                  .conteudoInterna table.infoEx td{ padding-left: 0px; }
+                  .conteudoInterna table.menu td{ padding-left: 10px; }
+                  .conteudoInterna table.tabelaBorda{ border: solid 2px #C7D1E8; }
+                  .conteudoInterna table.info td.separador{ padding: 0px;}
+                  .txtRodape{ background-color: #FFFFFF; color: #0039BA; font-size: 11px; font-weight: bold; }                  
+                  .txt01{ font-size: 11px; }
+                  .txtObs{ font-size: 9px; }
+                  .tit01{ font-size: 21px; color: #0039BA; padding: 20px 0px; }
+                  .tit02{ font-size: 15px; color: #666666; font-weight: bold; }
+                  .tabTit01{ font-size: 11px; color: #FFFFFF; background-color: #7F9CDC; height: 22px; vertical-align: middle; font-weight: bold; }
+                  .tabTit02{ font-size: 10px; color: #FFFFFF; background-color: #7F9CDC; height: 30px; vertical-align: middle; padding-left: 3px!important; }
+                  .destaque01{ font-size: 11px; color: #0039BA; }
+                  .input { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #0039BA; background: #FFFFFF; }
+                </style>
+<script language="JavaScript">
+                  // -- funcoes -- //
+                  function MM_openBrWindow(theURL,winName,features) { //v2.0
+                    window.open(theURL,winName,features);
+                  }
+                  function aviso(){
+                     MM_openBrWindow('aviso.htm','','toolbar=no,status=yes,scrollbars=no,width=500,height=520');
+                  }
+                  function pagina(){
+                     if (document.email.chkInfEmail.checked == true){
+                        window.location.href='confirmacao_email.htm';      
+                     } else {
+                        window.location.href='pagina04.htm';
+                     }
+                  }
+                  
+                  // -- rodape -- //
+                  function mountDivRodape( nomeDiv, telefoneContato ){
+                     rodap = document.getElementById(nomeDiv);
+                     if( rodap ){
+                        rodap.innerHTML = getHtmlRodape(telefoneContato);
+                     }
+                  }
+                  
+                  function mountRodape( telefoneContato ){
+                     document.write( getHtmlRodape(telefoneContato));
+                  }
+                  
+                  function getHtmlRodape( telefoneContato ){
+                     htmlRodape = ' <table width="780" border="0" cellpadding="0" cellspacing="0"> ';
+                     htmlRodape += '   <tr>  ';
+                     htmlRodape += '     <td class="txtRodape" align="center"> CAIXA Cidad&atilde;o : ';
+                     htmlRodape += "0800 726 0207";
+                     htmlRodape += '</td> ';
+                     htmlRodape += '   </tr> ';
+                     htmlRodape += '   <tr>  ';
+                     htmlRodape += '     <td class="rodape"><img src="_images/transparente.gif" width="10" height="5"></td> ';
+                     htmlRodape += '   </tr> ';
+                     htmlRodape += ' </table> ';
+                     return htmlRodape;
+                  }
+            
+                  // -- cabecalho -- //
+                  function mountDivCabecalho(nomeDiv){
+                     cabec = document.getElementById(nomeDiv);
+                     if( cabec ){
+                        cabec.innerHTML = getHtmlCabec();
+                     }
+                  }
+
+                  function mountCabecalho(){
+                     document.write( getHtmlCabec() );
+                  }
+
+                  function getHtmlCabec(){
+                     htmlCabec = ' <table width="780" border="0" cellspacing="0" cellpadding="0"> ';
+                     htmlCabec += '   <tr>  ';
+                     htmlCabec += '     <td class="bkgLogo" align="right"><img src="_images/banner_topo.gif" width="400" height="40" hspace="8" align="absmiddle"></td> ';
+                     htmlCabec += '   </tr> ';
+                     htmlCabec += '   <tr>  ';
+                     htmlCabec += '     <td><a href="#a"><img vspace="2" src="_images/btoCabCaixa.jpg" width="88" height="24" border="0"></a><a href="#a"><img vspace="2" src="_images/btoCabRedeAtendimento.jpg" width="147" height="24" border="0"></a><a href="#a"><img vspace="2" src="_images/btoCabOuvidoria.jpg" width="96" height="24" border="0"></a><a href="#a"><img vspace="2" src="_images/btoCabDownload.jpg" width="100" height="24" border="0"></a><a href="#a"><img vspace="2" src="_images/btoCabMapaSite.jpg" width="106" height="24" border="0"></a><a href="#a"><img vspace="2" src="_images/btoCabSeguranca.jpg" width="100" height="24" border="0"></a><a href="#a"><img vspace="2" src="_images/btoCabImprensa.jpg" width="88" height="24" border="0"></a><a href="#a"><img vspace="2" src="_images/btoCabInterrogacao.jpg" width="55" height="24" border="0"></a></td> ';
+                     htmlCabec += '   </tr> ';
+                     htmlCabec += ' </table>';
+                     return htmlCabec;
+                  }
+
+                  // -- topo_FGTS -- //
+                  function mountDivTopo( nomeDiv, nomeCliente ){
+                     topo = document.getElementById(nomeDiv);
+                     if ( topo ){
+                        topo.innerHTML = getHtmlTopo(nomeCliente);
+                     }
+                  }
+                  
+                  function mountTopo( nomeCliente ){
+                     document.write( getHtmlTopo(nomeCliente));
+                  }
+                  
+                  function getHtmlTopo( nomeCliente ){
+                     htmlTopo = ' <table width="780" border="0" cellpadding="0" cellspacing="0"> ';
+                     htmlTopo +='   <tr>  ';
+                     htmlTopo +='     <td class="meio"> ';
+                     htmlTopo +='       <table width="100%" border="0" cellspacing="0" cellpadding="0"> ';
+                     htmlTopo +='         <tr>  ';
+                     htmlTopo +='           <td width="152"><img src="_images/iltInternaM03.gif" width="152" height="79"></td> ';
+                     htmlTopo +='           <td class="bkgTopoInstit1"><img src="_images/titeCaixaPostalFGTS.gif" width="260" height="44" class="topoTitulo"><br>  ';
+                     htmlTopo +='           </td> ';
+                     htmlTopo +='           <td class="bkgTopoInstit2" width="20" valign="top"><img src="_images/bltSetaAzul.gif" width="22" height="22">  ';
+                     htmlTopo +='           </td> ';
+                     htmlTopo +='           <td class="bkgTopoInstit3" width="200" valign="top" align="left"> ';
+                     htmlTopo +='             <select name="select3" style="WIDTH: 197px" class="navegue" tabindex="15"> ';
+                     htmlTopo +='               <option>Navegue pela CAIXA</option> ';
+                     htmlTopo +='               <option>- - - - - - - - - -</option> ';
+                     htmlTopo +='               <option>Para Voc&ecirc;</option> ';
+                     htmlTopo +='               <option>Para sua Empresa</option> ';
+                     htmlTopo +='               <option>Para sua Cidade</option> ';
+                     htmlTopo +='               <option>- - - - - - - - - -</option> ';
+                     htmlTopo +='               <option>Loterias</option> ';
+                     htmlTopo +='               <option>Casa Pr&oacute;pria</option> ';
+                     htmlTopo +='               <option>Servi&ccedil;os ao Cidad&atilde;o</option> ';
+                     htmlTopo +='               <option>Desenvolvimento Urbano</option> ';
+                     htmlTopo +='               <option>- - - - - - - - - -</option> ';
+                     htmlTopo +='               <option>Empres&aacute;rios Lot&eacute;ricos</option> ';
+                     htmlTopo +='               <option>Licita&ccedil;&otilde;es &amp; Fornecedores</option> ';
+                     htmlTopo +='               <option>Im&oacute;veis &agrave; venda</option> ';
+                     htmlTopo +='             </select></td> ';
+                     htmlTopo +='         </tr> ';
+                     htmlTopo +='         <tr>  ';
+                     htmlTopo +='           <td class="bkgAzul01"><img src="_images/transparente.gif" width="2" height="1"></td> ';
+                     htmlTopo +='           <td class="bkgAzul01" colSpan="3"><img src="_images/transparente.gif" width="2" height="1"></td> ';
+                     htmlTopo +='         </tr> ';
+                     htmlTopo +='         <tr>  ';
+                     htmlTopo +='           <td class="bkgAzul01"><img src="_images/transparente.gif" width="2" height="10"></td> ';
+                     htmlTopo +='           <td class="bkgAzul04" colSpan="3" height="20">&nbsp;&nbsp;';
+                     htmlTopo += nomeCliente;
+                     htmlTopo +=', seguem as informa&ccedil;&otilde;es solicitadas:</td> ';
+                     htmlTopo +='         </tr> ';
+                     htmlTopo +='      </table> ';
+                     htmlTopo +='    </td> ';
+                     htmlTopo +='   </tr> ';
+                     htmlTopo +=' </table> ';
+                     return htmlTopo;
+                  }
+
+                </script>
+</head>
+<body onload="javascript: mountDivCabecalho('divCabecalho'); mountDivTopo('divTopo', 'NELSON SILVA NETO                                           '); mountDivRodape('divRodape', '');">
+<div id="divCabecalho"></div>
+<div id="divTopo"></div>
+<table width="780" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
+<tr>
+<td class="txt01"></td>
+</tr>
+<tr>
+<td class="txt01">
+<div align="center">
+<table cellSpacing="0" cellPadding="2" width="720" border="0">
+<tr>
+<td class="tdcinza">Mensagem enviada em: <span class="txtazul"><b>22/11/2016</b>
+<br>
+</span></td>
+</tr>
+<tr>
+<td class="tdcinza">
+<br>
+</td>
+</tr>
+</table>
+</div>
+<div align="center">
+<table border="0" cellpadding="0" width="720" cellspacing="0">
+<tr>
+<td bgcolor="#0039B9"><img height="1" src="_images/transparente.gif" width="1" border="0"></td>
+</tr>
+</table>
+</div>
+<div align="center">
+<table cellSpacing="0" cellPadding="2" width="720" border="0">
+<tr>
+<td class="tit01" colspan="2">:: Extrato de conta de fundo de garantia - FGTS</td>
+</tr>
+<tr>
+<td colspan="2">
+<div align="center">
+<table border="0" cellpadding="0" width="720" cellspacing="0">
+<tr>
+<td bgcolor="#0039B9" colspan="2"><img height="1" src="_images/transparente.gif" width="1" border="0"></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td class="txt01">Data de gera&ccedil;&atilde;o: 17/11/2016</td><td class="txt01"></td>
+</tr>
+<tr>
+<td colspan="2">
+<div align="center">
+<table border="0" cellpadding="0" width="720" cellspacing="0">
+<tr>
+<td bgcolor="#0039B9" colspan="2"><img height="1" src="_images/transparente.gif" width="1" border="0"></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td class="txt01">Nome: NELSON SILVA NETO                                           </td><td class="txt01">
+<p align="left"></p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<div align="center">
+<table border="0" cellpadding="0" width="720" cellspacing="0">
+<tr>
+<td bgcolor="#0039B9" colspan="2"><img height="2" src="_images/transparente.gif" width="1" border="0"></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td class="txt01">PIS/PASEP: 13207806626</td><td class="txt01">
+<p align="left">UF: BR</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<div align="center">
+<table border="0" cellpadding="0" width="720" cellspacing="0">
+<tr>
+<td bgcolor="#0039B9" colspan="2"><img height="1" src="_images/transparente.gif" width="1" border="0"></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td class="txt01">Empresa: CASTMETA INFORMATICA LTDA               </td><td class="txt01">
+<p align="left"></p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<div align="center">
+<table border="0" cellpadding="0" width="720" cellspacing="0">
+<tr>
+<td bgcolor="#0039B9" colspan="2"><img height="1" src="_images/transparente.gif" width="1" border="0"></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td class="txt01">C&oacute;d. Estab.: 09960300692307</td><td class="txt01">
+<p align="left">Categoria: 01</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<div align="center">
+<table border="0" cellpadding="0" width="720" cellspacing="0">
+<tr>
+<td bgcolor="#0039B9" colspan="2"><img height="1" src="_images/transparente.gif" width="1" border="0"></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td class="txt01">N&uacute;mero Conta FGTS: 00000835806</td><td class="txt01">
+<p align="left">Tipo Conta: OPTANTE     </p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<div align="center">
+<table border="0" cellpadding="0" width="720" cellspacing="0">
+<tr>
+<td bgcolor="#0039B9" colspan="2"><img height="2" src="_images/transparente.gif" width="1" border="0"></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td class="txt01">Data admiss&atilde;o: 07/12/2015</td><td class="txt01">
+<p align="left"></p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<div align="center">
+<table border="0" cellpadding="0" width="720" cellspacing="0">
+<tr>
+<td bgcolor="#0039B9" colspan="2"><img height="1" src="_images/transparente.gif" width="1" border="0"></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td class="txt01">Data/C&oacute;d. Movimenta&ccedil;&atilde;o: 02/02/2016/J </td><td class="txt01">
+<p align="left">Data op&ccedil;&atilde;o: 07/12/2015</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<div align="center">
+<table border="0" cellpadding="0" width="720" cellspacing="0">
+<tr>
+<td bgcolor="#0039B9" colspan="2"><img height="1" src="_images/transparente.gif" width="1" border="0"></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td class="txt01">Taxa de Juros: 3%</td><td class="txt01">
+<p align="left"></p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<div align="center">
+<table border="0" cellpadding="0" width="720" cellspacing="0">
+<tr>
+<td bgcolor="#0039B9" colspan="2"><img height="1" src="_images/transparente.gif" width="1" border="0"></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td class="txt01">Saldo para fins rescis&oacute;rios: R$ 946,51</td><td class="txt01">
+<p align="left"></p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<div align="center">
+<table border="0" cellpadding="0" width="720" cellspacing="0">
+<tr>
+<td bgcolor="#0039B9" colspan="2"><img height="1" src="_images/transparente.gif" width="1" border="0"></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td class="txt01">SALDO ANTERIOR:&nbsp;</td><td class="txt01">R$ 942,70</td>
+</tr>
+<tr>
+<td class="txt01">Data de saldo anterior:&nbsp;</td><td class="txt01">  /  /    </td>
+</tr>
+<tr>
+<td class="txt01"><img height="10" src="_images/transparente.gif" width="1" border="0"></td><td class="txt01"></td>
+</tr>
+<tr>
+<td class="txt01">Total de lan&ccedil;amentos:&nbsp;</td><td class="txt01">R$ 3,81</td>
+</tr>
+<tr>
+<td class="txt01"><img height="10" src="_images/transparente.gif" width="1" border="0"></td><td class="txt01"></td>
+</tr>
+<tr>
+<td class="txt01">SALDO ATUAL:&nbsp;</td><td class="txt01">
+<p align="left">R$ 946,51</p>
+</td>
+</tr>
+<tr>
+<td class="txt01">Data:</td><td class="txt01">
+<p align="left">10/10/2016</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<div align="center">
+<table border="0" cellpadding="0" width="720" cellspacing="0">
+<tr>
+<td bgcolor="#0039B9" colspan="2"><img height="1" src="_images/transparente.gif" width="1" border="0"></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td class="txtObs" colspan="2">* importante: O saldo informado pode se alterar em fun&ccedil;&atilde;o de saques/dep&oacute;sitos processados ap&oacute;s: 10/10/2016</td>
+</tr>
+</table>
+</div>
+<div align="center">
+<table cellSpacing="0" cellPadding="2" width="720" border="0">
+<tr>
+<td class="tit01" colspan="6">:: Hist&oacute;rico dos Lan&ccedil;amentos</td>
+</tr>
+<tr class="bkgAzul02">
+<td class="tabTit01" width="100">Data</td><td class="tabTit01" width="50" align="center">C&oacute;digo</td><td class="tabTit01" width="320">Descri&ccedil;&atilde;o dos Lan&ccedil;amentos</td><td class="tabTit01" width="100">
+<p align="right">Valor R$<img border="0" src="_images/transparente.gif" width="13" height="10"></p>
+</td><td class="tabTit01" width="50">
+<p align="center">C/D</p>
+</td><td class="tabTit01" width="100">
+<p align="right">Total R$<img border="0" src="_images/transparente.gif" width="13" height="10"></p>
+</td>
+</tr>
+<tr>
+<td class="txt01" width="100">10/10/2016</td><td class="txt01" width="50" align="center">011</td><td class="txt01" width="320">CREDITO DE JUROS/ATUALIZACAO MONETARIA 0,004045 S/SALDO 942,70                                      </td><td class="txt01" width="100" align="right">
+<p align="right">3,81</p>
+</td><td class="txt01" width="50" align="center">C</td><td class="txt01" width="100" align="right">
+<p align="right">946,51</p>
+</td>
+</tr>
+<tr>
+<td class="txt01" width="100">  /  /    </td><td class="txt01" width="50" align="center">   </td><td class="txt01" width="320">                                                                                                    </td><td class="txt01" width="100" align="right">
+<p align="right">                .  </p>
+</td><td class="txt01" width="50" align="center"> </td><td class="txt01" width="100" align="right">
+<p align="right">                .  </p>
+</td>
+</tr>
+<tr>
+<td class="txt01" width="100">  /  /    </td><td class="txt01" width="50" align="center">   </td><td class="txt01" width="320">                                                                                                    </td><td class="txt01" width="100" align="right">
+<p align="right">                .  </p>
+</td><td class="txt01" width="50" align="center"> </td><td class="txt01" width="100" align="right">
+<p align="right">                .  </p>
+</td>
+</tr>
+</table>
+</div>
+<div align="center">
+<table cellSpacing="0" cellPadding="2" width="720" border="0">
+<tr>
+<td class="tit01" colspan="3">:: Dep&oacute;sito nos &uacute;ltimos 6 meses anteriores a  SETEMBRO/2016</td>
+</tr>
+<tr class="bkgAzul02">
+<td class="tabTit01" width="120">M&ecirc;s/Ano</td><td class="tabTit01" width="400"></td><td class="tabTit01" width="200">
+<p align="right">Valor<img border="0" src="_images/transparente.gif" width="20" height="10"></p>
+</td>
+</tr>
+<tr>
+<td class="txt01" width="120">    MARCO/2016</td><td class="txt01" width="400"></td><td class="txt01" width="200" align="right">
+<p align="right">0,00</p>
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<div align="center">
+<table border="0" cellpadding="0" width="720" cellspacing="0">
+<tr>
+<td bgcolor="#0039B9" colspan="2"><img height="1" src="_images/transparente.gif" width="1" border="0"></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td class="txt01" width="120">    ABRIL/2016</td><td class="txt01" width="400"></td><td class="txt01" width="200" align="right">
+<p align="right">0,00</p>
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<div align="center">
+<table border="0" cellpadding="0" width="720" cellspacing="0">
+<tr>
+<td bgcolor="#0039B9" colspan="2"><img height="1" src="_images/transparente.gif" width="1" border="0"></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td class="txt01" width="120">     MAIO/2016</td><td class="txt01" width="400"></td><td class="txt01" width="200" align="right">
+<p align="right">0,00</p>
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<div align="center">
+<table border="0" cellpadding="0" width="720" cellspacing="0">
+<tr>
+<td bgcolor="#0039B9" colspan="2"><img height="1" src="_images/transparente.gif" width="1" border="0"></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td class="txt01" width="120">    JUNHO/2016</td><td class="txt01" width="400"></td><td class="txt01" width="200" align="right">
+<p align="right">0,00</p>
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<div align="center">
+<table border="0" cellpadding="0" width="720" cellspacing="0">
+<tr>
+<td bgcolor="#0039B9" colspan="2"><img height="1" src="_images/transparente.gif" width="1" border="0"></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td class="txt01" width="120">    JULHO/2016</td><td class="txt01" width="400"></td><td class="txt01" width="200" align="right">
+<p align="right">0,00</p>
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<div align="center">
+<table border="0" cellpadding="0" width="720" cellspacing="0">
+<tr>
+<td bgcolor="#0039B9" colspan="2"><img height="1" src="_images/transparente.gif" width="1" border="0"></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td class="txt01" width="120">   AGOSTO/2016</td><td class="txt01" width="400"></td><td class="txt01" width="200" align="right">
+<p align="right">0,00</p>
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<div align="center">
+<table border="0" cellpadding="0" width="720" cellspacing="0">
+<tr>
+<td bgcolor="#0039B9" colspan="2"><img height="1" src="_images/transparente.gif" width="1" border="0"></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div align="center">
+<table cellSpacing="0" cellPadding="2" width="720" border="0">
+<tr>
+<td class="tdcinza"><img border="0" src="_images/transparente.gif" width="13" height="7"></td>
+</tr>
+<tr>
+<td class="tdcinza"><img border="0" src="_images/bltMarcador01.gif" width="7" height="7">&nbsp;<a href="#">INFORMA&Ccedil;&Otilde;ES AO TRABALHADOR</a></td>
+</tr>
+<tr>
+<td class="tdcinza"><img border="0" src="_images/bltMarcador01.gif" width="7" height="7">&nbsp;<a href="#">ALTERA&Ccedil;&Atilde;O CADASTRAL E DESCADASTRAMENTO</a></td>
+</tr>
+<tr>
+<td><b>SITUA&Ccedil;&Otilde;ES QUE PERMITEM O SAQUE DA CONTA VINCULADA:</b>
+<br>
+											Despedida sem justa causa; culpa rec&iacute;proca ou for&ccedil;a maior;
+											extin&ccedil;&atilde;o da empresa/ supress&atilde;o da atividade/ nulidade do
+											contrato de trabalho;
+											t&eacute;rmino do contrato de trabalho no prazo
+											determinado; aposentadoria;
+											suspens&atilde;o total do trabalho avulso
+											por per&iacute;odo igual ou
+											superior a noventa dias, necessidade
+											pessoal em raz&atilde;o de
+											desastre natural que atingiu a resid&ecirc;ncia
+											do trabalhador em
+											munic&iacute;pio que tenha decretado situa&ccedil;&atilde;o de
+											emerg&ecirc;ncia ou
+											estado de calamidade p&uacute;blica; falecimento; ter,
+											o titular da
+											conta, idade igual ou superior a setenta anos,
+											trabalhador ou
+											dependente portador do v&iacute;rus HIV - SIDA/AIDS;
+											trabalhador ou
+											dependente acometido de neoplasia maligna -
+											C&Acirc;NCER;
+											perman&ecirc;ncia do titular, por tr&ecirc;s anos ininterruptos,
+											fora do
+											regime do FGTS, para contratos de trabalho extintos a
+											partir
+											de 14/07/1990, inclusive ; e, utiliza&ccedil;&atilde;o em Moradia
+											Pr&oacute;pria.
+
+										</td>
+</tr>
+<tr>
+<td><b>
+												PROCEDIMENTOS PARA O SAQUE DA CONTA VINCULADA :
+												<br>
+</b>
+											Munido de documento de identifica&ccedil;&atilde;o pessoal, Cart&atilde;o do
+											Cidad&atilde;o ou Cart&atilde;o de Inscri&ccedil;&atilde;o PIS-PASEP e Carteira de
+											Trabalho e Previd&ecirc;ncia Social - CTPS do titular, apresentar o
+											Termo de Rescis&atilde;o de Contrato de Trabalho ou documento
+											comprobat&oacute;rio do direito do saque em ag&ecirc;ncia da CAIXA ou em
+											ag&ecirc;ncia da rede banc&aacute;ria onde a CAIXA n&atilde;o esteja presente
+
+										</td>
+</tr>
+<tr>
+<td><b>
+												UTILIZA&Ccedil;&Atilde;O EM MORADIA PR&Oacute;PRIA:</b>
+<br>
+											O trabalhador dever&aacute; consultar o agente financeiro escolhido
+											para atendimento.
+										</td>
+</tr>
+<tr>
+<td><b>CR&Eacute;DITO DE JUROS E ATUALIZA&Ccedil;&Atilde;O MONET&Aacute;RIA: </b>
+<br>
+											o saldo da conta vinculada &eacute; atualizado mensalmente, com base
+											no indexador aplicado &agrave; caderneta de poupan&ccedil;a com anivers&aacute;rio
+											no dia 01 de cada m&ecirc;s. Os valores j&aacute; creditados, tamb&eacute;m, s&atilde;o
+											acrescidos de juros que podem variar de 3% a 6% ao ano,
+											conforme taxa de juros devida &agrave; conta vinculada.
+										</td>
+</tr>
+<tr>
+<td class="tdcinza"><img border="0" src="_images/transparente.gif" width="13" height="20"><p align="center">
+<img border="0" src="_images/banner01.gif" width="166" height="49">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img border="0" src="_images/banner02.gif" width="166" height="49"></p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+</table>
+<div id="divRodape"></div>
+</body>
+</html>

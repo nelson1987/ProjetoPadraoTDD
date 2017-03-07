@@ -1,0 +1,58 @@
+﻿@model WebForLink.Web.ViewModels.TimelineVM
+<div class="row bs-wizard" style="border-bottom:0;">
+    <div class="col-xs-offset-2 col-xs-1 col-md-2 col-md-offset-0 col-lg-1 col-lg-offset-2 bs-wizard-step criacao">
+        <div class="text-center bs-wizard-stepnum">@Model.Importados</div>
+        <div class="progress"><div class="progress-bar"></div></div>
+        <a class="bs-wizard-dot" alt="Importados"></a>
+        <div class="bs-wizard-info text-center"> Importados</div>
+    </div>
+    <div class="col-xs-1 bs-wizard-step criacao">
+        <!-- complete -->
+        <div class="text-center bs-wizard-stepnum">@Model.Validados</div>
+        <div class="progress"><div class="progress-bar"></div></div>
+        <a href="#" class="bs-wizard-dot"></a>
+        <div class="bs-wizard-info text-center"> Validados em órgãos público</div>
+    </div>
+    <div class="col-xs-1 col-md-2 col-lg-1 bs-wizard-step criacao">
+        <!-- complete -->
+        <div class="text-center bs-wizard-stepnum">@Model.Categorizados</div>
+        <div class="progress"><div class="progress-bar"></div></div>
+        <a href="#" class="bs-wizard-dot"></a>
+        <div class="bs-wizard-info text-center"> Categorizados</div>
+    </div>
+    <div class="col-xs-1 bs-wizard-step convite">
+        <!-- active -->
+        <div class="text-center bs-wizard-stepnum">@Model.Convidados</div>
+        <div class="progress"><div class="progress-bar"></div></div>
+        <a href="#" class="bs-wizard-dot"></a>
+        <div class="bs-wizard-info text-center"> Convidados</div>
+    </div>
+    <div class="col-xs-1 col-md-2 col-lg-1 bs-wizard-step convite">
+        <!-- active -->
+        <div class="text-center bs-wizard-stepnum">@Model.Bloqueados</div>
+        <div class="progress"><div class="progress-bar"></div></div>
+        <a href="#" class="bs-wizard-dot"></a>
+        <div class="bs-wizard-info text-center"> Bloqueados</div>
+    </div>
+    <div class="col-xs-1 bs-wizard-step convite">
+        <!-- active -->
+        <div class="text-center bs-wizard-stepnum">@Model.Respondido</div>
+        <div class="progress"><div class="progress-bar"></div></div>
+        <a href="#" class="bs-wizard-dot"></a>
+        <div class="bs-wizard-info text-center"> Convites respondido</div>
+    </div>
+    <div class="col-xs-1 col-md-2 col-lg-1 bs-wizard-step reprovado">
+        <!-- active -->
+        <div class="text-center bs-wizard-stepnum">@Model.Reprovados</div>
+        <div class="progress"><div class="progress-bar"></div></div>
+        <a href="#" class="bs-wizard-dot"></a>
+        <div class="bs-wizard-info text-center"> Reprovados</div>
+    </div>
+    <div class="col-xs-1 bs-wizard-step complete">
+        <!-- active -->
+        <div class="text-center bs-wizard-stepnum">@Model.Criados</div>
+        <div class="progress"><div class="progress-bar"></div></div>
+        <a href="#" class="bs-wizard-dot"></a>
+        <div class="bs-wizard-info text-center"> Criados</div>
+    </div>
+</div>

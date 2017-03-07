@@ -1,0 +1,65 @@
+﻿@model WebForLink.Web.ViewModels.FornecedorBaseListaVM
+<section class="content-header">
+    <h1>
+        Importação de Fornecedores
+    </h1>
+</section>
+
+<section class="content">
+    @Html.Partial("_FuncionalidadesTopo", Model.Topo)
+    <div class="box box-primary">
+        <div class="box-header"><h3 class="box-title">Pesquisar Fornecedor</h3></div>
+        <div class="box-body">
+            <div class="form-group">
+                @using (Html.BeginForm())
+                {
+                    @Html.HiddenFor(x => x.TipoFuncionalidade)
+
+                    <div class="row">
+                        @Html.Partial("_FiltroFixo", Model)
+                        @Html.Partial("_FiltroVariavel", Model)
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label>&nbsp;</label><br />
+                                <button type="submit" class="btn btn-primary" onclick="$('#Pagina').val('1');"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @Html.Partial("_Timeline", Model.Timeline)
+            </div>
+
+            @Html.Partial("_Grid", Model.FornecedoresBase)
+
+            @using (Html.BeginForm())
+            {
+                @Html.Hidden("Pagina", (int)ViewBag.Pagina)
+                @Html.Partial("_Paginacao")
+            }
+        </div>
+    </div>
+</section>
+
+@section Header {
+<link href="~/Content/css/timeline.css" rel="stylesheet" />
+    }
+@section Scripts {
+    @Scripts.Render("~/bundles/date")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Filtro_CNPJ").inputmask('99.999.999/9999-99', { greedy: false });
+            $("#Filtro_CPF").inputmask('999.999.999-99', { greedy: false });
+
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        function alternarCampos() {
+            $("#camposPessoaFisica").toggleClass("hidden");
+            $("#camposPessoaJuridica").toggleClass("hidden");
+        }
+
+        function preencherTipoFuncionalidade(enumTipoFuncionalidade) {
+            $("#TipoFuncionalidade").val(enumTipoFuncionalidade);
+        }
+    </script>
+}

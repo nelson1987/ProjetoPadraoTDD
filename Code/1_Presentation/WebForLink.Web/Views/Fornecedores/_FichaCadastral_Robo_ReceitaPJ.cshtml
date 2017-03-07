@@ -1,0 +1,221 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FornecedoresVM
+
+@if (Model != null)
+{
+    <div id="callReceita" class="panel panel-@Model.RoboReceitaCNPJ.cssCor">
+        <div id="callReceitaHeading" class="panel-heading panel-heading-@Model.RoboReceitaCNPJ.cssCor">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#bodyReceita">
+                    <b>Receita Federal:</b><span> @Html.Raw(Model.RoboReceitaCNPJ.Code != null ? Model.RoboReceitaCNPJ.Data.Message : "")</span>
+                </a>
+            </h4>
+        </div>
+        <div id="bodyReceita" class="panel-collapse collapse" role="tabpanel">
+            <div class="panel-body">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Razão Social</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_RazaoSocial">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.RazaoSocial)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.RazaoSocial)
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Code)
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.Message)
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Nome Fantasia</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_NomeFantasia">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.NomeFantasia)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.NomeFantasia)
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Situação Cadastral</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_SituacaoCadastral">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.SituacaoCadastral)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.SituacaoCadastral)
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Motivo Situação Cadastral</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_MotivoSituacaoCadastral">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.MotivoSituacaoCadastral)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.MotivoSituacaoCadastral)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Data Sit. Cad.</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_DataSituacaoCadastral">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.DataSituacaoCadastral)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.DataSituacaoCadastral)
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Data Emissão</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_DataEmissao">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.DataEmissao)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.DataEmissao)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Hora Emissão</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_HoraEmissao">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.HoraEmissao)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.HoraEmissao)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Data Abertura</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_DataAbertura">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.DataEmissao)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.DataEmissao)
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Ente Federativo</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_EnteFederativoResponsavel">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.EnteFederativoResponsavel)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.EnteFederativoResponsavel)
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Endereço Eletrônico</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_EnderecoEletronico">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.EnderecoEletronico)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.EnderecoEletronico)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Telefone</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_Telefone">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.Telefone)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.Telefone)
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Observação IBGE</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_ObservacaoIBGE">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.ObservacaoIBGE)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.ObservacaoIBGE)
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Logradouro</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_Logradouro">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.Logradouro)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.Logradouro)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Número</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_Numero">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.Numero)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.Numero)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Complemento</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_Complemento">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.Complemento)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.Complemento)
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Bairro</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_Bairro">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.Bairro)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.Bairro)
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Município</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_Municipio">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.Municipio)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.Municipio)
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Estado</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_UF">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.UF)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.UF)
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>CEP</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_CEP">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.CEP)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.CEP)
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Matriz ou Filial</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_MatrizFilial">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.MatrizFilial)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.MatrizFilial)
+                    </div>
+                </div>
+
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <label>Atividade Principal</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_AtividadeEconomicaPrincipal">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.AtividadeEconomicaPrincipal)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.AtividadeEconomicaPrincipal)
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Natureza Jurídica</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_NaturezaJuridica">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.NaturezaJuridica)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.NaturezaJuridica)
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Situação Especial</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_SituacaoEspecial">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.SituacaoEspecial)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.SituacaoEspecial)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Data Situação Especial</label><br />
+                        <span id="span_RoboReceitaCNPJ_Data_DataSituacaoEspecial">@Html.DisplayTextFor(model => model.RoboReceitaCNPJ.Data.DataSituacaoEspecial)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCNPJ.Data.DataSituacaoEspecial)
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+}
+
+                

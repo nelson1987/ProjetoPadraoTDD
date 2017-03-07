@@ -1,0 +1,53 @@
+﻿@model WebForLink.Web.Areas.Administracao.Models.UsuarioAdministracaoModel
+
+<ul class="span4">
+    <li>@*<input type="checkbox" id="all" name="check-all" />*@ <b>Papéis</b> </li>
+    @for (var i = 0; i < Model.PapelList.Count; i++)
+    {
+        var papel = Model.PapelList[i];
+        <li class="checkbox">
+            &emsp;
+            <label>
+                @Html.Hidden("PapelList[" + @i + "].Id", papel.Id)
+                @Html.Hidden("PapelList[" + @i + "].Nome", papel.Nome)
+                @Html.Hidden("PapelList[" + @i + "].Sigla", papel.Sigla)
+                <input type="checkbox"
+                       name="SelectedGroupsPapel"
+                       value="@papel.Id" id="@papel.Id"
+                       @{ if (Model.SelectedGroupsPapel != null)
+                          {
+                                if (Model.SelectedGroupsPapel.Contains(papel.Id))
+                                {  
+                                  <text> checked='checked' </text>        
+                                } 
+                          } 
+                       }
+
+                       @(ViewBag.Acao == "Excluir" ? "Disabled" : "") />
+
+
+
+                @papel.Nome
+            </label>
+        </li>
+    }
+</ul>
+
+@*<script type="text/javascript">
+    $("li.parent-list ul").hide(); //hide the child lists
+    $("li.parent-list i").click(function () {
+        $(this).toggleClass('fa-caret-down'); // toggle the font-awesome icon class on click
+        $(this).addClass('fa-caret-up'); // toggle the font-awesome icon class on click
+        $(this).next("ul").toggle(); // toggle the visibility of the child list on click
+    });
+    // check-uncheck all
+    $(document).on('change', 'input[id="all"]', function () {
+        $('.canine').prop("checked", this.checked);
+    });
+    // parent/child check-uncheck all
+    $(function () {
+        $('.parent').on('click', function () {
+            $(this).closest('ul li').find(':checkbox').prop('checked', this.checked);
+        });
+    });
+</script>*@

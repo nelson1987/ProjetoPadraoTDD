@@ -1,0 +1,163 @@
+﻿@model WebForLink.Web.ViewModels.ProrrogacaoPrazoVM
+
+@{
+    var classeEstilo = "";
+    if (Model.Aprovado != null)
+    {
+        if ((bool)Model.Aprovado)
+        {
+            classeEstilo = "callout-custom-success";
+        }
+        else{
+            classeEstilo = "callout-custom-danger";
+        }
+    }
+    else{
+        classeEstilo = "callout-custom-default";
+    }
+}
+
+<div class="box box-primary">
+    <div class="box-change">
+        <div id="alertaSucessoProrrogarPrazos" class="alert alert-success" role="alert" onclick="ocultarMensagem(this)"></div>
+        <div id="alertaErroProrrogarPrazos" class="alert alert-danger" role="alert" onclick="ocultarMensagem(this)"></div>
+    </div>
+    <div class="box-header">
+        <h3 class="box-title">Prazo de Entrega - @Model.PrazoPreenchimento</h3>
+        @Html.ValidationMessage("ProrrogacaoPrazoValidation", "", new { @class = "text-danger" })
+    </div>
+
+    <div class="box-body">
+        <div class="@Html.Raw("row " + (Model.DataSolicitacaoProrrogacao != null ? "" : "hidden"))" id="divProrrogacaoStatus">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div id="divCalloutProrrogacao" class="callout-custom @classeEstilo">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <b>Solicitação de Prorrogação de prazo enviado em </b> <span id="spanProrrogacaoDataSolicitacao">@Html.Raw(Model.DataSolicitacaoProrrogacao.HasValue ? Model.DataSolicitacaoProrrogacao.Value.ToShortDateString() : "&nbsp;")</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <b>Prorrogar para:</b><br /> 
+                                <span id="spanProrrogacaoDataProrrogacao">@Html.Raw(Model.DataProrrogacao.ToShortDateString())</span>
+                            </div>
+                            <div class="col-md-4">
+                                <b>Status:</b><br /> 
+                                <span id="spanProrrogacaoStatus">@Html.Raw(Model.Status)</span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <input type="hidden" id="ProrrogarPrazosExcluir" name="ProrrogarPrazosExcluir" value="" />
+        <div id="divProrrogarPrazos" class="hidden">
+            <div class="ProrrogarPrazo" name="ProrrogarPrazo" style="border: solid 1px silver; padding-top: 7px;">
+                <div class="col-xs-4 col-md-2 ">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.StDataProrrogacao)<br />
+                        @Html.TextBoxFor(model => model.StDataProrrogacao, new { @class = "form-control", data_inputmask = "'alias': 'dd/mm/yyyy'", data_mask = "", placehold = "dd/mm/aaaa" })
+                        @Html.ValidationMessageFor(model => model.StDataProrrogacao)
+                    </div>
+                </div>
+                <div class="col-xs-8 col-md-8 col-md-offset-1">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Motivo)<br />
+                        @Html.TextAreaFor(model => model.Motivo, new { @class = "form-control input-sm", disable_input = "", rows = "4" })
+                        @Html.ValidationMessageFor(model => model.Motivo)
+                    </div>
+                </div>
+                <div class="clearfix"></div>                
+            </div>
+            <div class="clearfix"></div>
+            @if (!Model.DataSolicitacaoProrrogacao.HasValue || Model.Aprovado.HasValue) {
+                <br>
+                <div class="text-right text-nowrap">
+                    <button type="button" class="btn btn-primary" id="btProrrogarPrazo" onclick="$('#ProrrogarPrazos').toggleClass('hidden');">Salvar</button>
+                    <button type="button" class="btn btn-danger" id="btCancelarProrrogacao">Cancelar</button>
+                </div>            
+                <div id="ProrrogarPrazos" class="alert alert-warning text-center hidden  col-md-12" role="alert">
+                    <span>Tem certeza que deseja enviar esta solicitação de prorrogação de prazo?</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary btn-xs" onclick="ContinuarProrrogacao(this);">Sim</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-default btn-xs" onclick="$(this).parent('div').hide();">Não</button>
+                </div>
+                <div class="clearfix"></div>
+            }
+        </div>
+        <div class="clearfix"></div>
+        @if (!Model.DataSolicitacaoProrrogacao.HasValue || Model.Aprovado.HasValue) {
+        <button type="button" class="btn btn-primary" id="bt_prorrogar" onclick="$('#divProrrogarPrazos').toggleClass('hidden'); $('#bt_prorrogar').toggleClass('hidden');">Solicitar Prorrogação</button>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+    $(document).ready(function () {
+        var habilitaEdicao = $("#HabilitaEdicao").val() == "True";
+        if (habilitaEdicao) {
+            var objDivPai = $("#divProrrogarPrazos").parent(),
+                objDivBotoesEdicao = objDivPai.children(".text-right")[0];
+
+            $(objDivBotoesEdicao).toggleClass("hidden");
+        }
+    });
+
+    function habilitaCampos() {
+        $("#divProrrogarPrazos :input").attr("disabled", false);
+    }
+
+    function ContinuarProrrogacao(e) {
+        console.log(e);
+        $(e).toggleClass('disabled');
+        var dados = {
+            solicitacaoId: $('#Solicitacao_ID').val(),
+            dataProrrogacao: $('#StDataProrrogacao').val(),
+            motivoProrrogacao: $('#Motivo').val()
+        };
+        console.log(dados);
+        $.ajax({
+            url: '@Url.Action("ProrrogarPrazo", "Importacao")',
+            data: dados,
+            success: function (data) {
+                console.log(data);
+                $('#divProrrogarPrazos').toggleClass("hidden");
+                $('#bt_prorrogar').toggleClass("hidden");
+                $('#ProrrogarPrazos').toggleClass('hidden');
+                if (data.status) {
+                    $("#alertaSucessoProrrogarPrazos").fadeIn('slow');
+                    $("#alertaSucessoProrrogarPrazos").html(data.mensagem);
+
+                    setTimeout(function () {
+                        $("#alertaSucessoProrrogarPrazos").fadeOut('slow');
+                    }, 10000);
+
+                    $('#divCalloutProrrogacao').removeClass();
+                    $('#divCalloutProrrogacao').addClass('callout-custom').addClass('callout-custom-default');
+
+                    $("#spanProrrogacaoDataSolicitacao").empty().text(data.dataSolicitacao);
+                    $("#spanProrrogacaoDataProrrogacao").empty().text(data.dataProrrogacao);
+                    $("#spanProrrogacaoStatus").empty().text(data.statusGravacao);
+
+                    if($("#divProrrogacaoStatus").hasClass("hidden"))
+                        $("#divProrrogacaoStatus").toggleClass("hidden");
+
+                    $("#bt_prorrogar").toggleClass("hidden");
+                }
+                else {
+                    $("#alertaErroProrrogarPrazos").fadeIn('slow');
+                    $("#alertaErroProrrogarPrazos").html(data.mensagem);
+
+                    setTimeout(function () {
+                        $("#alertaErroProrrogarPrazos").fadeOut('slow');
+                    }, 10000);
+                }
+            },
+        });
+        $(e).toggleClass('disabled');
+    };    
+</script>
+    }

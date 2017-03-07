@@ -1,0 +1,957 @@
+2017-02-09 16:26:57,408 [1] ERROR WebForLink.Web.MvcApplication - Aplicação Iniciada
+2017-02-09 16:26:58,067 [1] ERROR WebForLink.Web.Mappers.MappingProfile - Mapper not initialized. Call Initialize with appropriate configuration. If you are trying to use mapper instances through a container or otherwise, make sure you do not have any calls to the static Mapper.Map methods, and if you're using ProjectTo or UseAsDataSource extension methods, make sure you pass in the appropriate IConfigurationProvider instance.
+2017-02-09 16:27:01,519 [11] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Index, UsuarioId: 351
+2017-02-09 16:27:26,755 [11] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: minhafichacadastral, UsuarioId: 351
+2017-02-09 16:27:56,820 [11] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 16:27:56,821 [11] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 16:36:54,976 [1] ERROR WebForLink.Web.MvcApplication - Aplicação Iniciada
+2017-02-09 16:36:58,473 [1] ERROR WebForLink.Web.Mappers.MappingProfile - Mapper not initialized. Call Initialize with appropriate configuration. If you are trying to use mapper instances through a container or otherwise, make sure you do not have any calls to the static Mapper.Map methods, and if you're using ProjectTo or UseAsDataSource extension methods, make sure you pass in the appropriate IConfigurationProvider instance.
+2017-02-09 16:37:01,712 [9] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 16:37:01,713 [9] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 16:37:01,733 [10] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Index, UsuarioId: 351
+2017-02-09 16:37:58,190 [9] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 16:37:58,192 [9] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnException(ExceptionContext filterContext)
+2017-02-09 16:37:58,212 [9] ERROR WebForLink.Web.MvcApplication - Erro na aplicação Erro inesperado 
+ Identificador: 7931faa7e639443683a3fd4531c06de9
+System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em WebForLink.Web.Areas.Administracao.Models.UsuarioAdministracaoModel.Validar() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Areas\Administracao\Models\UsuarioAdministracaoModel.cs:linha 117
+   em WebForLink.Web.Areas.Administracao.Models.UsuarioAdministracaoModel.ModelToViewModel(Usuario usuario, UrlHelper url) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Areas\Administracao\Models\UsuarioAdministracaoModel.cs:linha 102
+   em WebForLink.Web.Areas.Administracao.Controllers.UsuarioController.MinhaContaFrm(String MensagemSucesso) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Areas\Administracao\Controllers\UsuarioController.cs:linha 271
+   em lambda_method(Closure , ControllerBase , Object[] )
+   em System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   em System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.ActionInvocation.InvokeSynchronousActionMethod()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-02-09 16:37:58,333 [9] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: PaginaInicial, UsuarioId: 351
+2017-02-09 16:37:58,370 [9] ERROR WebForLink.Web.Controllers.ConviteController - WebForLink.Domain.Infrastructure.CriptografiaException: Erro ao Descriptografar ---> System.FormatException: Comprimento inválido para uma matriz ou uma cadeia de caracteres de Base 64.
+   em System.Convert.FromBase64_Decode(Char* startInputPtr, Int32 inputLength, Byte* startDestPtr, Int32 destLength)
+   em System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   em System.Convert.FromBase64String(String s)
+   em WebForLink.Domain.Infrastructure.Criptografia.Descriptografar() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 79
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em WebForLink.Domain.Infrastructure.Criptografia.Descriptografar() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 89
+   em WebForLink.Domain.Infrastructure.Criptografia.ReadUrl(String pUrl, String key) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 150
+   em WebForLink.Domain.Infrastructure.Criptografia..ctor(EnumCripto tipo, String palavra, String chave) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 53
+   em WebForLink.Application.Services.SolicitacaoAppService.DescriptografarLinkConvite(String chaveUrl) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Service\Services\SolicitacaoDocumentoService.cs:linha 38
+   em WebForLink.Web.Controllers.ConviteController.PaginaInicial(String chave, SolicitacaoConviteVM model) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Controllers\ConviteController.cs:linha 60
+2017-02-09 16:37:58,430 [5] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Index, UsuarioId: 351
+2017-02-09 16:39:18,982 [6] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.
+2017-02-09 16:39:18,984 [6] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.
+2017-02-09 16:40:49,872 [8] ERROR WebForLink.Web.MvcApplication - Aplicação Iniciada
+2017-02-09 16:40:51,463 [8] ERROR WebForLink.Web.Mappers.MappingProfile - Mapper not initialized. Call Initialize with appropriate configuration. If you are trying to use mapper instances through a container or otherwise, make sure you do not have any calls to the static Mapper.Map methods, and if you're using ProjectTo or UseAsDataSource extension methods, make sure you pass in the appropriate IConfigurationProvider instance.
+2017-02-09 16:40:53,824 [16] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Index, UsuarioId: 351
+2017-02-09 16:40:53,824 [5] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 16:40:53,825 [5] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 16:41:22,513 [5] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 16:41:22,514 [5] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-09 16:41:27,526 [5] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-09 16:41:27,531 [5] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnException(ExceptionContext filterContext)
+2017-02-09 16:43:36,503 [5] ERROR WebForLink.Web.MvcApplication - Erro na aplicação Erro inesperado 
+ Identificador: 888d3e98a73247c88f0eb286598e8ca7
+System.Web.HttpCompileException (0x80004005): C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Views\Shared\_LayoutAdministracao.cshtml(5): error CS1061: 'IGeral' does not contain a definition for 'PegaAuthTicket' and no extension method 'PegaAuthTicket' accepting a first argument of type 'IGeral' could be found (are you missing a using directive or an assembly reference?)
+   em System.Web.Compilation.AssemblyBuilder.Compile()
+   em System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   em System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   em System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   em System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   em System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   em System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   em System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(String virtualPath, Type requiredBaseType)
+   em System.Web.WebPages.BuildManagerWrapper.CreateInstanceOfType[T](String virtualPath)
+   em System.Web.WebPages.VirtualPathFactoryExtensions.CreateInstance[T](IVirtualPathFactory factory, String virtualPath)
+   em System.Web.WebPages.VirtualPathFactoryManager.CreateInstanceOfType[T](String virtualPath)
+   em System.Web.WebPages.VirtualPathFactoryExtensions.CreateInstance[T](IVirtualPathFactory factory, String virtualPath)
+   em System.Web.WebPages.WebPageBase.CreatePageFromVirtualPath(String virtualPath, HttpContextBase httpContext, Func`2 virtualPathExists, DisplayModeProvider displayModeProvider, IDisplayMode displayMode)
+   em System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   em System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   em System.Web.WebPages.WebPageExecutingBase.WriteTo(TextWriter writer, HelperResult content)
+   em System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   em System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   em System.Web.WebPages.WebPageBase.PopContext()
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   em System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   em System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   em System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-02-09 16:43:41,372 [5] ERROR WebForLink.Web.MvcApplication - Aplicação Iniciada
+2017-02-09 16:43:42,033 [5] ERROR WebForLink.Web.Mappers.MappingProfile - Mapper not initialized. Call Initialize with appropriate configuration. If you are trying to use mapper instances through a container or otherwise, make sure you do not have any calls to the static Mapper.Map methods, and if you're using ProjectTo or UseAsDataSource extension methods, make sure you pass in the appropriate IConfigurationProvider instance.
+2017-02-09 16:43:44,932 [5] ERROR WebForLink.Web.Infrastructure.Geral - Houve um erro ao desserializar o objeto do tipo WebForLink.Web.Infrastructure.Autenticado. Caractere 'A' inesperado encontrado.
+2017-02-09 16:43:48,733 [5] ERROR WebForLink.Web.MvcApplication - Erro na aplicação Erro inesperado 
+ Identificador: f1209913a8154e15824540d143a705c3
+System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em WebForLink.Web.Filters.BreadCrumbAttribute.System.Web.Mvc.IActionFilter.OnActionExecuting(ActionExecutingContext filterContext) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Filters\BreadCrumbFilter.cs:linha 31
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__31(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeAction(ControllerContext controllerContext, String actionName, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecuteCore>b__1c(AsyncCallback asyncCallback, Object asyncState, ExecuteCoreState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecuteCore(AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecute>b__14(AsyncCallback asyncCallback, Object callbackState, Controller controller)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(AsyncCallback asyncCallback, Object asyncState, ProcessRequestState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-02-09 16:43:48,777 [5] ERROR WebForLink.Web.Infrastructure.Geral - Houve um erro ao desserializar o objeto do tipo WebForLink.Web.Infrastructure.Autenticado. Caractere 'A' inesperado encontrado.
+2017-02-09 16:43:50,872 [5] ERROR WebForLink.Web.MvcApplication - Erro na aplicação Erro inesperado 
+ Identificador: b713da0df61f4ae29119ba364061130a
+System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em WebForLink.Web.Filters.BreadCrumbAttribute.System.Web.Mvc.IActionFilter.OnActionExecuting(ActionExecutingContext filterContext) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Filters\BreadCrumbFilter.cs:linha 31
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__31(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeAction(ControllerContext controllerContext, String actionName, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecuteCore>b__1c(AsyncCallback asyncCallback, Object asyncState, ExecuteCoreState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecuteCore(AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecute>b__14(AsyncCallback asyncCallback, Object callbackState, Controller controller)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(AsyncCallback asyncCallback, Object asyncState, ProcessRequestState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-02-09 16:43:50,911 [5] ERROR WebForLink.Web.Infrastructure.Geral - Houve um erro ao desserializar o objeto do tipo WebForLink.Web.Infrastructure.Autenticado. Caractere 'A' inesperado encontrado.
+2017-02-09 16:44:01,544 [5] ERROR WebForLink.Web.MvcApplication - Erro na aplicação Erro inesperado 
+ Identificador: b6ea2ad486584799954ac54f90e6d1ca
+System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em WebForLink.Web.Filters.BreadCrumbAttribute.System.Web.Mvc.IActionFilter.OnActionExecuting(ActionExecutingContext filterContext) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Filters\BreadCrumbFilter.cs:linha 31
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__31(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeAction(ControllerContext controllerContext, String actionName, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecuteCore>b__1c(AsyncCallback asyncCallback, Object asyncState, ExecuteCoreState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecuteCore(AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecute>b__14(AsyncCallback asyncCallback, Object callbackState, Controller controller)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(AsyncCallback asyncCallback, Object asyncState, ProcessRequestState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-02-09 16:44:01,585 [5] ERROR WebForLink.Web.Infrastructure.Geral - Houve um erro ao desserializar o objeto do tipo WebForLink.Web.Infrastructure.Autenticado. Caractere 'A' inesperado encontrado.
+2017-02-09 16:44:04,401 [5] ERROR WebForLink.Web.MvcApplication - Erro na aplicação Erro inesperado 
+ Identificador: dff644dd6a414c51a492691a1d040cf4
+System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em WebForLink.Web.Filters.BreadCrumbAttribute.System.Web.Mvc.IActionFilter.OnActionExecuting(ActionExecutingContext filterContext) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Filters\BreadCrumbFilter.cs:linha 31
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__31(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeAction(ControllerContext controllerContext, String actionName, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecuteCore>b__1c(AsyncCallback asyncCallback, Object asyncState, ExecuteCoreState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecuteCore(AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecute>b__14(AsyncCallback asyncCallback, Object callbackState, Controller controller)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(AsyncCallback asyncCallback, Object asyncState, ProcessRequestState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-02-09 16:44:04,410 [5] ERROR WebForLink.Web.Infrastructure.Geral - Houve um erro ao desserializar o objeto do tipo WebForLink.Web.Infrastructure.Autenticado. Caractere 'A' inesperado encontrado.
+2017-02-09 16:44:04,411 [5] ERROR WebForLink.Web.MvcApplication - Erro na aplicação Erro inesperado 
+ Identificador: 61c84375e0a8400689cba055c4df38eb
+System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em WebForLink.Web.Filters.BreadCrumbAttribute.System.Web.Mvc.IActionFilter.OnActionExecuting(ActionExecutingContext filterContext) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Filters\BreadCrumbFilter.cs:linha 31
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__31(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeAction(ControllerContext controllerContext, String actionName, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecuteCore>b__1c(AsyncCallback asyncCallback, Object asyncState, ExecuteCoreState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecuteCore(AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecute>b__14(AsyncCallback asyncCallback, Object callbackState, Controller controller)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(AsyncCallback asyncCallback, Object asyncState, ProcessRequestState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-02-09 16:44:04,422 [5] ERROR WebForLink.Web.Infrastructure.Geral - Houve um erro ao desserializar o objeto do tipo WebForLink.Web.Infrastructure.Autenticado. Caractere 'A' inesperado encontrado.
+2017-02-09 16:44:04,423 [5] ERROR WebForLink.Web.MvcApplication - Erro na aplicação Erro inesperado 
+ Identificador: 2c56011350744f2685a36aead5cff7cf
+System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em WebForLink.Web.Filters.BreadCrumbAttribute.System.Web.Mvc.IActionFilter.OnActionExecuting(ActionExecutingContext filterContext) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Filters\BreadCrumbFilter.cs:linha 31
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__31(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeAction(ControllerContext controllerContext, String actionName, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecuteCore>b__1c(AsyncCallback asyncCallback, Object asyncState, ExecuteCoreState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecuteCore(AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecute>b__14(AsyncCallback asyncCallback, Object callbackState, Controller controller)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(AsyncCallback asyncCallback, Object asyncState, ProcessRequestState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-02-09 16:44:04,429 [5] ERROR WebForLink.Web.Infrastructure.Geral - Houve um erro ao desserializar o objeto do tipo WebForLink.Web.Infrastructure.Autenticado. Caractere 'A' inesperado encontrado.
+2017-02-09 16:44:04,430 [5] ERROR WebForLink.Web.MvcApplication - Erro na aplicação Erro inesperado 
+ Identificador: 1f17ad3e5d174d02aaed5c21e32ef14d
+System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em WebForLink.Web.Filters.BreadCrumbAttribute.System.Web.Mvc.IActionFilter.OnActionExecuting(ActionExecutingContext filterContext) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Filters\BreadCrumbFilter.cs:linha 31
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__31(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeAction(ControllerContext controllerContext, String actionName, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecuteCore>b__1c(AsyncCallback asyncCallback, Object asyncState, ExecuteCoreState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecuteCore(AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecute>b__14(AsyncCallback asyncCallback, Object callbackState, Controller controller)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(AsyncCallback asyncCallback, Object asyncState, ProcessRequestState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-02-09 16:44:04,436 [5] ERROR WebForLink.Web.Infrastructure.Geral - Houve um erro ao desserializar o objeto do tipo WebForLink.Web.Infrastructure.Autenticado. Caractere 'A' inesperado encontrado.
+2017-02-09 16:44:04,437 [5] ERROR WebForLink.Web.MvcApplication - Erro na aplicação Erro inesperado 
+ Identificador: 2743248638894002a2f548c29e8b4055
+System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em WebForLink.Web.Filters.BreadCrumbAttribute.System.Web.Mvc.IActionFilter.OnActionExecuting(ActionExecutingContext filterContext) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Filters\BreadCrumbFilter.cs:linha 31
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__31(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeAction(ControllerContext controllerContext, String actionName, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecuteCore>b__1c(AsyncCallback asyncCallback, Object asyncState, ExecuteCoreState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecuteCore(AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecute>b__14(AsyncCallback asyncCallback, Object callbackState, Controller controller)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(AsyncCallback asyncCallback, Object asyncState, ProcessRequestState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-02-09 16:44:04,446 [5] ERROR WebForLink.Web.Infrastructure.Geral - Houve um erro ao desserializar o objeto do tipo WebForLink.Web.Infrastructure.Autenticado. Caractere 'A' inesperado encontrado.
+2017-02-09 16:44:04,447 [5] ERROR WebForLink.Web.MvcApplication - Erro na aplicação Erro inesperado 
+ Identificador: 9549508ecbb54a5488bade03bb36ae7d
+System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em WebForLink.Web.Filters.BreadCrumbAttribute.System.Web.Mvc.IActionFilter.OnActionExecuting(ActionExecutingContext filterContext) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Filters\BreadCrumbFilter.cs:linha 31
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__31(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeAction(ControllerContext controllerContext, String actionName, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecuteCore>b__1c(AsyncCallback asyncCallback, Object asyncState, ExecuteCoreState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecuteCore(AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecute>b__14(AsyncCallback asyncCallback, Object callbackState, Controller controller)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(AsyncCallback asyncCallback, Object asyncState, ProcessRequestState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-02-09 16:44:04,456 [5] ERROR WebForLink.Web.Infrastructure.Geral - Houve um erro ao desserializar o objeto do tipo WebForLink.Web.Infrastructure.Autenticado. Caractere 'A' inesperado encontrado.
+2017-02-09 16:44:04,457 [5] ERROR WebForLink.Web.MvcApplication - Erro na aplicação Erro inesperado 
+ Identificador: 00f6b5cd292d4065a06ec01f020abc73
+System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em WebForLink.Web.Filters.BreadCrumbAttribute.System.Web.Mvc.IActionFilter.OnActionExecuting(ActionExecutingContext filterContext) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Filters\BreadCrumbFilter.cs:linha 31
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__31(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeAction(ControllerContext controllerContext, String actionName, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecuteCore>b__1c(AsyncCallback asyncCallback, Object asyncState, ExecuteCoreState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecuteCore(AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.<BeginExecute>b__14(AsyncCallback asyncCallback, Object callbackState, Controller controller)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.Controller.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__4(AsyncCallback asyncCallback, Object asyncState, ProcessRequestState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   em System.Web.Mvc.Async.AsyncResultWrapper.Begin[TState](AsyncCallback callback, Object callbackState, BeginInvokeDelegate`1 beginDelegate, EndInvokeVoidDelegate`1 endDelegate, TState invokeState, Object tag, Int32 timeout, SynchronizationContext callbackSyncContext)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-02-09 16:44:04,654 [12] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.
+2017-02-09 16:44:04,658 [12] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.
+2017-02-09 16:44:22,125 [18] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.
+2017-02-09 16:44:22,129 [18] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.
+2017-02-09 16:44:29,739 [13] ERROR WebForLink.Web.MvcApplication - Aplicação Iniciada
+2017-02-09 16:44:30,311 [13] ERROR WebForLink.Web.Mappers.MappingProfile - Mapper not initialized. Call Initialize with appropriate configuration. If you are trying to use mapper instances through a container or otherwise, make sure you do not have any calls to the static Mapper.Map methods, and if you're using ProjectTo or UseAsDataSource extension methods, make sure you pass in the appropriate IConfigurationProvider instance.
+2017-02-09 16:44:33,070 [18] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Index, UsuarioId: 351
+2017-02-09 16:44:40,286 [6] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 16:44:40,287 [6] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 16:44:48,826 [6] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 16:44:48,827 [6] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-09 16:44:54,008 [6] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-09 16:44:54,012 [6] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnException(ExceptionContext filterContext)
+2017-02-09 16:46:39,674 [6] ERROR WebForLink.Web.MvcApplication - Erro na aplicação Erro inesperado 
+ Identificador: 7a2ac25b9d2841eb80d1e1200a57c699
+System.Web.HttpCompileException (0x80004005): C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Views\Shared\_LayoutAdministracao.cshtml(88): error CS1061: 'IGeral' does not contain a definition for 'PegaAuthTicket' and no extension method 'PegaAuthTicket' accepting a first argument of type 'IGeral' could be found (are you missing a using directive or an assembly reference?)
+   em System.Web.Compilation.AssemblyBuilder.Compile()
+   em System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   em System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   em System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   em System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   em System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   em System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   em System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(String virtualPath, Type requiredBaseType)
+   em System.Web.WebPages.BuildManagerWrapper.CreateInstanceOfType[T](String virtualPath)
+   em System.Web.WebPages.VirtualPathFactoryExtensions.CreateInstance[T](IVirtualPathFactory factory, String virtualPath)
+   em System.Web.WebPages.VirtualPathFactoryManager.CreateInstanceOfType[T](String virtualPath)
+   em System.Web.WebPages.VirtualPathFactoryExtensions.CreateInstance[T](IVirtualPathFactory factory, String virtualPath)
+   em System.Web.WebPages.WebPageBase.CreatePageFromVirtualPath(String virtualPath, HttpContextBase httpContext, Func`2 virtualPathExists, DisplayModeProvider displayModeProvider, IDisplayMode displayMode)
+   em System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   em System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   em System.Web.WebPages.WebPageExecutingBase.WriteTo(TextWriter writer, HelperResult content)
+   em System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   em System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   em System.Web.WebPages.WebPageBase.PopContext()
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   em System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   em System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   em System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-02-09 16:46:39,726 [6] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: PaginaInicial, UsuarioId: 351
+2017-02-09 16:46:39,764 [6] ERROR WebForLink.Web.Controllers.ConviteController - WebForLink.Domain.Infrastructure.CriptografiaException: Erro ao Descriptografar ---> System.FormatException: Comprimento inválido para uma matriz ou uma cadeia de caracteres de Base 64.
+   em System.Convert.FromBase64_Decode(Char* startInputPtr, Int32 inputLength, Byte* startDestPtr, Int32 destLength)
+   em System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   em System.Convert.FromBase64String(String s)
+   em WebForLink.Domain.Infrastructure.Criptografia.Descriptografar() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 79
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em WebForLink.Domain.Infrastructure.Criptografia.Descriptografar() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 89
+   em WebForLink.Domain.Infrastructure.Criptografia.ReadUrl(String pUrl, String key) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 150
+   em WebForLink.Domain.Infrastructure.Criptografia..ctor(EnumCripto tipo, String palavra, String chave) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 53
+   em WebForLink.Application.Services.SolicitacaoAppService.DescriptografarLinkConvite(String chaveUrl) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Service\Services\SolicitacaoDocumentoService.cs:linha 38
+   em WebForLink.Web.Controllers.ConviteController.PaginaInicial(String chave, SolicitacaoConviteVM model) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Controllers\ConviteController.cs:linha 60
+2017-02-09 16:46:39,786 [22] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Index, UsuarioId: 351
+2017-02-09 16:46:52,848 [15] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 16:46:52,848 [15] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 16:47:02,484 [15] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 16:47:02,484 [15] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-09 16:47:05,823 [15] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-09 16:47:05,824 [15] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnException(ExceptionContext filterContext)
+2017-02-09 16:48:22,316 [15] ERROR WebForLink.Web.MvcApplication - Erro na aplicação Erro inesperado 
+ Identificador: 1086166c12714c898ae8059efb24ce38
+System.Web.HttpCompileException (0x80004005): C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Views\Shared\_LayoutAdministracao.cshtml(77): error CS0103: The name 'metodosGerais' does not exist in the current context
+   em System.Web.Compilation.AssemblyBuilder.Compile()
+   em System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   em System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   em System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   em System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   em System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   em System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   em System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(String virtualPath, Type requiredBaseType)
+   em System.Web.WebPages.BuildManagerWrapper.CreateInstanceOfType[T](String virtualPath)
+   em System.Web.WebPages.VirtualPathFactoryExtensions.CreateInstance[T](IVirtualPathFactory factory, String virtualPath)
+   em System.Web.WebPages.VirtualPathFactoryManager.CreateInstanceOfType[T](String virtualPath)
+   em System.Web.WebPages.VirtualPathFactoryExtensions.CreateInstance[T](IVirtualPathFactory factory, String virtualPath)
+   em System.Web.WebPages.WebPageBase.CreatePageFromVirtualPath(String virtualPath, HttpContextBase httpContext, Func`2 virtualPathExists, DisplayModeProvider displayModeProvider, IDisplayMode displayMode)
+   em System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   em System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   em System.Web.WebPages.WebPageExecutingBase.WriteTo(TextWriter writer, HelperResult content)
+   em System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   em System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   em System.Web.WebPages.WebPageBase.PopContext()
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   em System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   em System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   em System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-02-09 16:48:22,354 [15] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: PaginaInicial, UsuarioId: 351
+2017-02-09 16:48:22,380 [15] ERROR WebForLink.Web.Controllers.ConviteController - WebForLink.Domain.Infrastructure.CriptografiaException: Erro ao Descriptografar ---> System.FormatException: Comprimento inválido para uma matriz ou uma cadeia de caracteres de Base 64.
+   em System.Convert.FromBase64_Decode(Char* startInputPtr, Int32 inputLength, Byte* startDestPtr, Int32 destLength)
+   em System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   em System.Convert.FromBase64String(String s)
+   em WebForLink.Domain.Infrastructure.Criptografia.Descriptografar() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 79
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em WebForLink.Domain.Infrastructure.Criptografia.Descriptografar() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 89
+   em WebForLink.Domain.Infrastructure.Criptografia.ReadUrl(String pUrl, String key) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 150
+   em WebForLink.Domain.Infrastructure.Criptografia..ctor(EnumCripto tipo, String palavra, String chave) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 53
+   em WebForLink.Application.Services.SolicitacaoAppService.DescriptografarLinkConvite(String chaveUrl) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Service\Services\SolicitacaoDocumentoService.cs:linha 38
+   em WebForLink.Web.Controllers.ConviteController.PaginaInicial(String chave, SolicitacaoConviteVM model) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Controllers\ConviteController.cs:linha 60
+2017-02-09 16:48:22,394 [19] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Index, UsuarioId: 351
+2017-02-09 16:48:31,526 [15] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 16:48:31,527 [15] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 16:48:35,321 [15] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 16:48:35,322 [15] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-09 16:48:56,424 [15] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-09 16:48:56,426 [15] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnException(ExceptionContext filterContext)
+2017-02-09 16:48:59,762 [15] ERROR WebForLink.Web.MvcApplication - Erro na aplicação Erro inesperado 
+ Identificador: c65099c1bb254ae2a5f7cf98ef2894fc
+System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em ASP._Page_Views_Shared__LayoutAdministracao_cshtml.Execute() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Views\Shared\_LayoutAdministracao.cshtml:linha 17
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   em System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer)
+   em System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   em System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   em System.Web.WebPages.WebPageExecutingBase.WriteTo(TextWriter writer, HelperResult content)
+   em System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   em System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   em System.Web.WebPages.WebPageBase.PopContext()
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   em System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   em System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   em System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-02-09 16:48:59,792 [15] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: PaginaInicial, UsuarioId: 351
+2017-02-09 16:48:59,824 [15] ERROR WebForLink.Web.Controllers.ConviteController - WebForLink.Domain.Infrastructure.CriptografiaException: Erro ao Descriptografar ---> System.FormatException: Comprimento inválido para uma matriz ou uma cadeia de caracteres de Base 64.
+   em System.Convert.FromBase64_Decode(Char* startInputPtr, Int32 inputLength, Byte* startDestPtr, Int32 destLength)
+   em System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   em System.Convert.FromBase64String(String s)
+   em WebForLink.Domain.Infrastructure.Criptografia.Descriptografar() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 79
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em WebForLink.Domain.Infrastructure.Criptografia.Descriptografar() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 89
+   em WebForLink.Domain.Infrastructure.Criptografia.ReadUrl(String pUrl, String key) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 150
+   em WebForLink.Domain.Infrastructure.Criptografia..ctor(EnumCripto tipo, String palavra, String chave) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 53
+   em WebForLink.Application.Services.SolicitacaoAppService.DescriptografarLinkConvite(String chaveUrl) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Service\Services\SolicitacaoDocumentoService.cs:linha 38
+   em WebForLink.Web.Controllers.ConviteController.PaginaInicial(String chave, SolicitacaoConviteVM model) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Controllers\ConviteController.cs:linha 60
+2017-02-09 16:48:59,840 [21] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Index, UsuarioId: 351
+2017-02-09 16:49:17,026 [25] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 16:49:17,026 [25] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 16:49:17,111 [25] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 16:49:17,111 [25] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-09 16:49:21,695 [25] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-09 16:49:35,231 [28] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 16:49:35,232 [28] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 16:49:35,596 [28] ERROR WebForLink.Web.Controllers.Extensoes.ControllerPadrao - WebForLink.Domain.Infrastructure.Exceptions.ServiceWebForLinkException: Erro ao cadastrar Usuário ---> System.ArgumentNullException: Valor não pode ser nulo.
+Nome do parâmetro: source
+   em System.Linq.Enumerable.Where[TSource](IEnumerable`1 source, Func`2 predicate)
+   em WebForLink.Application.Services.Process.UsuarioWebForLinkAppService.AlterarMinhaConta(Usuario entidade, Int32[] papeis, Int32[] perfis, Int32 contratanteSelecionado) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Service\Services\Process\UsuarioService.cs:linha 261
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em WebForLink.Application.Services.Process.UsuarioWebForLinkAppService.AlterarMinhaConta(Usuario entidade, Int32[] papeis, Int32[] perfis, Int32 contratanteSelecionado) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Service\Services\Process\UsuarioService.cs:linha 297
+   em WebForLink.Web.Areas.Administracao.Controllers.UsuarioController.MinhaContaFrm(UsuarioAdministracaoModel modelo) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Areas\Administracao\Controllers\UsuarioController.cs:linha 313
+2017-02-09 16:49:35,607 [28] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 16:49:35,607 [28] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-09 16:49:35,612 [28] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-09 16:49:40,221 [23] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: HomeAdmin, Action: Index, UsuarioId: 351
+2017-02-09 16:49:47,606 [23] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 16:49:47,607 [23] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 16:49:47,680 [23] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 16:49:47,680 [23] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-09 16:49:47,685 [23] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-09 17:01:18,430 [44] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 17:01:18,431 [44] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 17:01:18,613 [44] ERROR WebForLink.Web.Controllers.Extensoes.ControllerPadrao - WebForLink.Domain.Infrastructure.Exceptions.ServiceWebForLinkException: Erro ao cadastrar Usuário ---> System.ArgumentNullException: Valor não pode ser nulo.
+Nome do parâmetro: source
+   em System.Linq.Enumerable.Where[TSource](IEnumerable`1 source, Func`2 predicate)
+   em WebForLink.Application.Services.Process.UsuarioWebForLinkAppService.AlterarMinhaConta(Usuario entidade, Int32[] papeis, Int32[] perfis, Int32 contratanteSelecionado) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Service\Services\Process\UsuarioService.cs:linha 261
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em WebForLink.Application.Services.Process.UsuarioWebForLinkAppService.AlterarMinhaConta(Usuario entidade, Int32[] papeis, Int32[] perfis, Int32 contratanteSelecionado) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Service\Services\Process\UsuarioService.cs:linha 297
+   em WebForLink.Web.Areas.Administracao.Controllers.UsuarioController.MinhaContaFrm(UsuarioAdministracaoModel modelo) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Areas\Administracao\Controllers\UsuarioController.cs:linha 313
+2017-02-09 17:01:18,614 [44] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 17:01:18,614 [44] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-09 17:01:18,622 [44] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-09 17:01:33,947 [47] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 17:01:33,947 [47] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 17:02:23,638 [47] ERROR WebForLink.Web.Controllers.Extensoes.ControllerPadrao - WebForLink.Domain.Infrastructure.Exceptions.ServiceWebForLinkException: Erro ao cadastrar Usuário ---> System.ArgumentNullException: Valor não pode ser nulo.
+Nome do parâmetro: source
+   em System.Linq.Enumerable.Where[TSource](IEnumerable`1 source, Func`2 predicate)
+   em WebForLink.Application.Services.Process.UsuarioWebForLinkAppService.AlterarMinhaConta(Usuario entidade, Int32[] papeis, Int32[] perfis, Int32 contratanteSelecionado)
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em WebForLink.Application.Services.Process.UsuarioWebForLinkAppService.AlterarMinhaConta(Usuario entidade, Int32[] papeis, Int32[] perfis, Int32 contratanteSelecionado)
+   em WebForLink.Web.Areas.Administracao.Controllers.UsuarioController.MinhaContaFrm(UsuarioAdministracaoModel modelo) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Areas\Administracao\Controllers\UsuarioController.cs:linha 313
+2017-02-09 17:02:23,639 [47] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 17:02:23,639 [47] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-09 17:02:23,647 [47] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-09 17:02:27,456 [47] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 17:02:27,457 [47] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 17:10:10,488 [1] ERROR WebForLink.Web.MvcApplication - Aplicação Iniciada
+2017-02-09 17:10:12,589 [1] ERROR WebForLink.Web.Mappers.MappingProfile - Mapper not initialized. Call Initialize with appropriate configuration. If you are trying to use mapper instances through a container or otherwise, make sure you do not have any calls to the static Mapper.Map methods, and if you're using ProjectTo or UseAsDataSource extension methods, make sure you pass in the appropriate IConfigurationProvider instance.
+2017-02-09 17:10:15,189 [10] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Index, UsuarioId: 351
+2017-02-09 17:10:30,267 [7] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 17:10:30,268 [7] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 17:10:33,946 [7] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 17:10:33,947 [7] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-09 17:10:39,377 [7] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-09 17:10:47,303 [6] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 17:10:47,304 [6] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 17:11:06,240 [6] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 17:11:06,241 [6] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-09 17:11:06,247 [6] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-09 17:11:06,308 [9] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 17:11:06,308 [9] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 17:11:11,123 [9] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 17:11:11,124 [9] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-09 17:11:11,130 [9] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-09 17:11:29,920 [10] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.
+2017-02-09 17:11:39,960 [15] ERROR WebForLink.Web.MvcApplication - Aplicação Iniciada
+2017-02-09 17:11:40,777 [15] ERROR WebForLink.Web.Mappers.MappingProfile - Mapper not initialized. Call Initialize with appropriate configuration. If you are trying to use mapper instances through a container or otherwise, make sure you do not have any calls to the static Mapper.Map methods, and if you're using ProjectTo or UseAsDataSource extension methods, make sure you pass in the appropriate IConfigurationProvider instance.
+2017-02-09 17:11:43,913 [8] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 17:11:43,914 [8] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 17:11:49,207 [8] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 17:11:49,209 [8] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-09 17:11:55,239 [8] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-09 17:12:33,916 [9] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 17:12:33,917 [9] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 17:16:03,182 [8] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 17:16:03,183 [8] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 17:16:06,259 [9] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 17:16:06,260 [9] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-09 17:16:09,331 [8] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 17:16:09,332 [8] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-09 17:16:11,392 [8] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-09 17:16:11,399 [9] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-09 17:16:11,624 [6] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.
+2017-02-09 17:16:16,277 [18] ERROR WebForLink.Web.MvcApplication - Aplicação Iniciada
+2017-02-09 17:16:16,850 [18] ERROR WebForLink.Web.Mappers.MappingProfile - Mapper not initialized. Call Initialize with appropriate configuration. If you are trying to use mapper instances through a container or otherwise, make sure you do not have any calls to the static Mapper.Map methods, and if you're using ProjectTo or UseAsDataSource extension methods, make sure you pass in the appropriate IConfigurationProvider instance.
+2017-02-09 17:16:23,253 [6] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: HomeAdmin, Action: Index, UsuarioId: 351
+2017-02-09 17:16:30,880 [6] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 17:16:30,881 [6] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 17:16:57,699 [6] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 17:16:57,700 [6] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-09 17:17:01,965 [6] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-09 17:17:15,003 [22] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 17:17:15,003 [22] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 17:17:48,568 [22] ERROR WebForLink.Web.Controllers.Extensoes.ControllerPadrao - WebForLink.Domain.Infrastructure.Exceptions.ServiceWebForLinkException: Erro ao cadastrar Usuário ---> System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em WebForLink.Application.Services.Process.UsuarioWebForLinkAppService.AlterarMinhaConta(Usuario entidade, Int32[] papeis, Int32[] perfis, Int32 contratanteSelecionado) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Service\Services\Process\UsuarioService.cs:linha 262
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em WebForLink.Application.Services.Process.UsuarioWebForLinkAppService.AlterarMinhaConta(Usuario entidade, Int32[] papeis, Int32[] perfis, Int32 contratanteSelecionado) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Service\Services\Process\UsuarioService.cs:linha 299
+   em WebForLink.Web.Areas.Administracao.Controllers.UsuarioController.MinhaContaFrm(UsuarioAdministracaoModel modelo) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Areas\Administracao\Controllers\UsuarioController.cs:linha 313
+2017-02-09 17:17:48,573 [22] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 17:17:48,574 [22] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-09 17:17:48,578 [22] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-09 17:17:53,190 [22] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 17:17:53,191 [22] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 17:21:06,401 [22] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 17:21:06,401 [22] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-09 17:21:06,405 [22] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-09 17:21:06,444 [21] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Usuario, Action: minhacontafrm, UsuarioId: 351
+2017-02-09 17:21:06,445 [21] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-09 17:21:12,769 [21] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-09 17:21:12,770 [21] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-09 17:21:12,779 [21] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)

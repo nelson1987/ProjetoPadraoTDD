@@ -1,0 +1,130 @@
+﻿@model WebForLink.Web.Areas.Externo.Models.InclusaoLinkExternoVM
+@{
+    ViewBag.Title = "Index";
+}
+
+<section class="content-header">
+    <h1>Pré-Cadastro</h1>
+</section>
+<section class="content">
+    @if (Model.isValidarSenha)
+    {
+        <div id="formUsuario">
+            @Html.Partial("~/Areas/Externo/Views/PreCadastro/_PreCadastro_ValidarUsuario_Editavel.cshtml", Model)
+        </div>
+    }
+    @if ((bool)ViewBag.ExibirFicha)
+    {
+        <div id="formPrecadastro">
+            @Html.Partial("~/Areas/Externo/Views/Shared/_PreCadastro_FichaCadastral.cshtml", Model.FichaCadastral)
+        </div>
+    }
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#formPrecadastro form').submit(function () {
+                if ($(this).valid())
+                    $('.aguarde').show();
+                else
+                    $('.aguarde').hide();
+            });
+            $('#formUsuario form').submit(function () {
+                if ($(this).valid())
+                    $('.aguarde').show();
+                else
+                    $('.aguarde').hide();
+            });
+            $('#cnpjInputValidacao').inputmask('99.999.999/9999-99');
+            $('#cpfInputValidacao').inputmask('999.999.999-99');
+        });
+        $("input[name='isCNPJ']").click(function () {
+            $('#btnValidar').removeAttr("disabled");
+            $('#dvSelecionar').removeClass("hidden");
+            if ($(this).val() === "False") {
+                $('#cpf_form').removeClass('hidden');
+                $('#cnpj_form').addClass('hidden');
+            }
+            else {
+                $('#cnpj_form').removeClass('hidden');
+                $('#cpf_form').addClass('hidden');
+            }
+            $('#cnpjInputValidacao').inputmask('99.999.999/9999-99');
+            $('#cpfInputValidacao').inputmask('999.999.999-99');
+        });
+        function excluirDados(objBotao) {
+            var objItemLista = $(objBotao).parent().parent().parent();
+            objItemLista.remove();
+        }
+        var renderizarFichaCadastralForm = function (data, status, name) {
+            if (data.MensagemErro != null) exibirMensagemErroFicha(data.MensagemErro);
+            else {
+                $("#" + name).html(data);
+                $('form').removeData('validator');
+                $('form').removeData('unobtrusiveValidation');
+                $.validator.unobtrusive.parse('form');
+                $(".aguarde").hide();
+                $('#divDadosGerais').parent().removeClass('hidden');
+                $('#alertaSucessoDadosGerais').text('Solicitação de atualização dos dados de endereços realizada com sucesso!');
+                $('#alertaSucessoDadosGerais').removeClass('hidden');
+                $('#alertaSucessoDadosGerais').fadeIn('fast');
+                setTimeout("$('#alertaSucessoDadosGerais').fadeOut('fast')", 10000);
+                setTimeout("$('#divDadosGerais').parent().addClass('hidden')", 10000);
+                $(window).scrollTop($('#divDadosGerais').offset().top);
+            }
+        };
+        function ocultarMensagem(objDivOrigem) {
+            $(objDivOrigem).fadeOut('fast');
+        }
+        var exibirMensagemErroFicha = function (msgErro) {
+            $('.aguarde').hide();
+            $('#divDadosGerais').parent().removeClass('hidden');
+            $('#alertaErroDadosGerais').text(msgErro);
+            $('#alertaErroDadosGerais').removeClass('hidden');
+            $('#alertaErroDadosGerais').fadeIn('fast');
+            setTimeout("$('#alertaErroDadosGerais').fadeOut('fast')", 10000);
+            setTimeout("$('#divDadosGerais').parent().addClass('hidden')", 10000);
+            $(window).scrollTop($('#divDadosGerais').offset().top);
+        };
+        function ocultarJanelaConfirmacao(strTipo) {
+            var strNomeJanela = '#confirmacao' + strTipo;
+            $(strNomeJanela).fadeOut('fast');
+            $(strNomeJanela).toggleClass("hidden");
+        }
+        function exibirConfirmacaoExclusao(obj) {
+            var objli = $(obj).parent().parent()
+            var alert = $(objli).find(".alert");
+            $(alert).toggleClass("hidden");
+        }
+        var renderizarDadosUsuarioForm = function (data, status, name) {
+            $("#" + name).html(data);
+            //Recriar o Validate
+            $('form').removeData('validator');
+            $('form').removeData('unobtrusiveValidation');
+            $.validator.unobtrusive.parse('form');
+            ///===
+            $(".aguarde").hide();
+        };
+        var incluirDados = function (localAppend, actionResult, elemento) {
+            $(elemento).attr("disabled", "disabled");
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: actionResult,
+                data: {
+                },
+                success: function (data) {
+                    $("#" + localAppend).append(data);
+                    $(".aguarde").hide();
+                    $(elemento).removeAttr("disabled");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    $(".aguarde").hide();
+                    $(elemento).removeAttr("disabled");
+                }
+            });
+        };
+    </script>
+}

@@ -1,0 +1,35 @@
+﻿@model WebForLink.Web.ViewModels.DadosContatoVM
+
+<div class="contato" name="contato" style="border: solid 1px silver; padding-top: 7px;">
+    <div class="col-xs-6 col-md-6">
+        @Html.HiddenFor(x => x.ContatoID)
+        @Html.HiddenFor(x => x.PjPfId)
+        <div class="form-group">
+            <label>Nome Contato</label><br />
+            <span>@Html.DisplayTextFor(x => x.NomeContato)</span>
+        </div>
+    </div>
+
+    <div class="col-xs-6 col-md-6">
+        <div class="form-group">
+            <label>E-mail</label><br />
+            <span>@Html.DisplayTextFor(x => x.EmailContato)</span>
+        </div>
+    </div>
+
+    <div class="col-xs-4 col-md-3">
+        <input type="hidden" id="ContatoID" name="ContatoID" value="" />
+        <div class="form-group">
+            <label>Telefone</label><br />
+            <span>@Html.DisplayTextFor(x => x.Telefone)</span>
+        </div>
+    </div>
+
+    <div class="col-xs-4 col-md-3">
+        <div class="form-group">
+            <label>Celular</label><br />
+            <span>@Html.DisplayTextFor(x => x.Celular)</span>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>

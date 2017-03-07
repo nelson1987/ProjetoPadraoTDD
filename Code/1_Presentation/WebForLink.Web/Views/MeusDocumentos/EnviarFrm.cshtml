@@ -1,0 +1,384 @@
+﻿@model WebForLink.Web.ViewModels.MeusDocumentosEnviarVM
+@using WebForLink.Web.Infrastructure;
+@using WebForLink.Web.Interfaces;
+@using WebForLink.Domain.Infrastructure;
+@{
+    IGeral _metodosGerais = new Geral();
+    string key = _metodosGerais.ValorKey();
+    EncryptDecryptQueryString cripto = new EncryptDecryptQueryString();
+}
+@section Header {
+    @Styles.Render("~/style/date")
+
+    <link href="~/Content/css/bootstrap-tagsinput.css" rel="stylesheet" />
+    <link href="~/Content/css/typeahead.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap3-wysihtml5.css" rel="stylesheet" />
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/date")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/plugins/bloodhound/bloodhound.min.js")
+    @Scripts.Render("~/Scripts/plugins/typeahead/typeahead.jquery.min.js")
+    @Scripts.Render("~/Scripts/plugins/typeahead/typeahead.bundle.js")
+    @Scripts.Render("~/Scripts/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js")
+    <script type="text/javascript">
+        function selecionarTodosChecks(obj) {
+            var checkboxes = $($(obj).parents('.row')[0]).find(":checkbox");
+            checkboxes.each(function () {
+                $(this).prop('checked', true);
+            });
+        }
+
+        function SemValidade() {
+            if ($('#SemPrazo').is(':checked')) {
+                $('#DataValidade').prop('disabled', true)
+                $('#DataValidade').val('');
+                $('#DataValidade').datepicker('update');
+            }
+            else {
+                $('#DataValidade').prop('disabled', false)
+            }
+        }
+        var abrirModal = function () {
+            $(".aguarde").show();
+            var idsSelecionados = { ids: $('#Documentos').val() };
+            $.post('@Url.Action("ModalPesquisarEmail")', idsSelecionados, function (data, status) {
+                $("#dvListaEmails").html(data);
+                $("#dvListaEmails").modal();
+                $(".aguarde").hide();
+            });
+        };
+        var sairModal = function () {
+            $('#IdsIncluidos').val('');
+            $("#dvListaEmails").modal('hide');
+        }
+        var limparModal = function () {
+            $('#dvListaEmails #Nome').val('');
+            $('#dvListaEmails #Email').val('');
+            $('#dvListaEmails #Empresa').val('');
+        };
+        var enviarModal = function () {
+            var idsSelecionados = { ids: $('#IdsIncluidos').val() };
+            $('#dvListaEmails #Nome').val('');
+            $('#dvListaEmails #Email').val('');
+            $('#dvListaEmails #Empresa').val('');
+            $(".aguarde").show();
+            $.post('../BuscaEmailsPorId', idsSelecionados, function (data, status) {
+                for (var i = 0; i < data.length; i++) {
+                    $('#Para').tagsinput('add', data[i]);
+                }
+                $(".aguarde").hide();
+                $("#dvListaEmails").modal('hide');
+            });
+        }
+        var checkClick = function (id, elemento) {
+            console.log("Id", id);
+            console.log("Elemento", elemento);
+            var array = new Array();
+            if (this.value)
+                if (this.value != '')
+                    array = this.value.split(",");
+
+            var i = array.indexOf(id);
+            if (i != -1)
+                array.splice(i, 1);
+            else
+                array.push(id);
+            $('#IdsIncluidos').val(array);
+        };
+        var renderizarListaEmailsFichaCadastralForm = function (data, status, elemento) {
+            $("#" + elemento).html(data);
+            $(".aguarde").hide();
+        };
+        $(document).ready(function () {
+            if ($('#EnviarFichaCadastral').is(":checked")) {
+                $('#dvDadosBancarios').removeClass('hidden');
+                $('#dvDadosContatos').removeClass('hidden');
+            }
+            $('#EnviarFichaCadastral').change(function () {
+                $('#dvDadosBancarios').toggleClass('hidden');
+                $('#dvDadosContatos').toggleClass('hidden');
+            });
+
+            $("[data-mask]").inputmask("dd/mm/yyyy", { "placeholder": "dd/mm/aaaa" });
+
+            $('#DataValidade').datepicker({
+                format: "dd/mm/yyyy",
+                language: "pt-BR",
+                todayHighlight: true,
+                autoclose: true
+            });
+
+            var elt = $('#Para')
+            elt.tagsinput({
+                itemValue: 'value',
+                itemText: 'text',
+                tagClass: 'label label-default',
+                typeaheadjs: [{
+                    name: 'Destinatarios',
+                    displayKey: 'text',
+                    templates: { header: '<b>&nbsp;Destinatários</b>' },
+                    source: function (request, response) {
+                        $.getJSON('@Url.Action("BuscaEmails")', {
+                            chave: request
+                        },
+                        response);
+                    }
+                }]
+            });
+
+            elt.tagsinput('input')
+                .css("width", "")
+                .keypress(function (e) {
+                    if (e.which == 13) {
+                        if ($(this).val().trim() != "") {
+                            elt.tagsinput('add', { "value": "EmailAvulso:" + $(this).val(), "text": $(this).val() });
+                            elt.tagsinput('input').typeahead('val', '');
+                        }
+                        return false;
+                    }
+                })
+                .change(function () {
+                    if ($(this).val().trim() != "") {
+                        elt.tagsinput('input').typeahead('val', '');
+                    }
+                });
+
+            $("#SemPrazo").on('click', SemValidade);
+
+        });
+
+    </script>
+
+    <script src="~/Scripts/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Mensagem").wysihtml5();
+        });
+    </script>
+}
+<section class="content-header">
+    <h1>
+        Enviar
+        <!-- small>Control panel</!--small -->
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> Meus Documentos</li>
+        <li class="active">Enviar</li>
+    </ol>
+</section>
+<!-- FORM -->
+<section class="content">
+    <div id="boxForm" class="box box-primary">
+        <div class="box-header"><h3 class="box-title">E-mail</h3></div>
+        <div class="box-body">
+            @using (Html.BeginForm("EnviarFrm"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.Hidden("Documentos", (string)ViewBag.Documentos)
+
+                <div class="form-group">
+                    <label>Documentos Selecionados:</label>
+                    <ul>
+                        @for (int i = 0; i < Model.MeusDocumentos.Count; i++)
+                        {
+                            <li>@Model.MeusDocumentos[i].DescricaoDeDocumentos.DESCRICAO</li>
+                        }
+                    </ul>
+                    <hr />
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-xs btn-primary" onclick="abrirModal();"><i class="fa fa-search"></i></button>
+                            @Html.LabelFor(model => model.Para, htmlAttributes: new { @class = "control-label" })
+                            &nbsp;<span class="text-danger" style="font-weight:bold;">*</span><br />
+                            @Html.TextBoxFor(model => model.Para, new { @class = "form-control", disable_input = "" })
+                            @Html.ValidationMessageFor(model => model.Para, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Assunto, htmlAttributes: new { @class = "control-label" })
+                            &nbsp;<span class="text-danger" style="font-weight:bold;">*</span><br />
+                            @Html.TextBoxFor(model => model.Assunto, new { @class = "form-control", disable_input = "" })
+                            @Html.ValidationMessageFor(model => model.Assunto, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Mensagem, htmlAttributes: new { @class = "control-label" })
+                            &nbsp;<span class="text-danger" style="font-weight:bold;">*</span><br />
+                            @Html.TextAreaFor(model => model.Mensagem, new { @class = "form-control", disable_input = "", rows = 3, style="height:100px;" })
+                            @Html.ValidationMessageFor(model => model.Mensagem, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @*<div class="col-md-12">
+                        <div class="form-group">
+                            <label>Prazo Limite de disponibilidade dos documentos</label>
+                            <div class="row">
+                                <div class="col-md-2 col-xs-5">
+                                    @Html.TextBoxFor(model => model.DataValidade, new { @class = "form-control", data_inputmask = "'alias': 'dd/mm/yyyy'", data_mask = "", disable_input = "" })
+                                    @Html.ValidationMessageFor(model => model.DataValidade, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-3 col-xs-5">
+                                    <div class="form-group" style="">
+                                        <div class="checkbox">
+                                            @Html.CheckBoxFor(model => model.SemPrazo, new { disable_input = "" })
+                                            @Html.ValidationMessageFor(model => model.SemPrazo, "", new { @class = "text-danger" })
+                                        </div>
+                                        <label class="control-label">Sem Prazo</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.CheckBoxFor(model => model.EnviarFichaCadastral, new { @class = "" })
+                                    @Html.DisplayNameFor(model => model.EnviarFichaCadastral)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 hidden" id="dvDadosBancarios">
+                            <div class="box box-primary">
+                                <div class="box-header"><h3 class="box-title">Dados Bancários</h3></div>
+                                <div class="box-body">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-1 col-xs-12 text-center">
+                                                <input type="checkbox" class="checkbox-inline" name="selecionarTodosBancos" onchange="selecionarTodosChecks(this);" />
+                                            </div>
+                                            <div class="col-md-11 col-xs-12">
+                                                <label class="text-center" for="selecionarTodosBancos">Selecionar todos</label>
+                                            </div>
+                                            @for (int i = 0; i < Model.DadosBancarios.Count; i++)
+                                            {
+                                                <div class="col-md-1 col-xs-12 text-center">
+                                                    <input type="checkbox" class="text-center" name="DadosBancarios[@i].BancoPJPFID" value="@Model.DadosBancarios[i].BancoPJPFID" />
+                                                </div>
+                                                <div class="col-md-11 col-xs-12" style="border: solid 1px silver;">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Banco</label><br />
+                                                            <span>@Model.DadosBancarios[i].NomeBanco</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-6 col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Agência</label><br />
+                                                            <span>
+                                                                @(!string.IsNullOrEmpty(Model.DadosBancarios[i].Digito) ? string.Format("{0}-{1}", Model.DadosBancarios[i].Agencia, Model.DadosBancarios[i].Digito) : Model.DadosBancarios[i].Agencia.ToString())
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-6 col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Conta Corrente</label><br />
+                                                            <span>
+                                                                @(!string.IsNullOrEmpty(Model.DadosBancarios[i].ContaCorrenteDigito) ? string.Format("{0}-{1}", Model.DadosBancarios[i].ContaCorrente, Model.DadosBancarios[i].ContaCorrenteDigito) : Model.DadosBancarios[i].ContaCorrente.ToString())
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    @if (Model.DadosBancarios[i].NomeArquivo != null)
+                                                    {
+                                                        <div class="col-xs-12 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Arquivo</label><br />
+                                                                <a href="@Url.Action("FornecedorArquivo", "Fornecedores", new { chaveurl = cripto.Criptografar(string.Format("ArquivoID={0}", Model.DadosBancarios[i].ArquivoID), key) })" class="btn-link">@Model.DadosBancarios[i].NomeArquivo</a>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 hidden" id="dvDadosContatos">
+                            <div class="box box-primary">
+                                <div class="box-header"><h3 class="box-title">Dados de Contatos</h3></div>
+                                <div class="box-body">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-1 col-xs-12 text-center">
+                                                <input type="checkbox" class="checkbox-inline" name="selecionarTodosContatos" onchange="selecionarTodosChecks(this);" />
+                                            </div>
+                                            <div class="col-md-11 col-xs-12">
+                                                <label class="text-center" for="selecionarTodosContatos">Selecionar todos</label>
+                                            </div>
+                                            @for (int i = 0; i < Model.DadosContatos.Count; i++)
+                                            {
+                                                <div class="col-md-1 text-center">
+                                                    <input type="checkbox" class="checkbox-inline" name="DadosContatos[@i].ContatoID" value="@Model.DadosContatos[i].ContatoID" />
+                                                </div>
+                                                <div class="col-md-11" style="border: solid 1px silver;">
+                                                    <div class="col-xs-6 col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Nome Contato</label><br />
+                                                            <span>@Model.DadosContatos[i].NomeContato</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xs-6 col-md-6">
+                                                        <div class="form-group">
+                                                            <label>E-mail</label><br />
+                                                            <span>@Model.DadosContatos[i].EmailContato</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xs-4 col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Telefone</label><br />
+                                                            <span>@Model.DadosContatos[i].Telefone</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xs-4 col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Celular</label><br />
+                                                            <span>@Model.DadosContatos[i].Celular</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="text-right text-nowrap">
+                                <button type="button" class="btn btn-primary" onclick="$('#alert_confirm span').text('Tem certeza que deseja enviar este e-mail?'); $('#alert_confirm').fadeIn('fast');">Enviar</button>
+                                <button type="button" class="btn btn-default" onclick="location.href='@ViewBag.LinkCancelar'">Cancelar</button>
+                            </div>
+                            <div id="alert_confirm" class="alert alert-warning" role="alert" style="display: none;">
+                                <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="submit" class="btn btn-primary btn-xs">Sim</button>&nbsp;&nbsp;&nbsp;
+                                <button type="button" class="btn btn-default btn-xs" onclick="$('#alert_confirm').fadeOut('fast');">Não</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<div id="dvListaEmails" class="modal fade">
+    @Html.Partial("~/Views/MeusDocumentos/_Modal_PesquisarEmail.cshtml", new WebForLink.Web.ViewModels.MeusDocumentosPesquisarEmailVM { })
+</div><!-- /.modal -->

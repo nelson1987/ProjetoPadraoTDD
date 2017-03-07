@@ -1,0 +1,70 @@
+﻿@model WebForLink.Web.ViewModels.RetornoQuestionario<WebForLink.Web.ViewModels.QuestionarioVM>
+
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        var habilitaEdicao = $("#HabilitaEdicao").val() == "True";
+        if (habilitaEdicao) {
+            var objDivPai = $("#divQuestionarioDinamico").parent(),
+                objDivBotoesEdicao = objDivPai.children(".text-right")[0];
+
+            $(objDivBotoesEdicao).toggleClass("hidden");
+        }
+    });
+</script>
+    }
+<div class="box box-primary" id="questionarioDinamico">
+    <div class="box-header">
+        <h3 class="box-title">
+            Informações Complementares
+        </h3>
+        @Html.ValidationMessage("QuestionarioDinamicoValidation", "", new { @class = "text-danger" })
+        <ul class="nav nav-tabs">
+            @{
+                var contadorTabs = 0;
+                foreach (var questionarioTitulos in Model.QuestionarioDinamicoList)
+                {
+                    var reference = "#quest_" + questionarioTitulos.Id;
+                    if (contadorTabs == 0)
+                    {
+                        <li class="active"><a href=@reference data-toggle="tab">@questionarioTitulos.Titulo</a></li>
+                    }
+                    else
+                    {
+                        <li><a href=@reference data-toggle="tab">@questionarioTitulos.Titulo</a></li>
+                    }
+                    contadorTabs++;
+                }
+            }
+        </ul>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tab-content">
+                    @{
+                        foreach (var itens in Model.QuestionarioDinamicoList)
+                        {
+                            itens.EstiloClassCss = "tab-pane fade";
+                        }
+                        var item1 = Model.QuestionarioDinamicoList.FirstOrDefault();
+                        if (item1 != null) 
+                        { 
+                            item1.EstiloClassCss = "tab-pane fade in active";
+                        }
+                    }
+                    <div id="divQuestionarioDinamico">
+                        @Html.EditorFor(x => x.QuestionarioDinamicoList)
+                    </div>
+                    <div class="clearfix"></div>
+                    <br>
+                    <div class="text-right text-nowrap hidden">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-danger" onclick="cancelarDados('QuestionarioDinamico', '@Url.Action("CancelarQuestionarioDinamico", "ModificacaoQuestionarioDinamico")');">Cancelar</button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

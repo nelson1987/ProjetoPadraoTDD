@@ -1,0 +1,160 @@
+﻿@model WebForLink.Web.ViewModels.PerguntaVM
+<div class="col-md-4">
+    <div class="form-group perguntas" id="perguntaTab_@Model.Id">
+        @Html.HiddenFor(x => x.Id)
+        @Html.HiddenFor(x => x.AbaId)
+        @Html.HiddenFor(x => x.TipoDado)
+        @Html.HiddenFor(x => x.ExibeNome)
+        @Html.HiddenFor(x => x.Escrita)
+        @Html.HiddenFor(x => x.SolicitacaoId)
+        @Html.HiddenFor(x => x.Dominio)
+        @Html.HiddenFor(x => x.DominioListId)
+        @Html.HiddenFor(x => x.RespostaId)
+        @Html.HiddenFor(x => x.PerguntaPai)
+        @Html.HiddenFor(x => x.Titulo)
+        @Html.HiddenFor(x => x.RespostaFornecedorId)
+        @Html.LabelFor(x => x.Titulo, Model.Titulo)
+        @if (Model.Obrigatorio)
+        {
+            <span class="text-danger">*</span>
+            <br />
+        }
+        @{
+            if (Model.DominioList != null)
+            {
+                if (Model.TipoDado == "Checkbox")
+                {
+                    <div class="checkbox">
+                        @foreach (var item in Model.DominioList)
+                        {
+                            <label>
+                                @{
+                            string valorAtribuido = string.Empty;
+                            if (Model.SolicitacaoId > 0)
+                            {
+                                if (Model.Resposta != null)
+                                {
+                                    foreach (var respost in Model.Resposta.Split('^'))
+                                    {
+                                        if (respost == item.Value)
+                                        {
+                                            valorAtribuido = item.Value;
+                                        }
+                                    }
+                                    @Html.CheckBox("RespostaCheckbox", valorAtribuido == item.Value, new { value = item.Value })
+                                    @item.Text
+                                }
+                                else
+                                {
+                                    @Html.CheckBox("RespostaCheckbox", new { value = item.Value })
+                                    @item.Text
+                                }
+                            }
+                            else
+                            {
+                                if (Model.RespostaFornecedor != null)
+                                {
+                                    foreach (var respost in Model.RespostaFornecedor.Split('^'))
+                                    {
+                                        if (respost == item.Value)
+                                        {
+                                            valorAtribuido = item.Value;
+                                        }
+                                    }
+                                    @Html.CheckBox("RespostaCheckbox", valorAtribuido == item.Value, new { value = item.Value })
+                                    @item.Text
+                                }
+                                else
+                                {
+                                    @Html.CheckBox("RespostaCheckbox", new { value = item.Value })
+                                    @item.Text
+                                }
+                            }
+                                }
+                            </label>
+                        }
+                    </div>
+                }
+                else if (Model.TipoDado == "TextArea")
+                {
+                    if (Model.SolicitacaoId > 0)
+                    {
+                        Html.TextAreaFor(x => x.Resposta, Model.Objeto);
+                    }
+                    else
+                    {
+                        Html.TextAreaFor(x => x.RespostaFornecedor, Model.Objeto);
+                    }
+                }
+                else if (Model.TipoDado == "RadioButton")
+                {
+                    if (Model.Escrita)
+                    {
+                        <div class="radio">
+                            @foreach (var item in Model.DominioList)
+                            {
+                                <label>
+                                    @if (Model.SolicitacaoId > 0)
+                                    {
+                                        @(Model.Resposta == item.Text ? 
+                                        Html.RadioButtonFor(model => model.Resposta, item.Value, new { @checked = true }) : 
+                                        Html.RadioButtonFor(model => model.Resposta, item.Value))
+                                    }
+                                    else
+                                    {
+                                        @(Model.RespostaFornecedor == item.Text ? 
+                                        Html.RadioButtonFor(model => model.RespostaFornecedor, item.Value, new { @checked = true }) : 
+                                        Html.RadioButtonFor(model => model.RespostaFornecedor, item.Value))
+                                    }
+                                    @item.Text
+                                </label>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="radio disabled">
+                            @foreach (var item in Model.DominioList)
+                            {
+                                <label>
+                                    @Html.RadioButtonFor(model => model.DominioListId, item.Value, new { Disabled = Model.Escrita == false }) 
+                                    @item.Text
+                                </label>
+                            }
+                        </div>
+                    }
+                }
+                else
+                {
+                    if (Model.SolicitacaoId > 0)
+                    {
+                        if (Model.DominioList.Count > 0)
+                        {
+                            @Html.DropDownListFor(x => x.DominioListId, Model.DominioList, "-- Selecione --", Model.Objeto)
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(x => x.Resposta, Model.Objeto)
+                        }
+                    }
+                    else
+                    {
+                        if (Model.DominioList.Count > 0)
+                        {
+                            @Html.DropDownListFor(x => x.DominioListId, Model.DominioList, "-- Selecione --", Model.Objeto)
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(x => x.RespostaFornecedor, Model.Objeto)
+                        }
+                    }
+                }
+            }
+        }
+        @Html.ValidationMessageFor(x => x.Resposta, " ", new { @class = "text-danger" })
+    </div>
+</div>
+@if (Model.PulaLinha)
+{
+    <div class="clearfix"></div>
+}

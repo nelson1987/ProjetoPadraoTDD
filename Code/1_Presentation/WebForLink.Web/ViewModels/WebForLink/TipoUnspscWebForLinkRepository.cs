@@ -1,0 +1,4 @@
+﻿namespace WebForLink.Web.ViewModels
+{
+
+}

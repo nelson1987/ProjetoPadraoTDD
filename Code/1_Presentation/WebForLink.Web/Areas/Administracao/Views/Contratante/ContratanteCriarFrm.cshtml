@@ -1,0 +1,95 @@
+﻿@model WebForLink.Web.Areas.Administracao.Models.ContratanteAdministracaoModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdministracao.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> @ViewBag.Page</li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Dados do Contratante</h3>
+                </div>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.TipoCadastroId, "Tipo de cadastro", htmlAttributes: new { @class = "control-label" })
+                                        @Html.DropDownList("TIPO_CADASTRO_ID", null, htmlAttributes: new { @class = "form-control input-sm" })
+                                        @Html.ValidationMessageFor(model => model.TipoCadastroId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CNPJ, htmlAttributes: new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.CNPJ, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                                        @Html.ValidationMessageFor(model => model.CNPJ, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.RazaoSocial, htmlAttributes: new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.RazaoSocial, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                                        @Html.ValidationMessageFor(model => model.RazaoSocial, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.NomeFantasia, htmlAttributes: new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.NomeFantasia, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                                        @Html.ValidationMessageFor(model => model.NomeFantasia, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Estilo, htmlAttributes: new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.Estilo, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                                        @Html.ValidationMessageFor(model => model.Estilo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ContranteCodERP, htmlAttributes: new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.ContranteCodERP, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                                        @Html.ValidationMessageFor(model => model.ContranteCodERP, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <div class="text-right text-nowrap">
+                            <button type="button" class="btn btn-primary" onclick="$('#alert_confirm span').text('Tem certeza que deseja salvar esta @ViewBag.Page?'); $('#alert_confirm').fadeIn('fast');">Salvar</button>
+                            <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("ContratanteLst")';">Cancelar</button>
+                        </div>
+                        <div id="alert_confirm" class="alert alert-warning" role="alert" style="display: none;">
+                            <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="submit" class="btn btn-primary btn-xs">Sim</button>&nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-default btn-xs" onclick="$('#alert_confirm').fadeOut('fast');">Não</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

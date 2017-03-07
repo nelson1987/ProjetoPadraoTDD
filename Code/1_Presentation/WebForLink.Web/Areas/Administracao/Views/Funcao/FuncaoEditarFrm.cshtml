@@ -1,0 +1,103 @@
+﻿@model WebForLink.Web.Areas.Administracao.Models.FuncaoAdministracaoModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdministracao.cshtml";
+}
+
+<section class="content-header">
+    <h1>@ViewBag.Title</h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> @ViewBag.Page</li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+</section>
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Dados da Função</h3>
+                </div>
+                <div class="box-body">
+                    @using (Html.BeginForm("FuncaoEditarFrm","Funcao"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Codigo, new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.Codigo, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                                        @Html.ValidationMessageFor(model => model.Codigo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.AplicacaoId, new { @class = "control-label" })
+                                        @Html.DropDownList("APLICACAO_ID", (SelectList)ViewBag.APLICACAO_ID, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.AplicacaoId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Nome, new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Tela, new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.Tela, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Tela, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Descricao, new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.FuncaoPaiId, new { @class = "control-label" })
+                                        @Html.DropDownList("FUNCAO_PAI", (SelectList)ViewBag.FUNCAO_PAI, "--Selecione--", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.FuncaoPaiId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                @*<div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.PerfilId, "Perfil", new { @class = "control-label" })
+                                        @Html.DropDownList("PERFIL_ID", null, "--Selecione--", new { @class = "form-control input-sm" })
+                                        @Html.ValidationMessageFor(model => model.PerfilId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <div class="text-right text-nowrap">
+                                <button type="button" class="btn btn-primary" onclick="$('#alert_confirm span').text('Tem certeza que deseja salvar esta @ViewBag.Page?'); $('#alert_confirm').fadeIn('fast');">Salvar</button>
+                                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("FuncaoLst")';">Cancelar</button>
+                            </div>
+                            <div id="alert_confirm" class="alert alert-warning" role="alert" style="display: none;">
+                                <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="submit" class="btn btn-primary btn-xs">Sim</button>&nbsp;&nbsp;&nbsp;
+                                <button type="button" class="btn btn-default btn-xs" onclick="$('#alert_confirm').fadeOut('fast');">Não</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,130 @@
+﻿@model WebForLink.Web.ViewModels.Adesao.AdesaoCriacaoVM
+@{
+    Layout = "~/Views/Shared/_LayoutPrincipal.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <h2 class="text-center">Planos</h2>
+        <div class="col-md-12">
+            <div class="col-lg-6 col-lg-offset-1 no-padding hidden-xs hidden-sm" style="padding-right:0px; padding-left:0px;">
+                <div class="text-center col-lg-12"><h3 style="padding-top: 0px; margin-top: 5px; margin-bottom: 5px; height: 30px;">Planos</h3></div>
+                @for (int i = 0; i < Model.Planos[0].Propriedades.Count; i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        <div class="col-lg-12" style="margin-top: 5px; margin-bottom:5px;">
+                            <div class="text-left text-bold">@Model.Planos[0].Propriedades[i].Descricao</div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-lg-12" style="background-color:ghostwhite; margin-top: 5px; margin-bottom:5px;">
+                            <div class="text-left text-bold">@Model.Planos[0].Propriedades[i].Descricao</div>
+                        </div>
+                    }
+                }
+            </div>
+            @foreach (var item in Model.Planos)
+            {
+                string cor = string.Empty;
+                string icone = string.Empty;
+                switch (item.Id)
+                {
+                    case 1:
+                        cor = "#F25F5C";
+                        icone = "glyphicon-send";
+                        break;
+                    case 2:
+                        cor = "#FFE066";
+                        icone = "glyphicon-stats";
+                        break;
+                    case 3:
+                        cor = "#247BA0";
+                        icone = "glyphicon-flash";
+                        break;
+                    case 4:
+                        cor = "#528E84";
+                        icone = "glyphicon-globe";
+                        break;
+                    default:
+                        cor = "#70C1B3";
+                        icone = "glyphicon-send";
+                        break;
+                }
+                <div class="col-lg-1" style="padding-left:0px; padding-right:0px; padding-bottom:5px;">
+                    <div class="col-lg-12 text-center" style="background-color:@cor; height:40px; color:White;">
+                        <div class="text-center col-lg-12 hidden-xs hidden-sm"><h4>@item.Nome</h4></div>
+                    </div>
+                    @for (int i = 0; i < item.Propriedades.Count; i++)
+                    {
+                        var alturaColuna = item.Propriedades[i].Descricao.Length < 58 ? "30px" : "40px";
+                        if (i % 2 == 0)
+                        {
+                            <div class="col-lg-12 text-center media-middle" style="margin-top: 5px; margin-bottom:5px;">
+                                @if (!item.Propriedades[i].Valido)
+                                {
+                                    <span class="glyphicon glyphicon-remove text-center hidden-xs hidden-sm" style="color:#EA504D;"></span>
+                                }
+                                else
+                                {
+                                    <span class="glyphicon glyphicon-ok text-center hidden-xs hidden-sm" style="color:#2A826A;"></span>
+                                        <span class="text-center hidden-md hidden-lg" style="font-size:14px;">@item.Propriedades[i].Descricao</span>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-lg-12 text-center" style="background-color:ghostwhite;margin-top: 5px; margin-bottom:5px;">
+                                @if (!item.Propriedades[i].Valido)
+                        {
+                                    <span class="glyphicon glyphicon-remove text-center hidden-xs hidden-sm" style="color:#EA504D;"></span>
+                                }
+                                else
+                                {
+                                    <span class="glyphicon glyphicon-ok text-center hidden-xs hidden-sm" style="color:#2A826A;"></span>
+                                        <span class="text-center hidden-md hidden-lg" style="font-size:14px;">@item.Propriedades[i].Descricao</span>
+                                }
+                            </div>
+                        }
+                    }
+                    @*<div class="col-lg-12 no-padding" style="padding-left: 0px; padding-right: 0px; padding-top: 3px;">
+                            <button data-link="@item.UrlChave" class="btn btn-flat botaoPlanos center-block" style="background-color:@cor; color:white;">Assinar</button>
+                        </div>*@
+                    <div class="col-lg-12 no-padding" style="padding-left: 0px; padding-right: 0px; padding-top: 3px;">
+                        @*<button onclick="location.href = 'https://pag.ae/bfFXrW';" class="btn btn-flat botaoPlanos center-block" style="background-color:@cor; color:white;">Assinar</button>*@
+                        <button onclick="location.href='@item.UrlChave'" class="btn btn-flat botaoPlanos center-block" style="background-color:@cor; color:white;">Assinar</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row" id="divContratacao">
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            @Html.Raw(Model.ExibeModalAcesso ? "$('#acessoModal').modal('show')" : "$('#acessoModal').modal('hide')")
+        });
+
+        function renderizarDadosAjaxBeginForm(data, status, xhr) {
+            $(".aguarde").show();
+            $('#divContratacao').html(data);
+            $(".aguarde").hide();
+            //exibirMensagemSucesso(xhr);
+        }
+
+        $(".nav-link").click(function (e) {
+            e.preventDefault();
+            var link = $(this);
+            var href = link.attr("href");
+            $("html,body").animate({ scrollTop: $(href).offset().top - 80 }, 200);
+            link.closest(".navbar").find(".navbar-toggle:not(.collapsed)").click();
+        });
+
+        $(document).ready(function () {
+        });
+    </script>
+}

@@ -1,0 +1,323 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+@using WebForLink.Domain.Enums
+@Styles.Render("~/style/date")
+@Scripts.Render("~/bundles/date")
+
+@{
+    int Fluxo = Model.Aprovacao.FluxoTPId;
+    bool NecessitaExecucaoManual = (bool)ViewBag.NecessitaExecucaoManual;
+}
+<section class="content-header">
+    <h1>
+        Aprovação
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> Aprovação</li>
+        <li class="active">Aprovação</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div id="boxGrid" class="box box-primary">
+        <div class="box-header"><h3 class="box-title">Solicitação</h3></div>
+        <div class="box-header">
+            @Html.ValidationMessage("AprovacaoValidation", "", new { @class = "text-danger" })
+        </div>
+        <div class="box-body">
+            <div class="box-body">
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label>Código</label><br />
+                        <span>@Model.Aprovacao.ID</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Tipo Solicitação</label><br />
+                        @Model.Aprovacao.NomeSolicitacao
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Data Solicitação</label><br />
+                        @Model.Aprovacao.Solicitacao_Dt_Cria.ToString("dd/MM/yyyy")
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Situação</label><br />
+                        <span>@Model.Aprovacao.Solicitacao_Tramite.Papel.PAPEL_NM</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Solicitante</label><br />
+                        @Model.Aprovacao.Login
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Receita Federal</label><br />
+                        <span>@Model.RoboReceita</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Sintegra</label><br />
+                        <span>@Model.RoboSintegra</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Simples Nacional</label><br />
+                        <span>@Model.RoboSimples</span>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    @if (ViewBag.QtdGrupoEmpresa > 1)
+    {
+        <div id="boxGrid" class="box box-primary">
+            <div class="box-body">
+                <h4>Empresa: <small>@Model.Aprovacao.NomeContratante</small></h4>
+            </div>
+        </div>
+    }
+    @using (Html.BeginForm("AprovacaoFrm", "Aprovacao", FormMethod.Post, new { id = "formPostAprovacao" }))
+    {
+        <input type="hidden" id="btnAcao" name="btnAcao" value="" />
+        <input type="hidden" id="PapelID" name="PapelID" value="@Model.Solicitacao.Tramite.Papel.ID" />
+        <input type="hidden" id="ContratanteID" name="ContratanteID" value="@Model.ContratanteID" />
+        <input type="hidden" id="SolicitacaoID" name="SolicitacaoID" value="@Model.Aprovacao.ID" />
+        <input type="hidden" id="FluxoID" name="FluxoID" value="@Model.Aprovacao.FluxoId" />
+        <input type="hidden" id="FluxoTPID" name="FluxoID" value="@Model.Aprovacao.FluxoTPId" />
+
+        //RECEITA FEDERAL
+        switch ((EnumTiposFluxo)Fluxo)
+        {
+
+            case EnumTiposFluxo.CadastroFornecedorNacional:
+            case EnumTiposFluxo.CadastroFornecedorEstrangeiro:
+            case EnumTiposFluxo.AmpliacaoFornecedor:
+            case EnumTiposFluxo.CadastroFornecedorPF:
+            case EnumTiposFluxo.CadastroFornecedorNacionalDireto:
+            case EnumTiposFluxo.CadastroFornecedorPFDireto:
+                if (Model.TipoFornecedor != 2)
+                {
+                    @Html.Partial("~/Views/Fornecedores/_FichaCadastral_FornecedorRobo.cshtml", Model)
+                }
+
+                break;
+        }
+        @Html.Partial("~/Views/Fornecedores/_FichaCadastral_DadosGerais.cshtml", Model)
+
+        switch ((EnumTiposFluxo)Fluxo)
+        {
+
+            case EnumTiposFluxo.CadastroFornecedorNacional:
+            case EnumTiposFluxo.CadastroFornecedorEstrangeiro:
+            case EnumTiposFluxo.AmpliacaoFornecedor:
+            case EnumTiposFluxo.CadastroFornecedorPF:
+            case EnumTiposFluxo.CadastroFornecedorNacionalDireto:
+            case EnumTiposFluxo.CadastroFornecedorPFDireto:
+            case EnumTiposFluxo.ModificacaoEndereco:
+                @Html.Partial("~/Views/Fornecedores/_FichaCadastral_DadosEnderecos.cshtml", Model)
+
+                break;
+        }
+
+        //OUTROS DADOS
+        if (Fluxo == (int)EnumTiposFluxo.ModificacoesGerais)
+        {
+            @Html.Partial("~/Views/Fornecedores/_FichaCadastral_OutrosDados_Editavel.cshtml", Model)
+        }
+
+        //DADOS BANCÁRIOS
+        switch ((EnumTiposFluxo)Fluxo)
+        {
+            case EnumTiposFluxo.CadastroFornecedorNacional:
+            case EnumTiposFluxo.CadastroFornecedorEstrangeiro:
+            case EnumTiposFluxo.AmpliacaoFornecedor:
+            case EnumTiposFluxo.ModificacaoDadosBancarios:
+            case EnumTiposFluxo.CadastroFornecedorPF:
+            case EnumTiposFluxo.CadastroFornecedorNacionalDireto:
+            case EnumTiposFluxo.CadastroFornecedorPFDireto:
+                @Html.Partial("~/Views/Fornecedores/_FichaCadastral_DadosBancario.cshtml", Model.DadosBancarios)
+                break;
+        }
+
+        //DADOS CONTATOS
+        switch ((EnumTiposFluxo)Fluxo)
+        {
+            case EnumTiposFluxo.CadastroFornecedorNacional:
+            case EnumTiposFluxo.CadastroFornecedorEstrangeiro:
+            case EnumTiposFluxo.AmpliacaoFornecedor:
+            case EnumTiposFluxo.ModificacaoDadosContato:
+            case EnumTiposFluxo.CadastroFornecedorPF:
+            case EnumTiposFluxo.CadastroFornecedorNacionalDireto:
+            case EnumTiposFluxo.CadastroFornecedorPFDireto:
+                @Html.Partial("~/Views/Fornecedores/_FichaCadastral_Contatos.cshtml", Model.DadosContatos)
+                break;
+        }
+
+        //OBSERVAÇÃO
+        switch ((EnumTiposFluxo)Fluxo)
+        {
+            case EnumTiposFluxo.CadastroFornecedorNacional:
+            case EnumTiposFluxo.AmpliacaoFornecedor:
+            case EnumTiposFluxo.CadastroFornecedorPF:
+            case EnumTiposFluxo.CadastroFornecedorNacionalDireto:
+            case EnumTiposFluxo.CadastroFornecedorPFDireto:
+                @Html.Partial("~/Views/Fornecedores/_FichaCadastral_Observacao.cshtml", Model)
+                @Html.Partial("~/Views/Fornecedores/_FichaCadastral_Anexos.cshtml", Model.SolicitacaoFornecedor)
+                break;
+        }
+
+        //DADOS FISCAIS
+        if (Fluxo == (int)EnumTiposFluxo.ModificacaoDocumentos)
+        {
+            @Html.Partial("~/Views/Fornecedores/_FichaCadastral_Anexos.cshtml", Model.SolicitacaoFornecedor)
+        }
+
+        //********** SERVICOS E MATERIAIS **********//
+        switch ((EnumTiposFluxo)Fluxo)
+        {
+            case EnumTiposFluxo.CadastroFornecedorNacional:
+            case EnumTiposFluxo.CadastroFornecedorEstrangeiro:
+            case EnumTiposFluxo.AmpliacaoFornecedor:
+            case EnumTiposFluxo.CadastroFornecedorPF:
+            case EnumTiposFluxo.CadastroFornecedorNacionalDireto:
+            case EnumTiposFluxo.CadastroFornecedorPFDireto:
+            case EnumTiposFluxo.ModificacaoServicoMaterial:
+                @Html.Partial("../Fornecedores/_FichaCadastral_ServicosMaterias", Model.FornecedoresUnspsc)
+                break;
+        }
+
+        //DADOS FISCAIS
+        if (Fluxo == (int)EnumTiposFluxo.ModificacaoDadosFiscais)
+        {
+            @Html.Partial("~/Views/Fornecedores/_FichaCadastral_DadosFiscais.cshtml", Model)
+        }
+
+        //BLOQUEIO
+        if (Fluxo == (int)EnumTiposFluxo.BloqueioFornecedor)
+        {
+            @Html.Partial("~/Views/Fornecedores/_FichaCadastral_Bloqueio.cshtml", Model)
+        }
+
+        //DESBLOQUEIO
+        if (Fluxo == (int)EnumTiposFluxo.DesbloqueioFornecedor)
+        {
+            @Html.Partial("~/Views/Fornecedores/_FichaCadastral_Desbloqueio.cshtml", Model)
+        }
+
+        // QuestionárioDinâmico
+        switch ((EnumTiposFluxo)Fluxo)
+        {
+            case EnumTiposFluxo.CadastroFornecedorNacional:
+            case EnumTiposFluxo.AmpliacaoFornecedor:
+            case EnumTiposFluxo.CadastroFornecedorPF:
+            case EnumTiposFluxo.CadastroFornecedorNacionalDireto:
+            case EnumTiposFluxo.CadastroFornecedorPFDireto:
+            case EnumTiposFluxo.ModificacaoQuestionarioDinamico:
+                if (Model.Questionarios.QuestionarioDinamicoList.Any())
+                {
+                    @Html.Partial("~/Views/Fornecedores/_FichaCadastral_QuestionarioDinamico.cshtml", Model.Questionarios)
+                }
+                break;
+        }
+
+
+        <div class="box box-primary">
+            <div class="box-body">
+                @if (NecessitaExecucaoManual)
+                {
+                    <span class="help-block text-center">
+                        Este tipo de solicitação necessita de execução manual.
+                    </span>
+                }
+                <div class="text-center text-nowrap">
+                    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("AprovacaoLst")'">Voltar</button>
+
+                    @if (NecessitaExecucaoManual)
+                    {
+                        <button type="button" class="btn btn-primary" onclick="salvar('executado')">Confirmar Execução e Finalizar</button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-primary" onclick="salvar('aprovar')">Aprovar</button>
+                    }
+                    <button type="button" class="btn btn-danger" onclick="salvar('reprovar')">Reprovar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-footer">
+            <div id="alert_confirm" class="alert alert-warning" role="alert" style="display: none;">
+                <label id="txtMotivo" style="display:none">Motivo da reprovação</label>
+                <textarea id="txtReprovacao" class="form-control input-sm" name="motivoReprovao" role="alert" rows="4" cols="20" maxlength="255" style="display:none"></textarea><br />
+                <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" id="btnSim" class="btn btn-primary btn-xs">Sim</button>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-default btn-xs" onclick="$('#alert_confirm').fadeOut('fast');">Não</button>
+            </div>
+        </div>
+
+    }
+</section>
+@section Scripts {
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            $('#txtReprovacao').val('');
+            $('#btnSim').click(function () {
+                $('#formPostAprovacao').submit();
+            });
+        });
+
+        function salvar(parameter) {
+            var $target = $('html,body');
+            var txtReprovacao = $('#txtReprovacao');
+            var txtMotivo = $('#txtMotivo');
+
+            switch (parameter) {
+                case "modificar":
+                    $target.animate({ scrollTop: $target.height() }, 1000);
+                    txtReprovacao.val("");
+                    txtReprovacao.fadeOut();
+                    txtMotivo.fadeOut();
+                    $('#btnAcao').val('modificar');
+                    $('#alert_confirm span').text('Tem certeza que deseja modificar os dados alterados?'); $('#alert_confirm').fadeIn('fast');
+                    break;
+
+                case "aprovar":
+                    $target.animate({ scrollTop: $target.height() }, 1000);
+                    $('#btnAcao').val('aprovar');
+                    txtReprovacao.val('');
+                    txtReprovacao.fadeOut();
+                    txtMotivo.fadeOut();
+                    $('#alert_confirm span').text('Tem certeza que deseja aprovar a solicitação?'); $('#alert_confirm').fadeIn('fast');
+                    break;
+
+                case "executado":
+                    $target.animate({ scrollTop: $target.height() }, 1000);
+                    $('#btnAcao').val('executado');
+                    txtReprovacao.val('');
+                    txtReprovacao.fadeOut();
+                    txtMotivo.fadeOut();
+                    $('#alert_confirm span').text('Tem certeza que deseja confirmar a execução e finalizar esta solicitação?'); $('#alert_confirm').fadeIn('fast');
+                    break;
+
+                default:
+                    $target.animate({ scrollTop: $target.height() }, 1000);
+                    $('#btnAcao').val('reprovar');
+                    $('#alert_confirm span').text('Tem certeza que deseja reprovar a solicitação?'); $('#alert_confirm').fadeIn('fast');
+                    txtReprovacao.val("");
+                    txtReprovacao.fadeIn();
+                    txtMotivo.fadeIn();
+                    break;
+            }
+        }
+    </script>
+}

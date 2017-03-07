@@ -1,0 +1,88 @@
+﻿@model WebForLink.Web.ViewModels.SolicitacaoFornecedorVM
+
+<link href="~/Content/css/bootstrap3-wysihtml5.css" rel="stylesheet" />
+<section class="content-header">
+    <h1>
+        Solicitação de Documentos
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> Fornecedores</li>
+        <li class="active">Solicitação de Documentos</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="alert alert-success" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick="$(this).fadeOut('fast')"></div>
+    </div>
+    <div class="wizard">
+        <a class=current><span class="badge">1</span> Solicitação de Criação</a>
+        <a><span class="badge">2</span> Validação em Orgão Públicos </a>
+        <a><span class="badge">3</span> Fornecedor </a>
+        <a><span class="badge">4</span> MDM </a>
+    </div>
+    <br />
+    @Html.Partial("~/Views/Documento/_AdicionarMaisDocumentos.cshtml", Model)
+
+    <div id="boxGrid" class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Enviar Solicitação por E-mail</h3>
+        </div>
+        <div class="box-body">
+            @using (Html.BeginForm("SolicitacaoEnviar"))
+            {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(x => x.Fornecedor.CNPJ)
+            @Html.HiddenFor(x => x.PassoAtual)
+            @Html.HiddenFor(x => x.SolicitacaoCriacaoID)
+            @Html.HiddenFor(x => x.ContratanteSelecionado)
+            <div class="form-group">
+                @Html.LabelFor(x => x.Assunto, htmlAttributes: new { @class = "control-label" })
+                <span class="text-danger" style="font-weight:bold;">*</span><br />
+                @Html.TextBoxFor(x => x.Assunto, new { @class = "form-control input-sm", disable_input = "" })
+                @Html.ValidationMessageFor(x => x.Assunto, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.Mensagem, htmlAttributes: new { @class = "control-label" })
+                <div class='box-body pad'>
+                    @Html.TextAreaFor(x => x.Mensagem, new { @class = "form-control input-sm", disable_input = "", rows = "7" })
+                </div>
+                @Html.ValidationMessageFor(x => x.Mensagem, "", new { @class = "text-danger" })
+            </div>
+            }
+        </div>
+        <div class="box-footer">
+            <div class="row">
+                <div class="form-group col-md-3 pull-right text-nowrap text-right">
+                    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("SolicitacaoDocumentos")'">Voltar</button>
+                    <button type="button" class="btn btn-warning" onclick="$('#ConfirmaEnviar').fadeIn('fast'); $('#btnNão').focus();"><i class="fa fa-envelope"></i> ENVIAR</button>
+                </div>
+            </div>
+
+            <div id="ConfirmaEnviar" class="alert alert-warning text-center" role="alert" style="display: none;">
+                <span>
+                    <b>Tem certeza que deseja enviar esta solicitação ao fornecedor?</b>
+                </span><br />
+                <button id="btnSim" type="button" class="btn btn-primary btn-xs" onclick="$('#ConfirmaEnviar').fadeOut('fast'); $('form').submit();">Sim</button>&nbsp;&nbsp;&nbsp;
+                <button id="btnNão" type="button" class="btn btn-default btn-xs" onclick="$('#ConfirmaEnviar').fadeOut('fast');">Não</button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</section>
+@section Scripts {
+    <script src="~/Scripts/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+            $('[data-toggle="popover"]').click(function () {
+                $('[data-toggle="popover"]').not(this).popover('hide'); //all but this
+            });
+
+            $("#Mensagem").wysihtml5();
+        });
+    </script>
+}

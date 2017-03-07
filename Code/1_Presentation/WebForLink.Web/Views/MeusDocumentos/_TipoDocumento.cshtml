@@ -1,0 +1,83 @@
+﻿@section Scripts {
+    <script src="~/Scripts/Views/Shared/TipoDocumentos.js"></script>
+}
+<div class="box-header"><h3 class="box-title">Cadastro de Tipo de Documentos</h3></div>
+<div class="box-body">
+
+    <div class="alert alert-success" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick="$(this).fadeOut('fast')"></div>
+    <div class="alert alert-danger" role="alert" style="display: none; font-size: 14px; font-weight: bold;" onclick="$(this).fadeOut('fast')"></div>
+
+    <div id="divFormTipoDocumento" class="form-group" style="display: none;">
+        @using (Html.BeginForm("MeusDocumentosLst"))
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Descrição</label><br />
+                    @Html.TextBox("Descricao", null, htmlAttributes: new { @class = "form-control input-sm" })
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group" style="padding-left: 40px;">
+                        <lable>&nbsp;</lable>
+                        <div class="checkbox">
+                            @Html.CheckBox("TipoDocumentoAtivo", true)
+                        </div>
+                        <label>Ativo</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label>&nbsp;</label><br />
+                    <button type="button" class="btn btn-primary" onclick="TipoSalvar('@Url.Action("TipoDocumentos")');">Salvar</button>
+                    <button type="button" class="btn btn-default" onclick="TipoCancelar();">Cancelar</button>
+                </div>
+            </div>
+        }
+    </div>
+    <div id="divBotaoIncluir" class="form-group">
+        <button type="button" class="btn btn-primary" onclick="TipoIncluir();">Novo Tipo de Documento</button>
+    </div>
+    <div class="table-responsive">
+        <table id="tblTipoDocumentos" class="table table-bordered table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        Tipo de Documento
+                    </th>
+                    <th class="text-center">
+                        Ativo
+                    </th>
+                    <th class="text-center col-md-1">Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in (List<WebForLink.Domain.Entities.WebForLink.TipoDeDocumento>)ViewBag.ListaTipoDocumento)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DESCRICAO)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.ATIVO)
+                        </td>
+                        <td class="text-center text-nowrap">
+                            @if (item.TIPO_DOCUMENTOS_CH_ID == null)
+                            {
+                                <button type="button" class="btn btn-primary btn-xs" onclick="TipoEditar(@item.ID, '@item.DESCRICAO', @Html.Raw(item.ATIVO).ToString().ToLower());">Editar</button>
+                                <button type="button" class="btn btn-danger btn-xs" onclick="TipoExcluir(@item.ID, '@item.DESCRICAO');">Excluir</button>
+                            }
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="clearfix"></div>
+    </div>
+    <div id="alert_confirm_TipoDocumento" class="alert alert-warning" role="alert" style="display: none;">
+        <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" class="btn btn-primary btn-xs" onclick="TipoSalvar('@Url.Action("TipoDocumentos")'); $('#alert_confirm_TipoDocumento').hide();">Sim</button>&nbsp;&nbsp;&nbsp;
+        <button type="button" class="btn btn-default btn-xs" onclick="$('#alert_confirm_TipoDocumento').fadeOut('fast');">Não</button>
+    </div>
+</div><!-- /.box-body -->
+<div class="box-footer">
+    <button type="button" class="btn btn-default" onclick="$('#TipoDocumentos')[0].selectedIndex = 0; $('#divTipoDocumento').html('&nbsp;'); $('#divTipoDocumento').hide(); $('#boxForm').fadeIn('fast');">Fechar Cadastro de Tipo de Documento</button>
+</div>

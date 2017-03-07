@@ -1,0 +1,28 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        var habilitaEdicao = $("#HabilitaEdicao").val() == "True";
+        if (habilitaEdicao) {
+            var objDivPai = $("#divObservacao").parent(),
+                objDivBotoesEdicao = objDivPai.children(".text-right")[0];
+
+            $(objDivBotoesEdicao).toggleClass("hidden");
+        }
+    });
+</script>
+    }
+<div class="box box-primary">
+    <div class="box-header"><h3 class="box-title">Observação</h3></div>
+    <div class="box-body">
+            <div id="divObservacao">
+                <div class="form-group">
+                    @Html.TextAreaFor(model => model.Observacao, new { @class = "form-control input-sm", rows = "4" })
+                </div>
+            </div>
+        <br>
+        <div class="clearfix"></div>
+    </div>
+</div>
+

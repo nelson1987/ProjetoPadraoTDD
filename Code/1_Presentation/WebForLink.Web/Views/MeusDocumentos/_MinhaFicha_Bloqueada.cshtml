@@ -1,0 +1,147 @@
+﻿@model FichaCadastralWebForLinkVM
+@using System.Web.Mvc.Html
+@using WebForLink.Web.ViewModels.WebForLink
+
+@{
+    FornecedoresVM robo = (FornecedoresVM)ViewBag.FornecedorVM;
+}
+@section Header{
+    <style>
+        .fileUpload {
+            position: relative;
+            overflow: hidden;
+            margin: 0px;
+            height: 30px;
+            float: left;
+        }
+
+            .fileUpload input.upload {
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 0;
+                padding: 0;
+                font-size: 20px;
+                cursor: pointer;
+                opacity: 0;
+                filter: alpha(opacity=0);
+            }
+
+        #uploadFile {
+            border: 0;
+            background-color: transparent;
+        }
+    </style>
+}
+@Html.HiddenFor(x => x.ContratanteID)
+@Html.HiddenFor(x => x.ContratanteFornecedorID)
+@Html.HiddenFor(x => x.PJPFID)
+@Html.HiddenFor(x => x.TipoFornecedor)
+
+<!--DADOS GERAIS-->
+@Html.Partial("../Fornecedores/_FichaCadastral_DadosGerais_MinhaFicha_Bloqueada", Model)
+
+<!--ROBO-->
+@Html.Partial("../Fornecedores/_FichaCadastral_Robo", robo)
+
+<!--ENDEREÇO-->
+@Html.Partial("../Fornecedores/_FichaCadastral_DadosEnderecos", Model)
+
+<!--BANCARIOS-->
+@if (Model.DadosBancarios.Any(x => x.Banco != null))
+{
+    @Html.Partial("../Fornecedores/_FichaCadastral_DadosBancario", Model.DadosBancarios)
+}
+
+<!--CONTATOS-->
+@if (Model.DadosContatos.Any(x => x.EmailContato != null))
+{
+@Html.Partial("../Fornecedores/_FichaCadastral_Contatos", Model.DadosContatos)
+}
+
+<!--MATERIAIS E SERVIÇOS-->
+@if (Model.FornecedoresUnspsc.Any())
+{
+    @Html.Partial("../Fornecedores/_FichaCadastral_ServicosMaterias", Model.FornecedoresUnspsc)
+}
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if ('@(ViewBag.MensagemSucesso)' != '') {
+                $('#FichaAlertaSucessoTop, #FichaAlertaSucessoBottom').fadeIn('slow');
+                $('#FichaAlertaSucessoTop, #FichaAlertaSucessoBottom').text('@Html.Raw(ViewBag.MensagemSucesso)');
+                setTimeout('$("#FichaAlertaSucessoTop, #FichaAlertaSucessoBottom").fadeOut("slow")', 10000);
+            }
+
+            if ('@(ViewBag.MensagemErro)' != '') {
+                $('#FichaAlertaErroTop').fadeIn('slow');
+                $('#FichaAlertaErroTop').text('@Html.Raw(ViewBag.MensagemErro)');
+                setTimeout('$("#FichaAlertaErroTop").fadeOut("slow")', 10000);
+            }
+
+            TipoFornecedor();
+            $('input[name=TipoFornecedor]').on('click', TipoFornecedor);
+
+            if(@robo.ContratanteID > 0){
+                $('#divOrgaosPublico').show();
+                //$('#accordion-robo').collapse('hide');
+            }
+
+        });
+
+        function TipoFornecedor() {
+            if ('@Model.TipoFornecedor' == '1') {
+                $('#CNPJ_CPF').inputmask('99.999.999/9999.99');
+                $('#callReceitaCPF').hide();
+            }
+            else {
+                $('#CNPJ_CPF').inputmask('999.999.999-99');
+            }
+        }
+    </script>
+    @Scripts.Render("~/bundles/fileupload")
+    @*<script src="~/Scripts/plugins/jqueryUiWidget/jquery.ui.widget.js"></script>
+        <script src="~/Scripts/jquery.fileupload.js"></script>
+        <script src="~/Scripts/Views/Shared/DadosFornecedor.js"></script>
+        <script src="~/Scripts/Views/Shared/FileUpload.js"></script>
+        <script src="~/Scripts/Views/Shared/Robo.js"></script>*@
+    <script type="text/javascript">
+        $(function () {
+            $('.tdNumeral').inputmask('99999', { greedy: false });
+            $('.tdDecimalV3').inputmask('9,999', { greedy: false });
+            $('.tdDecimalV2').inputmask('99,99', { greedy: false });
+            $('.tdData').inputmask('dd/mm/yyyy');
+
+            urlReceitaCNPJ = '/MeusDocumentos/ReceitaFederalCNPJ';
+            urlReceitaCPF = '/MeusDocumentos/ReceitaFederalCPF';
+            urlSintegra = '/MeusDocumentos/Sintegra';
+            urlSimples = '/MeusDocumentos/SimplesNacional';
+
+            aplicarPluginUpload('.upload', '#CNPJ_CPF');
+        });
+
+        function formatarPaieFilho(perguntaPai, respostaPai) {
+            $.getJSON('@Url.Action("LiberarProximasRespostas","CadUnico")',
+                {
+                    idPerguntaPai: perguntaPai,
+                    idRespostaPai: respostaPai
+                },
+                function (data) {
+                    $(data).each(function (i) {
+                        if ($("[identificador = " + data[i].perguntaId + "]").attr("permissao") === "true") {
+                            $("[identificador = " + data[i].perguntaId + "]")
+                                .prop("disabled", false);
+                        }
+                        var $sli = $("[identificador = " + data[i].perguntaId + "]");
+                        $sli.empty();
+                        $.each(data[i].respostas, function (i, modelo) {
+                            $sli.append($("<option></option>")
+                                .attr("value", modelo.Value)
+                                .attr("selected", modelo.Selected)
+                                .text(modelo.Text));
+                        });
+                    });
+                });
+        }
+    </script>
+}

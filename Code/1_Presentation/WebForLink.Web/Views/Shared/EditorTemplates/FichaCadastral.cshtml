@@ -1,0 +1,19 @@
+﻿@model WebForLink.Web.Controllers.FichaCadastralVM
+<div class="row">
+    <div class="col-md-8">
+        @Html.HiddenFor(Model => Model.Id)
+        @Html.LabelFor(Model => Model.Status, htmlAttributes: new { @class = "" })
+        @Html.TextBoxFor(Model => Model.Status, new { htmlAttributes = new { @class = "form-control input-sm" } })
+        @Html.ValidationMessageFor(Model => Model.Status, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-md-4">
+        @Html.LabelFor(Model => Model.Bancos, htmlAttributes: new { @class = "" })
+        @Html.TextBoxFor(Model => Model.Bancos, new { htmlAttributes = new { @class = "form-control input-sm" } })
+        @Html.ValidationMessageFor(Model => Model.Bancos, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-md-8">
+        @Html.LabelFor(Model => Model.Contatos, htmlAttributes: new { @class = "" })
+        @Html.TextBoxFor(Model => Model.Contatos, new { htmlAttributes = new { @class = "form-control input-sm" } })
+        @Html.ValidationMessageFor(Model => Model.Contatos, "", new { @class = "text-danger" })
+    </div>
+</div>

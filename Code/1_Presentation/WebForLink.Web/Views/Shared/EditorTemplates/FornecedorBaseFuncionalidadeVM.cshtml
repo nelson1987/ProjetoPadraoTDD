@@ -1,0 +1,37 @@
+﻿@using WebForLink.Domain.Infrastructure;
+
+@model WebForLink.Web.ViewModels.FornecedorBaseFuncionalidadeVM
+
+@{
+    string categoriaCSS = "text-center";
+    string categoriaTitle = string.Empty;
+
+    if (string.IsNullOrEmpty(Model.CategoriaNome))
+    {
+        categoriaCSS = "danger text-center";
+        categoriaTitle = "Sem Categoria!";
+    }
+}
+
+<tr>
+    <td class="text-center">
+        @Html.CheckBoxFor(x => x.Selecionado)
+        @Html.HiddenFor(x => x.ID)
+    </td>
+    <td class="text-center">
+        @(!string.IsNullOrEmpty(Model.CNPJ) ?
+        Mascara.MascararCNPJouCPF(Model.CNPJ) :
+        Mascara.MascararCNPJouCPF(Model.CPF))
+    </td>
+    <td>
+        @(!string.IsNullOrEmpty(Model.RazaoSocial) ?
+        Model.RazaoSocial :
+        Model.Nome)
+    </td>
+    @*<td class="text-center"></td>*@
+    <td class="@categoriaCSS" data-container="body" data-toggle="tooltip" title="@categoriaTitle" data-placement="left">
+        @Html.DisplayFor(x => x.CategoriaNome)
+    </td>
+</tr>
+
+

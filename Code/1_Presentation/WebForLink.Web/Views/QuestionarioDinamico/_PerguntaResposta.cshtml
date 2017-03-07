@@ -1,0 +1,94 @@
+﻿@model WebForLink.Web.ViewModels.QuestionarioVM 
+@Html.AntiForgeryToken()
+@Html.Hidden("IdQuestionario", Model.Id)
+@foreach (var aba in Model.AbaList)
+{
+    <div class="box-header">
+        <h3 class="box-title">@aba.Titulo</h3>
+    </div>
+    <div class="box-body abas">
+        <div class="row">
+            @Html.Hidden("IdAba", aba.Id)
+            @foreach (var pergunta in aba.PerguntaList)
+            {
+                    <div class="col-md-4">
+                        <div class="form-group perguntas">
+                            @Html.Hidden("IdPergunta", pergunta.Id)
+                            @Html.Hidden("Titulo", pergunta.Titulo)
+                            @Html.Hidden("Obrigatorio", pergunta.Obrigatorio)
+                            @Html.Hidden("Leitura", pergunta.Leitura)
+                            @Html.Hidden("Escrita", pergunta.Escrita)
+                            @Html.Hidden("SolicitacaoId", pergunta.SolicitacaoId)
+                            @Html.Hidden("TipoDado", pergunta.TipoDado)
+                            @Html.Label(pergunta.Titulo, new { @class = "control-label" })
+                            @if (pergunta.Obrigatorio)
+                            {
+                                <span class="text-danger">*</span><br />
+                            }
+                            @{
+                            object novo;
+                            if (!pergunta.Escrita)
+                            {
+                                novo = new { @class = "form-control Resposta", disabled = "disabled" };
+                            }
+                            else
+                            {
+                                if (pergunta.PerguntaPai != null)
+                                {
+                                    novo = new { @class = "form-control Resposta", disabled = "disabled" };
+                                }
+                                else
+                                {
+                                    novo = new { @class = "form-control Resposta", onChange = "formatarPaieFilho(this.value);" };
+                                }
+                            }
+                            }
+                            @if (pergunta.DominioList.Any())
+                            {
+                                @*<select id="@pergunta.Titulo" name="@pergunta.Titulo" onchange=" alterarListaDominio(this.value, @pergunta.Id); " class="form-control Resposta">
+                                    <option value="">Selecione...</option>
+                                    @foreach (var dominio in pergunta.DominioList)
+                                    {
+                                        if (dominio.Value == pergunta.Resposta)
+                                        {
+                                            <option value="@dominio.Value" selected="selected">@dominio.Value - @dominio.Text</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@dominio.Value"> @dominio.Value - @dominio.Text </option>
+                                        }
+                                    }
+                                </select>*@
+
+
+                                @Html.DropDownListFor(s => s.Id, pergunta.DominioList, novo)
+                                if (pergunta.Obrigatorio)
+                                {
+                                    @Html.ValidationMessage(pergunta.Titulo, "", new { @class = "text-danger" })
+                                }
+                            }
+                            else
+                            {
+                                @Html.TextBox(pergunta.Titulo, pergunta.Resposta, novo)
+                                if (pergunta.Obrigatorio)
+                                {
+                                    @Html.ValidationMessage(pergunta.Titulo, "", new { @class = "text-danger" })
+                                }
+                            }
+                        </div>
+                    </div>
+            }
+        </div>
+    </div>
+}
+@section Scripts{
+<script type="text/javascript">
+    $(document).ready(function () {
+        var input = $('.input-validation-error:first');
+        if (input) {
+            input.focus();
+        }
+        //
+    });
+</script>
+}

@@ -1,0 +1,6 @@
+﻿@model WebForLink.Web.Controllers.EnviarEmailSolicitacaoGridVM
+<tr id="solicitacaoLinha_@Model.Id">
+    <td><input type="hidden" name="DocumentoList" value="@Model.Id" />@Model.Tipo</td>
+    <td>@Model.Descricao</td>
+    <th><button class="btn btn-danger btn-xs" onclick="$(this).parents('#solicitacaoLinha_@Model.Id').remove();"><span class="glyphicon glyphicon-trash"></span>&nbsp;Excluir</button></th>
+</tr>

@@ -1,0 +1,124 @@
+﻿@model WebForLink.Web.ViewModels.FichaCadastral.FichaCadastralDadosSolicitacaoVM
+@using WebForLink.Web.Interfaces;
+@using WebForLink.Web.Infrastructure;
+@using WebForLink.Domain.Infrastructure;
+@{
+    IGeral _metodosGerais = new Geral();
+    string key = _metodosGerais.ValorKey();
+    EncryptDecryptQueryString cripto = new EncryptDecryptQueryString();
+}
+<div id="boxGrid" class="box box-primary">
+    <div class="box-header"><h3 class="box-title">Solicitação</h3></div>
+    <div class="box-body">
+        <div class="col-md-1 col-xs-6">
+            <div class="form-group">
+                <label>Código</label><br />
+                <span>@Model.Id</span>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-6">
+            <div class="form-group">
+                <label>Tipo Solicitação</label><br />
+                <span>@Model.NomeSolicitacao</span>
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-6">
+            <div class="form-group">
+                <label>Data Solicitação</label><br />
+                <span>@Model.CriacaoSolicitacao</span>
+            </div>
+        </div>
+        <div class="col-md-6 col-xs-6">
+            <div class="form-group">
+                <label>Solicitante</label><br />
+                <span>@Model.Login</span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-4 col-xs-6">
+            <div class="form-group">
+                <label>Receita Federal</label><br />
+                <span>@Model.RoboReceita</span>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-6">
+            <div class="form-group">
+                <label>Sintegra</label><br />
+                <span>@Model.RoboSintegra</span>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-6">
+            <div class="form-group">
+                <label>Simples Nacional</label><br />
+                <span>@Model.RoboSimples</span>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-6">
+            <div class="form-group">
+                <label>Prazo de entrega</label><br />
+                <span>@Model.PrazoPreenchimento</span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            Situação
+                        </th>
+                        <th class="text-center">
+                            Status
+                        </th>
+                        <th class="text-center">
+                            Data
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.TramiteGrid.Any())
+                    {
+                        foreach (var item in Model.TramiteGrid)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    @item.NomePapel
+                                </td>
+                                <td class="text-center">
+                                    @item.NomeStatus
+                                </td>
+                                <td class="text-center">
+                                    @if (item.DataFim != null)
+                                    {
+                                        @item.DataFim
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <div class="clearfix"></div>
+        </div>
+        @if (Model.PermiteReenviarFicha)
+        {
+            using (Html.BeginForm(Model.UrlReenviarFicha))/* "ReenviarFicha", "Acompanhamento", new { TipoFuncionalidade = Model.TipoFuncionalidade, idSolicitacao = Model.SolicitacaoFornecedor.SolicitacaoCriacaoID, CNPJ = Model.CNPJ_CPF, EmailContato = Model.DadosContatos.FirstOrDefault(x => x.EmailContato == x.EmailContato).EmailContato, Model }))*/
+            {
+                <div class="col-md-4">
+                    <label>&nbsp;</label><br />
+                    <button type="button" class="btn btn-primary" id="BotaoFuncionalidade" data-toggle="modal" data-target="#myModal" onclick="$('#Funcao').val('@Model.TipoFuncionalidade')">Reenviar Ficha Cadastral</button>
+                    @Html.Partial("_Modal", Model)
+                </div>
+            }
+        }
+        <div class="clearfix"></div>
+    </div>
+</div>
+@if (Model.PertenceGrupoEmpresa)
+{
+    <div id="boxGrid2" class="box box-primary">
+        <div class="box-body">
+            <h4>Empresa: <small>@Model.ContratanteGrupo</small></h4>
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
+}

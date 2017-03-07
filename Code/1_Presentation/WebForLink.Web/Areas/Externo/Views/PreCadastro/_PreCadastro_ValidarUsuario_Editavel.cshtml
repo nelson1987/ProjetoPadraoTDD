@@ -1,0 +1,61 @@
+﻿@model WebForLink.Web.Areas.Externo.Models.InclusaoLinkExternoVM
+<!--INICIO Dados Gerais-->
+<div class="box box-primary">
+    <div class="box-change">
+        <div id="alertaSucessoDadosGerais" class="alert alert-success hidden" role="alert" onclick="ocultarMensagem(this)"></div>
+        <div id="alertaErroDadosGerais" class="alert alert-danger hidden" role="alert" onclick="ocultarMensagem(this)"></div>
+    </div>
+    <div class="box-body">
+        <div class="col-xs-8 col-md-5">
+            @using (Ajax.BeginForm("ValidarUsuarioSenhaPreCadastro", "PreCadastro", new AjaxOptions { OnSuccess = "renderizarDadosUsuarioForm(data, status, 'formUsuario')", OnFailure = "renderizarDvDadosUsuarioForm(data, status, 'formUsuario')" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-lg-12">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.IdContratante)
+                                @Html.HiddenFor(model => model.Link)
+                                <div class="form-group">
+                                    <div class="radio">
+                                        <label class="radio-inline">
+                                            @Html.RadioButtonFor(model => model.isCNPJ, false) Pessoa Física
+                                        </label>
+                                        <label class="radio-inline">
+                                            @Html.RadioButtonFor(model => model.isCNPJ, true) Pessoa Jurídica
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12" id="dvSelecionar">
+                            <div class="col-lg-6 hidden" id="cpf_form">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.CPF, htmlAttributes: new { @class = "control-label", id = "cpfLabelValidacao" })
+                                    @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @class = "form-control input-sm", id = "cpfInputValidacao" } })
+                                    @Html.ValidationMessageFor(model => model.CPF, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6" id="cnpj_form">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.CNPJ, htmlAttributes: new { @class = "control-label", id = "cnpjLabelValidacao" })
+                                    @Html.EditorFor(model => model.CNPJ, new { htmlAttributes = new { @class = "form-control input-sm", id = "cnpjInputValidacao" } })
+                                    @Html.ValidationMessageFor(model => model.CNPJ, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">&nbsp;</label><br />
+                                <button type="submit" class="btn btn-primary" id="btnValidar"> Validar</button>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            }
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

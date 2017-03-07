@@ -1,0 +1,30 @@
+﻿@model IEnumerable<WebForLink.Web.ViewModels.DadosContatoVM>
+@using WebForLink.Domain.Enums
+
+<div class="box box-primary">
+    <div class="box-change">
+        <div id="alertaSucessoDadosContatos" class="alert alert-success" role="alert" onclick="ocultarMensagem(this)"></div>
+        <div id="alertaErroDadosContatos" class="alert alert-danger" role="alert" onclick="ocultarMensagem(this)"></div>
+    </div>
+    <div class="box-header"><h3 class="box-title">Dados de Contatos</h3></div>
+    <div class="box-body">
+        <div class="aguarde-interno" id="divAguardeContatos">
+            <div>
+                <i class="fa fa-refresh fa-spin"></i> Aguarde...
+            </div>
+        </div>
+        <div id="divContatos">
+            @Html.DisplayForModel()
+        </div>
+        <br>
+        <div class="text-right text-nowrap hidden">
+            <button type="button" class="btn btn-primary" onclick="$('#divAguardeContatos').show(); consultarSolicitacoesEmAberto('DadosContatos', @Convert.ToInt32(EnumTiposFluxo.ModificacaoDadosContato));">Editar</button>
+        </div>
+        <div id="confirmacaoDadosContatos" class="alert alert-warning hidden" role="alert">
+            <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" id="botaoEditarDadosBancarios" class="btn btn-primary btn-xs" onclick="editarDados('DadosContatos', '@Url.Action("EditarDadosContatos", "DadosBancario")');">Sim</button>&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-default btn-xs" onclick="ocultarJanelaConfirmacao('DadosContatos')">Não</button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

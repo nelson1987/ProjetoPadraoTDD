@@ -1,0 +1,10 @@
+﻿@model WebForLink.Web.ViewModels.IDadoEndereco
+<div class="row divEndereco">
+    <div class="col-md-3">
+        <div class="form-group">
+            @Html.LabelFor(model => model.TipoEndereco, htmlAttributes: new { @class = "control-label" })&nbsp;<span class="text-danger" style="font-weight:bold;">*</span><br />
+            @Html.TextBoxFor(model => model.TipoEndereco, new { @class = "form-control input-sm", disabled = true })
+            @Html.ValidationMessageFor(model => model.TipoEndereco, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>

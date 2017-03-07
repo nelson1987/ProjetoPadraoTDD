@@ -1,0 +1,70 @@
+﻿@model WebForLink.Web.ViewModels.ArquivoAnexadoVM
+@{
+    string name = string.Format("files{0}[]", Model.Id);
+    string btnSuccess = string.Format("btnSuccess_{0}", Model.Id);
+    string fileBtn = string.Format("fileBtn_{0}", Model.Id);
+}
+<form class="fileupload" method="POST" enctype="multipart/form-data" data-url="@Url.Action("Upload", "UploadArquivo")">
+    <div class="row">
+        <div class="col-lg-8 fileupload-progress fade">
+            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar progress-bar-success" style="width: 0%;"></div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            @Html.HiddenFor(x => x.Id)
+            @Html.HiddenFor(x => x.IdSolicitacao)
+            @Html.HiddenFor(x => x.ArquivoAnexado)
+            @Html.HiddenFor(x => x.CodigoCliente)
+            <span class="btn btn-success fileinput-button pull-right" id=@btnSuccess>
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>Adicionar Arquivos</span>
+                <input id=@fileBtn type="file" name=@name multiple="">
+            </span>
+            <br>
+        </div>
+    </div>
+    <div class="row">
+        <div role="presentation" class="table table-striped col-lg-12">
+            <div class="files">
+                @foreach (var anexo in Model.ArquivosAnexos)
+                {
+                    foreach (var arquivo in anexo.ArquivosSalvos)
+                    {
+                        @*<span>@arquivo.Id</span>
+                            <span>@arquivo.Nome</span>
+                            <span>@arquivo.Endereco</span>*@
+
+                        <div class="row template-download fade in">
+                            <div class="col-lg-2">
+                                @*<span class="preview">
+                                        <a href=@arquivo.EnderecoDownload(6,23) title=@arquivo.Nome download=@arquivo.Nome data-gallery="">
+                                            <img src="/DADOS/Solicitacao/6\23\/thumbs/15032054_1414126095272084_2808935056608816621_n.jpg.80x80.jpg">
+                                        </a>
+                                    </span>*@
+                            </div>
+                            <div class="col-lg-6">
+                                <p class="name">
+                                    <a href=@arquivo.EnderecoDownload(6,23) title=@arquivo.Nome download=@arquivo.Nome data-gallery="">
+                                        @arquivo.Nome
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="col-lg-1">
+                                <span class="size">70.62 KB</span>
+                            </div>
+                            <div class="col-lg-3">
+                                <button class="btn btn-danger delete pull-right" data-type="GET" data-url="/UploadArquivo/DeleteFile/?chaveUrl=oYerQYggLh2i6AAeOJEo7jsxyNpo3SbnlarUKWwAEgD5ZkpPiII9oSCDJMgtpaOLMHLF1U9EWQRTxemtzNw7lW38Rh_22_nbayh9c_22_M8EfyrZv63VJNE6bffw==&amp;file=15032054_1414126095272084_2808935056608816621_n.jpg">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                    <span>Delete</span>
+                                </button>
+                                <input type="checkbox" name="delete" value="1" class="toggle hidden">
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</form>
+<br>

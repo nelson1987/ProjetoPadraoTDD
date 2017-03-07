@@ -1,0 +1,14 @@
+﻿@model IEnumerable<WebForLink.Web.Areas.Administracao.Controllers.NovoQuestionarioVM>
+@{
+    ViewBag.Title = "ConfigurarQuestionario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ConfigurarQuestionario</h2>
+
+@foreach (var item in Model)
+{
+    <div>
+        @item.Id
+    </div>
+}

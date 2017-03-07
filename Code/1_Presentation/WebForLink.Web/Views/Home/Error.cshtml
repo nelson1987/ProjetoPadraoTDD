@@ -1,0 +1,62 @@
+﻿@using WebForLink.Web.Infrastructure;
+@using WebForLink.Web.Interfaces;
+@{
+    
+    IGeral _metodosGerais = new Geral();
+    string Estilo = (string)Geral.PegaAuthTicket("Estilo");
+    string header = "";
+    string footer = "";
+
+    if (Estilo == null)
+    {
+        Layout = null;
+        header += "<!DOCTYPE html>";
+        header += "<html>";
+        header += "<head>";
+        header += "    <meta charset='utf-8' />";
+        header += "    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>";
+        header += "    <title>" + HttpContext.Current.Application["NomeSistema"].ToString() + "</title>";
+        header += Styles.Render("~/style/bootstrap").ToHtmlString();
+        header += Styles.Render("~/style/lilas").ToHtmlString();
+        header += "</head>";
+        header += "<body>";
+        footer += "</body>";
+        footer += "</html>";
+        
+    }
+
+    var ex = (HttpException)ViewBag.Exception;
+}
+
+@Html.Raw(header)
+
+<div class="error-page">
+    <div class="col-md-12 text-center"><h2><i class="fa fa-warning text-yellow"></i> @Context.Response.StatusCode</h2></div>
+    <div class="clearfix"></div>
+    <div class="col-md-12 text-center">
+        <h3> Desculpa! Ocorreu algum erro.</h3>
+        <p>
+            Este erro foi registrado e em breve será corrigido.
+        </p>
+    </div>
+    <div class="clearfix"></div>
+</div>
+@if (User.IsInRole("ADM.ERRO"))
+{
+    <div class="col-md-12">
+        <hr />
+        @if (ex != null)
+    {
+            <p><b>Codigo do Erro: </b><br /> @ex.ErrorCode</p>
+            <p><b>Mesagem: </b><br /> @ex.Message</p>
+            <p><b>Inner Exception: </b><br /> @ex.InnerException</p>
+            <p><b>Stake Tarce: </b><br /> @ex.StackTrace</p>
+    }
+    else
+    {
+            <p>Não há mensagem de erro.</p>
+    }
+    </div>
+}
+
+@Html.Raw(footer)

@@ -1,0 +1,117 @@
+﻿@model WebForLink.Web.Controllers.NovaFichaCadastralVM
+
+@{
+    ViewBag.Title = "Ficha";
+}
+<section class="content-header">
+    <h1>Minha Ficha Cadastral</h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-archive"></i> Meus Documentos</li>
+        <li class="active">Minha Ficha Cadastral</li>
+    </ol>
+</section>
+<section class="content">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.UsuarioId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.ContratanteId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.FornecedorId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Teste, new { htmlAttributes = new { @class = "form-control" } })
+
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Dados Gerais</h3>
+                </div>
+                <div class="box-body">
+                    @Html.Partial("~/Views/NovoDadosGerais/_DadosGeraisFrm.cshtml", Model.DadosGerais)
+                </div>
+            </div>
+            @Html.Partial("~/Views/NovoDadosEndereco/_DadosEnderecoFrm.cshtml", Model.DadosEndereco)
+
+
+            <div class="box box-primary">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/date")
+    <script>
+        function incluirDados(strTipo, strUrlAction) {
+            $.ajax({
+                type: "POST",
+                url: strUrlAction,
+                dataType: "html",
+                success: function (data, textStatus, jqXHR) {
+                    renderizarCampos(strTipo, $(data).find('#divEnderecos'));
+                    $('.TelefoneMask').inputmask({ mask: ['(99) 9999-9999', '(99) 99999-9999'] });
+                    $('form').removeData('validator');
+                    $('form').removeData('unobtrusiveValidation');
+                    $.validator.unobtrusive.parse($('form'));
+                },
+                error: function (data, textStatus, jqXHR) {
+                },
+            });
+        }
+        function renderizarCampos(strTipo, data) {
+            switch (strTipo) {
+                case "DadosBancarios":
+                    $('#divBancos').append(data);
+                    break;
+                case "DadosEnderecos":
+                    $('#divEnderecos').append(data);
+                    break;
+                case "DadosContatos":
+                    $("#divContatos").append(data);
+                    aplicarMascaras(data);
+                    break;
+                case "Documentos":
+                    $("#divDocumentos").children().append(data);
+                    break;
+                case "QuestionarioDinamico":
+                    $("#divQuestionarioDinamico").children().append(data);
+                    break;
+            }
+        }
+
+        @*$('#btnEndereco').click(function () {
+            adicionarEnderecoEmModal(12);
+        });
+        function adicionarEnderecoEmModal(idFicha) {
+            console.log($('form #lstEnderecoFicha').serialize());
+            $.ajax({
+                url: '@Url.Action("AdicionarDadosEnderecos", "NovoDadosEndereco")',
+                data: $('form').serialize(),
+                success: function (result) {
+                    //var lstEndereco = $(result).find('#lstEnderecoFicha .panel:last-child');
+                    $('#lstEnderecoFicha').html(result);
+                    //console.log(result);
+                }
+            });
+        }*@
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var habilitaEdicao = $("#HabilitaEdicao").val() == "True";
+            if (habilitaEdicao) {
+                var objDivPai = $("#divContatos").parent(),
+                    objDivBotoesEdicao = objDivPai.children(".text-right")[0];
+
+                $(objDivBotoesEdicao).toggleClass("hidden");
+            }
+            $('.TelefoneMask').inputmask({ mask: ['(99) 9999-9999', '(99) 99999-9999'] });
+        });
+    </script>
+}

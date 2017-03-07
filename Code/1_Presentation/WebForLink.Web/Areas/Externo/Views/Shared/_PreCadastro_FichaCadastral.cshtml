@@ -1,0 +1,100 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+
+@using (Ajax.BeginForm("Incluir", "PreCadastro", new AjaxOptions { OnSuccess = "renderizarFichaCadastralForm(data, status, 'formPrecadastro')" }))
+{
+    <div>
+        @Html.AntiForgeryToken()
+        @Html.TextBoxFor(x => x.IsPjpfProprio, new { @class = "hidden" })
+        @Html.TextBoxFor(x => x.IsPjpfBaseProprio, new { @class = "hidden" })
+        @Html.TextBoxFor(x => x.ID, new { @class = "hidden" })
+        @Html.TextBoxFor(x => x.ContratanteID, new { @class = "hidden" })
+        @Html.TextBoxFor(x => x.PreCadastroEnum, new { @class = "hidden" })
+        @Html.TextBoxFor(x => x.PjpfBaseId, new { @class = "hidden" })
+        <div class="box hidden">
+            <div class="box-change" id="divDadosGerais">
+                <div id="alertaSucessoDadosGerais" class="alert alert-success hidden" role="alert" style="font-size: 14px; font-weight: bold; text-align: center;" onclick="ocultarMensagem(this)"></div>
+                <div id="alertaErroDadosGerais" class="alert alert-danger hidden" role="alert" style="font-size: 14px; font-weight: bold; text-align: center;" onclick="ocultarMensagem(this)"></div>
+            </div>
+        </div>
+        <!--INICIO Dados Gerais-->
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">Dados Gerais</h3>
+                @Html.ValidationMessage("DadosGeraisValidation", "", new { @class = "text-danger" })
+            </div>
+            <div class="box-body">
+                <div id="divDadosGerais">
+                    @Html.Partial("~/Areas/Externo/Views/Shared/_PreCadastro_DadosGerais_Editavel.cshtml", Model)
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!--FIM Dados Gerais-->
+        <!--INICIO Dados Enderecos-->
+        <div class="box box-primary">
+            <div class="box-change">
+                <div id="alertaSucessoDadosEnderecos" class="alert alert-success hidden" role="alert" onclick="ocultarMensagem(this)"></div>
+                <div id="alertaErroDadosEnderecos" class="alert alert-danger hidden" role="alert" onclick="ocultarMensagem(this)"></div>
+            </div>
+            <div class="box-header">
+                <h3 class="box-title">Dados de Endereços</h3>
+                @Html.ValidationMessage("DadosEnderecosValidation", "", new { @class = "text-danger" })
+            </div>
+            <div class="box-body">
+                <div id="divEndereco">
+                    @foreach (var item in Model.DadosEnderecos)
+                    {
+                        @Html.Partial("~/Areas/Externo/Views/Shared/_PreCadastro_DadosEndereco_Editavel.cshtml", item)
+                    }
+                </div>
+                <div class="form-group" style="padding-top: 7px;">
+                    <button type="button" class="btn btn-default" onclick="incluirDados('divEndereco', '@Url.Action("Index", "EnderecoPartial")',this);" disable-input="">Adicionar Mais Endereços</button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!--FIM Dados Enderecos-->        
+        <!--INICIO Dados Contatos -->
+        <div class="box box-primary">
+            <div class="box-change">
+                <div id="alertaSucessoDadosContatos" class="alert alert-success hidden" role="alert" onclick="ocultarMensagem(this)"></div>
+                <div id="alertaErroDadosContatos" class="alert alert-danger hidden" role="alert" onclick="ocultarMensagem(this)"></div>
+            </div>
+            <div class="box-header">
+                <h3 class="box-title">Dados de Contatos</h3>
+                @Html.ValidationMessage("DadosContatosValidation", "", new { @class = "text-danger" })
+            </div>
+            <div class="box-body">
+                <div id="divContato">
+                    @foreach (var item in Model.DadosContatos)
+                    {
+                        @Html.Partial("~/Areas/Externo/Views/Shared/_PreCadastro_DadosContato_Editavel.cshtml", item)
+                    }
+                </div>
+                <div class="form-group" style="padding-top: 7px;">
+                    <button type="button" class="btn btn-default" onclick="incluirDados('divContato', '@Url.Action("Index", "ContatoPartial")',this);" disable-input="">Adicionar Mais Contatos</button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!--Fim Dados Contatos -->
+        @Html.Partial("~/Areas/Externo/Views/Shared/_PreCadastro_ServicoMaterial_Editavel.cshtml", Model.FornecedoresUnspsc)
+        <div class="box box-primary">
+            <div class="box-body">
+                <div class="text-center text-nowrap">
+                    <button type="button" class="btn btn-default" onclick="location.href='@Model.ChaveUrl'">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="$('#alert_confirm').fadeIn('fast');">Salvar</button>
+                </div>
+                <div class="clearfix"></div>
+                <div id="alert_confirm" class="alert alert-warning" role="alert" style="display: none;">
+                    <span>
+                        Tem certeza que deseja confirmar o pré-cadastro?<br />
+                    </span><br />
+                    <button type="submit" class="btn btn-primary btn-xs" onclick="$('#alert_confirm').fadeOut('fast');">Sim</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-default btn-xs" onclick="$('#alert_confirm').fadeOut('fast');">Não</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

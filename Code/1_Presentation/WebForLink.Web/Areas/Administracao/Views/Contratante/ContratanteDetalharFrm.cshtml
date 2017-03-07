@@ -1,0 +1,85 @@
+﻿@model WebForLink.Web.Areas.Administracao.Models.ContratanteAdministracaoModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdministracao.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        Acompanhamento
+        <!-- small>Control panel</!--small -->
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> Contratante</li>
+        <li class="active">Detalhar</li>
+    </ol>
+</section>
+
+<!-- FORM -->
+<section class="content">
+    <div id="boxGrid" class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Solicitação</h3>
+        </div>
+        <div class="box-body">
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CNPJ)<br/>
+                    @Html.DisplayFor(model => model.CNPJ)
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RazaoSocial)<br />
+                    @Html.DisplayFor(model => model.RazaoSocial)
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NomeFantasia)<br />
+                    @Html.DisplayFor(model => model.NomeFantasia)
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DataCadastro)<br />
+                    @Html.DisplayFor(model => model.DataCadastro)
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ExtensaoImagem)<br />
+                    @Html.DisplayFor(model => model.ExtensaoImagem)
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Estilo)<br />
+                    @Html.DisplayFor(model => model.Estilo)
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ContranteCodERP)<br />
+                    @Html.DisplayFor(model => model.ContranteCodERP)
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ContratanteConfig.ContratanteId)<br />
+                    @Html.DisplayFor(model => model.ContratanteConfig.ContratanteId)
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="box box-primary">
+        <div class="box-body">
+            <div class="text-center text-nowrap">
+                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("ContratanteLst", "Contratante")'">Voltar</button>
+            </div>
+        </div>
+    </div>
+</section>

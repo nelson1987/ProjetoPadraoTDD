@@ -1,0 +1,59 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+@{ 
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <title></title>    
+</head>
+<body>
+    @if (ViewBag.erro == null)
+    {
+
+        @Html.HiddenFor(x => x.ContratanteID)
+        @Html.Hidden("FornecedorID", Model.ID)
+        @Html.HiddenFor(x => x.ContratanteFornecedorID)
+        @Html.Hidden("CategoriaContratanteID", Model.CategoriaId)
+
+        if (ViewBag.StatusFornecedor == 2)
+        {
+            @Html.Partial("../Fornecedores/_FichaCadastral_Bloqueado", Model)
+        }
+
+        @Html.Partial("../Fornecedores/_FichaCadastral_FornecedorRobo", Model)
+
+        @Html.Partial("../Fornecedores/_FichaCadastral_DadosGerais", Model)
+
+        @Html.Partial("../Fornecedores/_FichaCadastral_DadosEnderecos", Model)
+
+        if (Model.DadosBancarios.Count > 0)
+        {
+            @Html.Partial("../Fornecedores/_FichaCadastral_DadosBancario", Model.DadosBancarios)
+        }
+
+        if (Model.DadosContatos.Count > 0)
+        {
+            @Html.Partial("../Fornecedores/_FichaCadastral_Contatos", Model.DadosContatos)
+        }
+
+        @*@Html.Partial("../Fornecedores/_FichaCadastral_Anexos", Model.SolicitacaoFornecedor)*@
+
+        @Html.Partial("../Fornecedores/_FichaCadastral_ServicosMaterias", Model.FornecedoresUnspsc)
+
+        if (Model.Questionarios.QuestionarioDinamicoList != null)
+        {
+            @Html.Partial("../Fornecedores/_FichaCadastral_QuestionarioDinamico", Model.Questionarios)
+        }
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert" style="font-size: 14px; font-weight: bold; text-align: center;">
+            <div>@ViewBag.erro</div>
+        </div>
+    }
+    </body>
+</html>

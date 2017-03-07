@@ -1,0 +1,52 @@
+﻿@model WebForLink.Web.ViewModels.EnderecoVM
+<div class="panel panel-default" data-id-form="@Model.IdForm">
+    <div class="panel-body">
+        <div class="enderecoVMs">
+            <div class="row">
+                @Html.HiddenFor(Model => Model.Id)
+                <div class="col-md-3">
+                    @Html.LabelFor(Model => Model.Cep, htmlAttributes: new { @class = "" })
+                    @Html.TextBoxFor(Model => Model.Cep, new { @class = "form-control input-sm cepMask" })
+                    @Html.ValidationMessageFor(Model => Model.Cep, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(Model => Model.Estado, htmlAttributes: new { @class = "" })
+                    @Html.DropDownListFor(m => m.Estado, Model.EstadosList, new { @class = "form-control input-sm" })
+                    @Html.ValidationMessageFor(Model => Model.Estado, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(Model => Model.Cidade, htmlAttributes: new { @class = "" })
+                    @Html.TextBoxFor(Model => Model.Cidade, new { @class = "form-control input-sm" })
+                    @Html.ValidationMessageFor(Model => Model.Cidade, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(Model => Model.Bairro, htmlAttributes: new { @class = "" })
+                    @Html.TextBoxFor(Model => Model.Bairro, new { @class = "form-control input-sm" })
+                    @Html.ValidationMessageFor(Model => Model.Bairro, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.LabelFor(Model => Model.Endereco, htmlAttributes: new { @class = "" })
+                    @Html.TextBoxFor(Model => Model.Endereco, new { @class = "form-control input-sm" })
+                    @Html.ValidationMessageFor(Model => Model.Endereco, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(Model => Model.Numero, htmlAttributes: new { @class = "" })
+                    @Html.TextBoxFor(Model => Model.Numero, new { @class = "form-control input-sm" })
+                    @Html.ValidationMessageFor(Model => Model.Numero, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    @Html.LabelFor(Model => Model.Complemento, htmlAttributes: new { @class = "" })
+                    @Html.TextBoxFor(Model => Model.Complemento, new { @class = "form-control input-sm" })
+                    @Html.ValidationMessageFor(Model => Model.Complemento, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-xs btn-warning" type="button" onclick="apagarEndereco(this);">
+                        <i class="glyphicon glyphicon-trash">&nbsp;</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,202 @@
+﻿@model WebForLink.Web.ViewModels.EnviarEmailSolicitacaoVM
+@using WebForLink.Web.Helpers
+@{
+    ViewBag.Title = "Incluir";
+}
+
+@section styles{
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-wysiwyg/0.3.3/bootstrap3-wysihtml5.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.webui-popover/1.2.1/jquery.webui-popover.min.css">
+    <style>
+        .btn {
+            border-color: #ccc !important;
+            border-radius: 2px;
+        }
+
+        .container-fluid {
+            padding-top: 65px;
+        }
+
+        .footer {
+            height: 50px;
+            padding-bottom: 0px;
+            padding-top: 0px;
+        }
+
+            .footer .container {
+                padding-top: 15px;
+            }
+
+        #relatorioSelecionados ul {
+            text-decoration: none;
+        }
+    </style>
+}
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(x => x.IdFornecedor)
+    @Html.LabelFor(x => x.CodigoCliente)
+    @Html.LabelFor(x => x.LoginUsuario)
+    <div class="container-fluid">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="row">
+                <div class="form-inline">
+                    <div class="col-lg-6">
+                        @Html.LabelFor(x => x.Cnpj, new { @class = "control-label col-lg-4" })
+                        @Html.TextBoxFor(x => x.Cnpj, new { @class = "form-control col-lg-7", disabled = "disabled" })
+                    </div>
+                    <div class="col-lg-6">
+                        @Html.LabelFor(x => x.RazaoSocial, new { @class = "control-label col-lg-4" })
+                        @Html.TextBoxFor(x => x.RazaoSocial, new { @class = "form-control col-lg-7", disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+            <!-- Main content -->
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelForRequired(x => x.Assunto, new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.Assunto, new { @class = "form-control input-sm" })
+                    @Html.ValidationMessageFor(x => x.Assunto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelForRequired(x => x.Mensagem, new { @class = "control-label" })
+                    @Html.TextAreaFor(x => x.Mensagem, new { @class = "form-control input-sm", rows = "7", cols = "20" })
+                    @Html.ValidationMessageFor(x => x.Mensagem, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-lg-12 col-sm-12">
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary col-lg-10 col-lg-offset-1 col-sm-12" id="btnDocumento"><span class="glyphicon glyphicon-arrow-down"></span>&nbsp;Incluir Documento</button>
+                </div>
+            </div>
+            <br />
+            <div class="col-md-12 hidden" id="tabDocumentos">
+                <div class="col-md-12">
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(x => x.TipoDocumento, new { @class = "control-label" })
+                            @Html.DropDownListFor(x => x.TipoId, Model.TipoDocumento, new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(x => x.DescricaoDocumento, new { @class = "control-label" })
+                            @Html.DropDownListFor(x => x.DescricaoId, Model.DescricaoDocumento, new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary btn-sm" id="btnInclusao"><span class="glyphicon glyphicon-arrow-down"></span>Adicionar Documento em Solicitação</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 table-responsive">
+                    <table class="table table-bordered table-striped table-condensed" id="documentosSelecionados">
+                        <thead style="background-color: #2f7790; color: white;">
+                            <tr>
+                                <th>Tipo de Documento</th>
+                                <th>Nome de Documento</th>
+                                <th>Opção</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DocumentoList)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="hidden" name="DocumentoList" value="@item.Id" />@item.Tipo
+                                    </td>
+                                    <td>@item.Descricao</td>
+                                    <th>
+                                        <button class="btn btn-danger btn-xs" onclick=""><span class="glyphicon glyphicon-trash"></span>&nbsp;Excluir</button>
+                                    </th>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br />
+            <div class="col-md-12">
+                <div class="form-group">
+                    <button type="button" class="btn btn-default btn-sm" id="btnInclusao"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Voltar</button>
+                    <button type="submit" class="btn btn-success btn-sm pull-right" id="btnInclusao"><span class="glyphicon glyphicon-saved"></span>&nbsp;Enviar Solicitação</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/bootstrap3-wysihtml5.all.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.webui-popover.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#Mensagem").wysihtml5();
+            $("#btnDocumento").click(function () {
+                $("#tabDocumentos").toggleClass("hidden");
+                $('#aguarde').toggleClass("hidden");
+                $.ajax({
+                    url: '@Url.Action("ListarTipoDocumento")',
+                    success: function (data) {
+                        $('#TipoId').empty();
+                        $('#TipoId').append('<option value="0">--Selecione--</option>');
+                        for (var i = 0; i < data.length; i++) {
+                            $('#TipoId').append('<option value="' + data[i].Id + '">' + data[i].Descricao + '</option>');
+                        }
+                        console.log(data);
+                    },
+                    complete: function (data) {
+                        $('#aguarde').toggleClass("hidden");
+                    }
+                });
+            });
+
+            $('#TipoId').change(function () {
+                $('#aguarde').toggleClass("hidden");
+                $.ajax({
+                    url: '@Url.Action("ListarDescricaoDocumento")',
+                    data: {
+                        tipo: $('#TipoId').val()
+                    },
+                    success: function (data) {
+                        $('#DescricaoId').empty();
+                        $('#DescricaoId').append('<option value="0">--Selecione--</option>');
+                        for (var i = 0; i < data.length; i++) {
+                            $('#DescricaoId').append('<option value="' + data[i].Id + '">' + data[i].Descricao + '</option>');
+                        }
+                        $('#DescricaoId').removeAttr("Disabled");
+                    },
+                    complete: function (data) {
+                        $('#aguarde').toggleClass("hidden");
+                    }
+                });
+            });
+            $('#btnInclusao').click(function () {
+                $('#aguarde').toggleClass("hidden");
+                if ($('#DescricaoId').val() == 0 || $('#TipoId').val() == 0)
+                    return false;
+                if ($('input[name=DocumentoList]').length > 0)
+                    for (var i = 0; i < $('input[name=DocumentoList]').length; i++) {
+                        if ($('input[name=DocumentoList]')[i].value == $('#DescricaoId').val())
+                            return false;
+                    }
+                $.ajax({
+                    url: '@Url.Action("AdicionarLinhaTabelaDocumentoSolicitados")',
+                    data: {
+                        tipo: $('#TipoId').val(),
+                        descricao: $('#DescricaoId').val()
+                    },
+                    success: function (data) {
+                        $('#documentosSelecionados').append(data);
+                    },
+                    complete: function (data) {
+                        $('#aguarde').toggleClass("hidden");
+                    }
+                });
+            });
+        });
+    </script>
+}

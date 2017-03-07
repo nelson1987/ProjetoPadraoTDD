@@ -1,0 +1,121 @@
+﻿@using WebForLink.Web.Infrastructure;
+@using WebForLink.Web.Interfaces;
+
+@{
+    IGeral metodosGerais = new Geral();
+    string estilo = metodosGerais.PegaAuthTicket("Estilo").ToString();
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <title>@System.Web.HttpContext.Current.Application["NomeSistema"].ToString()</title>
+    @Styles.Render("~/style/bootstrap")
+    @Styles.Render("~/style/" + estilo)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @RenderSection("scripts", required: false)
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js.js"></script>
+
+        <style>
+            .knob {
+                display: none;
+            }
+        </style>
+
+    <![endif]-->
+    <!--[if lt IE 8]>
+        <script>
+            location.href = 'Compatibilidade.html'
+        </script>
+    <![endif]-->
+
+</head>
+<body class="skin-blue">
+    <div class="aguarde">
+        <div>
+            <i class="fa fa-refresh fa-spin"></i> Aguarde...
+        </div>
+    </div>
+    <header class="header">
+        <a href="@Url.Action("Index", "Home")" class="logo">
+            @System.Web.HttpContext.Current.Application["NomeSistema"].ToString()
+        </a>
+        <div class="nome-cliente-mobile col-md-12">
+            <i>@metodosGerais.PegaAuthTicket("NomeEmpresa").ToString()</i>
+        </div>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <div class="col-xs-1 col-md-1">
+                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+            </div>
+            <div class="nome-cliente col-md-9">
+                <i>@metodosGerais.PegaAuthTicket("NomeEmpresa").ToString()</i>
+            </div>
+            <div class="navbar-right">
+                <ul class="nav navbar-nav">
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="glyphicon glyphicon-user"></i>
+                            <span>@metodosGerais.PegaAuthTicket("NomeReduzidoUsuario").ToString() <i class="caret"></i></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-right">
+                                    <a href="@Url.Action("Index", new { area = "", controller = "Home" })" class="btn btn-default btn-flat">Sair</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MENU -->
+
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+        <aside class="left-side sidebar-offcanvas">
+            <section class="sidebar">
+                <div class="user-panel">
+                    <div class="logo-cliente">
+                        <button type="button" class="btn btn-default" onclick="window.location.href='@Url.Action("LogoFoto", new { area = "", controller = "HomeAdmin" })'">
+                            <i class="fa fa-pencil"></i> Inserir Logo
+                        </button>
+                        @if (System.IO.File.Exists(Server.MapPath("/ImagensUsuarios/") + metodosGerais.PegaAuthTicket("Imagem").ToString()))
+                        {
+                            <img src='~/ImagensUsuarios/@metodosGerais.PegaAuthTicket("Imagem").ToString()' />
+                        }
+                        else
+                        {
+                            <img src='~/Content/images/@((metodosGerais.PegaAuthTicket("TipoContratante").ToString() == "1") ? "semfoto.png" : "semlogo.png")' />
+                        }
+                    </div>
+                </div>
+            </section>
+        </aside>
+
+        <aside class="right-side">
+            @RenderBody()
+        </aside>
+    </div>
+</body>
+@RenderSection("scripts", required: false)
+</html>

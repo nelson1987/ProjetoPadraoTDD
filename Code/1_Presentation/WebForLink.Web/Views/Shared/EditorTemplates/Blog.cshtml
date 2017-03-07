@@ -1,0 +1,17 @@
+﻿@model WebForLink.Web.Controllers.Blog
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="bancoVMs">
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.Id)
+                @Html.LabelFor(Model => Model.Name, htmlAttributes: new { @class = "" })
+                @Html.TextBoxFor(model => model.Name)
+                @Html.LabelFor(Model => Model.URL, htmlAttributes: new { @class = "" })
+                @Html.TextBoxFor(model => model.URL)
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </div>
+        </div>
+    </div>
+</div>

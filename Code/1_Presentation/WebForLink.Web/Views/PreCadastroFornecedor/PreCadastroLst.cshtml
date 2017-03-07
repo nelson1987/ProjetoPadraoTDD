@@ -1,0 +1,305 @@
+﻿@model WebForLink.Web.ViewModels.PreCadastroListaVM
+
+@section Header {
+    @Styles.Render("~/style/date")
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/date")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if ('@(ViewBag.MensagemSucesso)' != '') {
+                $('#FichaAlertaOkTop').fadeIn('slow');
+                $('#FichaAlertaOkTop').text('@Html.Raw(ViewBag.MensagemSucesso)');
+                setTimeout('$("#FichaAlertaOkTop").fadeOut("slow")', 10000);
+            }
+
+            if ('@(ViewBag.MensagemError)' != '') {
+                $('#FichaAlertaErroTop').fadeIn('slow');
+                $('#FichaAlertaErroTop span').text('@Html.Raw(ViewBag.MensagemError)');
+            }
+
+            $('#FiltroPesquisa_CNPJ').inputmask('99.999.999/9999-99');
+            $('#FiltroPesquisa_CPF').inputmask('999.999.999-99');
+
+
+
+            $("[data-mask]").inputmask();
+
+            fBtn();
+
+            carregaCheckBoxGrid('@(ViewBag.HiddenFornecedorId)');
+        });
+
+        function Chama(action) {
+            var chave = $('input[name=rdFornecedorId]:checked').val();
+            var obj = $('input[name=rdFornecedorId]:checked');
+
+            location.href = '/Fornecedores/' + action + "/" + chave;
+
+        }
+
+        function pegaCNPJ() {
+            var cnpj = "";
+            cnpj = $('#FiltroPesquisa_CNPJ').val();
+            cnpj = cnpj.replace(/\./g, '').replace(/\-/g, '').replace(/\//g, '').replace(/\ /g, '');
+
+            return cnpj;
+        }
+
+        function pegaCPF() {
+            var cpf = "";
+            cpf = $('#FiltroPesquisa_CPF').val();
+            cpf = cpf.replace(/\./g, '').replace(/\-/g, '').replace(/\ /g);
+
+            return cpf;
+        }
+
+        function fBtn(obj) {
+            if ($('input[name=rdFornecedorId]:radio:checked').val() != undefined) {
+                if (obj == undefined)
+                    obj = $('input[name=rdFornecedorId]:radio:checked')
+
+                var tudoAmpliado = $(obj).parent('td').children('input[name=TudoAmpliado]').val();
+                var bloqueado = $(obj).parent('td').children('input[name=Bloqueado]').val();
+
+                $('#btnExibir').prop('disabled', false);
+                $('#btnModificar').prop('disabled', false);
+
+                if (bloqueado == '1') {
+                    $('#btnBloquear').prop('disabled', true);
+                    $('#btnDesbloquear').prop('disabled', false);
+                } else {
+                    $('#btnBloquear').prop('disabled', false);
+                    $('#btnDesbloquear').prop('disabled', true);
+                }
+
+                if (tudoAmpliado == '1') {
+                    $('#btnExpandir').prop('disabled', true);
+                } else {
+                    $('#btnExpandir').prop('disabled', false);
+                }
+            }
+        }
+
+        function checkFornecedor(param) {
+            if (param.checked) {
+                var id = $(param).parent().parent().find('#item_ID');
+                console.log('ID ', id.val());
+                addFornecedorId(id.val(), true);
+
+            } else {
+                var id = $(param).parent().parent().find('#item_ID');
+                addFornecedorId(id.val(), false);
+            }
+        }
+
+        function addFornecedorId(id, chk) {
+            var valor = "";
+            if (chk) {
+                valor += $('#hiddenFornecedorId').val() + id + "|";
+                $('#hiddenFornecedorId').val(valor);
+            } else {
+                valor += $('#hiddenFornecedorId').val().replace(id + '|', '');
+                $('#hiddenFornecedorId').val(valor);
+            }
+        }
+
+        function carregaCheckBoxGrid(param) {
+            if (param != "" && param != null && param != undefined) {
+                var arrayFornecedorId = [];
+                arrayFornecedorId = param.split("|");
+
+                $('#grid tr').each(function () {
+                    var id = $(this).find("#item_ID").val();
+                    if (arrayFornecedorId.indexOf(id) != -1) {
+                        var checkbox = $(this).find('input[type="checkbox"]');
+                        $(checkbox).prop('checked', true);
+                    }
+                });
+            }
+        }
+
+        function verificaChecks() {
+            if ($('#hiddenFornecedorId').val() == "" || $('#hiddenFornecedorId').val() == null) {
+                $('#FichaAlertaErroChecks').fadeIn('slow');
+                $('#FichaAlertaErroChecks span').text("Nenhum fornecedor selecionado.");
+                return false;
+            }
+
+            var param = $('#hiddenFornecedorId').val();
+            window.location.href = '@Url.Action("FornecedoresLst")' + '?acao=' + "SOLICITARDOCUMENTO&ids=" + param;
+
+        }
+    </script>
+}
+<section class="content-header">
+    <h1>
+        Pré-Cadastro
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> Pré-Cadastro</li>
+        <li class="active">Pré-Cadastro de Fornecedores</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<!-- .content -->
+<section class="content">
+    <div class="row">
+        <div id="FichaAlertaOkTop" class="alert alert-success" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick=" $(this).fadeOut('fast') "></div>
+    </div>
+    <div class="row">
+        <div id="FichaAlertaErroTop" class="alert alert-danger" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick=" $(this).fadeOut('fast') ">
+            <span></span>
+            <br />
+            <input class="btn btn-default btn-xs" type="button" value="Fechar" onclick=" $('#FichaAlertaErroTop').hide();" />
+        </div>
+    </div>
+    <div class="row">
+        <div id="FichaAlertaErroChecks" class="alert alert-danger" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick=" $(this).fadeOut('fast') ">
+            <span></span>
+            <br />
+        </div>
+    </div>
+    <!-- .box -->
+    <div id="boxGrid" class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Pesquisa de Fornecedor</h3>
+        </div>
+        <div class="box-body">
+            <div class="form-group">
+                @using (Html.BeginForm("PreCadastroLst"))
+                {
+                    @Html.Hidden("Pagina", (int)ViewBag.Pagina)
+                    @Html.Hidden("hiddenFornecedorId", (string)ViewBag.HiddenFornecedorId)
+                    <div class="row">
+                        <div class="col-md-2">
+                            @Html.LabelFor(x => x.FiltroPesquisa.CNPJ)<br />
+                            @Html.TextBoxFor(x => x.FiltroPesquisa.CNPJ, new { @class = "form-control input-sm" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.LabelFor(x => x.FiltroPesquisa.CPF)<br />
+                            @Html.TextBoxFor(x => x.FiltroPesquisa.CPF, new { @class = "form-control input-sm" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.LabelFor(x => x.FiltroPesquisa.Nome)<br />
+                            @Html.TextBoxFor(x => x.FiltroPesquisa.Nome, new { @class = "form-control input-sm" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Categoria (Grupo Contas)</label><br />
+                            @Html.Partial("_CategoriasTreeView", (List<WebForLink.Web.ViewModels.CategoriaVM>)ViewBag.Categoria)
+                        </div>
+                        @if (ViewBag.Empresa != null)
+                        {
+                            <div class="col-md-6">
+                                <label>Empresa</label>
+                                @Html.DropDownList("Empresa", null, "Selecionar...", new { @class = "form-control input-sm" })
+                            </div>
+                        }
+                        <div class="clearfix"></div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="form-group pull-right">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("FornecedoresLst")'"><i class="fa fa-eraser"></i>&nbsp; Limpar</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp; Pesquisar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                }
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-condensed" id="grid">
+                    <thead>
+                        @if (Model.ListaGrid.Any())
+                        {
+                            <tr>
+
+                                <th class="text-center">
+                                    @Html.DisplayNameFor(model => model.FiltroPesquisa.RazaoSocial)
+                                </th>
+                                <th class="text-center">
+                                    @Html.DisplayNameFor(model => model.FiltroPesquisa.CNPJ)
+                                </th>
+                                <th class="text-center">
+                                    @Html.DisplayNameFor(model => model.FiltroPesquisa.Nome)
+                                </th>
+                                <th class="text-center">
+                                    @Html.DisplayNameFor(model => model.FiltroPesquisa.Status)
+                                </th>
+                                <th class="text-center">Ação</th>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <th colspan="4">
+                                    &nbsp;
+                                </th>
+                            </tr>
+                        }
+                    </thead>
+                    <tbody>
+                        @if (Model.ListaGrid.Any())
+                        {
+                            foreach (var item in Model.ListaGrid)
+                            {
+                                <tr>
+                                    @Html.HiddenFor(modelItem => item.Id)
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nome)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.Documento)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.Empresa)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.Status)
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-primary btn-xs" onclick="location.href='@Html.DisplayFor(modelItem => item.UrlEditar)'">
+                                            <i class=" glyphicon glyphicon-file"></i>&nbsp; Entrar
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr class="warning">
+                                <td colspan="10" class="text-warning text-center">
+                                    A pesquisa não retornou nenhum resultado!
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @if (Model.ListaGrid.Any())
+                {
+                    @Html.Partial("_Paginacao")
+                }
+                <div class="clearfix"></div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="form-group pull-right">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("CriarPreCadastro")'; ">Incluir Novo Fornecedor</button>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+</section>
+<!-- /.content -->

@@ -1,0 +1,66 @@
+﻿@model WebForLink.Web.ViewModels.DadosGeraisTesteVM
+
+@if (Model != null)
+{
+    using (Html.BeginCollectionItem("DadosGerais"))
+    {
+        <div id="boxGrid" class="box box-default">
+            <div class="box-header">
+                <h3 class="box-title"><a href="#demo" data-toggle="collapse">Dados Gerais</a></h3>
+                <span class="box-subtitle pull-right">
+                    <i class="fa fa-check-square-o" style="color:#00a65a; font-size:17px;">&nbsp;</i>
+                </span>
+            </div>
+            <div class="box-body collapse" id="demo">
+                <div class="col-lg-12">
+                    @if (!string.IsNullOrEmpty(Model.Documento))
+                                {
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Documento, htmlAttributes: new { @class = "control-label" })<br />
+                                        @Html.DisplayFor(model => model.Documento, new { @class = "form-control input-sm" })
+                                    </div>
+                                </div>
+                                }
+                    @if (!string.IsNullOrEmpty(Model.RazaoSocial))
+                                {
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.RazaoSocial, htmlAttributes: new { @class = "control-label" })<br />
+                                        @Html.DisplayFor(model => model.RazaoSocial, new { @class = "form-control input-sm" })
+                                    </div>
+                                </div>
+                                }
+                    @if (!string.IsNullOrEmpty(Model.NomeFantasia))
+                                {
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.NomeFantasia, htmlAttributes: new { @class = "control-label" })<br />
+                                        @Html.DisplayFor(model => model.NomeFantasia, new { @class = "form-control input-sm" })
+                                    </div>
+                                </div>
+                                }
+                    @if (!string.IsNullOrEmpty(Model.InscricaoEstadual))
+                                {
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.InscricaoEstadual, htmlAttributes: new { @class = "control-label" })<br />
+                                        @Html.DisplayFor(model => model.InscricaoEstadual, new { @class = "form-control input-sm" })
+                                    </div>
+                                </div>
+                                }
+                    @if (!string.IsNullOrEmpty(Model.InscricaoMunicipal))
+                                {
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.InscricaoMunicipal, htmlAttributes: new { @class = "control-label" })<br />
+                                        @Html.DisplayFor(model => model.InscricaoMunicipal, new { @class = "form-control input-sm" })
+                                    </div>
+                                </div>
+                                }
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    }
+}

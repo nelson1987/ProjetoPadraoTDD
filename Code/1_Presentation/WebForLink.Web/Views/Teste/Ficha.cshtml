@@ -1,0 +1,155 @@
+﻿@model WebForLink.Web.ViewModels.FichaCadastralTesteVM
+@{
+    ViewBag.Title = "FichaCadastral";
+}
+@Html.BreadCrumb("Meus Documentos", "Minha Ficha Cadastral")
+<section class="content">
+    @Html.Alerta("FichaAlertaSucessoTop")
+    @Html.Alerta("FichaAlertaErroTop")
+    @using (Html.BeginForm("Ficha", "Teste", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.EditorFor(x => x.DadosGerais)
+
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title"><a href="#dadosEnderecosCollapse" data-toggle="collapse">@Language.Dados_Enderecos</a></h3>
+                @*@Html.ValidationMessage("DadosEnderecosValidation", "", new { @class = "text-danger" })*@
+            </div>
+
+            <div class="box-body collapse" id="dadosEnderecosCollapse">
+                <input type="hidden" id="EnderecosExcluir" name="EnderecosExcluir" value="" />
+
+                <div id="divEnderecos">
+                    @for (int i = 0; i < Model.EnderecoList.Count; i++)
+                {
+                        @Html.EditorFor(x => x.EnderecoList[i])
+                    }
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="form-group" style="padding-top: 7px;">
+                    <button type="button" class="btn btn-default" onclick="incluirDados('DadosEnderecos', '@Url.Action("Incluir", "DadosEnderecos")');" disable-input="">Adicionar Dados de Endereços</button>
+                </div>
+                <br>
+                <div class="text-right text-nowrap hidden">
+                    <button type="button" class="btn btn-primary" onclick="validaSalvarEnderecos();">Salvar</button>
+                    <button type="button" class="btn btn-danger" onclick="cancelarDados('DadosEnderecos', '@Url.Action("Cancelar", "DadosEnderecos")');">Cancelar</button>
+                </div>
+                <div id="ConfirmacaoEnderecos" class="alert alert-warning" role="alert" style="display: none;">
+                    <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="submit" id="btnSimEnderecos" class="btn btn-primary btn-xs" onclick="">Sim</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" id="btnNaoEnderecos" class="btn btn-default btn-xs" onclick="$('#ConfirmacaoEnderecos').fadeOut('fast');">Não</button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title"><a href="#dadosBancariosCollapse" data-toggle="collapse">Dados Bancários</a></h3>
+                @*@Html.ValidationMessage("DadosBancariosValidation", "", new { @class = "text-danger" })*@
+            </div>
+
+            <div class="box-body collapse" id="dadosBancariosCollapse">
+                <input type="hidden" id="BancosExcluir" name="BancosExcluir" value="" />
+
+                <div id="divBancos">
+                    @for (int i = 0; i < Model.BancarioList.Count; i++)
+                {
+                    @Html.EditorFor(x => x.BancarioList[i])
+                    }
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="form-group" style="padding-top: 7px;">
+                    <button type="button" class="btn btn-default" onclick="incluirDados('DadosBancarios', '@Url.Action("Incluir", "DadosBancarios")');" disable-input="">Adicionar Dados Bancários</button>
+                </div>
+                <br>
+                <div class="text-right text-nowrap hidden">
+                    <button type="button" class="btn btn-primary" onclick="validaSalvarBancos();">Salvar</button>
+                    <button type="button" class="btn btn-danger" onclick="cancelarDados('DadosBancarios', '@Url.Action("Cancelar", "DadosBancarios")');">Cancelar</button>
+                </div>
+                <div id="ConfirmacaoBancos" class="alert alert-warning" role="alert" style="display: none;">
+                    <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="submit" id="btnSimBancos" class="btn btn-primary btn-xs" onclick="">Sim</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" id="btnNaoBancos" class="btn btn-default btn-xs" onclick="$('#ConfirmacaoBancos').fadeOut('fast');">Não</button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title"><a href="#dadosContatosCollapse" data-toggle="collapse">Dados Contatos</a></h3>
+                @*@Html.ValidationMessage("DadosContatosValidation", "", new { @class = "text-danger" })*@
+            </div>
+
+            <div class="box-body collapse" id="dadosContatosCollapse">
+                <input type="hidden" id="BancosExcluir" name="BancosExcluir" value="" />
+
+                <div id="divBancos">
+                    @for (int i = 0; i < Model.ContatoList.Count; i++)
+                {
+                    @Html.EditorFor(x => x.ContatoList[i])
+                    }
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="form-group" style="padding-top: 7px;">
+                    <button type="button" class="btn btn-default" onclick="incluirDados('DadosContatos', '@Url.Action("Incluir", "DadosContatos")');" disable-input="">Adicionar Dados Contatos</button>
+                </div>
+                <br>
+                <div class="text-right text-nowrap hidden">
+                    <button type="button" class="btn btn-primary" onclick="validaSalvarBancos();">Salvar</button>
+                    <button type="button" class="btn btn-danger" onclick="cancelarDados('DadosContatos', '@Url.Action("Cancelar", "DadosContatos")');">Cancelar</button>
+                </div>
+                <div id="ConfirmacaoBancos" class="alert alert-warning" role="alert" style="display: none;">
+                    <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="submit" id="btnSimBancos" class="btn btn-primary btn-xs" onclick="">Sim</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" id="btnNaoBancos" class="btn btn-default btn-xs" onclick="$('#ConfirmacaoBancos').fadeOut('fast');">Não</button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <br />
+        for (int i = 0; i < Model.MaterialList.Count; i++)
+        {
+            @Html.EditorFor(x => x.MaterialList[i])
+        }
+        <br />
+        for (int i = 0; i < Model.ServicoList.Count; i++)
+        {
+            @Html.EditorFor(x => x.ServicoList[i])
+        }
+
+        <div class="box box-primary">
+            <div class="box-body">
+                <div class="text-center text-nowrap">
+                    <button type="button" class="btn btn-primary" onclick="$('#alert_confirm').show(); $('#btnSimFicha').focus();">Salvar</button>
+                </div>
+                <div id="alert_confirm" class="alert alert-warning" role="alert" style="display: none;">
+                    <span>Tem certeza que deseja salvar sua ficha cadastral?</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" id="btnSimFicha" class="btn btn-primary btn-xs" onclick="$('form').submit();">Sim</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" id="btnNaoFicha" class="btn btn-default btn-xs" onclick="$('#alert_confirm').fadeOut('fast');">Não</button>
+                </div>
+            </div>
+        </div>
+    }
+    @Html.Alerta("FichaAlertaSucessoBottom")
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $.validator.defaults.ignore = "input[type=hidden]";
+        /*$.validator.setDefaults({
+        ignore: [],
+        // any other default options and/or rules
+        });*/
+    </script>
+
+    @*@Scripts.Render("~/bundles/date")*@
+}

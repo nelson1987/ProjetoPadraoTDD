@@ -1,0 +1,123 @@
+﻿@model WebForLink.Web.ViewModels.ListaDocumentosVM
+
+<section class="content-header">
+    <h1>
+        Cadastro de Lista de Documentos
+        <!-- small>Control panel</small -->
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> Fornecedores</li>
+        <li class="active">Cadastro de Lista de Documentos</li>
+    </ol>
+</section>
+
+
+<!-- FORM -->
+<section class="content">
+    <div id="divTipoDocumento" class="box box-primary" style="display: none;"></div>
+    <div id="divDescricaoDocumento" class="box box-primary" style="display: none;"></div>
+
+    @using (Html.BeginForm("ListaDocumentosFrm"))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.Partial("../Documento/_DocumentoFrm", Model)
+    }
+</section>
+
+@section Scripts {
+    <script type="text/javascript">
+    var AcaoTipoDocumento = "[Criar, Editar, Deletar]";
+    var AcaoDescricaoDocumento = "[Criar, Editar, Deletar]";
+
+    function AdicionaAcao(obj, texto) {
+        $(obj).append("<optgroup label='Ação'><option value='-1'>" + texto + "</option></optgroup>");
+    }
+
+    function montaListaTipoDocumento() {
+        $.getJSON('@Url.Action("ListaTipoDocumento", "MeusDocumentos")',
+        {
+            tipo: "Frm"
+        },
+        function (data) {
+            $('#TipoDocumentos').empty();
+            $.each(data, function (index, optionData) {
+                $('#TipoDocumentos').append("<option value='" + optionData.Value + "'>" + optionData.Text + "</option>");
+            });
+            if (data.length > 1)
+                AdicionaAcao($('#TipoDocumentos'), AcaoTipoDocumento);
+
+        });
+    }
+
+    function montaListaDescricaoDocumento() {
+        $.getJSON('@Url.Action("ListaDescricaoDocumento","MeusDocumentos")',
+        {
+            tipoDocumento: $('#TipoDocumentos').val(),
+            tipo: "Frm",
+            cache: false
+        },
+        function (data) {
+            $('#DescricaoDeDocumentos').empty();
+            $.each(data, function (index, optionData) {
+                $('#DescricaoDeDocumentos').append("<option value='" + optionData.Value + "'>" + optionData.Text + "</option>");
+            });
+            if ($('#TipoDocumentos').val() != '' && $('#TipoDocumentos').val() != '-1')
+                AdicionaAcao($('#DescricaoDeDocumentos'), AcaoDescricaoDocumento);
+        });
+    }
+
+    function SemValidade() {
+        if ($('#SemValidade').is(':checked')) {
+            $('#DataValidade').prop('disabled', true)
+            $('#DataValidade').val('');
+            $('#DataValidade').datepicker('update');
+        }
+        else {
+            $('#DataValidade').prop('disabled', false)
+        }
+    }
+
+    function TipoAtualizacao(p) {
+        $("input[name=TipoAtualizacao][value=" + p + "]").prop('checked', true);
+
+        if (p == 3)
+            $('#divPeriodicidade').show();
+    }
+
+    $(document).ready(function () {
+        $.ajaxSetup({ cache: false });
+
+        TipoAtualizacao(@Model.TipoAtualizacao);
+
+        $("#TipoDocumentos").change(function () {
+            montaListaDescricaoDocumento();
+
+            if ($(this).val() == '-1') {
+                $('#boxForm').hide();
+                $('#divTipoDocumento').html('<div class="box-body"><div class="text-center"><i class="fa fa-refresh fa-spin"></i> Aguarde...</div></div>').fadeIn('fast');
+                $('#divTipoDocumento').load('@Url.Action("TipoDocumento", "MeusDocumentos")');
+            }
+        });
+
+        $("#DescricaoDeDocumentos").change(function () {
+            if ($(this).val() == '-1') {
+                $('#boxForm').hide();
+                $('#divDescricaoDocumento').html('<div class="box-body"><div class="text-center"><i class="fa fa-refresh fa-spin"></i> Aguarde...</div></div>').fadeIn('fast');
+                var urlDesc = '@Url.Action("DescricaoDocumento", "MeusDocumentos")' + '/?tipoDocumentoId=' + encodeURIComponent($('#TipoDocumentos').val()) + "&DescricaoDocumento=" + encodeURIComponent($('#TipoDocumentos option:selected').text());
+                $('#divDescricaoDocumento').load(urlDesc);
+            }
+        });
+
+        AdicionaAcao($('#TipoDocumentos'), AcaoTipoDocumento);
+        if ($('#DescricaoDeDocumentos option').length > 1) {
+            AdicionaAcao($('#DescricaoDeDocumentos'), AcaoDescricaoDocumento);
+        }
+
+        $("#SemValidade").on('click', SemValidade);
+
+        SemValidade();
+    });
+
+    </script>
+}

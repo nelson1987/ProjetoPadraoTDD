@@ -1,0 +1,162 @@
+﻿@model IEnumerable<WebForLink.Web.ViewModels.MeusDocumentosVM>
+@using WebForLink.Web.ViewModels;
+@Styles.Render("~/style/date")
+@section Scripts {
+    @Scripts.Render("~/bundles/date")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#TipoDocumento").change(function () {
+                $.getJSON('@Url.Action("ListaDescricaoDocumento")',
+                    {
+                        tipoDocumento: $('#TipoDocumento').val(),
+                        tipo: "Lst",
+                        filtrado: true
+                    },
+                    function (data) {
+                        $('#DescricaoDocumento').empty();
+                        $.each(data, function (index, optionData) {
+                            $('#DescricaoDocumento').append("<option value='" + optionData.Value + "'>" + optionData.Text + "</option>");
+                        });
+
+                    });
+            });
+
+            if ('@(ViewBag.MensagemSucesso)' != '') {
+                $('.alert').fadeIn('slow');
+                $('.alert').text('@Html.Raw(ViewBag.MensagemSucesso)');
+                setTimeout('$(".alert").fadeOut("slow")', 10000);
+            }
+
+            $('[data-toggle="popover"]').popover();
+
+            $('[data-toggle="popover"]').click(function () {
+                $('[data-toggle="popover"]').not(this).popover('hide'); //all but this
+            });
+        });
+    </script>
+}
+<section class="content-header">
+    <h1>
+        Cadastro de Documentos
+        <!-- small>Control panel</!--small -->
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> Meus Documentos</li>
+        <li class="active">Cadastro de Documentos</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="alert alert-success" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick="$(this).fadeOut('fast')"></div>
+    </div>
+    <div id="boxGrid" class="box box-primary">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @using (Html.BeginForm("MeusDocumentosLst"))
+                        {
+                            @Html.Hidden("Pagina", (int)ViewBag.Pagina)
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Tipo de Documento</label><br />
+                                    @Html.DropDownList("TipoDocumento", null, "Todos", htmlAttributes: new { @class = "form-control input-sm" })
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Descrição do Documento</label><br />
+                                    @Html.DropDownList("DescricaoDocumento", null, "Todos", htmlAttributes: new { @class = "form-control input-sm" })
+                                </div>
+                                <div class="col-md-2">
+                                    <label>&nbsp;</label><br />
+                                    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("MeusDocumentosFrm")'">Novo Documento</button>
+                                </div>
+                                <div class="col-md-10 text-right">
+                                    <label>&nbsp;</label><br />
+                                    <button type="submit" class="btn btn-primary" onclick="$('#Pagina').val('1');"><i class="fa fa-search"></i>&nbsp;Consultar</button>
+                                    <button type="button" class="btn btn-default" onclick="$('#TipoDocumento').val(''); $('#DescricaoDocumento').val('');"><i class="glyphicon glyphicon-erase"></i>&nbsp;Limpar</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-condensed">
+                            <thead>
+                                @if (Model.Any())
+                                {
+                                    <tr>
+                                        <th class="text-center">
+                                            @Html.DisplayNameFor(model => model.TipoDocumento)
+                                        </th>
+                                        <th class="text-center">
+                                            @Html.DisplayNameFor(model => model.DescricaoDocumento)
+                                        </th>
+                                        <th class="text-center">
+                                            @Html.DisplayNameFor(model => model.DataValidade)
+                                        </th>
+                                        <th class="text-center">
+                                            Documento
+                                        </th>
+                                        <th class="text-center">Ação</th>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <th colspan="10">
+                                            &nbsp;
+                                        </th>
+                                    </tr>
+                                }
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TipoDocumento)
+                                        </td>
+                                        <td>
+                                            <span data-html="true" data-placement="bottom" data-trigger="hover"
+                                                  data-toggle="popover" title=""
+                                                  data-content="@item.DescricaoDocumento">
+                                                @*@Html.DisplayFor(modelItem => item.DescricaoDocumento)*@
+
+                                                @item.DescricaoDocumento.DiminuirEAdicionarTresPontos(100)
+                                            </span>
+                                        </td>
+                                        <td class="text-center">
+                                            @Html.DisplayFor(modelItem => item.ValidaDataValidade)
+                                        </td>
+                                        <td class="text-center">
+                                            <button class="btn btn-xs btn-warning" onclick="location.href='@item.UrlArquivo'"><i class="fa fa-download"></i></button>
+                                        </td>
+                                        <td class="text-center text-nowrap">
+                                            <button class="btn btn-primary btn-xs" onclick="location.href='@item.UrlEditar'">Editar</button>
+                                            <button class="btn btn-danger btn-xs" onclick="location.href='@item.UrlExcluir'">Excluir</button>
+                                        </td>
+                                    </tr>
+                                }
+                                @if (!Model.Any())
+                                {
+                                    <tr class="warning">
+                                        <td colspan="10" class="text-warning text-center">
+                                            A pesquisa não retornou nenhum resultado!
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        @if (Model.Any())
+                        {
+                            @Html.Partial("_Paginacao")
+                        }
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
+</section><!-- /.content -->

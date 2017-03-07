@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+}
+
+@Styles.Render("~/Content/jQuery-File-Upload")
+
+@Html.Partial("_Files")
+
+
+@section scripts{
+    <script>
+        var $form = null;
+        $(function() {
+            $form = $(".fileupload").fileupload({
+                dataType: "json",
+            });
+        });
+        $(".fileupload").addClass("fileupload-processing");
+    </script>
+    @Scripts.Render("~/bundles/jQuery-File-Upload")
+}

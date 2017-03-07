@@ -1,0 +1,7 @@
+//Sistema de Leilão
+//usuário dão Lance
+
+public class Lance
+{
+
+}

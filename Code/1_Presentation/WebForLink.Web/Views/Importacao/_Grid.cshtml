@@ -1,0 +1,31 @@
+﻿@model IEnumerable<WebForLink.Web.ViewModels.FornecedorBaseVM>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th class="text-center">CNPJ / CPF</th>
+                <th>Razão Social / Nome</th>
+                <th class="text-center">Órgãos Públicos</th>
+                <th class="text-center">@Html.DisplayNameFor(x => x.CategoriaId)</th>
+                <th class="text-center">Convite</th>
+                <th class="text-center">Prazo</th>
+                <th class="text-center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @Html.DisplayForModel()
+            }
+            else
+            {
+                <tr class="warning">
+                    <td colspan="10" class="text-warning text-center">
+                        A pesquisa não retornou nenhum resultado!
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

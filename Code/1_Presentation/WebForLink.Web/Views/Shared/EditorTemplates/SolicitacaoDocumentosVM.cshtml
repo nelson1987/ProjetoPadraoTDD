@@ -1,0 +1,129 @@
+﻿@using WebForLink.Web.Infrastructure;
+@using WebForLink.Web.Interfaces;
+@using WebForLink.Domain.Infrastructure;
+@model WebForLink.Web.ViewModels.SolicitacaoDocumentosVM
+@{
+    IGeral _metodosGerais = new Geral();
+    string key = _metodosGerais.ValorKey();
+    EncryptDecryptQueryString cripto = new EncryptDecryptQueryString();
+}
+@using (Html.BeginCollectionItem("SolicitacaoFornecedor.Documentos"))
+{
+    <div style="margin-top:5px; padding-top:7px; border: solid 1px silver; border-radius: 3px;">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>Documento @Html.Raw(Model.Obrigatorio ? "Exigível <span class=\"text-danger\" style=\"font-weight:bold;\">*</span>" : "Necessário")</label><br />
+                <span><span class="text-blue" title="@(Model.Obrigatorio ? "Obrigatório Informar este Documento" : "Necessário informar este documento para uma análise mais rápida.")" style="cursor:default;"><i class="fa fa-info-circle fa-lg"></i></span> @Model.Documento</span>
+                @Html.HiddenFor(x => x.ID, new { @name = "DocumentoID" })
+                @Html.HiddenFor(x => x.Documento)
+                @Html.HiddenFor(x => x.Obrigatorio)
+                @Html.HiddenFor(x => x.DescricaoDocumentoId)
+                @Html.HiddenFor(x => x.DescricaoDocumentoId_CH)
+                @Html.HiddenFor(x => x.ArquivoID)
+                @Html.HiddenFor(x => x.ListaDocumentosID)
+                @Html.HiddenFor(x => x.UsadoEmOutroContratante)
+                @Html.HiddenFor(x => x.AtualizarDocOutrosContratantes)
+                @Html.ValidationMessageFor(x => x.Obrigatorio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @if (Model.ListaVersao != null)
+        {
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Versionados:</label>
+                    <label class="badge">@(Model.ListaVersao.Any() ? Model.ListaVersao.Count() : 0)</label>
+                    <button type="button" class="btn btn-xs btn-default" data-toggle="popover" title="" data-original-title="Versões Anteriores" data-trigger="focus">Ver</button>
+                </div>
+            </div>
+            <div id="relatorioSelecionados" class="hidden">
+                <ul>
+                    @foreach (var item in Model.ListaVersao)
+                    {
+                        <li>@item.Nome</li>
+                    }
+                </ul>
+                <input type="hidden" class="form-control" id="recipient-name">
+            </div>
+        }
+        <div class="clearfix"></div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @if (ViewBag.Acao != "Excluir")
+                {
+                    <div class="col-lg-4 col-md-5 col-xs-12">
+                        <label>&nbsp;</label><br />
+                        <div class="fileUpload btn btn-default">
+                            <span>Buscar Arquivo</span>
+                            @Html.TextBoxFor(x => x.Arquivo, new { @class = "upload", type = "file", origemArquivo = "Doc" })
+                            @Html.ValidationMessageFor(x => x.Arquivo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-7 col-xs-12">
+                        <label>&nbsp;</label><br />
+                        <span class="help-block" style="float: none;">
+                            @Html.HiddenFor(x => x.ArquivoSubido, new { ArquivoSubido = "" })
+                            @Html.HiddenFor(x => x.TipoArquivoSubido, new { TipoArquivoSubido = "" })
+                            @Html.HiddenFor(x => x.ArquivoSubidoOriginal, new { ArquivoSubidoOriginal = "" })
+                            <span percentual>@Html.Raw(!String.IsNullOrEmpty(Model.ArquivoSubido) ? "<span style='color: #00a65a;' title='Arquivo subido com Sucesso!'><i class='fa fa-check-circle'></i></span>" : "")</span>
+                            <span nomearquivo>@Html.Raw(!String.IsNullOrEmpty(Model.ArquivoSubido) ? Model.ArquivoSubidoOriginal : "Nenhum Comprovante Selecionado!")</span>
+                            <span cancelarupload class="badge bg-red-gradient hidden text-center cancelarupload">
+                                Interromper upload? 
+                                <button cancelaruploadSim type="button" class="btn btn-default btn-xs">Sim</button>
+                                <button cancelaruploadNao type="button" class="btn btn-default btn-xs" onclick="$(this).parent().toggleClass('hidden');">Não</button>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="clearfix"></div>
+                }
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                @Html.HiddenFor(x => x.Periodicidade)
+                @Html.HiddenFor(x => x.DataValidade)
+                @if (Model.Periodicidade != null)
+                {
+                    <label>Por Período</label><br />
+                    <input type="text" class="form-control" id="DataValidade" name="DataValidadeAux" value="" disabled placeholder="@Model.DescricaoPeriodicidade" />
+                }
+                else if (Model.PorValidade != null)
+                {
+                    if ((bool)Model.PorValidade)
+                    {
+                        <label>Data Validade</label><br />
+                        @Html.TextBoxFor(model => model.DataValidade, new { @class = "form-control", data_inputmask = "'alias': 'dd/mm/yyyy'", data_mask = "" })
+                    }
+                }
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Arquivo</label><br />
+                <a href="@Url.Action("FornecedorArquivo", "Fornecedores", new { chaveurl = cripto.Criptografar(string.Format("ArquivoID={0}", Model.ArquivoID), key) })" class="btn-link">@Model.NomeArquivo</a>
+                @Html.HiddenFor(model => model.NomeArquivo)
+                @Html.HiddenFor(model => model.ArquivoID)
+                @Html.HiddenFor(model => model.ID)
+                @Html.HiddenFor(model => model.SolicitacaoID)
+                @Html.HiddenFor(model => model.Periodicidade)
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-12 hidden" id="@Html.Raw(Html.IdForModel() + "divPerguntaAtualizacaoDoc")">
+            <div class="form-group">
+                <div class="alert alert-warning text-center">
+                    ATENÇÃO!<br />
+                    Este documento também é utilizado por outros clientes! Deseja atualizar este arquivo nesses outros clientes?<br />
+                    <button type="button" class="btn btn-primary btn-xs" onclick="$('#@Html.Raw(Html.IdForModel() + "_AtualizarDocOutrosContratantes")').val('True'); $('#@Html.Raw(Html.IdForModel() + "divPerguntaAtualizacaoDoc")').toggleClass('hidden'); $('#@Html.Raw(Html.IdForModel() + "divAlertaAtualizacaoDoc")').toggleClass('hidden');">Sim</button>
+                    <button type="button" class="btn btn-default btn-xs" onclick="$('#@Html.Raw(Html.IdForModel() + "divPerguntaAtualizacaoDoc")').toggleClass('hidden');">Não</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 hidden" id="@Html.Raw(Html.IdForModel() + "divAlertaAtualizacaoDoc")">
+            <div class="form-group">
+                <div class="alert alert-info text-center">ATENÇÃO!<br />Ao Salvar, este Arquivo será atualizado em todos os seus clientes que utilizam este mesmo documento!</div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+}
+

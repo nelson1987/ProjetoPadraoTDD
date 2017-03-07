@@ -1,0 +1,326 @@
+﻿@model WebForDocs.ViewModels.EnviadosVM
+@using WebForDocs.Biblioteca;
+@{
+    string key = Geral.Key;
+    EncryptDecryptQueryString cripto = new EncryptDecryptQueryString();
+}
+@section Header {
+@Styles.Render("~/Content/date")
+<link href="~/Content/bootstrap-tagsinput.css" rel="stylesheet" />
+<link href="~/Content/typeahead.css" rel="stylesheet" />
+}
+@section Scripts {
+@Scripts.Render("~/bundles/date")
+
+<script src="~/Scripts/bloodhound.min.js"></script>
+<script src="~/Scripts/typeahead.jquery.min.js"></script>
+<script src="~/Scripts/typeahead.bundle.js"></script>
+
+<script src="~/Scripts/bootstrap-tagsinput.js"></script>
+<script type="text/javascript">
+    function SemValidade() {
+        if ($('#SemPrazo').is(':checked')) {
+            $('#Disponibilidade').prop('disabled', true)
+            $('#Disponibilidade').val('');
+            $('#Disponibilidade').datepicker('update');
+        }
+        else {
+            $('#Disponibilidade').prop('disabled', false)
+        }
+    }
+
+
+    $(document).ready(function () {
+        $("#Disponibilidade").inputmask("dd/mm/yyyy", { "placeholder": "dd/mm/aaaa" });
+
+        $('#Disponibilidade').datepicker({
+            format: "dd/mm/yyyy",
+            language: "pt-BR",
+            todayHighlight: true,
+            autoclose: true
+        });
+
+        var elt = $('#Para')
+        elt.tagsinput({
+            itemValue: 'value',
+            itemText: 'text',
+            tagClass: 'label label-default',
+            typeaheadjs: [{
+                name: 'Destinatarios',
+                displayKey: 'text',
+                templates: { header: '<b>&nbsp;Destinatários</b>' },
+                source: function (request, response) {
+                    $.getJSON('@Url.Action("BuscaEmails")', {
+                        chave: request
+                    },
+                    response);
+                }
+            }]
+        });
+
+        elt.tagsinput('input')
+            .css("width", "")
+            .keypress(function (e) {
+                if (e.which == 13) {
+                    if ($(this).val().trim() != "") {
+                        elt.tagsinput('add', { "value": "EmailAvulso:" + $(this).val(), "text": $(this).val() });
+                        elt.tagsinput('input').typeahead('val', '');
+                    }
+                    return false;
+                }
+            })
+            .change(function () {
+                if ($(this).val().trim() != "") {
+                    elt.tagsinput('input').typeahead('val', '');
+                }
+            });
+
+        $('[data-toggle="popover"]').popover();
+
+        $('[data-toggle="popover"]').click(function () {
+            $('[data-toggle="popover"]').not(this).popover('hide'); //all but this
+        });
+
+        var emailsValue = $("#EmailsValue").val().split("|");
+        var emailsText = $("#EmailsText").val().split("|");
+
+        for (i = 0; i < emailsValue.length; i++) {
+            elt.tagsinput('add', { "value": emailsValue[i], "text": emailsText[i] });
+        }
+
+        $("#SemPrazo").on('click', SemValidade);
+
+        SemValidade();
+    });
+
+</script>
+}
+
+<section class="content-header">
+    <h1>
+        Enviados
+        <!-- small>Control panel</!--small -->
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> Meus Documentos</li>
+        <li class="active">Enviados</li>
+    </ol>
+</section>
+
+
+<!-- FORM -->
+<section class="content">
+    <div id="boxForm" class="box box-primary">
+        <div class="box-header"><h3 class="box-title">E-mail</h3></div>
+        <div class="box-body">
+            @using (Html.BeginForm("EnviarFrm"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.MeusCompartilhamentosId)
+                @Html.HiddenFor(model => model.Chave)
+                @Html.HiddenFor(model => model.DocumentosEnviadosText)
+                @Html.HiddenFor(model => model.DocumentosEnviadosValue)
+                @Html.HiddenFor(model => model.Assunto)
+                @Html.HiddenFor(model => model.Mensagem)
+                @Html.HiddenFor(model => model.EmailsValue)
+                @Html.HiddenFor(model => model.EmailsText)
+
+                <input type="hidden" id="Acao" name="Acao" vaue="" />
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <dl class="dl-horizontal">
+                                <dt>Data de Envio:</dt>
+                                <dd>@Model.EnviadoEm</dd>
+                                <dt>&nbsp;</dt>
+                                <dd>&nbsp;</dd>
+                                <dt>Documentos Enviados:</dt>
+                                <dd>
+                                    <ul class="list-unstyled" style="max-height:100px; overflow-y: auto; border: solid 1px #ccc; padding: 5px;">
+                                        @for (int i = 0; i < Model.DocumentosEnviados.Count; i++)
+                                        {
+                                            <li>@Model.DocumentosEnviados[i]</li>
+                                        }
+                                    </ul>
+                                </dd>
+                                <dt>E-mails:</dt>
+                                <dd>
+                                    <ul class="lista-emails">
+                                        @for (int i = 0; i < Model.Emails.Count; i++)
+                                        {
+                                            if (Model.Emails[i].VisualizouAlgumDoc)
+                                            {
+                                                <li>
+                                                    <button type="button" class="btn btn-xs btn-info" data-html="true" data-placement="bottom" data-toggle="popover" title="" data-original-title="Documentos Visualizados"
+                                                            data-content="
+                                                        <ul class='lista-doc' style='max-height:100px; overflow-y: auto;'>
+                                                            @for (int j = 0; j < Model.Emails[i].DocumentosVisualizados.Count; j++)
+                                                            {
+                                                                <li>@Model.Emails[i].DocumentosVisualizados[j]</li>
+                                                            }
+                                                        </ul>">
+                                                <i class="fa fa-eye fa-lg" title="Já visualizou ao menos um documento"></i></button> @Model.Emails[i].Email
+                                            </li>
+                                            }
+                                            else
+                                            {
+                                                <li><button type="button" class="btn btn-default btn-xs" disabled=""><i class="fa fa-eye-slash fa-lg" title="Ainda não visualizou nenhum documento"></i></button> @Model.Emails[i].Email</li>
+                                            }
+                                        }
+                                    </ul>
+                                </dd>
+                                <dt>Assunto:</dt>
+                                <dd>@Model.Assunto</dd>
+                                <dt>&nbsp;</dt>
+                                <dd>&nbsp;</dd>
+                                <dt>Mensagem:</dt>
+                                <dd>@Html.Raw(Model.Mensagem)</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="col-md-12" id="dvDadosBancarios">
+                        <div class="box box-primary">
+                            <div class="box-header"><h3 class="box-title">Dados Bancários</h3></div>
+                            <div class="box-body">
+                                @for (int i = 0; i < Model.DadosBancarios.Count; i++)
+                                {
+                                    <div class="col-md-12 col-xs-12" style="border: solid 1px silver;">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Banco</label><br />
+                                                <span>@Model.DadosBancarios[i].NomeBanco</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-md-2">
+                                            <div class="form-group">
+                                                <label>Agência</label><br />
+                                                <span>
+                                                    @(!string.IsNullOrEmpty(Model.DadosBancarios[i].Digito) ? string.Format("{0}-{1}", Model.DadosBancarios[i].Agencia, Model.DadosBancarios[i].Digito) : Model.DadosBancarios[i].Agencia.ToString())
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-md-2">
+                                            <div class="form-group">
+                                                <label>Conta Corrente</label><br />
+                                                <span>
+                                                    @(!string.IsNullOrEmpty(Model.DadosBancarios[i].ContaCorrenteDigito) ? string.Format("{0}-{1}", Model.DadosBancarios[i].ContaCorrente, Model.DadosBancarios[i].ContaCorrenteDigito) : Model.DadosBancarios[i].ContaCorrente.ToString())
+                                                </span>
+                                            </div>
+                                        </div>
+                                        @if (Model.DadosBancarios[i].NomeArquivo != null)
+                                        {
+                                            <div class="col-xs-12 col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label">Arquivo</label><br />
+                                                    <a href="@Url.Action("FornecedorArquivo", "Fornecedores", new { chaveurl = cripto.Encrypt(string.Format("ArquivoID={0}", Model.DadosBancarios[i].ArquivoID), key) })" class="btn-link">@Model.DadosBancarios[i].NomeArquivo</a>
+                                                </div>
+                                            </div>
+                                        }
+                                        <div class="clearfix"></div>
+                                    </div>
+                                }
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12" id="dvDadosContatos">
+                        <div class="box box-primary">
+                            <div class="box-header"><h3 class="box-title">Dados de Contatos</h3></div>
+                            <div class="box-body">
+                                @for (int i = 0; i < Model.DadosContatos.Count; i++)
+                                {
+                                    <div class="col-md-12" style="border: solid 1px silver;">
+                                        <div class="col-xs-6 col-md-6">
+                                            <div class="form-group">
+                                                <label>Nome Contato</label><br />
+                                                <span>@Model.DadosContatos[i].NomeContato</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-6 col-md-6">
+                                            <div class="form-group">
+                                                <label>E-mail</label><br />
+                                                <span>@Model.DadosContatos[i].EmailContato</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-4 col-md-3">
+                                            <div class="form-group">
+                                                <label>Telefone</label><br />
+                                                <span>@Model.DadosContatos[i].Telefone</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-4 col-md-3">
+                                            <div class="form-group">
+                                                <label>Celular</label><br />
+                                                <span>@Model.DadosContatos[i].Celular</span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                }
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Prazo de disponibilidade dos documentos</label>
+                            <div class="row">
+                                <div class="col-md-2 col-xs-5">
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.Disponibilidade, new { @class = "form-control", data_inputmask = "'alias': 'dd/mm/yyyy'", data_mask = "", disable_input = "" })
+                                        @*<span class="input-group-addon">faltam 000 dias</span>*@
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Disponibilidade, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-3 col-xs-5">
+                                    <div class="form-group" style="">
+                                        <div class="checkbox">
+                                            @Html.CheckBoxFor(model => model.SemPrazo, new { disable_input = "" })
+                                            @Html.ValidationMessageFor(model => model.SemPrazo, "", new { @class = "text-danger" })
+                                        </div>
+                                        <label class="control-label">Sem Prazo</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-primary" onclick="$('#Acao').val('AlterarDisponibilidade'); $('#alert_confirm span').text('Tem certeza que deseja alterar a Disponibilidade?'); $('#alert_confirm').fadeIn('fast');">Alterar Disponibilidade</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Para</label>
+                            @Html.TextBox("Para", "", new { @class = "form-control", disable_input = "" })
+                            @Html.ValidationMessageFor(model => model.Para, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="box-footer">
+                    <div class="text-right text-nowrap">
+                        <button type="button" class="btn btn-primary" onclick="$('#Acao').val('Reenviar'); $('#alert_confirm span').text('Tem certeza que deseja Reenviar este email?'); $('#alert_confirm').fadeIn('fast');">Reenviar</button>
+
+                        <button type="button" class="btn btn-default" onclick="location.href='@ViewBag.LinkCancelar'">Cancelar</button>
+                    </div>
+
+                    <div id="alert_confirm" class="alert alert-warning" role="alert" style="display: none;">
+                        <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-primary btn-xs">Sim</button>&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-default btn-xs" onclick="$('#alert_confirm').fadeOut('fast');">Não</button>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</section>

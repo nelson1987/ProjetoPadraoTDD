@@ -1,0 +1,31 @@
+﻿@model WebForLink.Web.ViewModels.ConviteVM
+@*@using WebForLink.Web.Helpers*@
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+    <div class="row">
+        <h2 class="text-center">
+            Você foi convidado para participar do WebForLink.<br/>Seja bem-vindo.
+        </h2>
+        @using (Html.BeginForm())
+        {
+            <div class="col-md-12">
+                <div class="form-group col-lg-3">
+                    <label class="control-label" for="ResponsavelNome">CNPJ</label>
+                    @*<span class="text-danger">*</span>
+                        <input class="form-control text-box single-line disabled" data-val="true" data-val-required="O campo Nome completo é obrigatório" id="ResponsavelNome" name="ResponsavelNome" type="text" value="">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="ResponsavelNome" data-valmsg-replace="true"></span>*@
+                    @Html.TextBoxFor(Model => Model.Cnpj, new {@class = "form-control text-box single-line disabled", disabled = "disabled"})
+
+                </div>
+                <div class="form-group col-lg-9">
+                    <label class="control-label" for="ResponsavelNome">Nome completo</label>
+                    <span class="text-danger">*</span>
+                    <input class="form-control text-box single-line" data-val="true" data-val-required="O campo Nome completo é obrigatório" id="ResponsavelNome" name="ResponsavelNome" type="text" value="">
+                    <span class="field-validation-valid text-danger" data-valmsg-for="ResponsavelNome" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+        }
+    </div>
+</div>

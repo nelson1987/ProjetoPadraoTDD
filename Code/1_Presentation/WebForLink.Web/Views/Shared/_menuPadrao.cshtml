@@ -1,0 +1,92 @@
+﻿<li>
+    <a href="@Url.Action("Index", new { area = "", controller = "HomeAdmin" })">
+        <div>
+            <i class="fa fa-home"></i>Home
+        </div>
+    </a>
+</li>
+@if (User.IsInRole("MENU.FORN"))
+{
+    <li onclick="$(this).children('ul').slideToggle('slow');">
+        <div><i class="fa fa-cube"></i>Fornecedores</div>
+        <ul style="display: none;">
+            @if (User.IsInRole("FOR.CAT"))
+            {
+            <li id=""><a href="@Url.Action("CategoriaLst", new { area = "", controller ="Categoria"})"><div><i class="fa fa-angle-double-right"></i>Configurar Categoria (Grupo Contas)</div></a></li>
+            }
+            @if (User.IsInRole("FOR.LDOC"))
+            {
+            <li id=""><a href="@Url.Action("ListaDocumentosLst", new { area = "", controller ="Documento"})"><div><i class="fa fa-angle-double-right"></i>Configurar Lista de Documentos</div></a></li>
+            }
+            @if (User.IsInRole("FOR.PESQ"))
+            {
+            <li id=""><a href="@Url.Action("FornecedoresLst", new { area = "", controller ="Fornecedores"})"><div><i class="fa fa-angle-double-right"></i>Gestão de Fornecedores</div></a></li>
+            }
+            @if (User.IsInRole("FOR.FORN"))
+            {
+            <li id=""><a href="@Url.Action("FornecedoresFrm", new { area = "", controller = "Fornecedores" })"><div><i class="fa fa-angle-double-right"></i>Novo Fornecedor</div></a></li>
+            }
+            @if (User.IsInRole("FOR.IMP"))
+            {
+            <li id=""><a href="@Url.Action("CarregarArquivo", new { area = "", controller = "Importacao" })"><div><i class="fa fa-angle-double-right"></i>Importação</div></a></li>
+            }
+            @if (User.IsInRole("FOR.GESTIMP"))
+            {
+            <li id=""><a href="@Url.Action("Listar", new { area = "", controller ="Importacao"})"><div><i class="fa fa-angle-double-right"></i>Gestão de Importados</div></a></li>
+            }
+            @if (User.IsInRole("FOR.AP"))
+            {
+            <li id=""><a href="@Url.Action("AprovacaoLst", new { area = "", controller ="Aprovacao"})"><div><i class="fa fa-angle-double-right"></i>Aprovação</div></a></li>
+            }
+            @if (User.IsInRole("FOR.CONT"))
+            {
+            <li id=""><a href="@Url.Action("FornecedoresControleSolicitacoesLst", new { area = "", controller ="ControleSolicitacao"})"><div><i class="fa fa-angle-double-right"></i>Acompanhamento</div></a></li>
+            }
+            @if (User.IsInRole("FOR.PCAD"))
+            {
+            <li id=""><a href="@Url.Action("PreCadastroLst", new { area = "", controller = "PreCadastroFornecedor" })"><div><i class="fa fa-angle-double-right"></i>Lista de pré-cadastrados</div></a></li>
+            }
+            @if (User.IsInRole("FOR.PLANO"))
+            {
+            <li id=""><a href="#"><div><i class="fa fa-angle-double-right"></i>Meu Plano</div></a></li>
+            }
+            @if (User.IsInRole("FOR.ESTA"))
+            {
+            <li id=""><a href="#"><div><i class="fa fa-angle-double-right"></i>Estatística</div></a></li>
+            }
+        </ul>
+    </li>
+}
+
+@if (User.IsInRole("MENU.MEUS"))
+{
+    if (User.IsInRole("MEUS.FICHA"))
+    {
+        <li id=""><a href="@Url.Action("MinhaFichaCadastral", new { area = "", controller ="MeusDocumentos"})"><div><i class="fa fa-clipboard"></i>Minha Ficha Cadastral</div></a></li>
+    }
+    if (User.IsInRole("MEUS.DENVIA"))
+    {
+        <li id=""><a href="#"><div><i class="fa fa-angle-double-right"></i>Convites Abertos VL</div></a></li>
+    }
+    <li onclick="$(this).children('ul').slideToggle('slow');">
+        <div><i class="fa fa-archive"></i>Gestão Documentos</div>
+        <ul style="display: none;">
+            @if (User.IsInRole("MEUS.DOC"))
+            {
+                <li id=""><a href="@Url.Action("MeusDocumentosLst", new { area = "", controller ="MeusDocumentos"})"><div><i class="fa fa-angle-double-right"></i>Cadastro de Documentos</div></a></li>
+            }
+            @if (User.IsInRole("MEUS.DEST"))
+            {
+            <li id=""><a href="@Url.Action("DestinatarioLst", new { area = "", controller ="Destinatario"})"><div><i class="fa fa-angle-double-right"></i>Destinatários</div></a></li>
+            }
+            @if (User.IsInRole("MEUS.ENVIAR"))
+            {
+                <li id=""><a href="@Url.Action("EnviarLst", new { area = "", controller ="MeusDocumentos"})"><div><i class="fa fa-angle-double-right"></i>Enviar</div></a></li>
+            }
+            @if (User.IsInRole("MEUS.ENVIADOS"))
+            {
+                <li id=""><a href="@Url.Action("EnviadosLst", new { area = "", controller ="MeusDocumentos"})"><div><i class="fa fa-angle-double-right"></i>Documentos Compartilhados</div></a></li>
+            }
+        </ul>
+    </li>
+}

@@ -1,0 +1,61 @@
+﻿<li>
+    <a href="@Url.Action("Index", new { area = "", controller = "HomeAdmin" })">
+        <div>
+            <i class="fa fa-home"></i>Home
+        </div>
+    </a>
+</li>
+@if (User.IsInRole("ADM.CONTAS"))
+{
+    <li onclick="$(this).children('ul').slideToggle('slow');">
+        <div>
+            <i class="fa fa-users"></i>Contas
+        </div>
+        <ul style="display: none;">
+            @if (User.IsInRole("ADM.LOGO"))
+            {
+                <li id="menu5"><a href="@Url.Action("LogoFoto", new { area = "", controller = "HomeAdmin" })"><div><i class="fa fa-angle-double-right"></i>Logo</div></a></li>
+            }
+            @if (User.IsInRole("ADM.MINHACONTA"))
+            {
+                <li id="menu5"><a href="@Url.Action("MinhaContaFrm", new { area = "Administracao", controller = "Usuario" })"><div><i class="fa fa-angle-double-right"></i>Minha Conta</div></a></li>
+            }
+            @if (User.IsInRole("ADM.OUTRASCONTAS"))
+            {
+                <li id="menu5"><a href="@Url.Action("GerenciarContasLst", new { area = "Administracao", controller = "Usuario"})"><div><i class="fa fa-angle-double-right"></i>Gerenciar outras contas</div></a></li>
+            }
+        </ul>
+    </li>
+}
+@if (User.IsInRole("MENU.ADMN"))
+{
+    <li onclick="$(this).children('ul').slideToggle('slow');">
+        <div><i class="fa fa-cogs"></i>Administração</div>
+        <ul style="display: none;">
+            @if (User.IsInRole("ADM.APL"))
+            {
+                <li id="menu5"><a href="@Url.Action("AplicacaoLst", new { area = "Administracao", controller = "Aplicacao" })"><div><i class="fa fa-angle-double-right"></i>Configurar Aplicações</div></a></li>
+            }
+            @if (User.IsInRole("ADM.CON"))
+            {
+                <li id="menu5"><a href="@Url.Action("ContratanteLst", new { area = "Administracao", controller = "Contratante" })"><div><i class="fa fa-angle-double-right"></i>Configurar Contratantes</div></a></li>
+            }
+            @if (User.IsInRole("ADM.FUN"))
+            {
+                <li id="menu5"><a href="@Url.Action("FuncaoLst", new { area = "Administracao", controller = "Funcao" })"><div><i class="fa fa-angle-double-right"></i>Configurar Funções</div></a></li>
+            }
+            @if (User.IsInRole("ADM.PAP"))
+            {
+                <li id="menu5"><a href="@Url.Action("PapelLst", new { area = "Administracao", controller = "Papel" })"><div><i class="fa fa-angle-double-right"></i>Configurar Papéis</div></a></li>
+            }
+            @if (User.IsInRole("ADM.PER"))
+            {
+                <li id="menu5"><a href="@Url.Action("PerfilLst", new { area = "Administracao", controller = "Perfil" })"><div><i class="fa fa-angle-double-right"></i>Configurar Perfis</div></a></li>
+            }
+            @if (User.IsInRole("ADM.USU"))
+            {
+                <li id="menu5"><a href="@Url.Action("UsuarioLst", new { area = "Administracao", controller = "Usuario" })"><div><i class="fa fa-angle-double-right"></i>Configurar Usuários</div></a></li>
+            }            
+        </ul>
+    </li>
+}

@@ -1,0 +1,159 @@
+﻿@model WebForLink.Web.ViewModels.DestinatariosVM
+
+
+<section class="content-header">
+    <h1>
+        Destinatário
+        <!-- small>Control panel</!--small -->
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> Meus Documentos</li>
+        <li class="active">Destinatário</li>
+    </ol>
+</section>
+
+
+<!-- FORM -->
+<section class="content">
+    <div id="boxForm" class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Novo Destinatário</h3>
+        </div>
+        @using (Html.BeginForm("DestinatarioFrm", "Destinatario", FormMethod.Post))
+        {
+            <div class="box-body">
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+                @Html.Hidden("Acao", (string)ViewBag.Acao)
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label" })
+                            <span class="text-danger" style="font-weight:bold;">*</span><br />
+                            @Html.TextBoxFor(model => model.Nome, new { @class = "form-control", disable_input = "" })
+                            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Sobrenome, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Sobrenome, new { @class = "form-control", disable_input = "" })
+                            @Html.ValidationMessageFor(model => model.Sobrenome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                            <span class="text-danger" style="font-weight:bold;">*</span><br />
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", disable_input = "" })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Empresa, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Empresa, new { @class = "form-control", disable_input = "" })
+                            @Html.ValidationMessageFor(model => model.Empresa, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TelefoneFixo, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.TelefoneFixo, new { @class = "form-control", disable_input = "" })
+                            @Html.ValidationMessageFor(model => model.TelefoneFixo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Celular, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Celular, new { @class = "form-control", disable_input = "" })
+                            @Html.ValidationMessageFor(model => model.Celular, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TelefoneTrabalho, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.TelefoneTrabalho, new { @class = "form-control", disable_input = "" })
+                            @Html.ValidationMessageFor(model => model.TelefoneTrabalho, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Fax, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Fax, new { @class = "form-control", disable_input = "" })
+                            @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Obs, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextAreaFor(model => model.Obs, new { @class = "form-control", disable_input = "", rows = 3 })
+                            @Html.ValidationMessageFor(model => model.Obs, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                @if (Model.ID != 0)
+                {
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group" style="padding-left: 40px;">
+                            <lable>&nbsp;</lable>
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(model => model.Ativo, new { disable_input = "" })
+                                @Html.ValidationMessageFor(model => model.Ativo, "", new { @class = "text-danger" })
+                            </div>
+                            @Html.LabelFor(model => model.Ativo, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                    </div>
+                </div>
+                }
+                <div class="clearfix"></div>
+            </div>
+            <div class="box-footer">
+                <div class="row">
+                    <div class="col-lg-2 text-left">
+                        <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("DestinatarioLst")'">Cancelar</button>
+                    </div>
+                    <div class="col-lg-10 text-right text-nowrap">
+                        @if (ViewBag.Acao != "Excluir")
+                            {
+                            <button type="button" class="btn btn-primary" onclick="$('#alert_confirm span').text('Tem certeza que deseja Salvar este Destinatário?'); $('#alert_confirm').fadeIn('fast');">Salvar</button>
+                            }
+                            else
+                            {
+                            <button type="button" class="btn btn-danger" onclick="$('#alert_confirm span').text('Tem certeza que deseja EXCLUIR este Destinatário?'); $('#alert_confirm').fadeIn('fast');">Excluir</button>
+                            }
+                        <button type="button" class="btn btn-default" onclick="$('#Nome').val('');$('#Sobrenome').val('');$('#Email').val('');$('#Empresa').val('');$('#TelefoneFixo').val('');$('#Celular').val('');$('#TelefoneTrabalho').val('');$('#Fax').val('');$('#Obs').val('');"><i class="glyphicon glyphicon-erase"></i>&nbsp;Limpar</button>
+                    </div>
+                </div>
+                <div id="alert_confirm" class="alert alert-warning" role="alert" style="display: none;">
+                    <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="submit" class="btn btn-primary btn-xs">Sim</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-default btn-xs" onclick="$('#alert_confirm').fadeOut('fast');">Não</button>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts {
+    @Styles.Render("~/style/date")
+    @Scripts.Render("~/bundles/date")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#TelefoneTrabalho, #TelefoneFixo, #Celular, #Fax').inputmask({mask: ['(99) 9999-9999', '(99) 99999-9999']});
+            $('[disable-input]').prop('disabled', @(ViewBag.Acao == "Excluir" ? "true" : "false"));
+
+        });
+
+    </script>
+}

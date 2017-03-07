@@ -1,0 +1,36 @@
+﻿@model IEnumerable<WebForLink.Web.ViewModels.CategoriaVM>
+
+@{
+    Layout = null;
+}
+
+<script src="~/Scripts/Views/Shared/CategoriasTreeView.js"></script>
+
+<div id="divCatTree" class="col-md-12" style="height: 30px; overflow:hidden; border: 1px solid silver;">
+    <div class="row">
+        <div id="divCatTreeContainer" class="treeview-simples-container">
+            <div id="divCatSelecionado" style="cursor: default; padding: 6px; height: 30px; width: 100%; border-bottom: 1px solid silver;" onclick="abrirCategorias();">
+                <span id="spanCategoria">@(!String.IsNullOrEmpty(ViewBag.CategoriaSelecionadaNome) ? ViewBag.CategoriaSelecionadaNome : "Selecione...")</span>
+                <i class="fa fa-caret-down fa-lg pull-right" style="padding: 4px;"></i>
+                <input type="hidden" name="CategoriaSelecionada" id="CategoriaSelecionada" value="@ViewBag.CategoriaSelecionada" />
+                <input type="hidden" name="CategoriaSelecionadaNome" id="CategoriaSelecionadaNome" value="@ViewBag.CategoriaSelecionadaNome" />
+            </div>
+            <div id="divTreeViewSimples" style="max-height: 269px; overflow-y:auto; padding-left:6px; display: none;">
+                <ul class="treeview-simples">
+                    <li class="filho" onclick="selecionaCategoria(0, 'Selecione...')">Selecione...</li>
+                    @foreach (var item in Model)
+                    {
+                        if (item.TemFilhos)
+                        {
+                            <li class="pai" onclick="buscaFilhos(this, @item.ID, '@Url.Action("CategoriaFilhoLst", "Categoria")');">@item.Descricao <i class="fa fa-chevron-circle-right"></i></li>
+                        }
+                        else
+                        {
+                            <li class="filho" onclick="selecionaCategoria(@item.ID, '@item.Descricao');">@item.Descricao</li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

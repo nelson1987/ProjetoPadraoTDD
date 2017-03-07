@@ -1,0 +1,53 @@
+﻿@model List<WebForLink.Web.ViewModels.MeusDocumentosPesquisarEmailGridVM>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-condensed">
+        <thead>
+            <tr>
+                <th class="text-center">Opção</th>
+                <th class="text-center">Nome</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Origem</th>
+                <th class="text-center">Empresa</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            <input type="hidden" value="@item.Id" />
+                            @if (item.IsChecked)
+                            {
+                                <input type="checkbox" class="checkbox" onclick="checkClick('@item.Id', this);" checked="checked" />
+                            }
+                            else
+                            {
+                                <input type="checkbox" class="checkbox" onclick="checkClick('@item.Id', this);" />
+                            }
+                        </td>
+                        <td>
+                            @item.Nome
+                        </td>
+                        <td>
+                            @item.Email
+                        </td>
+                        <td>
+                            @item.Origem
+                        </td>
+                        <td>
+                            @item.Empresa
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-center">Não foram encontrados dados para a pesquisa</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

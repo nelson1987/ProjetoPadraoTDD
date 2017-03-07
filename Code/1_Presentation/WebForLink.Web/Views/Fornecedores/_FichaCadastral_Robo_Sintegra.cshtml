@@ -1,0 +1,190 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FornecedoresVM
+
+@if (Model != null)
+{
+    <div id="callReceitaSintegra" class="panel panel-@Model.RoboSintegra.cssCor">
+        <div id="callReceitaSintegraHeading" class="panel-heading panel-heading-@Model.RoboSintegra.cssCor">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#bodySintegra">
+                    <b>Sintegra:</b><span> @Html.Raw(Model.RoboSintegra.Code != null ? Model.RoboSintegra.Data.Message : "")</span>
+                </a>
+            </h4>
+        </div>
+        <div id="bodySintegra" class="panel-collapse collapse" role="tabpanel">
+            <div class="panel-body">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Razão Social</label><br />
+                        <span id="span_RoboSintegra_Data_RazaoSocial">@Html.DisplayTextFor(model => model.RoboSintegra.Data.RazaoSocial)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.RazaoSocial)
+                        @Html.HiddenFor(model => model.RoboSintegra.Code)
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.Message)
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Situação Cadastral</label><br />
+                        <span id="span_RoboSintegra_Data_SituacaoCadastral">@Html.DisplayTextFor(model => model.RoboSintegra.Data.SituacaoCadastral)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.SituacaoCadastral)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Data Sit. Cad.</label><br />
+                        <span id="span_RoboSintegra_Data_DataSituacaoCadastral">@Html.DisplayTextFor(model => model.RoboSintegra.Data.DataSituacaoCadastral)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.DataSituacaoCadastral)
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Telefone</label><br />
+                        <span id="span_RoboSintegra_Data_Telefone">@Html.DisplayTextFor(model => model.RoboSintegra.Data.Telefone)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.Telefone)
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Logradouro</label><br />
+                        <span id="span_RoboSintegra_Data_Logradouro">@Html.DisplayTextFor(model => model.RoboSintegra.Data.Logradouro)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.Logradouro)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Número</label><br />
+                        <span id="span_RoboSintegra_Data_Numero">@Html.DisplayTextFor(model => model.RoboSintegra.Data.Numero)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.Numero)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Complemento</label><br />
+                        <span id="span_RoboSintegra_Data_Complemento">@Html.DisplayTextFor(model => model.RoboSintegra.Data.Complemento)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.Complemento)
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Bairro</label><br />
+                        <span id="span_RoboSintegra_Data_Bairro">@Html.DisplayTextFor(model => model.RoboSintegra.Data.Bairro)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.Bairro)
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Município</label><br />
+                        <span id="span_RoboSintegra_Data_Municipio">@Html.DisplayTextFor(model => model.RoboSintegra.Data.Municipio)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.Municipio)
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Estado</label><br />
+                        <span id="span_RoboSintegra_Data_UF">@Html.DisplayTextFor(model => model.RoboSintegra.Data.UF)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.UF)
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>CEP</label><br />
+                        <span id="span_RoboSintegra_Data_CEP">@Html.DisplayTextFor(model => model.RoboSintegra.Data.CEP)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.CEP)
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <label>Atividade Principal</label><br />
+                        <span id="span_RoboSintegra_Data_AtividadeEconomicaPrincipal">@Html.DisplayTextFor(model => model.RoboSintegra.Data.AtividadeEconomicaPrincipal)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.AtividadeEconomicaPrincipal)
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Inscrição Estadual</label><br />
+                        <span id="span_RoboSintegra_Data_InscricaoEstadual">@Html.DisplayTextFor(model => model.RoboSintegra.Data.InscricaoEstadual)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.InscricaoEstadual)
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Enquadramento Fiscal</label><br />
+                        <span id="span_RoboSintegra_Data_EnquadramentoFiscal">@Html.DisplayTextFor(model => model.RoboSintegra.Data.EnquadramentoFiscal)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.EnquadramentoFiscal)
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Situação EFD</label><br />
+                        <span id="span_RoboSintegra_Data_SituacaoEFD">@Html.DisplayTextFor(model => model.RoboSintegra.Data.SituacaoEFD)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.SituacaoEFD)
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Multiplas IEs</label><br />
+                        <span id="span_RoboSintegra_Data_MultiplasIE">@Html.DisplayTextFor(model => model.RoboSintegra.Data.MultiplasIE)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.MultiplasIE)
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Emissão NFe Obrigatório</label><br />
+                        <span id="span_RoboSintegra_Data_EmissaoNFEObrigatorio">@Html.DisplayTextFor(model => model.RoboSintegra.Data.EmissaoNFEObrigatorio)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.EmissaoNFEObrigatorio)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Perfil EFD</label><br />
+                        <span id="span_RoboSintegra_Data_PerfilEFD">@Html.DisplayTextFor(model => model.RoboSintegra.Data.PerfilEFD)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.PerfilEFD)
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>CTE</label><br />
+                        <span id="span_RoboSintegra_Data_CTE">@Html.DisplayTextFor(model => model.RoboSintegra.Data.CTE)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.CTE)
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Data Inclusão</label><br />
+                        <span id="span_RoboSintegra_Data_DataInclusao">@Html.DisplayTextFor(model => model.RoboSintegra.Data.DataInclusao)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboSintegra.Data.DataInclusao)
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+                

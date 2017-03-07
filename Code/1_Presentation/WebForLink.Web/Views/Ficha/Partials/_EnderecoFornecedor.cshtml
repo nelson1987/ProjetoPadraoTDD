@@ -1,0 +1,268 @@
+﻿@model WebForLink.Web.ViewModels.DadosEnderecoVM
+<div class="box box-success box-endereco" style="margin-bottom: 5px;">
+    <div class="box-header with-border" style="background: #fBfBfB; border-bottom: #f0F0f0 1px solid;">
+        <span class="box-title" style="font-size: 14px;">COMERCIAL</span>
+        <span class="box-subtitle">@Html.DisplayTextFor(x => x.ResumoEndereco)</span>
+        <div class="box-tools pull-right">
+            <span type="button" class="btn btn-minimizar" data-widget="collapse">
+                <i class="fa fa-sort-desc"></i>
+            </span>&nbsp;
+            <span type="button" class="btn btn-danger btn-excluir-endereco" data-widget="remove">
+                <i class="fa fa-trash-o fa-lg"></i>
+            </span>
+        </div>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body hidden" style="padding: 10px 10px 0px 10px;">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Tipo de Endereço</label><br>
+                    <select class="form-control input-sm" data-val="true" data-val-number="The field Tipo de Endereço must be a number." data-val-required="O campo Tipo de Endereço é obrigatório." id="DadosEnderecos_2d1f9f65-de36-4f53-be25-7e7359c4035d__TipoEnderecoId" name="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].TipoEnderecoId" onchange=" obterNomeTipoEndereco(this); ">
+                        <option value="">Selecione um Endereço</option>
+                        <option selected="selected" value="1">COMERCIAL</option>
+                        <option value="2">RESIDENCIAL</option>
+                    </select>
+                    <span class="field-validation-valid text-danger" data-valmsg-for="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].ListTipoEndereco" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="col-xs-8 col-md-5">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Endereco)
+                    @Html.TextBoxFor(x => x.Endereco, new {@class = "form-control input-sm"})
+                    @*<input class="form-control input-sm" id="DadosEnderecos_2d1f9f65-de36-4f53-be25-7e7359c4035d__Endereco" maxlength="255" name="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].Endereco" type="text" value="av das americas">*@
+                </div>
+            </div>
+            <div class="col-xs-4 col-md-1">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Numero)
+                    @Html.TextBoxFor(x => x.Numero, new {@class = "form-control input-sm"})
+                    @*<input class="form-control input-sm" id="DadosEnderecos_2d1f9f65-de36-4f53-be25-7e7359c4035d__Numero" maxlength="50" name="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].Numero" type="text" value="3434">*@
+                </div>
+            </div>
+            <div class="col-xs-8 col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Complemento)
+                    @Html.TextBoxFor(x => x.Complemento, new {@class = "form-control input-sm"})
+                    @*<input class="form-control input-sm" id="DadosEnderecos_2d1f9f65-de36-4f53-be25-7e7359c4035d__Complemento" maxlength="255" name="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].Complemento" type="text" value="BL 5">*@
+                </div>
+            </div>
+            <div class="col-xs-4 col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.CEP)
+                    @Html.TextBoxFor(x => x.CEP, new {@class = "form-control input-sm"})
+                    @*<input class="form-control input-sm" id="DadosEnderecos_2d1f9f65-de36-4f53-be25-7e7359c4035d__CEP" maxlength="8" name="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].CEP" type="text" value="22780300">*@
+                </div>
+            </div>
+            <div class="col-xs-4 col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Bairro)
+                    @Html.TextBoxFor(x => x.Bairro, new {@class = "form-control input-sm"})
+                    @*<input class="form-control input-sm" id="DadosEnderecos_2d1f9f65-de36-4f53-be25-7e7359c4035d__Bairro" maxlength="100" name="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].Bairro" type="text" value="Barra da Tijuca">*@
+                </div>
+            </div>
+            <div class="col-xs-4 col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Cidade)
+                    @Html.TextBoxFor(x => x.Cidade, new {@class = "form-control input-sm"})
+                    @*<input class="form-control input-sm" id="DadosEnderecos_2d1f9f65-de36-4f53-be25-7e7359c4035d__Cidade" maxlength="100" name="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].Cidade" type="text" value="Rio de Janeiro">*@
+                </div>
+            </div>
+            <div class="col-xs-4 col-md-3">
+                <div class="form-group">
+                    <label>Estado</label><br>
+                    <select class="form-control input-sm" id="DadosEnderecos_2d1f9f65-de36-4f53-be25-7e7359c4035d__T_UF_UF_SGL" name="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].T_UF.UF_SGL">
+                        <option value="">Selecione o Estado</option>
+                        <option value="AC">ACRE</option>
+                        <option value="AL">ALAGOAS</option>
+                        <option value="AM">AMAZONIA</option>
+                        <option value="AP">AMAPÁ</option>
+                        <option value="BA">BAHIA</option>
+                        <option value="CE">CEARA</option>
+                        <option value="DF">DISTRITO FEDERAL</option>
+                        <option value="ES">ESPIRITO SANTO</option>
+                        <option value="GO">GOIAS</option>
+                        <option value="MA">MARANHÃO</option>
+                        <option value="MG">MINAS GERAIS</option>
+                        <option value="MS">MATO GROSSO DO SUL</option>
+                        <option value="MT">MATO GROSSO</option>
+                        <option value="PA">PARA</option>
+                        <option value="PB">PARAÍBA</option>
+                        <option value="PE">PERNANBUCO</option>
+                        <option value="PI">PIAUÍ</option>
+                        <option value="PR">PARANÁ</option>
+                        <option selected="selected" value="RJ">RIO DE JANEIRO</option>
+                        <option value="RN">RIO GRANDE DO NORTE</option>
+                        <option value="RO">RONDÔNIA</option>
+                        <option value="RR">RORAIMA</option>
+                        <option value="RS">RIO GRANDE DO SUL</option>
+                        <option value="SC">SANTA CATARINA</option>
+                        <option value="SE">SERGIPE</option>
+                        <option value="SP">SÃO PAULO</option>
+                        <option value="TO">TOCANTINS</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-4 col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Pais)
+                    @Html.TextBoxFor(x => x.Pais, new {@class = "form-control input-sm"})
+                    @*<input class="form-control input-sm" id="DadosEnderecos_2d1f9f65-de36-4f53-be25-7e7359c4035d__Pais" maxlength="100" name="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].Pais" type="text" value="Brasil">*@
+                </div>
+            </div>
+            <div class="col-md-1">
+                <label>&nbsp;</label><br>
+                <button type="button" class="btn btn-danger" onclick=" $(this).parent('div.Endereco').first('#exclusaoDadosEnderecos').toggleClass('hidden'); ">
+                    <i class="fa fa-trash-o fa-lg"></i>
+                </button>
+            </div>
+            <div class="clearfix"></div>
+            <div id="exclusaoDadosEnderecos" class="alert alert-warning text-center" role="alert" style="Height: 10%">
+                <span>Tem certeza que deseja excluir este Endereço?</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-primary btn-xs" onclick=" excluirDados(this); ">Sim</button>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-default btn-xs" onclick=" $(this).parent('div').hide(); ">Não</button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- ./box-body -->
+</div>
+<!--
+<div class="box">
+    <div class="box-header with-border">
+        <h3 class="box-title">Monthly Recap Report</h3>
+        <div class="box-tools pull-right">
+            <span type="button" class="" data-widget="collapse">
+                <i class="fa fa-minus"></i>
+            </span>&nbsp;
+            <span type="button" class="" data-widget="remove">
+                <i class="fa fa-times"></i>
+            </span>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            UHAUHAUHAUAHUHA
+        </div>
+    </div>
+</div>
+<div class="Endereco" name="Endereco" style="border-top: 1px solid #dddddd; padding-top: 2px;">
+    <input data-val="true" data-val-number="The field ID must be a number." id="DadosEnderecos_2d1f9f65-de36-4f53-be25-7e7359c4035d__ID" name="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].ID" type="hidden" value="42">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Tipo de Endereço</label><br>
+            <select class="form-control input-sm" data-val="true" data-val-number="The field Tipo de Endereço must be a number." data-val-required="O campo Tipo de Endereço é obrigatório." id="DadosEnderecos_2d1f9f65-de36-4f53-be25-7e7359c4035d__TipoEnderecoId" name="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].TipoEnderecoId" onchange="obterNomeTipoEndereco(this);">
+                <option value="">Selecione um Endereço</option>
+                <option selected="selected" value="1">COMERCIAL</option>
+                <option value="2">RESIDENCIAL</option>
+            </select>
+            <span class="field-validation-valid text-danger" data-valmsg-for="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].ListTipoEndereco" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+    <div class="col-xs-8 col-md-5">
+        <div class="form-group">
+            @*<label>Endereço</label><br>*@
+            @Html.LabelFor(x => x.Endereco)
+            @Html.TextBoxFor(x => x.Endereco, new {@class = "form-control input-sm"})
+            @*<input class="form-control input-sm" id="DadosEnderecos_2d1f9f65-de36-4f53-be25-7e7359c4035d__Endereco" maxlength="255" name="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].Endereco" type="text" value="av das americas">*@
+        </div>
+    </div>
+    <div class="col-xs-4 col-md-1">
+        <div class="form-group">
+            @*<label>Número</label><br>*@
+            @Html.LabelFor(x => x.Numero)
+            @Html.TextBoxFor(x => x.Numero, new {@class = "form-control input-sm"})
+            @*<input class="form-control input-sm" id="DadosEnderecos_2d1f9f65-de36-4f53-be25-7e7359c4035d__Numero" maxlength="50" name="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].Numero" type="text" value="3434">*@
+        </div>
+    </div>
+    <div class="col-xs-8 col-md-3">
+        <div class="form-group">
+            @*<label>Complemento</label><br>*@
+            @Html.LabelFor(x => x.Complemento)
+            @Html.TextBoxFor(x => x.Complemento, new {@class = "form-control input-sm"})
+            @*<input class="form-control input-sm" id="DadosEnderecos_2d1f9f65-de36-4f53-be25-7e7359c4035d__Complemento" maxlength="255" name="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].Complemento" type="text" value="BL 5">*@
+        </div>
+    </div>
+    <div class="col-xs-4 col-md-2">
+        <div class="form-group">
+            @*<label>CEP</label><br>*@
+            @Html.LabelFor(x => x.CEP)
+            @Html.TextBoxFor(x => x.CEP, new {@class = "form-control input-sm"})
+            @*<input class="form-control input-sm" id="DadosEnderecos_2d1f9f65-de36-4f53-be25-7e7359c4035d__CEP" maxlength="8" name="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].CEP" type="text" value="22780300">*@
+        </div>
+    </div>
+    <div class="col-xs-4 col-md-2">
+        <div class="form-group">
+            @*<label>Bairro</label><br>*@
+            @Html.LabelFor(x => x.Bairro)
+            @Html.TextBoxFor(x => x.Bairro, new {@class = "form-control input-sm"})
+            @*<input class="form-control input-sm" id="DadosEnderecos_2d1f9f65-de36-4f53-be25-7e7359c4035d__Bairro" maxlength="100" name="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].Bairro" type="text" value="Barra da Tijuca">*@
+        </div>
+    </div>
+    <div class="col-xs-4 col-md-2">
+        <div class="form-group">
+            @*<label>Cidade</label><br>*@
+            @Html.LabelFor(x => x.Cidade)
+            @Html.TextBoxFor(x => x.Cidade, new {@class = "form-control input-sm"})
+            @*<input class="form-control input-sm" id="DadosEnderecos_2d1f9f65-de36-4f53-be25-7e7359c4035d__Cidade" maxlength="100" name="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].Cidade" type="text" value="Rio de Janeiro">*@
+        </div>
+    </div>
+    <div class="col-xs-4 col-md-3">
+        <div class="form-group">
+            <label>Estado</label><br>
+            <select class="form-control input-sm" id="DadosEnderecos_2d1f9f65-de36-4f53-be25-7e7359c4035d__T_UF_UF_SGL" name="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].T_UF.UF_SGL">
+                <option value="">Selecione o Estado</option>
+                <option value="AC">ACRE</option>
+                <option value="AL">ALAGOAS</option>
+                <option value="AM">AMAZONIA</option>
+                <option value="AP">AMAPÁ</option>
+                <option value="BA">BAHIA</option>
+                <option value="CE">CEARA</option>
+                <option value="DF">DISTRITO FEDERAL</option>
+                <option value="ES">ESPIRITO SANTO</option>
+                <option value="GO">GOIAS</option>
+                <option value="MA">MARANHÃO</option>
+                <option value="MG">MINAS GERAIS</option>
+                <option value="MS">MATO GROSSO DO SUL</option>
+                <option value="MT">MATO GROSSO</option>
+                <option value="PA">PARA</option>
+                <option value="PB">PARAÍBA</option>
+                <option value="PE">PERNANBUCO</option>
+                <option value="PI">PIAUÍ</option>
+                <option value="PR">PARANÁ</option>
+                <option selected="selected" value="RJ">RIO DE JANEIRO</option>
+                <option value="RN">RIO GRANDE DO NORTE</option>
+                <option value="RO">RONDÔNIA</option>
+                <option value="RR">RORAIMA</option>
+                <option value="RS">RIO GRANDE DO SUL</option>
+                <option value="SC">SANTA CATARINA</option>
+                <option value="SE">SERGIPE</option>
+                <option value="SP">SÃO PAULO</option>
+                <option value="TO">TOCANTINS</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-xs-4 col-md-2">
+        <div class="form-group">
+            @*<label>País</label><br>*@
+            @Html.LabelFor(x => x.Pais)
+            @Html.TextBoxFor(x => x.Pais, new {@class = "form-control input-sm"})
+            @*<input class="form-control input-sm" id="DadosEnderecos_2d1f9f65-de36-4f53-be25-7e7359c4035d__Pais" maxlength="100" name="DadosEnderecos[2d1f9f65-de36-4f53-be25-7e7359c4035d].Pais" type="text" value="Brasil">*@
+        </div>
+    </div>
+    <div class="col-md-1">
+        <label>&nbsp;</label><br>
+        <button type="button" class="btn btn-danger" onclick="$(this).parent('div.Endereco').first('#exclusaoDadosEnderecos').toggleClass('hidden');">
+            <i class="fa fa-trash-o fa-lg"></i>
+        </button>
+    </div>
+    <div class="clearfix"></div>
+    <div id="exclusaoDadosEnderecos" class="alert alert-warning text-center hidden" role="alert" style="Height:10%">
+        <span>Tem certeza que deseja excluir este Endereço?</span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" class="btn btn-primary btn-xs" onclick="excluirDados(this);">Sim</button>&nbsp;&nbsp;&nbsp;
+        <button type="button" class="btn btn-default btn-xs" onclick="$(this).parent('div').hide();">Não</button>
+    </div>
+    <div class="clearfix"></div>
+</div>
+-->

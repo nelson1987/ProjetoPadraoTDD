@@ -1,0 +1,86 @@
+﻿@model WebForLink.Web.ViewModels.CategoriaVM
+
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('[disable-input]').prop('disabled', @(ViewBag.Acao == "Excluir" ? "true" : "false"));
+    });
+</script>
+    }
+<section class="content-header">
+    <h1>
+        Cadastro de Categoria
+        <!-- small>Control panel</!--small -->
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> Fornecedores</li>
+        <li class="active">Cadastro de Categoria</li>
+    </ol>
+</section>
+
+<!-- FORM -->
+<section class="content">
+    <div id="boxForm" class="box box-primary">
+        <div class="box-header"><h3 class="box-title"></h3></div>
+        <div class="box-body">
+            @using (Html.BeginForm("CategoriaFrm"))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+                @Html.Hidden("Acao", (string)ViewBag.Acao)
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Codigo, htmlAttributes: new { @class = "control-label" })
+                        &nbsp;<span class="text-danger" style="font-weight:bold;">*</span><br />
+                        @Html.TextBoxFor(model => model.Codigo, new { @class = "form-control", disable_input = "" })
+                        @Html.ValidationMessageFor(model => model.Codigo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label" })
+                        &nbsp;<span class="text-danger" style="font-weight:bold;">*</span><br />
+                        @Html.TextBoxFor(model => model.Descricao, new { @class = "form-control", disable_input = "" })
+                        @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-8">
+                    <div class="form-group" style="padding-left: 20px;">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(model => model.Ativo, new { disable_input = "" })
+                            @Html.ValidationMessageFor(model => model.Ativo, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.Ativo, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="box-footer">
+                    <div class="text-right text-nowrap">
+                        @if (ViewBag.Acao != "Excluir")
+                        {
+                            <button type="button" class="btn btn-primary" onclick="$('#alert_confirm span').text('Tem certeza que deseja Salvar esta Categoria?'); $('#alert_confirm').fadeIn('fast');">Salvar</button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-danger" onclick="$('#alert_confirm span').text('Tem certeza que deseja EXCLUIR esta Categoria?'); $('#alert_confirm').fadeIn('fast');">Excluir</button>
+                        }
+
+                        <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("CategoriaLst","Categoria")'">Cancelar</button>
+                    </div>
+
+                    <div id="alert_confirm" class="alert alert-warning" role="alert" style="display: none;">
+                        <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-primary btn-xs">Sim</button>&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-default btn-xs" onclick="$('#alert_confirm').fadeOut('fast');">Não</button>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</section>

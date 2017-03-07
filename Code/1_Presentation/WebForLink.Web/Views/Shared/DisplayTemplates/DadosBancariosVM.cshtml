@@ -1,0 +1,45 @@
+﻿@using WebForLink.Web.Infrastructure;
+@using WebForLink.Web.Interfaces;
+@using WebForLink.Domain.Infrastructure;
+@model WebForLink.Web.ViewModels.DadosBancariosVM
+
+@{
+    IGeral metodosGerais = new Geral();
+    string key = metodosGerais.ValorKey();
+    EncryptDecryptQueryString cripto = new EncryptDecryptQueryString();
+}
+
+<div class="Banco" style="border: solid 1px silver; padding-top: 7px;">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Banco</label><br />
+            <span>@Html.DisplayTextFor(x => x.NomeBanco)</span>
+        </div>
+    </div>
+    <div class="col-xs-6 col-md-2">
+        <div class="form-group">
+            <label>Agência</label><br />
+            <span>
+                @(!string.IsNullOrEmpty(Model.Digito) ? string.Format("{0}-{1}", Html.DisplayTextFor(x => x.Agencia), Html.DisplayTextFor(x => x.Digito)) : Html.DisplayTextFor(x => x.Agencia).ToString())
+            </span>
+        </div>
+    </div>
+    <div class="col-xs-6 col-md-2">
+        <div class="form-group">
+            <label>Conta Corrente</label><br />
+            <span>
+                @(!string.IsNullOrEmpty(Model.ContaCorrenteDigito) ? string.Format("{0}-{1}", Html.DisplayTextFor(x => x.ContaCorrente), Html.DisplayTextFor(x => x.ContaCorrenteDigito)) : Html.DisplayTextFor(x => x.ContaCorrente).ToString())
+            </span>
+        </div>
+    </div>
+@if (Model.NomeArquivo != null)
+{
+    <div class="col-xs-12 col-md-4">
+        <div class="form-group">
+            <label class="control-label">Arquivo</label><br />
+            <a href="@Url.Action("FornecedorArquivo", "Fornecedores", new { chaveurl = cripto.Criptografar(string.Format("ArquivoID={0}", Model.ArquivoID), key) })" class="btn-link">@Model.NomeArquivo</a>
+        </div>
+    </div>
+}
+    <div class="clearfix"></div>
+</div>

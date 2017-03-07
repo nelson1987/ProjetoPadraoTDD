@@ -1,0 +1,65 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+<div class="col-md-6">
+    <div class="form-group">
+        @Html.LabelFor(model => model.RazaoSocial, htmlAttributes: new { @class = "control-label" })
+        &nbsp;<span class="text-danger" style="font-weight:bold;">*</span><br />
+        @Html.TextBoxFor(model => model.RazaoSocial, new { @class = "form-control input-sm" })
+        @Html.ValidationMessageFor(model => model.RazaoSocial, "", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="form-group">
+        @Html.LabelFor(model => model.NomeFantasia, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.NomeFantasia, new { @class = "form-control input-sm" })
+        @Html.ValidationMessageFor(model => model.NomeFantasia, "", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="form-group">
+        <div class="radio">
+            @if (!Model.DocumentoEditavel)
+            {
+
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(model => model.isCPF, true, new { disabled = "disabled" }) Pessoa Física
+                </label>
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(model => model.isCPF, false, new { disabled = "disabled" }) Pessoa Jurídica
+                </label>
+            }
+            else
+            {
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(model => model.isCPF, true) Pessoa Física
+                </label>
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(model => model.isCPF, false) Pessoa Jurídica
+                </label>
+            }
+        </div>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="form-group">
+        <label for="cnpjInputValidacao" class="control-label" id="cnpjLabelValidacao">CNPJ</label>
+        &nbsp;<span class="text-danger" style="font-weight:bold;">*</span><br />
+        @if (!Model.DocumentoEditavel)
+        {
+            @Html.HiddenFor(model => model.CNPJ_CPF)
+            @Html.TextBoxFor(model => model.CNPJ_CPF, new { @class = "form-control input-sm", disabled = "disabled", id = "cnpjInputValidacao" })
+        }
+        else
+        {
+            @Html.TextBoxFor(model => model.CNPJ_CPF, new { @class = "form-control input-sm", id = "cnpjInputValidacao" })
+        }
+        @Html.ValidationMessageFor(model => model.CNPJ_CPF, "", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="form-group">
+        @Html.LabelFor(model => model.InscricaoMunicipal, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.InscricaoMunicipal, new { @class = "form-control input-sm" })
+        @Html.ValidationMessageFor(model => model.InscricaoMunicipal, "", new { @class = "text-danger" })
+    </div>
+</div>
+

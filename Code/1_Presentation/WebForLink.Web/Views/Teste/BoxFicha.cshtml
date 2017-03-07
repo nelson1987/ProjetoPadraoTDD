@@ -1,0 +1,65 @@
+﻿@model WebForLink.Web.Controllers.BoxesTesteVM
+@{
+    string nomebox = Model.NomeBox;
+    string validation = Model.Validation;
+    string collapse = Model.Collapse;
+    string divConfirmacao = Model.DivConfirmacao;
+
+    string botaoSim = Model.BotaoSim;
+    string botaoNao = Model.BotaoNao;
+    string incluirUrl = Model.UrlIncluir;
+    string cancelarUrl = Model.UrlCancelar;
+    string mensagemInclusao = Model.MensagemInclusao;
+    string divInterna = Model.DivInterna;
+    string excluir = Model.Excluir;
+    string div = Model.Div;
+    /*
+        NomeBox = "Dados Efetivos",
+    Validation = "DadosEfetivosValidation",
+    Collapse = "dadosEfetivosCollapse",
+    Excluir = "EfetivosExcluir",
+    Div = "divEfetivos",
+    DivInterna = "DadosEfetivos",
+    UrlIncluir = "",
+    MensagemInclusao = "Adicionar Dados de Efetivos",
+    UrlCancelar ="",
+    Validar = "validaSalvarEfetivos",
+    DivConfirmacao = "ConfirmacaoEfetivos",
+    */
+    //List<WebForLink.Web.Controllers.EnderecoTesteVM> lista = Model.Grid;
+}
+<div class="box box-primary">
+    <div class="box-header">
+        <h3 class="box-title"><a href="#@collapse" data-toggle="collapse">@nomebox</a></h3>
+        @Html.ValidationMessage(validation, "", new { @class = "text-danger" })
+
+        <div class="box-body collapse" id="@collapse">
+            <input type="hidden" id="@excluir" name="@excluir" value="" />
+
+            <div id="@div">
+                @*@for (int i = 0; i < Model.Grid.Count; i++)
+                {
+                    @Html.EditorFor(x => Model.Grid[i])
+                }*@
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="form-group" style="padding-top: 7px;">
+                <button type="button" class="btn btn-default" onclick="incluirDados('@divInterna', '@incluirUrl');" disable-input="">@mensagemInclusao</button>
+            </div>
+            <br>
+            <div class="text-right text-nowrap hidden">
+                <button type="button" class="btn btn-primary" onclick="validaSalvarEnderecos();">Salvar</button>
+                <button type="button" class="btn btn-danger" onclick="cancelarDados('@divInterna', '@cancelarUrl');">Cancelar</button>
+            </div>
+            <div id="@divConfirmacao" class="alert alert-warning" role="alert" style="display: none;">
+                <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="submit" id="@botaoSim" class="btn btn-primary btn-xs" onclick="">Sim</button>&nbsp;&nbsp;&nbsp;
+                <button type="button" id="@botaoNao" class="btn btn-default btn-xs" onclick="$('#@divConfirmacao').fadeOut('fast');">Não</button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,350 @@
+﻿@model WebForLink.Web.ViewModels.MeusDocumentosVM
+
+@section Scripts {
+    @Scripts.Render("~/bundles/date")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/plugins/jqueryUiWidget/jquery.ui.widget.js"></script>
+    <script src="~/Scripts/jquery.fileupload.js"></script>
+    <script src="~/Scripts/Views/Shared/TipoDocumentos.js"></script>
+    <script src="~/Scripts/Views/Shared/DescricaoDocumentos.js"></script>
+    <script type="text/javascript">
+    var AcaoTipoDocumento = "[Criar, Editar, Deletar]";
+    var AcaoDescricaoDocumento = "[Criar, Editar, Deletar]";
+
+    function AdicionaAcao(obj, texto){
+        $(obj).append("<optgroup label='Ação'><option value='-1'>" + texto + "</option></optgroup>");
+    }
+
+    function montaListaTipoDocumento(){
+        $.getJSON('@Url.Action("ListaTipoDocumento")',
+        {
+            tipo: "Frm"
+        },
+        function (data) {
+            $('#TipoDocumentos').empty();
+            $.each(data, function (index, optionData) {
+                $('#TipoDocumentos').append("<option value='" + optionData.Value + "'>" + optionData.Text + "</option>");
+            });
+            if(data.length > 1)
+                AdicionaAcao($('#TipoDocumentos'), AcaoTipoDocumento);
+
+        });
+    }
+
+    function montaListaDescricaoDocumento() {
+        $.getJSON('@Url.Action("ListaDescricaoDocumento")',
+        {
+            tipoDocumento: $('#TipoDocumentos').val(),
+            tipo: "Frm"
+        },
+        function (data) {
+            $('#DescricaoDocumentos').empty();
+            $.each(data, function (index, optionData) {
+                $('#DescricaoDocumentos').append("<option value='" + optionData.Value + "'>" + optionData.Text + "</option>");
+            });
+            if($('#TipoDocumentos').val() != '' && $('#TipoDocumentos').val() != '-1')
+                AdicionaAcao($('#DescricaoDocumentos'), AcaoDescricaoDocumento);
+
+        });
+    }
+
+    function SemValidade(){
+        if ($('#SemValidade').is(':checked'))
+        {
+            $('#DataValidade').prop('disabled', true)
+            $('#DataValidade').val('');
+            $('#DataValidade').datepicker('update');
+        }
+        else
+        {
+            $('#DataValidade').prop('disabled', @(ViewBag.Acao == "Excluir" ? "true" : "false"))
+        }
+    }
+
+    $(document).ready(function () {
+        $.ajaxSetup({ cache: false });
+
+        $("#TipoDocumentos").change(function () {
+            montaListaDescricaoDocumento();
+
+            if ($(this).val() == '-1'){
+                $('#boxForm').hide();
+                $('#divTipoDocumento').html('<div class="box-body"><div class="text-center"><i class="fa fa-refresh fa-spin"></i> Aguarde...</div></div>').fadeIn('fast');
+                $('#divTipoDocumento').load('@Url.Action("TipoDocumento")');
+            }
+        });
+
+        $("#DescricaoDocumentos").change(function () {
+            if ($(this).val() == '-1'){
+                $('#boxForm').hide();
+                $('#divDescricaoDocumento').html('<div class="box-body"><div class="text-center"><i class="fa fa-refresh fa-spin"></i> Aguarde...</div></div>').fadeIn('fast');
+                var urlDesc = '@Url.Action("DescricaoDocumento")' + '/?TipoDocumentoId=' + encodeURIComponent($('#TipoDocumentos').val()) + "&DescricaoDocumento=" + encodeURIComponent($('#TipoDocumentos option:selected').text());
+                $('#divDescricaoDocumento').load(urlDesc);
+            }
+        });
+
+        AdicionaAcao($('#TipoDocumentos'), AcaoTipoDocumento);
+        if ($('#DescricaoDocumentos option').length > 1){
+            AdicionaAcao($('#DescricaoDocumentos'), AcaoDescricaoDocumento);
+        }
+
+        $("[data-mask]").inputmask("dd/mm/yyyy", { "placeholder": "dd/mm/aaaa" });
+
+        $('#DataEmissao').datepicker({
+            format: "dd/mm/yyyy",
+            language: "pt-BR",
+            todayHighlight: true,
+            autoclose: true
+        });
+
+        $('#DataValidade').datepicker({
+            format: "dd/mm/yyyy",
+            language: "pt-BR",
+            todayHighlight: true,
+            autoclose: true
+        });
+
+        $('[disable-input]').prop('disabled', @(ViewBag.Acao == "Excluir" ? "true" : "false"));
+
+        $("#SemValidade").on('click', SemValidade);
+
+        SemValidade();
+
+        $('#file').fileupload({
+            dataType: 'json',
+            url: '/MeusDocumentos/UploadArquivoContratante',
+            autoUpload: true,
+            maxNumberOfFiles: 6,
+            change: function (e, data) {
+                if (data.files != null) {
+                    var extNaoPermitido = ['BAT', 'BIN', 'CMD', 'COM', 'CPL', 'EXE', 'GADGET', 'INF1', 'INS', 'INX', 'ISU', 'JOB', 'JSE', 'LNK', 'MSC', 'MSI', 'MSP', 'MST', 'PAF', 'PIF', 'PS1', 'REG', 'RGS', 'SCR', 'SCT', 'SHB', 'SHS', 'U3P', 'VB', 'VBE', 'VBS', 'VBSCRIPT', 'WS', 'WSF', 'WSH']
+                    var vExt = data.files[0].name.split('.');
+                    var ext = vExt[vExt.length - 1].toUpperCase();
+
+                    if (data.files[0].size > 29999999) {
+                        $(this).parent().parent().parent().find('[percentual]').empty().append('<span style="color: #d9534f;"><i class="fa fa-exclamation-triangle"></i></span>');
+                        $(this).parent().parent().parent().find('[nomearquivo]').text('Não é permitido arquivos maiores que 30MB');
+                        data.Abort();
+                    }
+                    if (extNaoPermitido.indexOf(ext) >= 0) {
+                        $(this).parent().parent().parent().find('[percentual]').empty().append('<span style="color: #d9534f;"><i class="fa fa-exclamation-triangle"></i></span>');
+                        $(this).parent().parent().parent().find('[nomearquivo]').text('Este tipo de Arquivo não é permitido');
+                        data.Abort();
+                    }
+                }
+            },
+            done: function (e, data) {
+                $(this).parent().parent().parent().find('[percentual]').empty().append('<span style="color: #00a65a;" title="Arquivo subido com Sucesso!"><i class="fa fa-check-circle"></i></span>');
+                $(this).parent().parent().parent().find('[ArquivoSubido]').val(data.result.nome);
+                $(this).parent().parent().parent().find('[TipoArquivoSubido]').val(data.result.tipo);
+                $(this).parent().parent().parent().find('[ArquivoSubidoOriginal]').val(data.result.original);
+                var nomearquivo = $(this).parent().parent().parent().find('[nomearquivo]');
+                nomearquivo.find('span').remove();
+            },
+            fail: function (e, data) {
+                $(this).parent().parent().parent().find('[percentual]').empty().append('<span style="color: #d9534f;" title="Erro ao tentar subir este arquivo!"><i class="fa fa-exclamation-triangle"></i></span>');
+            },
+            progress: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $(this).parent().parent().parent().find('[percentual]').text(progress + '% - ');
+            },
+            submit: function (e, data) {
+                var htmlNome = data.files[0].name + " <span class='badge bg-red' style='cursor: pointer;' title='Cancelar Upload' onclick='$(this).parent().parent().find(\"[cancelarupload]\").toggleClass(\"hidden\");'><i class='fa fa-trash-o'></i></span>";
+                var nomearquivo = $(this).parent().parent().parent().find('[nomearquivo]');
+                nomearquivo.empty();
+                nomearquivo.append(htmlNome);
+
+                cancelaruploadSim = $(this).parent().parent().parent().find('[cancelaruploadSim]');
+                cancelaruploadSim.unbind("click");
+                cancelaruploadSim.on("click", {upload: data} , function (e) {
+                    e.data.upload.abort();
+                    $(this).parent().toggleClass('hidden')
+                    $(this).parent().parent().find('[percentual]').empty();
+                    $(this).parent().parent().find('[nomearquivo]').empty().append('Nenhum Comprovante Selecionado!');
+                });
+                data.formData = { arqTmp: $(this).parent().parent().parent().find('[ArquivoSubido]').val() };
+            }
+        });
+
+    });
+
+    </script>
+}
+
+@section Header {
+    @Styles.Render("~/style/date")
+    <style>
+        .fileUpload {
+            position: relative;
+            overflow: hidden;
+            margin: 0px;
+            height: 34px;
+            float: left;
+        }
+
+            .fileUpload input.upload {
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 0;
+                padding: 0;
+                font-size: 20px;
+                cursor: pointer;
+                opacity: 0;
+                filter: alpha(opacity=0);
+            }
+
+        #uploadFile {
+            border: 0;
+            background-color: transparent;
+        }
+    </style>
+}
+
+<section class="content-header">
+    <h1>
+        Cadastro de Documentos
+        <!-- small>Control panel</!--small -->
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> Meus Documentos</li>
+        <li class="active">Cadastro de Documentos</li>
+    </ol>
+</section>
+<!-- FORM -->
+<section class="content">
+    <div id="divTipoDocumento" class="box box-primary" style="display: none;"></div>
+    <div id="divDescricaoDocumento" class="box box-primary" style="display: none;"></div>
+    <div id="boxForm" class="box box-primary">
+        <div class="box-header"><h3 class="box-title">Novo Documento</h3></div>
+        <div class="box-body">
+            @using (Html.BeginForm("MeusDocumentosFrm", "MeusDocumentos", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+                @Html.Hidden("Acao", (string)ViewBag.Acao)
+                @Html.HiddenFor(model => model.ArquivoId)
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Tipo de Documento</label>&nbsp;<span class="text-danger" style="font-weight:bold;">*</span><br />
+                        @Html.DropDownList("TipoDocumentos", null, htmlAttributes: new { @class = "form-control input-sm", disable_input = "" })
+                        @Html.ValidationMessageFor(model => model.TipoDocumento, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Descrição do Documento</label>&nbsp;<span class="text-danger" style="font-weight:bold;">*</span><br />
+                        @Html.DropDownList("DescricaoDocumentos", null, htmlAttributes: new { @class = "form-control input-sm", disable_input = "" })
+                        @Html.ValidationMessageFor(model => model.DescricaoDocumento, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-3 col-lg-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DataEmissao, htmlAttributes: new { @class = "control-label" })
+                        &nbsp;<span class="text-danger" style="font-weight:bold;">*</span>
+                        @Html.TextBoxFor(model => model.DataEmissao, new { @class = "form-control", data_inputmask = "'alias': 'dd/mm/yyyy'", data_mask = "", disable_input = "" })
+                        @Html.ValidationMessageFor(model => model.DataEmissao, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DataValidade, htmlAttributes: new { @class = "control-label" })
+                        &nbsp;<span class="text-danger" style="font-weight:bold;">*</span>
+                        @Html.TextBoxFor(model => model.DataValidade, new { @class = "form-control", data_inputmask = "'alias': 'dd/mm/yyyy'", data_mask = "", disable_input = "" })
+                        @Html.ValidationMessageFor(model => model.DataValidade, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-8">
+                    <div class="form-group">
+                        <lable>&nbsp;</lable>
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(model => model.SemValidade, new { disable_input = "" })
+                            @Html.ValidationMessageFor(model => model.SemValidade, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.SemValidade, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @if (ViewBag.Acao != "Excluir")
+                        {
+                            <div class="row">
+                                <div class="col-md-4 col-lg-3">
+                                    <label class="control-label">&nbsp;</label><br />
+                                    <div class="fileUpload btn btn-default">
+                                        <span>Buscar Arquivo</span>
+                                        @*<input type="file" class="upload" id="file" name="file" multiple onchange="$(this).parent().parent().parent().find('[nomearquivo]').text($(this)[0].files[0].name);" />*@
+                                        <input type="file" class="upload" id="file" name="file" onchange="$(this).parent().parent().parent().find('[nomearquivo]').text($(this)[0].files[0].name);" />
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-lg-9">
+                                    <label class="control-label">&nbsp;</label><br />
+                                    @Html.HiddenFor(x => x.ArquivoSubido, new { ArquivoSubido = "" })
+                                    @Html.HiddenFor(x => x.TipoArquivoSubido, new { TipoArquivoSubido = "" })
+                                    @Html.HiddenFor(x => x.ArquivoSubidoOriginal, new { ArquivoSubidoOriginal = "" })
+                                    <span percentual>@Html.Raw(!String.IsNullOrEmpty(Model.ArquivoSubido) ? "<span style='color: #00a65a;' title='Arquivo subido com Sucesso!'><i class='fa fa-check-circle'></i></span>" : "")</span>
+                                    <span nomearquivo>@Html.Raw(!String.IsNullOrEmpty(Model.ArquivoSubido) ? Model.ArquivoSubidoOriginal : "Nenhum Comprovante Selecionado!")</span>
+                                    <span cancelarupload class="badge bg-red-gradient hidden text-center cancelarupload">
+                                        Interromper upload?
+                                        <button cancelaruploadSim type="button" class="btn btn-default btn-xs">Sim</button>
+                                        <button cancelaruploadNao type="button" class="btn btn-default btn-xs" onclick="$(this).parent().toggleClass('hidden')">Não</button>
+                                    </span>
+                                    @Html.ValidationMessageFor(model => model.Arquivo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        }
+                    </div>
+                </div>
+                if (Model.ID != 0)
+                {
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Arquivo</label>&nbsp;<span class="text-danger" style="font-weight:bold;">*</span><br />
+                            <a href="@Model.UrlArquivo" target="_blank">@Model.NomeArquivo</a>
+                            @Html.HiddenFor(model => model.NomeArquivo)
+                        </div>
+                    </div>
+                }
+
+                <div class="col-md-12">
+                    <div class="form-group" style="padding-left: 20px;">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(model => model.Ativo, new { disable_input = "" })
+                            @Html.ValidationMessageFor(model => model.Ativo, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.Ativo, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="box-footer">
+                    <div class="text-right text-nowrap">
+                        @if (ViewBag.Acao != "Excluir")
+                        {
+                            <button type="button" class="btn btn-primary" onclick="$('#alert_confirm span').text('Tem certeza que deseja Salvar este documento?'); $('#alert_confirm').fadeIn('fast');">Salvar</button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-danger" onclick="$('#alert_confirm span').text('Tem certeza que deseja EXCLUIR este documento?'); $('#alert_confirm').fadeIn('fast');">Excluir</button>
+                        }
+
+                        <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("MeusDocumentosLst")'">Cancelar</button>
+                    </div>
+
+                    <div id="alert_confirm" class="alert alert-warning" role="alert" style="display: none;">
+                        <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-primary btn-xs">Sim</button>&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-default btn-xs" onclick="$('#alert_confirm').fadeOut('fast');">Não</button>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</section>

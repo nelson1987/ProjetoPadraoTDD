@@ -1,0 +1,128 @@
+﻿@using WebForLink.Web.Infrastructure;
+@using WebForLink.Domain.Enums;
+@using WebForLink.Web.Interfaces;
+@using WebForLink.Domain.Infrastructure;
+
+@model WebForLink.Web.ViewModels.SolicitacaoFornecedorVM
+
+@{
+    IGeral _metodosGerais = new Geral();
+    string key = _metodosGerais.ValorKey();
+    EncryptDecryptQueryString cripto = new EncryptDecryptQueryString();
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var habilitaEdicao = $("#HabilitaEdicao").val() == "True";
+        if (habilitaEdicao) {
+            $('#divEdicaoDocumentos').toggleClass("hidden");
+        }
+
+        if ('@ViewBag.RetSucessoDocs' == '1') {
+            $('#alertaSucessoDocumentos').text('Solicitação de atualização de documentos realizada com sucesso!');
+            $('#alertaSucessoDocumentos').fadeIn('fast');
+            setTimeout("$('#alertaSucessoDocumentos').fadeOut('fast')", 10000);
+            $('#btnEditarDocumentos').focus();
+        }
+        else if ('@ViewBag.RetSucessoDocs' == '-1') {
+            $('#alertaErroDocumentos').text('Não foi possível solicitar a atualização do documento, tente mais tarde. ');
+            $('#alertaErroDocumentos').fadeIn('fast');
+            setTimeout("$('#alertaErroDocumentos').fadeOut('fast')", 10000);
+            $('#btnEditarDocumentos').focus();
+        }
+    });
+</script>
+
+<div id="DocumentosAnexo" class="box box-primary">
+    <div class="box-change">
+        <div id="alertaSucessoDocumentos" class="alert alert-success" role="alert" onclick="ocultarMensagem(this)"></div>
+        <div id="alertaErroDocumentos" class="alert alert-danger" role="alert" onclick="ocultarMensagem(this)"></div>
+    </div>
+    <div class="box-header"><h3 class="box-title">Documentos</h3></div>
+    <div class="box-body">
+        <div class="aguarde-interno" id="divAguardeDocumento">
+            <div>
+                <i class="fa fa-refresh fa-spin"></i> Aguarde...
+            </div>
+        </div>
+        <div class="table-responsive form-group">
+            <table class="table">
+                <thead>
+                    @if (Model.Documentos.Count > 0)
+                    {
+                        <tr>
+                            <th class="default" style="border: 0;">
+                                <b>Documento</b>
+                            </th>
+                            <th class="text-center col-md-2 default" style="border: 0;">
+                                <b>Validade / Período</b>
+                            </th>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <th>
+                                &nbsp;
+                            </th>
+                        </tr>
+                    }
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Documentos)
+                    {
+                        <tr>
+                            <td>
+                                @if (item.ArquivoID != null)
+                                {
+                                    <a href="@Url.Action("FornecedorArquivo", "Fornecedores", new { chaveurl = cripto.Criptografar(string.Format("ArquivoID={0}", item.ArquivoID), key) })" class="btn-link">
+                                        @Html.Raw(item.Documento)
+                                    </a>
+                                }
+                                else
+                                {
+                                    @Html.Raw(item.Documento + " (Sem Arquivo)")
+                                }
+                            </td>
+                            <td class="text-center">
+                                @if (item.Periodicidade.HasValue)
+                                {
+                                    @Html.Raw(item.DescricaoPeriodicidade)
+                                }
+                                else
+                                {
+                                    if (item.DataValidade.HasValue)
+                                    {
+                                        @Html.Raw(item.DataValidade.Value.ToShortDateString())
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw("Sem Atualização")
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    }
+                    @if (Model.Documentos.Count == 0)
+                    {
+                        <tr class="warning">
+                            <td colspan="10" class="text-warning text-center">
+                                Não há documento cadastrado para este fornecedor
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div id="divEdicaoDocumentos" class="text-right text-nowrap hidden">
+            <button id="btnEditarDocumentos" type="button" class="btn btn-primary" onclick="$('#divAguardeDocumento').show(); consultarSolicitacoesEmAberto('Documentos', @Convert.ToInt32(EnumTiposFluxo.ModificacoesGerais));">Editar</button>
+        </div>
+        <div id="confirmacaoDocumentos" class="alert alert-warning hidden" role="alert">
+            <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-primary btn-xs" onclick="editarDados('Documentos', '@Url.Action("EditarDocumentos", "ModificacaoDocumento")');">Sim</button>&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-default btn-xs" onclick="ocultarJanelaConfirmacao('Documentos')">Não</button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

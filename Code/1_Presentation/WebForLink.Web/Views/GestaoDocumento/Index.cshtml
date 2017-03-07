@@ -1,0 +1,107 @@
+﻿@model WebForLink.Web.Controllers.DestinatarioVM
+@{
+    ViewBag.Title = "Index";
+}
+<section class="content-header">
+    <h1>
+        Gestão de Documentos
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> Gestão de Documentos</li>
+        @*<li class="active">Destinatário</li>*@
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="alert alert-success" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick="$(this).fadeOut('fast')"></div>
+    </div>
+    <div id="boxGrid" class="box box-primary">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        @using (Ajax.BeginForm("Listar", "GestaoDocumento", FormMethod.Get, new AjaxOptions
+                        {
+                            UpdateTargetId = "boxGridTabela",
+                            InsertionMode = InsertionMode.InsertAfter,
+                        }, null))
+                        {
+                            @Html.HiddenFor(x => x.page)
+                            @Html.HiddenFor(x => x.registros)
+                            <div class="row">
+                                <div class="col-md-4">
+                                    @Html.LabelFor(x => x.Nome, new { @class = "control-label" })<br />
+                                    @Html.TextBoxFor(x => x.Nome, new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-4">
+                                    @Html.LabelFor(x => x.Email, new { @class = "control-label" })<br />
+                                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-4">
+                                    @Html.LabelFor(x => x.Empresa, new { @class = "control-label" })<br />
+                                    @Html.TextBoxFor(x => x.Empresa, new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-12 text-right">
+                                    <label>&nbsp;</label><br />
+                                    <button type="button" class="btn btn-default" onclick="$('#Nome').val(''); $('#Email').val(''); $('#Empresa').val('');"><i class="glyphicon glyphicon-erase"></i>&nbsp;Limpar</button>
+                                    <button type="submit" class="btn btn-primary" id="btnPesquisar"><i class="fa fa-search"></i>&nbsp;Consultar</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div id="boxGridTabela">
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-right">
+                    <label>&nbsp;</label><br />
+                    <button type="button" class="btn btn-primary" id="btnAdicionar">
+                        <i class="fa fa-plus"></i>&nbsp;Novo Documento
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section scripts{
+    <script type="text/javascript">
+        $(document).ajaxStart(function () {
+            $(".aguarde").show();
+        });
+        $(document).ajaxStop(function () {
+            $(".aguarde").hide();
+        });
+        $(function () {
+            $('#btnAdicionar').click(function () {
+                document.location.href = '@Url.Action("CategoriaLst", new { area = "", controller = "Categoria" })';
+            });
+            $('#btnPesquisar').click(function () {
+                listarGrid({
+                    page: $("input[name=page]").val(),
+                    registros: $("input[name=registros]").val(),
+                    Email: $("input[name=Email]").val(),
+                    Empresa: $("input[name=Empresa]").val(),
+                    Nome: $("input[name=Nome]").val()
+                });
+            });
+        });
+        var listarGrid = function (filtros) {
+            console.log(filtros);
+            $.ajax({
+                url: '@Url.Action("Listar")',
+                data: filtros,
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $("#boxGridTabela").html(data);
+                    $("#slc_totalEmTela").val(filtros.registros);
+                    $("#slc_totalEmTela").change(function () {
+                        listarGrid({ page: 1, registros: $(this).val() });
+                    });
+                }
+            });
+        };
+        listarGrid({ page: 1, registros: 10 });
+    </script>
+}

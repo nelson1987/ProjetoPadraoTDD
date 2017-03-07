@@ -1,0 +1,170 @@
+﻿@model WebForLink.Web.ViewModels.EnviadosPesquisaVM
+
+@Styles.Render("~/style/date")
+@section Scripts {
+    @Scripts.Render("~/bundles/date")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#TipoDocumento").change(function () {
+                $.getJSON('@Url.Action("ListaDescricaoDocumento")',
+                    {
+                        tipoDocumento: $('#TipoDocumento').val(),
+                        tipo: "Lst",
+                        filtrado: true
+                    },
+                    function (data) {
+                        $('#DescricaoDocumento').empty();
+                        $.each(data, function (index, optionData) {
+                            $('#DescricaoDocumento').append("<option value='" + optionData.Value + "'>" + optionData.Text + "</option>");
+                        });
+                    });
+            });
+            if ('@(ViewBag.MensagemSucesso)' != '') {
+                $('.alert').fadeIn('slow');
+                $('.alert').text('@Html.Raw(ViewBag.MensagemSucesso)');
+                setTimeout('$(".alert").fadeOut("slow")', 10000);
+            }
+            $('#DataEnvioEntre').daterangepicker({
+                opens: 'right'
+            });
+        });
+    </script>
+}
+<section class="content-header">
+    <h1>
+        Enviados
+        <!-- small>Control panel</!--small -->
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> Meus Documentos</li>
+        <li class="active">Enviados</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="alert alert-success" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick="$(this).fadeOut('fast')"></div>
+    </div>
+    <div id="boxGrid" class="box box-primary">
+        <div class="box-body">
+            <div class="form-group">
+                @using (Html.BeginForm("EnviadosLst")) {
+                    @Html.Hidden("Pagina", (int)ViewBag.Pagina)
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Data de Envio entre</label><br />
+                                <input type="text" id="DataEnvioEntre" name="DataEnvioEntre" class="form-control" value="@ViewBag.DataEnvioEntre" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label>Destinatário</label><br />
+                                <input type="text" id="Destinatario" name="Destinatario" class="form-control" value="@ViewBag.Destinatario" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Fornecedor</label><br />
+                                <input type="text" id="Fornecedor" name="Fornecedor" class="form-control" value="@ViewBag.Fornecedor" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Tipo de Documento</label><br />
+                                @Html.DropDownList("TipoDocumento", null, "Todos", htmlAttributes: new { @class = "form-control input-sm" })
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label>Descrição do Documento</label><br />
+                                @Html.DropDownList("DescricaoDocumento", null, "Todos", htmlAttributes: new { @class = "form-control input-sm" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <label>&nbsp;</label><br />
+                            <button type="submit" class="btn btn-primary" onclick="$('#Pagina').val('1');"><i class="fa fa-search"></i>&nbsp;Consultar</button>
+                            <button type="button" class="btn btn-default" onclick="$('#DataEnvioEntre').val(''); $('#Destinatario').val(''); $('#Fornecedor').val(''); $('#TipoDocumento').val(''); $('#DescricaoDocumento').val('');"><i class="glyphicon glyphicon-erase"></i>&nbsp;Limpar</button>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-condensed">
+                    <thead>
+                        @if (Model.EnviadosGrid.Any())
+                        {
+                            <tr>
+                                <th class="text-center">
+                                    Enviado
+                                </th>
+                                <th class="text-center">
+                                    Assunto
+                                </th>
+                                <th class="text-center">
+                                    Para
+                                </th>
+                                <th class="text-center">
+                                    Qtd Documentos
+                                </th>
+                                @*<th class="text-center">
+                                    Disponível até
+                                </th>*@
+                                <th class="text-center">Ação</th>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <th colspan="10">
+                                    &nbsp;
+                                </th>
+                            </tr>
+                        }
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.EnviadosGrid)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.EnviadoEm)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Assunto)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Para)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.QtdDocs)
+                                </td>
+                                @*<td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Disponibilidade)
+                                </td>*@
+                                <td class="text-center text-nowrap">
+                                    <button class="btn btn-primary btn-xs" onclick="location.href='@item.UrlVer'">Ver</button>
+                                </td>
+                            </tr>
+                        }
+                        @if (!Model.EnviadosGrid.Any())
+                        {
+                            <tr class="warning">
+                                <td colspan="10" class="text-warning text-center">
+                                    A pesquisa não retornou nenhum resultado!
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @if (Model.EnviadosGrid.Any())
+                {
+                    @Html.Partial("_Paginacao")
+                }
+                <div class="clearfix"></div>
+            </div>
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
+</section><!-- /.content -->

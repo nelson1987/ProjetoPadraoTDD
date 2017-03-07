@@ -1,0 +1,94 @@
+﻿@model WebForLink.Web.ViewModels.ProrrogacaoPrazoVM
+<div id="alertProrrogacao" class="alert alert-warning alert-dismissable">
+    <i class="fa fa-warning fa-lg"></i>
+    <div class="form-group">
+        <div class="col-md-12">
+            <h4>Atenção!</h4>
+            <label>O Fonecedor solicitou Prorrogação de Prazo para a entrega de documentos.</label>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <input type="hidden" id="IdProrrogacao" name="IdProrrogacao" value="@Model.ID" />
+    <div class="form-group">
+        <div class="col-md-4">
+            <label>Prorrogar para</label><br />
+            @Model.DataProrrogacao.ToShortDateString()
+        </div>
+        <div class="col-md-4">
+            <label>Solicitado em</label><br />
+            @Model.DataSolicitacaoProrrogacao
+        </div>
+        <div class="col-md-4">
+            <label>Motivo</label><br />
+            @Model.Motivo
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="form-group text-center" id="divAprovaReprovaProrrogacao">
+        <button class="btn btn-primary btn-xs" onclick="$('#divConfirmaAprovacaoProrrogacao').toggleClass('hidden'); $('#divAprovaReprovaProrrogacao').toggleClass('hidden');">Aprovar Prorrogação</button>
+        <button class="btn btn-danger btn-xs" onclick="$('#divReprovarProrrogacao').toggleClass('hidden'); $('#divAprovaReprovaProrrogacao').toggleClass('hidden');">Reprovar</button>
+    </div>
+
+    <div id="divConfirmaAprovacaoProrrogacao" class="hidden">
+        <div class="form-group text-center">
+            <label>Tem certeza que deseja Aprovar esta Prorrogação?</label>
+            <button class="btn btn-primary btn-xs" onclick="Aprovar();">Sim</button>
+            <button class="btn btn-default btn-xs" onclick="$('#divConfirmaAprovacaoProrrogacao').toggleClass('hidden'); $('#divAprovaReprovaProrrogacao').toggleClass('hidden');">Não</button>
+        </div>
+    </div>
+
+    <div id="divReprovarProrrogacao" class="hidden">
+        <div class="form-group">
+            <label>Motivo da Reprovação</label>
+            <textarea class="form-control" name="MotivoReprovacao" id="MotivoReprovacao"></textarea>
+            <span class="field-validation-error text-danger hidden" id="spanValidationMotivo">Informe o Motivo da Reprovação!</span>
+        </div>
+        <div class="form-group text-center">
+            <button class="btn btn-danger btn-xs" id="btnSalvarMotivoReprovacao" onclick="Reprovar();">Reprovar</button>
+            <button class="btn btn-default btn-xs" onclick="$('#divReprovarProrrogacao').toggleClass('hidden'); $('#divAprovaReprovaProrrogacao').toggleClass('hidden');">Cancelar</button>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        function Aprovar() {
+            $.ajax({
+                url: '/Acompanhamento/AprovarProrrogacao',
+                type: 'get',
+                data: { idProrrogacao: $('#IdProrrogacao').val() },
+                dataType: 'json',
+                success: function (json) {
+                    if (json.erro == 0) {
+                        $('#alertProrrogacao').remove();
+                    }
+                    else {
+                        alert("Não foi possível reprovar esta solicitação");
+                    }
+                }
+            });
+        }
+
+        function Reprovar() {
+            if ($("#MotivoReprovacao").val().trim() == "") {
+                $('#spanValidationMotivo').toggleClass('hidden');
+                return;
+            }
+
+            $.ajax({
+                url: '/Acompanhamento/ReprovarProrrogacao',
+                type: 'get',
+                data: { idProrrogacao: $('#IdProrrogacao').val(), motivo: $('#MotivoReprovacao').val() },
+                dataType: 'json',
+                success: function (json) {
+                    if (json.erro == 0) {
+                        $('#alertProrrogacao').remove();
+                    }
+                    else {
+                        alert("Não foi possível reprovar esta solicitação");
+                    }
+                }
+            });
+        }
+    </script>
+}

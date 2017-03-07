@@ -1,0 +1,59 @@
+﻿@using WebForLink.Web.Infrastructure;
+@using WebForLink.Web.Interfaces;
+@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+@using WebForLink.Domain.Infrastructure;
+@{
+    IGeral _metodosGerais = new Geral();
+    string key = _metodosGerais.ValorKey();
+    EncryptDecryptQueryString cripto = new EncryptDecryptQueryString();
+}
+
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+
+    });
+
+</script>
+    }
+<div class="box box-primary">
+    <div class="box-header"><h3 class="box-title">Dados Bancários</h3></div>
+    <div class="box-body">
+
+        @if (Model.DadosBancarios != null && Model.DadosBancarios.Count == 1)
+        {
+            <div style="border: solid 1px silver; padding-top: 7px;">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Banco</label><br />
+                        <span>@Model.DadosBancarios.First().NomeBanco</span>
+                    </div>
+                </div>
+
+                <div class="col-xs-8 col-md-2 col-md-offset-1">
+                    <div class="form-group">
+                        <label>Agência</label><br />
+                        <span>@(!string.IsNullOrEmpty(Model.DadosBancarios.First().Digito) ? Model.DadosBancarios.First().Agencia + "-" + Model.DadosBancarios.First().Digito : Model.DadosBancarios.First().Agencia)</span>
+                    </div>
+                </div>
+
+                <div class="col-xs-8 col-md-2 col-md-offset-1">
+                    <div class="form-group">
+                        <label>Conta Corrente</label><br />
+                        <span>@(!string.IsNullOrEmpty(Model.DadosBancarios.First().ContaCorrenteDigito) ? Model.DadosBancarios.First().ContaCorrente+"-"+Model.DadosBancarios.First().ContaCorrenteDigito : Model.DadosBancarios.First().ContaCorrente)</span>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            if (Model.DadosBancarios.First().NomeArquivo != null)
+            {
+                <a href="@Url.Action("FornecedorComprovante", "Fornecedores", new { chaveurl = cripto.Criptografar(string.Format("ID={0}&ArquivoID={1}&SolicitacaoID={2}&NomeArquivo={3}", Model.ID, Model.DadosBancarios.First().ArquivoID, Convert.ToInt32(Model.SolicitacaoID), Model.DadosBancarios.First().NomeArquivo), key) })" class="btn-link">@Model.DadosBancarios.First().NomeArquivo</a>
+            }
+            else
+            {
+                <span id="labelArquivo" class="help-block" style="float: none;"> Nenhum Comprovante Selecionado!</span>
+            }
+        }
+        <div class="clearfix"></div>
+    </div><!-- /.box-body -->
+</div><!-- /.box -->

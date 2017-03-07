@@ -1,0 +1,151 @@
+﻿@model WebForLink.Web.ViewModels.Adesao.PreCadastroAdesaoVM
+
+@{
+    Layout = "~/Views/Shared/_LayoutPrincipal.cshtml";
+}
+
+    <div class="container">
+        <div class="row">
+            <h2 class="text-center">Inscreva-se</h2>
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationMessage("Mensagem", "", new { @class = "text-danger" })
+                @Html.AntiForgeryToken()
+                <div class="col-md-12">
+                    <h4>Responsável</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.PlanoEscolhido)
+
+                    <div class="form-group col-lg-9">
+                        @Html.LabelFor(model => model.ResponsavelNome, htmlAttributes: new { @class = "control-label" })
+                        <span class="text-danger">*</span>
+                        @Html.EditorFor(model => model.ResponsavelNome, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ResponsavelNome, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-lg-3">
+                        @Html.LabelFor(model => model.ResponsavelCPF, htmlAttributes: new { @class = "control-label" })
+                        <span class="text-danger">*</span>
+                        @Html.EditorFor(model => model.ResponsavelCPF, new { htmlAttributes = new { @class = "form-control cpfMask" } })
+                        @Html.ValidationMessageFor(model => model.ResponsavelCPF, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-lg-8">
+                        @Html.LabelFor(model => model.ResponsavelEmail, htmlAttributes: new { @class = "control-label" })
+                        <span class="text-danger">*</span>
+                        @Html.EditorFor(model => model.ResponsavelEmail, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ResponsavelEmail, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(model => model.ResponsavelTelefone, htmlAttributes: new { @class = "control-label" })
+                        <span class="text-danger">*</span>
+                        @Html.EditorFor(model => model.ResponsavelTelefone, new { htmlAttributes = new { @class = "form-control phoneMask" } })
+                        @Html.ValidationMessageFor(model => model.ResponsavelTelefone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                @*@Html.Partial("_PreCadastro_Empresa",Model.Empresa)*@
+                <div class="col-md-12">
+                    <h4>Empresa</h4>
+                    <hr />
+                    <div class="form-group col-lg-7">
+                        @Html.LabelFor(model => model.EmpresaNome, htmlAttributes: new { @class = "control-label" })
+                        <span class="text-danger">*</span>
+                        @Html.EditorFor(model => model.EmpresaNome, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmpresaNome, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-lg-3">
+                        @Html.LabelFor(model => model.EmpresaDocumento, htmlAttributes: new { @class = "control-label" })
+                        <span class="text-danger">*</span>
+                        @Html.EditorFor(model => model.EmpresaDocumento, new { htmlAttributes = new { @class = "form-control cnpjMask" } })
+                        @Html.ValidationMessageFor(model => model.EmpresaDocumento, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-lg-2">
+                        @Html.LabelFor(model => model.EmpresaCEP, htmlAttributes: new { @class = "control-label" })
+                        <span class="text-danger">*</span>
+                        @Html.EditorFor(model => model.EmpresaCEP, new { htmlAttributes = new { @class = "form-control cepMask" } })
+                        @Html.ValidationMessageFor(model => model.EmpresaCEP, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-lg-6">
+                        @Html.LabelFor(model => model.EmpresaEndereco, htmlAttributes: new { @class = "control-label" })
+                        <span class="text-danger">*</span>
+                        @Html.EditorFor(model => model.EmpresaEndereco, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmpresaEndereco, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-lg-3">
+                        @Html.LabelFor(model => model.EmpresaNumero, htmlAttributes: new { @class = "control-label" })
+                        <span class="text-danger">*</span>
+                        @Html.EditorFor(model => model.EmpresaNumero, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmpresaNumero, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-lg-3">
+                        @Html.LabelFor(model => model.EmpresaComplemento, new { @class = "control-label" })
+                        @Html.EditorFor(model => model.EmpresaComplemento, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmpresaComplemento, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-lg-3">
+                        @Html.LabelFor(model => model.EmpresaCidade, htmlAttributes: new { @class = "control-label" })
+                        <span class="text-danger">*</span>
+                        @Html.EditorFor(model => model.EmpresaCidade, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmpresaCidade, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-lg-2">
+                        @Html.LabelFor(model => model.EmpresaUF, htmlAttributes: new { @class = "control-label" })
+                        <span class="text-danger">*</span>
+                        @Html.EditorFor(model => model.EmpresaUF, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmpresaUF, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(model => model.EmpresaPais, htmlAttributes: new { @class = "control-label" })
+                        <span class="text-danger">*</span>
+                        @Html.EditorFor(model => model.EmpresaPais, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmpresaPais, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-lg-3">
+                        @Html.LabelFor(model => model.EmpresaTelefone, htmlAttributes: new { @class = "control-label" })
+                        <span class="text-danger">*</span>
+                        @Html.EditorFor(model => model.EmpresaTelefone, new { htmlAttributes = new { @class = "form-control phoneMask" } })
+                        @Html.ValidationMessageFor(model => model.EmpresaTelefone, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-lg-12">
+                        <input type="submit" value="Cadastrar" class="btn btn-primary btn-sm pull-right" />
+                        @Html.ActionLink("Voltar", "Index")
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            }
+
+        </div>
+        <div class="row" id="divContratacao">
+        </div>
+    </div>
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            jQuery.validator.addMethod("selectnic", function (value, element) {
+                console.log(value);
+                if (/^[0-9]{9}[vVxX]$/.test(value)) {
+                    return true;
+                } else {
+                    return false;
+                };
+            }, "wrong nic number");
+
+            $('form').validate({
+                rules: {
+                    Empresa_Documento: {
+                        selectnic: true,
+                        required: true
+                    }
+                }
+            });
+
+            $('.phoneMask').inputmask({ mask: ['(99) 9999-9999', '(99) 99999-9999'] });
+            $('.cepMask').inputmask('99999-999', { greedy: false });
+            $(".cnpjMask").inputmask('99.999.999/9999-99', { greedy: false });
+            $(".cpfMask").inputmask('999.999.999-99', { greedy: false });
+        });
+    </script>
+    }

@@ -1,0 +1,115 @@
+﻿@model WebForLink.Web.ViewModels.RoboSimplesNacionalTesteVM
+@if (Model != null)
+{
+    <div class="panel panel-success">
+        <div class="panel-heading panel-heading-success">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#bodySimplesNacional">
+                    <b>Simples Nacional:</b><span></span>
+                </a>
+            </h4>
+        </div>
+        <div id="bodySimplesNacional" class="panel-collapse collapse" role="tabpanel">
+            <div class="panel-body">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.HiddenFor(model => Model.SN_AGENDAMENTOS)
+                        @Html.HiddenFor(model => Model.SN_CONSULTA_DTHR)
+                        @Html.LabelFor(x => Model.SN_RAZAO_SOCIAL)<br />
+                        @Html.DisplayFor(model => Model.SN_RAZAO_SOCIAL)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => Model.SN_SIMEI_PERIODOS_ANTERIORES)<br />
+                        @Html.DisplayFor(model => Model.SN_SIMEI_PERIODOS_ANTERIORES)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => Model.ID)<br />
+                        @Html.DisplayFor(model => model.ID)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => Model.ROBO_DT_EXEC)<br />
+                        @Html.DisplayFor(model => model.ROBO_DT_EXEC)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => Model.CPF)<br />
+                        @Html.DisplayFor(model => model.CPF)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => Model.CNPJ)<br />
+                        @Html.DisplayFor(model => model.CNPJ)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => Model.RECEITA_FEDERAL_RAZAO_SOCIAL)<br />
+                        @Html.DisplayFor(model => model.RECEITA_FEDERAL_RAZAO_SOCIAL)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => Model.SIMPLES_NACIONAL_SITUACAO)<<br />
+                        @Html.DisplayFor(model => model.SIMPLES_NACIONAL_SITUACAO)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => Model.SN_SITUACAO_SIMEI)<br />
+                        @Html.DisplayFor(model => model.SN_SITUACAO_SIMEI)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => Model.SN_PERIODOS_ANTERIORES)<br />
+                        @Html.DisplayFor(model => model.SN_PERIODOS_ANTERIORES)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => Model.SN_SIMEI_PERIODOS_ANTERIORES)<br />
+                        @Html.DisplayFor(model => model.SN_SIMEI_PERIODOS_ANTERIORES)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => Model.SN_AGENDAMENTOS)<br />
+                        @Html.DisplayFor(model => model.SN_AGENDAMENTOS)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => Model.SN_RAZAO_SOCIAL)<br />
+                        @Html.DisplayFor(model => model.SN_RAZAO_SOCIAL)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => Model.SN_CONSULTA_DTHR)<br />
+                        @Html.DisplayFor(model => model.SN_CONSULTA_DTHR)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => Model.SN_CONTADOR_TENTATIVA)<br />
+                        @Html.DisplayFor(model => model.SN_CONTADOR_TENTATIVA)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => Model.SN_CODE_ROBO)<br />
+                        @Html.DisplayFor(model => model.SN_CODE_ROBO)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,5 @@
+﻿@model WebForLink.Web.ViewModels.IDadosGeraisVM
+
+@Html.LabelFor(model => model.NumeroDocumento, htmlAttributes: new { @class = "control-label" })&nbsp;<span class="text-danger" style="font-weight:bold;">*</span><br />
+@Html.TextBoxFor(model => model.NumeroDocumento, new { @class = "form-control input-sm", disabled = true })
+@Html.ValidationMessageFor(model => model.NumeroDocumento, "", new { @class = "text-danger" })

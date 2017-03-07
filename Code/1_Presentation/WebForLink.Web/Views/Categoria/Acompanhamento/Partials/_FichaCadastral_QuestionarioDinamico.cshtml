@@ -1,0 +1,71 @@
+﻿@model WebForLink.Web.ViewModels.RetornoQuestionario<WebForLink.Web.ViewModels.QuestionarioVM>
+@using WebForLink.Domain.Enums
+@if (Model.QuestionarioDinamicoList.FirstOrDefault() != null) {
+<div class="box box-primary" id="questionarioDinamico">
+    <div class="box-change">
+        <div id="alertaSucessoQuestionarioDinamico" class="alert alert-success" role="alert" onclick="ocultarMensagem(this)"></div>
+        <div id="alertaErroQuestionarioDinamico" class="alert alert-danger" role="alert" onclick="ocultarMensagem(this)"></div>
+    </div>
+    <div class="box-header">
+        <h3 class="box-title">
+            Informações Complementares
+        </h3>
+        <ul class="nav nav-tabs">
+            @{
+                var contadorTabs = 0;
+                foreach (var questionarioTitulos in Model.QuestionarioDinamicoList)
+                {
+                    var reference = "#quest_" + questionarioTitulos.Id;
+                    if (contadorTabs == 0)
+                    {
+                        <li class="active"><a href=@reference data-toggle="tab">@questionarioTitulos.Titulo</a></li>
+                    }
+                    else
+                    {
+                        <li><a href=@reference data-toggle="tab">@questionarioTitulos.Titulo</a></li>
+                    }
+                    contadorTabs++;
+                }
+            }
+        </ul>
+    </div>
+    <div class="box-body">
+        <div class="aguarde-interno" id="divAguardeQuestionario">
+            <div>
+                <i class="fa fa-refresh fa-spin"></i> Aguarde...
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tab-content">
+                    @{
+                        foreach (var itens in Model.QuestionarioDinamicoList)
+                        {
+                            itens.EstiloClassCss = "tab-pane fade";
+                        }
+                        var item1 = Model.QuestionarioDinamicoList.FirstOrDefault();
+                        if (item1 != null)
+                        {
+                            item1.EstiloClassCss = "tab-pane fade in active";
+                        }
+                        
+                    }
+                    <div id="divQuestionarioDinamico">
+                        @Html.DisplayFor(x => x.QuestionarioDinamicoList)
+                    </div>
+                    <br />
+                    <div class="text-right text-nowrap hidden">
+                        <button type="button" class="btn btn-primary" onclick="consultarSolicitacoesEmAberto('QuestionarioDinamico', @Convert.ToInt32(EnumTiposFluxo.ModificacaoQuestionarioDinamico));">Editar</button>
+                    </div>
+                    <div id="confirmacaoQuestionarioDinamico" class="alert alert-warning hidden" role="alert">
+                        <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-primary btn-xs" onclick="editarDados('QuestionarioDinamico', '@Url.Action("EditarQuestionarioDinamico", "ModificacaoQuestionarioDinamico")');">Sim</button>&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-default btn-xs" onclick="ocultarJanelaConfirmacao('QuestionarioDinamico')">Não</button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+}

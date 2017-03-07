@@ -1,0 +1,148 @@
+﻿@model IEnumerable<WebForLink.Web.Areas.Administracao.Models.ContratanteAdministracaoModel>
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdministracao.cshtml";
+}
+
+<section class="content-header">
+    <h1>@ViewBag.Title</h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> @ViewBag.Page</li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div id="FichaAlertaOkTop" class="alert alert-success" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick="$(this).fadeOut('fast')"></div>
+    </div>
+    <div id="boxGrid" class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">@ViewBag.Title</h3>
+        </div>
+        <div class="box-body">
+            @using (Html.BeginForm())
+            {
+                <div class="row">
+                    @Html.Hidden("Pagina", (int)ViewBag.Pagina)
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.FirstOrDefault().CNPJ, new { @class = "control-label" })
+                            <input type="text" id="CNPJ" name="CNPJ" class="form-control input-sm" />
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.FirstOrDefault().RazaoSocial, new { @class = "control-label" })
+                            <input type="text" id="RazaoSocial" name="RazaoSocial" class="form-control input-sm" />
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.FirstOrDefault().NomeFantasia, new { @class = "control-label" })
+                            <input type="text" id="NomeFantasia" name="NomeFantasia" class="form-control input-sm" />
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.FirstOrDefault().Estilo, new { @class = "control-label" })
+                            <input type="text" id="Estilo" name="Estilo" class="form-control input-sm" />
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.FirstOrDefault().ContranteCodERP, new { @class = "control-label" })
+                            <input type="text" id="ContranteCodERP" name="ContranteCodERP" class="form-control input-sm" />
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.FirstOrDefault().TipoCadastro, "Tipo de Cadastro", new { @class = "control-label" })
+                            @Html.DropDownList("TipoCadastroId", (SelectList)ViewBag.TIPO_CADASTRO_ID, "--Selecione--", new { @class = "form-control input-sm" })
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-3 col-md-offset-9">
+                            <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-search"></i>&nbsp;Pesquisar</button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                
+            }
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered table-striped table-condensed">
+                        <thead>
+                            <tr>
+                                <th class="text-center">
+                                    @Html.DisplayNameFor(model => model.CNPJ)
+                                </th>
+                                <th class="text-center">
+                                    @Html.DisplayNameFor(model => model.RazaoSocial)
+                                </th>
+                                <th class="text-center">
+                                    @Html.DisplayNameFor(model => model.NomeFantasia)
+                                </th>
+                                <th class="text-center">
+                                    @Html.DisplayNameFor(model => model.Estilo)
+                                </th>
+                                <th class="text-center">
+                                    @Html.DisplayNameFor(model => model.ContranteCodERP)
+                                </th>
+                                <th class="text-center">
+                                    @Html.DisplayNameFor(model => model.TipoCadastro.Nome)
+                                </th>
+                                <th class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.CNPJ)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.RazaoSocial)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.NomeFantasia)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Estilo)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.ContranteCodERP)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.TipoCadastro.Nome)
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-primary btn-xs" onclick="location.href='@item.UrlEditar';">Editar</button>
+                                    <button type="button" class="btn btn-primary btn-xs" onclick="location.href='@item.UrlDetalhar';">Detalhar</button>
+                                    @*<button type="button" class="btn btn-primary btn-xs" onclick="location.href='@item.UrlDeletar'">Deletar</button>*@
+                                </td>
+                            </tr>
+                            }
+                            @if (!Model.Any())
+                            {
+                            <tr class="warning">
+                                <td colspan="10" class="text-warning text-center">
+                                    A pesquisa não retornou nenhum resultado!
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                    @Html.Partial("_Paginacao")
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <br />
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary pull-right" onclick="location.href='@Url.Action("ContratanteCriarFrm")';"><i class="fa fa-plus"></i>&nbsp; Incluir Novo @ViewBag.Page</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

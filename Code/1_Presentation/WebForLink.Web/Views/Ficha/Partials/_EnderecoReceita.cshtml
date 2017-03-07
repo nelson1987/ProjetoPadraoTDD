@@ -1,0 +1,144 @@
+﻿@model WebForLink.Web.ViewModels.DadosEnderecoObtidoNaReceitaVM
+<div class="box box-success box-endereco" style="margin-bottom: 5px;">
+    <div class="box-header with-border" style="background: #fBfBfB; border-bottom: #f0F0f0 1px solid;">
+        <span class="box-title" style="font-size: 14px;">OBTIDO NA RECEITA FEDERAL</span>
+        <span class="box-subtitle">@Html.DisplayTextFor(x => x.ResumoEndereco)</span>
+        <div class="box-tools pull-right">
+            <span type="button" class="btn btn-minimizar" data-widget="collapse">
+                <i class="fa fa-minus"></i>
+            </span>
+        </div>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body hidden" style="padding: 5px 10px;">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Tipo De Endereço</label><br>
+                    <span>OBTIDO NA RECEITA FEDERAL</span>
+                </div>
+            </div>
+            <div class="col-xs-8 col-md-5">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Endereco)<br/>
+                    @Html.DisplayTextFor(x => x.Endereco)
+                </div>
+            </div>
+            <div class="col-xs-4 col-md-1">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Numero)<br/>
+                    @Html.DisplayTextFor(x => x.Numero)
+                </div>
+            </div>
+            <div class="col-xs-8 col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Complemento)<br/>
+                    @Html.DisplayTextFor(x => x.Complemento)
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-4 col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.CEP)<br/>
+                    @Html.DisplayTextFor(x => x.CEP)
+                </div>
+            </div>
+            <div class="col-xs-4 col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Bairro)<br/>
+                    @Html.DisplayTextFor(x => x.Bairro)
+                </div>
+            </div>
+            <div class="col-xs-4 col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Cidade)<br/>
+                    @Html.DisplayTextFor(x => x.Cidade)
+                </div>
+            </div>
+            <div class="col-xs-4 col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Estado)<br/>
+                    @Html.DisplayTextFor(x => x.Estado)
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Pais)<br/>
+                    @Html.DisplayTextFor(x => x.Pais)
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- ./box-body -->
+</div>
+@*<div class="EnderecoReceita" style="border-top: 1px solid #dddddd; padding-top: 2px; margin-bottom: 1px;background: #f6f6f6;">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Tipo De Endereço</label><br>
+                <span>OBTIDO NA RECEITA FEDERAL</span>
+            </div>
+        </div>
+        <div class="col-xs-8 col-md-5">
+            <div class="form-group">
+                <label>Endereco</label><br>
+                <span>AV REPUBLICA DO CHILE &nbsp;</span>
+                <input id="Endereco" name="Endereco" type="hidden" value="AV REPUBLICA DO CHILE">
+            </div>
+        </div>
+        <div class="col-xs-4 col-md-1">
+            <div class="form-group">
+                <label>Número</label><br>
+                <span>65 &nbsp;</span>
+                <input id="Numero" name="Numero" type="hidden" value="65">
+            </div>
+        </div>
+        <div class="col-xs-8 col-md-3">
+            <div class="form-group">
+                <label>Complemento</label><br>
+                <span> &nbsp;</span>
+                <input id="Complemento" name="Complemento" type="hidden" value="">
+            </div>
+        </div>
+
+        <div class="col-xs-4 col-md-2">
+            <div class="form-group">
+                <label>CEP</label><br>
+                <span>20031170 &nbsp;</span>
+                <input id="Cep" name="Cep" type="hidden" value="20031170">
+            </div>
+        </div>
+        <div class="col-xs-4 col-md-2">
+            <div class="form-group">
+                <label>Bairro</label><br>
+                <span>CENTRO &nbsp;</span>
+                <input id="Bairro" name="Bairro" type="hidden" value="CENTRO">
+            </div>
+        </div>
+        <div class="col-xs-4 col-md-2">
+            <div class="form-group">
+                <label>Cidade</label><br>
+                <span>RIO DE JANEIRO &nbsp;</span>
+                <input id="Cidade" name="Cidade" type="hidden" value="RIO DE JANEIRO">
+            </div>
+        </div>
+        <div class="col-xs-4 col-md-3">
+            <div class="form-group">
+                <label>Estado</label><br>
+                <span>RJ &nbsp;</span>
+                <input id="Estado" name="Estado" type="hidden" value="RJ">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>País</label><br>
+                <span> &nbsp;</span>
+                <input id="Pais" name="Pais" type="hidden" value="">
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>*@

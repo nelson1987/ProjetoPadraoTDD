@@ -1,0 +1,740 @@
+﻿@model WebForLink.Web.ViewModels.OCP.FornecedorFichaCadastralVM
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <title>@HttpContext.Current.Application["NomeSistema"].ToString()</title>
+    @Styles.Render("~/style/bootstrap")
+    @Styles.Render("~/style/azul")
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js.js"></script>
+
+        <style>
+            .knob {
+                display: none;
+            }
+        </style>
+
+    <![endif]-->
+    <!--[if lt IE 8]>
+        <script>
+            location.href = 'Compatibilidade.html'
+        </script>
+    <![endif]-->
+</head>
+<body>
+    <div>
+        <h4>FornecedorFichaCadastralVM</h4>
+        <hr />
+        <dl class="dl-horizontal"></dl>
+        <section class="content">
+            <div id="boxGrid" class="box box-primary">
+                <div class="box-header"><h3 class="box-title">Ids</h3></div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-6">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Id)
+                                @Html.DisplayFor(x => x.Id)
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-6">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.IdContratante)
+                                @Html.DisplayFor(x => x.IdContratante)
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-6">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.IdContratanteFornecedor)
+                                @Html.DisplayFor(x => x.IdContratanteFornecedor)
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-6">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.IdPjPf)
+                                @Html.DisplayFor(x => x.IdPjPf)
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-6">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.IdPjPfBase)
+                                @Html.DisplayFor(x => x.IdPjPfBase)
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-6">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.IdSolicitacao)
+                                @Html.DisplayFor(x => x.IdSolicitacao)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div id="boxGrid" class="box box-primary">
+                    <div class="box-header"><h3 class="box-title">Solicitação</h3></div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.DadosSolicitacao.IdSolicitacao)
+                                    @Html.DisplayFor(x => x.DadosSolicitacao.IdSolicitacao)
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.DadosSolicitacao.DataSolicitacao)
+                                    @Html.DisplayFor(x => x.DadosSolicitacao.DataSolicitacao)
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.DadosSolicitacao.PrazoEntrega)
+                                    @Html.DisplayFor(x => x.DadosSolicitacao.PrazoEntrega)
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.DadosSolicitacao.Solicitante)
+                                    @Html.DisplayFor(x => x.DadosSolicitacao.Solicitante)
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.DadosSolicitacao.StatusReceitaFederal)
+                                    @Html.DisplayFor(x => x.DadosSolicitacao.StatusReceitaFederal)
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.DadosSolicitacao.StatusSimplesNacional)
+                                    @Html.DisplayFor(x => x.DadosSolicitacao.StatusSimplesNacional)
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.DadosSolicitacao.StatusSintegra)
+                                    @Html.DisplayFor(x => x.DadosSolicitacao.StatusSintegra)
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.DadosSolicitacao.TipoSolicitacao)
+                                    @Html.DisplayFor(x => x.DadosSolicitacao.TipoSolicitacao)
+                                </div>
+                            </div>
+                            @if (Model.DadosSolicitacao.SituacaoSolicitacaoList.Any())
+                            {
+                                <div class="col-md-12">
+                                    <table class="table table-condensed table-hover col-md-12">
+                                        <thead>
+                                            <tr>
+                                                <th>@Html.LabelFor(x => x.DadosSolicitacao.SituacaoSolicitacaoList.FirstOrDefault().Situacao)</th>
+                                                <th>@Html.LabelFor(x => x.DadosSolicitacao.SituacaoSolicitacaoList.FirstOrDefault().Status)</th>
+                                                <th>@Html.LabelFor(x => x.DadosSolicitacao.SituacaoSolicitacaoList.FirstOrDefault().Data)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var banco in Model.DadosSolicitacao.SituacaoSolicitacaoList)
+                                            {
+                                                <tr>
+                                                    <td>@Html.DisplayFor(x => banco.Situacao)</td>
+                                                    <td>@Html.DisplayFor(x => banco.Status)</td>
+                                                    <td>@Html.DisplayFor(x => banco.Data)</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>*@
+            <div id="boxGrid" class="box box-primary">
+                <div class="box-header"><h3 class="box-title">Órgãos Públicos</h3></div>
+                <div class="box-body">
+                    <div class="row">
+                        @foreach (var banco in Model.OrgaosPublicos.DadosRetornados)
+                        {
+                            <div class="col-md-12">
+                                <div class="panel">
+                                    <div class="panel-title">Receita Federal</div>
+                                    <div class="panel-body">
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.RazaoSocial)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.RazaoSocial)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.NomeFantasia)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.NomeFantasia)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.SituacaoCadastral)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.SituacaoCadastral)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.MotivoSituacaoCadastral)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.MotivoSituacaoCadastral)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.DataSituacaoCadastral)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.DataSituacaoCadastral)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.DataEmissao)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.DataEmissao)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.HoraEmissao)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.HoraEmissao)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.DataAbertura)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.DataAbertura)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.EnteFederativo)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.EnteFederativo)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.EnderecoEletronico)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.EnderecoEletronico)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.Telefone)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.Telefone)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.ObservacaoIbge)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.ObservacaoIbge)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.Logradouro)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.Logradouro)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.Numero)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.Numero)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.Complemento)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.Complemento)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.Bairro)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.Bairro)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.Municipio)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.Municipio)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.Estado)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.Estado)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.Cep)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.Cep)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.MatrizOuFilial)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.MatrizOuFilial)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.AtividadePrincipal)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.AtividadePrincipal)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.NaturezaJuridica)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.NaturezaJuridica)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.SituacaoEspecial)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.SituacaoEspecial)
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            @Html.LabelFor(x => banco.ReceitaFederal.DatasSituacaoEspecial)
+                                            @Html.DisplayFor(x => banco.ReceitaFederal.DatasSituacaoEspecial)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                        <div class="col-md-12">
+                                            <div class="panel">
+                                                <div class="panel-title">Sintegra</div>
+                                                <div class="panel-body">
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.AtividadeEconomicaPrincipal)
+                                                        @Html.DisplayFor(x => banco.Sintegra.AtividadeEconomicaPrincipal)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.Bairro)
+                                                        @Html.DisplayFor(x => banco.Sintegra.Bairro)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.CEP)
+                                                        @Html.DisplayFor(x => banco.Sintegra.CEP)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.CertificadoHtml)
+                                                        @Html.DisplayFor(x => banco.Sintegra.CertificadoHtml)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.CNPJ)
+                                                        @Html.DisplayFor(x => banco.Sintegra.CNPJ)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.Codigo)
+                                                        @Html.DisplayFor(x => banco.Sintegra.Codigo)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.Complemento)
+                                                        @Html.DisplayFor(x => banco.Sintegra.Complemento)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.DataConsulta)
+                                                        @Html.DisplayFor(x => banco.Sintegra.DataConsulta)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.DataInclusao)
+                                                        @Html.DisplayFor(x => banco.Sintegra.DataInclusao)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.DataSituacaoCadastralInscricaoEstadual)
+                                                        @Html.DisplayFor(x => banco.Sintegra.DataSituacaoCadastralInscricaoEstadual)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.EnquadramentoFiscal)
+                                                        @Html.DisplayFor(x => banco.Sintegra.EnquadramentoFiscal)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.InscricaoEstadual)
+                                                        @Html.DisplayFor(x => banco.Sintegra.InscricaoEstadual)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.Logradouro)
+                                                        @Html.DisplayFor(x => banco.Sintegra.Logradouro)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.MultiplasIE)
+                                                        @Html.DisplayFor(x => banco.Sintegra.MultiplasIE)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.Municipio)
+                                                        @Html.DisplayFor(x => banco.Sintegra.Municipio)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.Numero)
+                                                        @Html.DisplayFor(x => banco.Sintegra.Numero)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.RazaoSocial)
+                                                        @Html.DisplayFor(x => banco.Sintegra.RazaoSocial)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.SituacaoCadastralInscricaoEstadual)
+                                                        @Html.DisplayFor(x => banco.Sintegra.SituacaoCadastralInscricaoEstadual)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.Telefone)
+                                                        @Html.DisplayFor(x => banco.Sintegra.Telefone)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.Sintegra.UF)
+                                                        @Html.DisplayFor(x => banco.Sintegra.UF)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="panel">
+                                                <div class="panel-title">Simples Nacional</div>
+                                                <div class="panel-body">
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.SimplesNacional.Codigo)
+                                                        @Html.DisplayFor(x => banco.SimplesNacional.Codigo)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.SimplesNacional.DataConsulta)
+                                                        @Html.DisplayFor(x => banco.SimplesNacional.DataConsulta)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.SimplesNacional.PeriodosAnteriores)
+                                                        @Html.DisplayFor(x => banco.SimplesNacional.PeriodosAnteriores)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.SimplesNacional.RazaoSocial)
+                                                        @Html.DisplayFor(x => banco.SimplesNacional.RazaoSocial)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.SimplesNacional.SIMEIPeriodosAnteriores)
+                                                        @Html.DisplayFor(x => banco.SimplesNacional.SIMEIPeriodosAnteriores)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.SimplesNacional.SituacaoSIMEI)
+                                                        @Html.DisplayFor(x => banco.SimplesNacional.SituacaoSIMEI)
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-6">
+                                                        @Html.LabelFor(x => banco.SimplesNacional.SituacaoSimplesNacional)
+                                                        @Html.DisplayFor(x => banco.SimplesNacional.SituacaoSimplesNacional)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            @*<div id="boxGrid" class="box box-primary">
+                    <div class="box-header"><h3 class="box-title">Dados Gerais</h3></div>
+                    <div class="box-body">
+                        <div class="row">
+                            @foreach (var banco in Model.DadosGerais.DadosRetornados)
+                            {
+                                <div class="col-md-3 col-xs-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => banco.IdSolicitacao)
+                                        @Html.DisplayFor(x => banco.IdSolicitacao)
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xs-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => banco.CategoriaGrupoContas)
+                                        @Html.DisplayFor(x => banco.CategoriaGrupoContas)
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xs-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => banco.CNPJ)
+                                        @Html.DisplayFor(x => banco.CNPJ)
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xs-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => banco.RazaoSocial)
+                                        @Html.DisplayFor(x => banco.RazaoSocial)
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xs-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => banco.NomeFantasia)
+                                        @Html.DisplayFor(x => banco.NomeFantasia)
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xs-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => banco.CNAE)
+                                        @Html.DisplayFor(x => banco.CNAE)
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xs-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => banco.InscricaoEstadual)
+                                        @Html.DisplayFor(x => banco.InscricaoEstadual)
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xs-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => banco.InscricaoMunicipal)
+                                        @Html.DisplayFor(x => banco.InscricaoMunicipal)
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>*@
+            <div id="boxGrid" class="box box-primary">
+                <div class="box-header"><h3 class="box-title">Dados de Endereco</h3></div>
+                <div class="box-body">
+                    <div class="row">
+                        @foreach (var banco in Model.DadosEnderecos.DadosRetornados)
+                        {
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => banco.IdSolicitacao)
+                                    @Html.DisplayFor(x => banco.IdSolicitacao)
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => banco.Endereco)
+                                    @Html.DisplayFor(x => banco.Endereco)
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => banco.Bairro)
+                                    @Html.DisplayFor(x => banco.Bairro)
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => banco.CEP)
+                                    @Html.DisplayFor(x => banco.CEP)
+                                </div>
+                            </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => banco.Cidade)
+                                                @Html.DisplayFor(x => banco.Cidade)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => banco.Complemento)
+                                                @Html.DisplayFor(x => banco.Complemento)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => banco.Estado)
+                                                @Html.DisplayFor(x => banco.Estado)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => banco.Numero)
+                                                @Html.DisplayFor(x => banco.Numero)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => banco.Pais)
+                                                @Html.DisplayFor(x => banco.Pais)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => banco.TipoEndereco)
+                                                @Html.DisplayFor(x => banco.TipoEndereco)
+                                            </div>
+                                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div id="boxGrid" class="box box-primary">
+                <div class="box-header"><h3 class="box-title">Dados Bancários</h3></div>
+                <div class="box-body">
+                    <div class="row">
+                        @foreach (var banco in Model.DadosBancarios.DadosRetornados)
+                        {
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => banco.IdSolicitacao)
+                                    @Html.DisplayFor(x => banco.IdSolicitacao)
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => banco.Agencia)
+                                    @Html.DisplayFor(x => banco.Agencia)
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => banco.Arquivo)
+                                    @Html.DisplayFor(x => banco.Arquivo)
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => banco.Banco)
+                                    @Html.DisplayFor(x => banco.Banco)
+                                </div>
+                            </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => banco.ContaCorrente)
+                                                @Html.DisplayFor(x => banco.ContaCorrente)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => banco.LinkArquivo)
+                                                @Html.DisplayFor(x => banco.LinkArquivo)
+                                            </div>
+                                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div id="boxGrid" class="box box-primary">
+                <div class="box-header"><h3 class="box-title">Dados de Contatos</h3></div>
+                <div class="box-body">
+                    <div class="row">
+                        @foreach (var banco in Model.DadosContatos.DadosRetornados)
+                        {
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => banco.IdSolicitacao)
+                                    @Html.DisplayFor(x => banco.IdSolicitacao)
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => banco.Nome)
+                                    @Html.DisplayFor(x => banco.Nome)
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => banco.Celular)
+                                    @Html.DisplayFor(x => banco.Celular)
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => banco.Email)
+                                    @Html.DisplayFor(x => banco.Email)
+                                </div>
+                            </div>
+                                        <div class="col-md-3 col-xs-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => banco.Telefone)
+                                                @Html.DisplayFor(x => banco.Telefone)
+                                            </div>
+                                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            @*<div id="boxGrid" class="box box-primary">
+                    <div class="box-header"><h3 class="box-title">Observação</h3></div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.DadosSolicitacao.Observacao)
+                                    @Html.DisplayFor(x => x.DadosSolicitacao.Observacao)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+            <div id="boxGrid" class="box box-primary">
+                <div class="box-header"><h3 class="box-title">Documentos</h3></div>
+                <div class="box-body">
+                    <div class="row">
+                        @foreach (var banco in Model.DadosDocumentos.DadosRetornados)
+                        {
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => banco.IdSolicitacao)
+                                    @Html.DisplayFor(x => banco.IdSolicitacao)
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => banco.Documento)
+                                    @Html.DisplayFor(x => banco.Documento)
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => banco.LinkDocumento)
+                                    @Html.DisplayFor(x => banco.LinkDocumento)
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => banco.ValidadePeriodo)
+                                    @Html.DisplayFor(x => banco.ValidadePeriodo)
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div id="boxGrid" class="box box-primary">
+                <div class="box-header"><h3 class="box-title">Servicos / Materiais / Equipamentos oferecidos ao Mercado</h3></div>
+                <div class="box-body">
+                    <div class="row">
+                        @foreach (var banco in Model.DadosUnspsc.DadosRetornados)
+                        {
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => banco.IdSolicitacao)
+                                    @Html.DisplayFor(x => banco.IdSolicitacao)
+                                </div>
+                            </div>
+                            foreach (var material in banco.Materiais)
+                            {
+                                <div class="col-md-3 col-xs-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => material.IdUnspsc)
+                                        @Html.DisplayFor(x => material.IdUnspsc)
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xs-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => material.Nome)
+                                        @Html.DisplayFor(x => material.Nome)
+                                    </div>
+                                </div>
+                            }
+                            foreach (var servico in banco.Servicos)
+                            {
+                                <div class="col-md-3 col-xs-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => servico.IdUnspsc)
+                                        @Html.DisplayFor(x => servico.IdUnspsc)
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xs-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => servico.Nome)
+                                        @Html.DisplayFor(x => servico.Nome)
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <div id="boxGrid" class="box box-primary">
+                <div class="box-header"><h3 class="box-title">Informações Complementares</h3></div>
+                <div class="box-body">
+                    <div class="row">
+                        @foreach (var banco in Model.DadosInformacaoComplementares.DadosRetornados)
+                        {
+                            <div class="col-md-3 col-xs-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => banco.IdSolicitacao)
+                                    @Html.DisplayFor(x => banco.IdSolicitacao)
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+    @if (!Request.UserAgent.Contains("MSIE 8.0") && !Request.UserAgent.Contains("MSIE 7.0") && !Request.UserAgent.Contains("MSIE 6.0"))
+    {
+        @Scripts.Render("~/bundles/jquery-2.x")
+    }
+    else
+    {
+        @Scripts.Render("~/bundles/jquery-1.x")
+    }
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/date")
+    @*@RenderSection("scripts", required: false)*@
+</body>
+</html>

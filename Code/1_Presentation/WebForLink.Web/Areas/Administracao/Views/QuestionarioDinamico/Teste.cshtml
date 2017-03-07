@@ -1,0 +1,231 @@
+﻿@model WebForLink.Web.Areas.Administracao.Controllers.TesteQuestionarioVM
+@{
+    ViewBag.Title = "Teste";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Teste</h2>
+
+<section class="content-header">
+    <h1>Informações Complementares</h1>
+    <ol class="breadcrumb">
+        <li class="active">Questionário</li>
+    </ol>
+</section>
+<section class="content" id="questionarioDv">
+    <div class="box box-primary">
+        <div class="box-header" id="quest_Teste">
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tab-content" id="quest_TesteContent">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@Styles.Render("~/style/date")
+@section Scripts {
+    @Scripts.Render("~/bundles/date")
+    <script src="~/Scripts/Views/QuestionarioDinamico/Teste.js"></script>
+    <script type="text/javascript">
+        var QuestionarioDinamico = {
+            Id: 1,
+            Titulo: "Matrícula de Funcionários",
+            Subtitulo: "Matrícula de Funcionários",
+            MenuAbas: [{ Ativo: true, Id: 1, Titulo: "Área de Atuação" }],
+            Abas: [{
+                Id: 1,
+                Titulo: "Área de Atuação",
+                Subtitulo: "Possíveis locais de trabalho para o Funcionário",
+                Perguntas: [
+                        {
+                            Id: 1, Dominio: false, Titulo: "Nome Completo", Resposta: "Nelson da Silva Neto", Tipo: "Texto", Obrigatorio: true, Visivel: true, Bloqueado: true,
+                            AbaId: 1,
+                            QuestionarioId: 1,
+                            FormName: "Questionario[1].Aba[1].Pergunta[1]",
+                            Pais: null,
+                            Filhos: null
+                        },
+                        {
+                            Id: 2, Dominio: false, Titulo: "Data de Nascimento", Resposta: "", Tipo: "Data", Obrigatorio: false, Visivel: true,
+                            AbaId: 1,
+                            QuestionarioId: 1,
+                            FormName: "Questionario[1].Aba[1].Pergunta[2]",
+                            Pais: [{ Id: 1, Respondido: true }],
+                            Filhos: [{ Id: 3, Obrigatorio: false }]
+                        },
+                        {
+                            Id: 3, Dominio: false, Titulo: "Salário", Resposta: "", Tipo: "Numeral(2)", Obrigatorio: true, Visivel: true,
+                            AbaId: 1,
+                            QuestionarioId: 1,
+                            FormName: "Questionario[1].Aba[1].Pergunta[3]",
+                            Filhos: null,
+                            Pais: [{ Id: 2, Respondido: false }]
+                        },
+                        //{
+                        //    Id: 4, Dominio: false, Titulo: "Matrícula", Resposta: "", Tipo: "Texto", Obrigatorio: true, Visivel: false,
+                        //    AbaId: 1,
+                        //    QuestionarioId: 1,
+                        //    FormName: "Questionario[1].Aba[1].Pergunta[4]",
+                        //    Filhos: null,
+                        //    Pais: [{ Id: 2, Respondido: false }]
+                        //},
+                        //{
+                        //    Id: 5, Dominio: false, Titulo: "Telefone", Resposta: "", Tipo: "Telefone", Obrigatorio: false, Visivel: true,
+                        //    AbaId: 1,
+                        //    QuestionarioId: 1,
+                        //    FormName: "Questionario[1].Aba[1].Pergunta[5]",
+                        //    Filhos: null
+                        //},
+                        //{
+                        //    Id: 6, Dominio: true, Titulo: "Estado", Resposta: "Rio de Janeiro", Tipo: "Dominio", Obrigatorio: false,
+                        //    AbaId: 1,
+                        //    QuestionarioId: 1,
+                        //    FormName: "Questionario[1].Aba[1].Pergunta[6]",
+                        //    DominioResposta: [
+                        //        { Id: 1, Valor: "Minas Gerais", Selected: false },
+                        //        { Id: 2, Valor: "Espírito Santo", Selected: false },
+                        //        { Id: 3, Valor: "São Paulo", Selected: false },
+                        //        { Id: 4, Valor: "Rio de Janeiro", Selected: true },
+                        //    ],
+                        //    Pai: [
+                        //        { Id: 1, Respondido: true }
+                        //    ]
+                        //},
+                        //{
+                        //    Dominio: true, Id: 7, Titulo: "Estado", Resposta: "Rio de Janeiro", Tipo: "Dominio", Obrigatorio: false,
+                        //    AbaId: 1,
+                        //    QuestionarioId: 1,
+                        //    FormName: "Questionario[1].Aba[1].Pergunta[7]",
+                        //    DominioResposta: [
+                        //        { Id: 1, Valor: "Minas Gerais", Selected: false },
+                        //        { Id: 2, Valor: "Espírito Santo", Selected: false },
+                        //        { Id: 3, Valor: "São Paulo", Selected: false },
+                        //        { Id: 4, Valor: "Rio de Janeiro", Selected: true },
+                        //    ],
+                        //    Pai: [
+                        //        { Id: 1, Respondido: true }
+                        //    ]
+                        //},
+                        //{
+                        //    Dominio: true, Id: 8, Titulo: "Área de Atuação", Resposta: "", Tipo: "Checkbox", Obrigatorio: false,
+                        //    AbaId: 1,
+                        //    QuestionarioId: 1,
+                        //    FormName: "Questionario[1].Aba[1].Pergunta[8]",
+                        //    DominioResposta: [
+                        //        { Id: 5, Valor: "Rio de Janeiro - Capital", Selected: false },
+                        //        { Id: 6, Valor: "Itaguaí", Selected: false },
+                        //        { Id: 7, Valor: "Angra", Selected: false },
+                        //        { Id: 8, Valor: "Japeri", Selected: false }
+                        //    ],
+                        //    Pai: [
+                        //        { Id: 1, Respondido: true },
+                        //        { Id: 2 }
+                        //    ],
+                        //    Filhos: [
+                        //        { Id: 4 },
+                        //    { Id: 5 }
+                        //    ]
+                        //},
+                        //{
+                        //    Dominio: true, Id: 9, Titulo: "Possível veículo próprio", Resposta: "", Tipo: "Radio", Obrigatorio: false,
+                        //    AbaId: 1,
+                        //    QuestionarioId: 1,
+                        //    FormName: "Questionario[1].Aba[1].Pergunta[9]",
+                        //    DominioResposta: [
+                        //        { Id: 9, Valor: "Sim", Selected: false },
+                        //        { Id: 10, Valor: "Não", Selected: false }
+                        //    ],
+                        //    Pai: [
+                        //        { Id: 4 }
+                        //    ]
+                        //},
+                        //{
+                        //    Dominio: true, Id: 10, Titulo: "Bairro Principal", Resposta: "", Tipo: "Dominio", Obrigatorio: false,
+                        //    AbaId: 1,
+                        //    QuestionarioId: 1,
+                        //    FormName: "Questionario[1].Aba[1].Pergunta[10]",
+                        //    DominioResposta: [
+                        //        //{ Id: 11, Valor: "Sim", Selected: false },
+                        //        //{ Id: 12, Valor: "Não", Selected: false }
+                        //    ],
+                        //    Pai: [
+                        //        { Id: 4 }
+                        //    ]
+                        //}
+                ]
+            }]
+        };
+        $(function () {
+            var htmlQuestionario = criarCabecalho(QuestionarioDinamico);
+            $('#quest_Teste').append(htmlQuestionario);
+            var htmlPerguntas = criarTab(QuestionarioDinamico);
+            $('#quest_TesteContent').append(htmlPerguntas);
+            //--
+            $('.blurFilhos').blur(function () {
+                if (this.value != '') {
+                    var idpergunta = $(this).attr("data-val-idPergunta");
+                    var resposta = this.value;
+                    var idFilhos = $(this).attr("data-val-idFilhos");
+                    $.ajax({
+                        url: '@Url.Action("RetornaPropriedadeFilhos")',
+                        type: 'get',
+                        data: { resposta: resposta, perguntaId: idpergunta },
+                        sucess: function (data) {
+                            var data = {
+                                Id: 3,
+                                Disabled: false,
+                                Dominio: false,
+                                Resposta: "Nelson da Silva Neto",
+                                Tipo: "Texto",
+                                Obrigatorio: true,
+                                Visivel: true,
+                                Bloqueado: true,
+                                AbaId: 1,
+                                QuestionarioId: 1,
+                                FormName: "Questionario[1].Aba[1].Pergunta[1]",
+                                Pais: null,
+                                Filhos: null
+                            };
+
+                            for (var i = 0; i < data.length; i++) {
+                                if (data[i].Disabled)
+                                $(document).find('[data-val-idPergunta="' + data[i].Id + '"]')
+                                    .removeAttr("disabled");
+                            }
+                        }
+                    });
+                }
+                console.log(this);
+                console.log($(this.id));
+            });
+            $('.phoneMask').inputmask({ mask: ['(99) 9999-9999', '(99) 99999-9999'] });
+            $('.dataMask').inputmask('99/99/9999');
+            $('.numeral2Mask').inputmask('999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999,99');
+            $('.numeral3Mask').inputmask('999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999,999');
+            $('.numeral4Mask').inputmask('999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999,9999');
+            $('.numeral5Mask').inputmask('999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999.999,99999');
+            //Blur = 'onBlur="alterarFilhos(' + perguntaResposta.Id + ',[' + filhosArray + '], this);"';
+            //classe += "blurFilhos"
+            @*$.ajax({
+                url: '@Url.Action("ExibirQuestionario")',
+                type: 'get',
+                //data: { idProrrogacao: $('#IdProrrogacao').val() },
+                dataType: 'json',
+                success: function (json) {
+                    console.log("JSON", json);
+
+                    var template = $('#questionarioDV .box-body').html();
+                    var htmlQuestionario = criarCabecalho(json);
+                    $('#quest_Teste').html(htmlQuestionario);
+                    var htmlPerguntas = criarTab(json);
+                    $('#quest_TesteContent').html(htmlPerguntas);
+                }
+            });*@
+
+        });
+    </script>
+}

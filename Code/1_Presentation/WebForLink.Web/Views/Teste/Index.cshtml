@@ -1,0 +1,25 @@
+﻿@model WebForLink.Web.Controllers.IBaseVM
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Index</h2>
+
+@Html.EditorFor(x => x)
+
+<div class="table-responsive">
+        <table class="table table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>url</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Grid.Resultados)
+            {
+                    @Html.Partial("~/Views/Shared/Listar/ListaGrid.cshtml", item)
+                }
+            </tbody>
+        </table>
+    </div>

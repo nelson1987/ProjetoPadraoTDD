@@ -1,0 +1,297 @@
+﻿@model WebForLink.Web.ViewModels.DadosBancarioVM
+
+<div class="box box-success box-bancario" style="margin-bottom: 5px;">
+<div class="box-header with-border" style="background: #fBfBfB; border-bottom: #f0F0f0 1px solid;">
+    <span class="box-title" style="font-size: 14px;">Banco Itaú</span>
+    <span class="box-subtitle">@Html.DisplayFor(x => x.ResumoBancario)</span>
+    <div class="box-tools pull-right">
+        <span type="button" class="btn btn-danger btn-excluir-bancario" data-widget="remove">
+                <i class="fa fa-trash-o fa-lg"></i>
+            </span>&nbsp;
+        <span type="button" class="btn btn-minimizar" data-widget="collapse">
+                <i class="fa fa-sort-desc"></i>
+            </span>
+    </div>
+</div>
+<!-- /.box-header -->
+<div class="box-body hidden" style="padding: 10px 10px 0px 10px;">
+<div class="row">
+<form id="fileupload" method="POST" enctype="multipart/form-data" data-url="@Url.Action("Upload", "UploadArquivo")">
+@*<input type="hidden" name="DadosBancarios.index" autocomplete="off" value="9aa07e19-f941-422e-9d5a-9c8e4d84cd14">*@
+@*<div class="Banco" name="Banco" style="border: solid 1px silver; padding-top: 7px;">*@
+@*<input data-val="true" data-val-number="The field BancoPJPFID must be a number." id="DadosBancarios_9aa07e19-f941-422e-9d5a-9c8e4d84cd14__BancoPJPFID" name="DadosBancarios[9aa07e19-f941-422e-9d5a-9c8e4d84cd14].BancoPJPFID" type="hidden" value="">
+                    <input data-val="true" data-val-number="The field BancoSolicitacaoID must be a number." id="DadosBancarios_9aa07e19-f941-422e-9d5a-9c8e4d84cd14__BancoSolicitacaoID" name="DadosBancarios[9aa07e19-f941-422e-9d5a-9c8e4d84cd14].BancoSolicitacaoID" type="hidden" value="">*@
+<div class="col-md-12 col-lg-5">
+    <div class="form-group">
+        <label>Banco</label><br>
+        <select class="form-control input-sm" data-val="true" data-val-number="The field Banco must be a number." data-val-required="Informe o Banco" id="DadosBancarios_9aa07e19-f941-422e-9d5a-9c8e4d84cd14__Banco" name="DadosBancarios[9aa07e19-f941-422e-9d5a-9c8e4d84cd14].Banco" onchange=" obterNomeBanco(this); ">
+            <option value="">Selecione um Banco</option>
+            <option value="1">Banco A.J.Renner S.A.</option>
+            <option value="2">Banco ABC Brasil S.A.</option>
+            <option value="3">Banco Alfa S.A.</option>
+            <option value="4">Banco Alvorada S.A.</option>
+            <option value="5">Banco Arbi S.A.</option>
+            <option value="6">Banco Azteca do Brasil S.A.</option>
+            <option value="7">Banco Banerj S.A.</option>
+            <option value="8">Banco Bankpar S.A.</option>
+            <option value="9">Banco Barclays S.A.</option>
+            <option value="10">Banco BBM S.A.</option>
+            <option value="11">Banco Beg S.A.</option>
+            <option value="12">Banco BGN S.A.</option>
+            <option value="13">Banco BM F de Servicos de Liquidacao e Custodia S.A</option>
+            <option value="14">Banco BMG S.A.</option>
+            <option value="15">Banco BNP Paribas Brasil S.A.</option>
+            <option value="16">Banco Boavista Interatlantico S.A.</option>
+            <option value="17">Banco Bonsucesso S.A.</option>
+            <option value="18">Banco Bracce S.A.</option>
+            <option value="19">Banco Bradesco BBI S.A.</option>
+            <option value="20">Banco Bradesco Cartoes S.A.</option>
+            <option value="21">Banco Bradesco Financiamentos S.A.</option>
+            <option value="22">Banco Bradesco S.A.</option>
+            <option value="23">Banco Brascan S.A.</option>
+            <option value="24">Banco BRJ S.A.</option>
+            <option value="25">Banco BTG Pactual S.A.</option>
+            <option value="26">Banco BVA S.A.</option>
+            <option value="27">Banco Cacique S.A.</option>
+            <option value="28">Banco Caixa Geral - Brasil S.A.</option>
+            <option value="29">Banco Capital S.A.</option>
+            <option value="30">Banco Cargill S.A.</option>
+            <option value="43">Banco Cedula S.A.</option>
+            <option value="31">Banco Citibank S.A.</option>
+            <option value="32">Banco Citicard S.A.</option>
+            <option value="33">Banco Classico S.A.</option>
+            <option value="34">Banco CNH Capital S.A.</option>
+            <option value="35">Banco Comercial e de Investimento Sudameris S.A.</option>
+            <option value="36">Banco Cooperativo do Brasil S.A. - BANCOOB</option>
+            <option value="37">Banco Cooperativo Sicredi S.A.</option>
+            <option value="38">Banco CR2 S.A.</option>
+            <option value="39">Banco Credibel S.A.</option>
+            <option value="40">Banco Credit Agricole Brasil S.A.</option>
+            <option value="41">Banco Credit Suisse (Brasil) S.A.</option>
+            <option value="42">Banco Cruzeiro do Sul S.A.</option>
+            <option value="44">Banco da Amazonia S.A.</option>
+            <option value="45">Banco Daimlerchrysler S.A.</option>
+            <option value="46">Banco Daycoval S.A.</option>
+            <option value="47">Banco de La Nacion Argentina</option>
+            <option value="48">Banco de La Provincia de Buenos Aires</option>
+            <option value="49">Banco de La Republica Oriental del Uruguay</option>
+            <option value="50">Banco de Lage Landen Brasil S.A.</option>
+            <option value="51">Banco de Pernambuco S.A. - BANDEPE</option>
+            <option value="52">Banco de Tokyo-Mitsubishi UFJ Brasil S.A.</option>
+            <option value="53">Banco Dibens S.A.</option>
+            <option value="54">Banco do Brasil S.A.</option>
+            <option value="55">Banco do Estado de Sergipe S.A.</option>
+            <option value="56">Banco do Estado do Para S.A.</option>
+            <option value="57">Banco do Estado do Piaui S.A. - BEP</option>
+            <option value="58">Banco do Estado do Rio Grande do Sul S.A.</option>
+            <option value="59">Banco do Nordeste do Brasil S.A.</option>
+            <option value="60">Banco Fator S.A.</option>
+            <option value="61">Banco Fiat S.A.</option>
+            <option value="62">Banco Fibra S.A.</option>
+            <option value="63">Banco Ficsa S.A.</option>
+            <option value="64">Banco Ford S.A.</option>
+            <option value="65">Banco GE Capital S.A.</option>
+            <option value="66">Banco Gerdau S.A.</option>
+            <option value="67">Banco GMAC S.A.</option>
+            <option value="68">Banco Guanabara S.A.</option>
+            <option value="69">Banco Honda S.A.</option>
+            <option value="70">Banco Ibi S.A. Banco Multiplo</option>
+            <option value="71">Banco IBM S.A.</option>
+            <option value="72">Banco Industrial do Brasil S.A.</option>
+            <option value="73">Banco Industrial e Comercial S.A.</option>
+            <option value="74">Banco Indusval S.A.</option>
+            <option value="75">Banco Intercap S.A.</option>
+            <option value="76">Banco Investcred Unibanco S.A.</option>
+            <option value="78">Banco Itau BBA S.A.</option>
+            <option value="79">Banco ItauBank S.A</option>
+            <option value="77">Banco Itaucred Financiamentos S.A.</option>
+            <option value="80">Banco J. P. Morgan S.A.</option>
+            <option value="81">Banco J. Safra S.A.</option>
+            <option value="82">Banco John Deere S.A.</option>
+            <option value="83">Banco KDB S.A.</option>
+            <option value="84">Banco KEB do Brasil S.A.</option>
+            <option value="85">Banco Luso Brasileiro S.A.</option>
+            <option value="86">Banco Matone S.A.</option>
+            <option value="93">Banco Maxima S.A.</option>
+            <option value="87">Banco Maxinvest S.A.</option>
+            <option value="88">Banco Mercantil do Brasil S.A.</option>
+            <option value="89">Banco Modal S.A.</option>
+            <option value="90">Banco Moneo S.A.</option>
+            <option value="91">Banco Morada S.A.</option>
+            <option value="92">Banco Morgan Stanley S.A.</option>
+            <option value="94">Banco Opportunity S.A.</option>
+            <option value="95">Banco Ourinvest S.A.</option>
+            <option value="96">Banco Panamericano S.A.</option>
+            <option value="97">Banco Paulista S.A.</option>
+            <option value="98">Banco Pecunia S.A.</option>
+            <option value="99">Banco Pine S.A.</option>
+            <option value="100">Banco Porto Seguro S.A.</option>
+            <option value="101">Banco Pottencial S.A.</option>
+            <option value="102">Banco Prosper S.A.</option>
+            <option value="103">Banco PSA Finance Brasil S.A.</option>
+            <option value="104">Banco Rabobank International Brasil S.A.</option>
+            <option value="105">Banco Real S.A.</option>
+            <option value="106">Banco Rendimento S.A.</option>
+            <option value="107">Banco Ribeirao Preto S.A.</option>
+            <option value="108">Banco Rodobens S.A.</option>
+            <option value="109">Banco Rural Mais S.A.</option>
+            <option value="110">Banco Rural S.A.</option>
+            <option value="111">Banco Safra S.A.</option>
+            <option value="112">Banco Santander (Brasil) S.A.</option>
+            <option value="113">Banco Schahin S.A.</option>
+            <option value="114">Banco Semear S.A.</option>
+            <option value="115">Banco Simples S.A.</option>
+            <option value="116">Banco Societe Generale Brasil S.A.</option>
+            <option value="117">Banco Sofisa S.A.</option>
+            <option value="118">Banco Standard de Investimentos S.A.</option>
+            <option value="119">Banco Sumitomo Mitsui Brasileiro S.A.</option>
+            <option value="120">Banco Toyota do Brasil S.A.</option>
+            <option value="122">Banco Triangulo S.A.</option>
+            <option value="121">Banco Tricury S.A.</option>
+            <option value="123">Banco Volkswagen S.A.</option>
+            <option value="124">Banco Volvo (Brasil) S.A.</option>
+            <option value="125">Banco Votorantim S.A.</option>
+            <option value="126">Banco VR S.A.</option>
+            <option value="127">Banco WestLB do Brasil S.A.</option>
+            <option value="128">BANESTES S.A. Banco do Estado do Espirito Santo</option>
+            <option value="129">Banif-Banco Internacional do Funchal (Brasil)S.A.</option>
+            <option value="130">Bank of America Merrill Lynch Banco Multiplo S.A.</option>
+            <option value="131">BankBoston N.A.</option>
+            <option value="132">BB Banco Popular do Brasil S.A.</option>
+            <option value="133">BES Investimento do Brasil S.A.-Banco de Investimento</option>
+            <option value="134">BPN Brasil Banco Multiplo S.A.</option>
+            <option value="135">BRB - Banco de Brasilia S.A.</option>
+            <option value="136">Caixa Economica Federal</option>
+            <option value="137">Citibank N.A.</option>
+            <option value="138">Deutsche Bank S.A. - Banco Alemao</option>
+            <option value="139">Dresdner Bank Brasil S.A. - Banco Multiplo</option>
+            <option value="140">Goldman Sachs do Brasil Banco Multiplo S.A.</option>
+            <option value="141">Hipercard Banco Multiplo S.A.</option>
+            <option value="142">HSBC Bank Brasil S.A. - Banco Multiplo</option>
+            <option value="143">HSBC Finance (Brasil) S.A. - Banco Multiplo</option>
+            <option value="144">ING Bank N.V.</option>
+            <option value="145">Itau Unibanco Holding S.A.</option>
+            <option value="146">Itau Unibanco S.A.</option>
+            <option value="147">JBS Banco S.A.</option>
+            <option value="148">JPMorgan Chase Bank</option>
+            <option value="149">Natixis Brasil S.A. Banco Multiplo</option>
+            <option value="150">NBC Bank Brasil S.A. - Banco Multiplo</option>
+            <option value="151">Parana Banco S.A.</option>
+            <option value="152">UNIBANCO - Uniao de Bancos Brasileiros S.A.</option>
+            <option value="153">Unicard Banco Multiplo S.A.</option>
+            <option value="154">Unicred Norte do Parana</option>
+        </select>
+        <input id="DadosBancarios_9aa07e19-f941-422e-9d5a-9c8e4d84cd14__NomeBanco" name="DadosBancarios[9aa07e19-f941-422e-9d5a-9c8e4d84cd14].NomeBanco" type="hidden" value="">
+        <span class="field-validation-valid text-danger" data-valmsg-for="DadosBancarios[9aa07e19-f941-422e-9d5a-9c8e4d84cd14].Banco" data-valmsg-replace="true"></span>
+    </div>
+</div>
+<div class="col-xs-8 col-md-3 col-lg-2">
+    <div class="form-group">
+        @Html.LabelFor(x => x.Agencia)
+        @Html.TextBoxFor(x => x.Agencia, new {@class = "form-control input-sm"})
+        @Html.ValidationMessageFor(x => x.Agencia)
+        @*<label>Agência</label><br>
+                            <input class="form-control input-sm" data-val="true" data-val-length="O campo Agencia deve ser uma cadeia de caracteres com no mínimo 4 e no máximo 4 de comprimento." data-val-length-max="4" data-val-length-min="4" data-val-required="Informe a Agência" id="DadosBancarios_9aa07e19-f941-422e-9d5a-9c8e4d84cd14__Agencia" maxlength="4" name="DadosBancarios[9aa07e19-f941-422e-9d5a-9c8e4d84cd14].Agencia" type="text" value="">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="DadosBancarios[9aa07e19-f941-422e-9d5a-9c8e4d84cd14].Agencia" data-valmsg-replace="true"></span>*@
+    </div>
+</div>
+<div class="col-xs-4 col-md-2 col-lg-1">
+    <div class="form-group">
+        @Html.LabelFor(x => x.DigitoAgencia)
+        @Html.TextBoxFor(x => x.DigitoAgencia, new {@class = "form-control input-sm"})
+        @Html.ValidationMessageFor(x => x.DigitoAgencia)
+        @*<label>Dígito</label><br>
+                            <input class="form-control input-sm" id="DadosBancarios_9aa07e19-f941-422e-9d5a-9c8e4d84cd14__Digito" maxlength="1" name="DadosBancarios[9aa07e19-f941-422e-9d5a-9c8e4d84cd14].Digito" type="text" value="">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="DadosBancarios[9aa07e19-f941-422e-9d5a-9c8e4d84cd14].Digito" data-valmsg-replace="true"></span>*@
+    </div>
+</div>
+<div class="col-xs-8 col-md-3 col-lg-2">
+    <div class="form-group">
+        @Html.LabelFor(x => x.Conta)
+        @Html.TextBoxFor(x => x.Conta, new {@class = "form-control input-sm"})
+        @Html.ValidationMessageFor(x => x.Conta)
+        @*<label>Conta Corrente</label><br>
+                            <input class="form-control input-sm" data-val="true" data-val-required="Informe a Conta Corrente" id="DadosBancarios_9aa07e19-f941-422e-9d5a-9c8e4d84cd14__ContaCorrente" maxlength="18" name="DadosBancarios[9aa07e19-f941-422e-9d5a-9c8e4d84cd14].ContaCorrente" type="text" value="">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="DadosBancarios[9aa07e19-f941-422e-9d5a-9c8e4d84cd14].ContaCorrente" data-valmsg-replace="true"></span>*@
+    </div>
+</div>
+<div class="col-xs-4 col-md-2 col-lg-1">
+    <div class="form-group">
+        @Html.LabelFor(x => x.DigitoConta)
+        @Html.TextBoxFor(x => x.DigitoConta, new {@class = "form-control input-sm"})
+        @Html.ValidationMessageFor(x => x.DigitoConta)
+        @*<label>Digito</label><br>
+                            <input class="form-control input-sm" data-val="true" data-val-required="Informe o Dígito da Conta Corrente" id="DadosBancarios_9aa07e19-f941-422e-9d5a-9c8e4d84cd14__ContaCorrenteDigito" maxlength="2" name="DadosBancarios[9aa07e19-f941-422e-9d5a-9c8e4d84cd14].ContaCorrenteDigito" type="text" value="">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="DadosBancarios[9aa07e19-f941-422e-9d5a-9c8e4d84cd14].ContaCorrenteDigito" data-valmsg-replace="true"></span>*@
+    </div>
+</div>
+@*<div class="col-md-1 col-lg-1 hidden-xs">
+                        <label>&nbsp;</label><br>
+                        <button type="button" class="btn btn-danger" onclick="exibirConfirmacaoExclusao(this)"><i class="fa fa-trash-o fa-lg"></i></button>
+                    </div>*@
+<div class="clearfix"></div>
+<div class="col-xs-12 col-md-6 col-lg-6">
+    <div class="form-group">
+        <div class="row">
+            @*<div class="col-md-12 col-lg-4">
+                                    <label class="control-label hidden-xs hidden-md">&nbsp;</label><br class="hidden-xs hidden-md">
+                                    <div class="fileUpload btn btn-default">
+                                        <span style="padding-left: 5px; float: none; text-align: center;">Buscar Comprovante</span>
+                                        <input class="upload" id="DadosBancarios_9aa07e19-f941-422e-9d5a-9c8e4d84cd14__Arquivo" name="DadosBancarios[9aa07e19-f941-422e-9d5a-9c8e4d84cd14].Arquivo" origemarquivo="CB" type="file" value="">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="DadosBancarios[9aa07e19-f941-422e-9d5a-9c8e4d84cd14].Arquivo" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-8">*@
+            @*<label class="hidden-md hidden-xs">&nbsp;</label><br class="hidden-md hidden-xs">
+                                <span class="help-block" style="float: none;">
+                                    <input arquivosubido="" id="DadosBancarios_9aa07e19-f941-422e-9d5a-9c8e4d84cd14__ArquivoSubido" name="DadosBancarios[9aa07e19-f941-422e-9d5a-9c8e4d84cd14].ArquivoSubido" type="hidden" value="">
+                                    <input tipoarquivosubido="" id="DadosBancarios_9aa07e19-f941-422e-9d5a-9c8e4d84cd14__TipoArquivoSubido" name="DadosBancarios[9aa07e19-f941-422e-9d5a-9c8e4d84cd14].TipoArquivoSubido" type="hidden" value="">
+                                    <input arquivosubidooriginal="" id="DadosBancarios_9aa07e19-f941-422e-9d5a-9c8e4d84cd14__ArquivoSubidoOriginal" name="DadosBancarios[9aa07e19-f941-422e-9d5a-9c8e4d84cd14].ArquivoSubidoOriginal" type="hidden" value="">
+                                    <span percentual=""></span>
+                                    <span nomearquivo="">Nenhum Comprovante Selecionado!</span>
+                                    <span cancelarupload="" class="badge bg-red-gradient hidden text-center cancelarupload">
+                                        Interromper upload?
+                                        <button cancelaruploadsim="" type="button" class="btn btn-default btn-xs">Sim</button>
+                                        <button cancelaruploadnao="" type="button" class="btn btn-default btn-xs" onclick="$(this).parent().toggleClass('hidden')">Não</button>
+                                    </span>
+                                </span>*@
+            <div class="col-md-12 col-lg-4">
+                <span class="btn btn-default fileinput-button">
+                                    @*<i class="glyphicon glyphicon-plus"></i>*@
+                                    <span>Buscar Comprovante</span>
+                                    <input type="file" name="files[]" multiple>
+                                </span>
+            </div> <!-- The global progress state -->
+            <div class="col-lg-5 fileupload-progress fade">
+                <!-- The global progress bar -->
+                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-success" style="width: 0%;"></div>
+                </div>
+                <!-- The extended global progress state -->
+                <div class="progress-extended">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-xs-10 col-md-6 col-lg-5">
+    <div class="form-group">
+    </div>
+</div>
+<div class="col-xs-2 hidden-md hidden-lg">
+    <label>&nbsp;</label><br>
+    <button type="button" class="btn btn-danger" onclick=" exibirConfirmacaoExclusao(this) ">
+        <i class="fa fa-trash-o fa-lg"></i>
+    </button>
+</div>
+<div class="clearfix"></div>
+<div class="alert alert-warning text-center hidden" role="alert">
+    <span>Tem certeza que deseja excluir este Banco?</span>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-primary btn-xs" onclick=" excluirDados(this); ">Sim</button>&nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-default btn-xs" onclick=" $(this).parent().toggleClass('hidden'); ">Não</button>
+</div>
+<div class="clearfix"></div>
+@*</div>*@
+</form>
+</div>
+</div>
+</div>

@@ -1,0 +1,116 @@
+﻿@model IEnumerable<WebForLink.Web.ViewModels.FornecedorUnspscVM>
+
+@Styles.Render("~/style/date")
+<link href="~/Content/css/bootstrap-tagsinput.css" rel="stylesheet" />
+<link href="~/Content/css/typeahead.css" rel="stylesheet" />
+@{
+    var vServicos = Model.Where(u => u.UsnpscCodigo >= 70000000).ToArray();
+    var vMateriais = Model.Where(u => u.UsnpscCodigo < 70000000).ToArray();
+    var servicos = "";
+    var materiais = "";
+
+    if (vServicos.Length > 0)
+    {
+        servicos = String.Join("|", vServicos.Select(x => x.UsnpscId.ToString()));
+    }
+    if (vMateriais.Length > 0)
+    {
+        materiais = String.Join("|", vMateriais.Select(x => x.UsnpscId.ToString()));
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/date")
+    <script src="~/Scripts/Views/Fornecedores/Modal/modalServicos.js"></script>
+    <script src="~/Scripts/Views/Fornecedores/Modal/modalMateriais.js"></script>
+    <script src="~/Scripts/bloodhound.min.js"></script>
+    <script src="~/Scripts/typeahead.jquery.min.js"></script>
+    <script src="~/Scripts/typeahead.bundle.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var HabilitaEdicaoUnspsc = $("#HabilitaEdicaoUnspsc").val() == "True";
+            if (HabilitaEdicaoUnspsc) {
+                $('#divSalvarServicoMaterial').toggleClass("hidden");
+            }
+        });
+
+        function removerServico(tr, id) {
+            var selecionados = $('#ServicosSelecionados').val().split("|");
+            var posicao = selecionados.indexOf(id);
+            selecionados.splice(posicao, 1);
+            $('#ServicosSelecionados').val(selecionados.join("|"));
+            $(tr).remove();
+        }
+
+        function removerMaterial(tr, id) {
+            var selecionados = $('#MateriaisSelecionados').val().split("|");
+            var posicao = selecionados.indexOf(id);
+            selecionados.splice(posicao, 1);
+            $('#MateriaisSelecionados').val(selecionados.join("|"));
+            $(tr).remove();
+        }
+    </script>
+}
+<div id="TipoServicoMaterial" class="box box-primary">
+    <div class="box-header"><h3 class="box-title">Servicos / Materiais / Equipamentos oferecidos ao Mercado</h3></div>
+    <div class="box-body">
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Serviços</h3><br />
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-default" onclick="$('#modalServicos').modal('show');">Hierarquia</button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <input type="hidden" name="ServicosSelecionados" id="ServicosSelecionados" value="@servicos">
+                    <table id="tblServicosSelecionados" class="table table-condensed">
+                        <tbody>
+                            @foreach (var item in vServicos)
+                            {
+                                <tr id="@Html.Raw("servicoTR" + item.UsnpscId)">
+                                    <td class="no-border" width="20"><button type="button" class="btn btn-danger btn-xs" onclick="@Html.Raw("removerServico('#servicoTR" + item.UsnpscId + "', '" + item.UsnpscId + "')")"><i class="fa fa-trash"></i></button></td>
+                                    <td class="no-border">@item.UsnpscDescricao</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Materiais</h3><br />
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-default" onclick="$('#modalMateriais').modal('show');">Hierarquia</button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <input type="hidden" name="MateriaisSelecionados" id="MateriaisSelecionados" value="@materiais">
+                    <table id="tblMateriaisSelecionados" class="table table-condensed">
+                        <tbody>
+                            @foreach (var item in vMateriais)
+                            {
+                                <tr id="@Html.Raw("MaterialTR" + item.UsnpscId)">
+                                    <td class="no-border" width="20"><button type="button" class="btn btn-danger btn-xs" onclick="@Html.Raw("removerMaterial('#MaterialTR" + item.UsnpscId + "', '" + item.UsnpscId + "')")"><i class="fa fa-trash"></i></button></td>
+                                    <td class="no-border">@item.UsnpscDescricao</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div id="divSalvarServicoMaterial" class="text-right text-nowrap hidden">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="button" class="btn btn-danger" onclick="cancelarDados('Unspsc', '@Url.Action("CancelarUnspsc", "ModificacaoUnspsc")');">Cancelar</button>
+        </div>
+    </div><!-- /.box-body -->
+</div><!-- /.box -->
+
+@Html.Partial("../Fornecedores/_ModalServicos")
+@Html.Partial("../Fornecedores/_ModalMateriais")

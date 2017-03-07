@@ -1,0 +1,42 @@
+﻿@model WebForLink.Web.ViewModels.MensagemImportacaoVM
+@section Header {
+    <link href="~/Content/css/bootstrap3-wysihtml5.css" rel="stylesheet" />
+}
+<!-- Main content -->
+@using (Html.BeginForm("SolicitacaoEnviar"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(x => x.Fornecedor.CNPJ)
+    @Html.HiddenFor(x => x.Fornecedor.Contato.Nome)
+    @Html.HiddenFor(x => x.Fornecedor.Contato.Email)
+    <div class="clearfix"></div>
+    <div class="col-md-12">
+        <div class="form-group">
+            @Html.LabelFor(x => x.Assunto, htmlAttributes: new { @class = "control-label" })
+            <span class="text-danger" style="font-weight:bold;">*</span><br />
+            @Html.TextBoxFor(x => x.Assunto, new { @class = "form-control input-sm", disable_input = "" })
+            @Html.ValidationMessageFor(x => x.Assunto, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-md-12">
+        <div class="form-group">
+            @Html.LabelFor(x => x.Mensagem, htmlAttributes: new { @class = "control-label" })
+
+            @Html.TextAreaFor(x => x.Mensagem, new { @class = "form-control input-sm", disable_input = "", rows = "7" })
+
+            @Html.ValidationMessageFor(x => x.Mensagem, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="clearfix"></div>
+}
+
+@section Scripts {
+    <script src="~/Scripts/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            $("#Mensagem").wysihtml5();
+        });
+</script>
+}

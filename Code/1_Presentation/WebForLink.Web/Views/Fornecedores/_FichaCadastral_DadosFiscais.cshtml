@@ -1,0 +1,54 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+
+<div class="box box-primary">
+    <div class="box-header"><h3 class="box-title">Impostos</h3></div>
+    <div class="box-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                    <tr>
+                        <th class="text-center col-md-1">
+                            Categoria
+                        </th>
+                        <th class="text-center col-md-1">
+                            Código
+                        </th>
+                        <th class="text-center col-md-1">
+                            Sujeito a
+                        </th>
+                        <th class="text-center">
+                            Descrição
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.DadosFiscais)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                @item.Categoria
+                            </td>
+                            <td class="text-center">
+                                @item.ID
+                            </td>
+                            <td class="text-center">
+                                @if (item.Sujeito)
+                                {
+                                    <input checked="checked" class="check-box" disabled="disabled" type="checkbox">
+                                }
+                                else
+                                {
+                                    <input class="check-box" disabled="disabled" type="checkbox">
+                                }
+                            </td>
+                            <td>
+                                @item.Descricao
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="clearfix"></div>
+    </div><!-- /.box-body -->
+</div><!-- /.box -->

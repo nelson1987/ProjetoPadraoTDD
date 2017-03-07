@@ -1,0 +1,18 @@
+﻿@using WebForLink.Web.ViewModels
+@model List<IDadoEndereco>
+<div id="boxGrid" class="box box-primary">
+    <div class="box-header"><h3 class="box-title">Dados de Endereços</h3></div>
+    <div class="box-body">
+        @foreach (var item in Model)
+        {
+            if(item.Preenchido == true)
+            {
+                @Html.DisplayFor(x => item, "IDadoEndereco")
+            }
+            else
+            {
+                @Html.EditorFor(m => item, "IDadoEndereco")
+            }
+        }
+    </div>
+</div>

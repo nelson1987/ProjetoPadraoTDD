@@ -1,0 +1,162 @@
+﻿@using WebForLink.Domain.Enums
+
+@model WebForLink.Web.ViewModels.FornecedoresesSolicitacaoDocumentosVM
+
+@{
+    Layout = "~/Views/Shared/_LayoutFornecedor.cshtml";
+    ViewBag.Title = System.Web.HttpContext.Current.Application["NomeSistema"].ToString();
+}
+
+<style>
+    .fileUpload {
+        position: relative;
+        overflow: hidden;
+        margin: 0px;
+        height: 30px;
+        float: left;
+    }
+
+        .fileUpload input.upload {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+
+    #uploadFile {
+        border: 0;
+        background-color: transparent;
+    }
+</style>
+<section class="content-header">
+    <h1>Solicitações</h1>
+</section>
+<section class="content">
+    <div id="FichaAlertaSucessoTop" class="alert alert-success" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick="$(this).fadeOut('fast')"></div>
+    <div id="FichaAlertaErroTop" class="alert alert-danger" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick="$(this).fadeOut('fast')"></div>
+    <div id="FichaAlertaSucessoBottom" class="alert alert-success" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick="$(this).fadeOut('fast')"></div>
+    <div id="boxGrid" class="box box-primary">
+        @*<div class="box-header"><h3 class="box-title">Solicitações de Documentos</h3></div>*@
+        <div class="box-body">
+            <div class="form-group table-responsive">
+                <table class="table table-bordered table-striped table-condensed">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Data</th>
+                            <th class="text-center">Solicitação</th>
+                            <th class="text-center">Contratante</th>
+                            <th class="text-center">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Solicitacoes != null)
+                        {
+                            foreach (var item in Model.Solicitacoes)
+                            {
+                        <tr>
+                            <td class="text-center">@item.SOLICITACAO_DT_CRIA</td>
+                            <td class="text-center">@item.Fluxo.Fluxo_NM</td>
+                            <td class="text-center">@item.WFD_Contratante.RAZAO_SOCIAL</td>
+
+                            <td class="text-center">
+                                <input type="hidden" class="clDocumentoVisualizacao" value="@item.ID" />
+                                <input type="hidden" class="clContratanteVisualizacao" value="@item.Contratante_ID" />
+                                <input type="hidden" class="clFornecedorVisualizacao" value="@item.Fornecedor.ID" />
+                                <button class="btn btn-primary btn-visualizar">Entrar</button>
+                            </td>
+                        </tr>
+                            }
+                        }
+                        else
+                        {
+                        <tr class="warning">
+                            <td colspan="10" class="text-warning text-center">Nenhum resultado foi encontrado.</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @Html.Partial("_Paginacao")
+        </div>
+    </div>
+    <div class="row hidden" id="dv_DocumentoSolicitacao">
+        <div class="col-lg-12" id="dv_ViewDocumento">
+            <!-- Local Que ficará a View s-->
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/Scripts/plugins/jqueryUiWidget/jquery.ui.widget.js"></script>
+    <script src="~/Scripts/jquery.fileupload.js"></script>
+    <script src="~/Scripts/Views/Shared/DadosFornecedor.js"></script>
+    <script src="~/Scripts/Views/Shared/FileUpload.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if ('@(ViewBag.MensagemSucesso)' != '') {
+                $('#FichaAlertaSucessoTop, #FichaAlertaSucessoBottom').fadeIn('slow');
+                $('#FichaAlertaSucessoTop, #FichaAlertaSucessoBottom').text('@Html.Raw(ViewBag.MensagemSucesso)');
+                setTimeout('$("#FichaAlertaSucessoTop, #FichaAlertaSucessoBottom").fadeOut("slow")', 10000);
+            }
+
+            if ('@(ViewBag.MensagemErro)' != '') {
+                $('#FichaAlertaErroTop').fadeIn('slow');
+                $('#FichaAlertaErroTop').text('@Html.Raw(ViewBag.MensagemErro)');
+                setTimeout('$("#FichaAlertaErroTop").fadeOut("slow")', 10000);
+            }
+
+            $("[data-mask]").inputmask();
+
+            $("#file").change(function () {
+                $('#labelArquivo').text($(this)[0].files[0].name);
+            });
+        });
+
+        function TrocarContratante() {
+            var url = '@Url.Action("FichaCadastral", "Documento", new { chaveurl = "" })';
+            url += '/' + $('#Contratantes').val();
+            location.href = url;
+        }
+
+        $("[data-mask]").inputmask();
+        $(".btn-visualizar").click(function () {
+            $(".btn-visualizar").attr('disabled', 'disabled');
+            $("#dv_ViewDocumento").empty();
+            var idDocumento = $(this).parent().find('.clDocumentoVisualizacao').val();
+            var idContratante = $(this).parent().find(".clContratanteVisualizacao").val();
+            var idFornecedor = $(this).parent().find(".clFornecedorVisualizacao").val();
+            $("#dv_DocumentoSolicitacao #idDocumento").val(idDocumento);
+            $.ajax({
+                url: '@Url.Action("PartialViewDocumento","Documento")',
+                data: {
+                    id: idDocumento,
+                    contratanteId: idContratante,
+                    fornecedorId: idFornecedor
+                },
+                cache: false,
+                success: function (html) {
+                    $("#dv_ViewDocumento").empty();
+                    $("#dv_ViewDocumento").append(html);
+                    aplicarPluginUpload(".upload", '#CNPJ_CPF');
+                    $(".btn-danger").click(function () {
+                        $("#dv_DocumentoSolicitacao").addClass("hidden");
+                    });
+                    $("[data-mask]").inputmask();
+                }
+            });
+            $("#dv_DocumentoSolicitacao").removeClass("hidden");
+            $(".btn-visualizar").removeAttr('disabled');
+            return false;
+        });
+        $(".btn-Enviar").click(function () {
+            $("#dv_DocumentoSolicitacao").addClass("hidden");
+        });
+
+    </script>
+}

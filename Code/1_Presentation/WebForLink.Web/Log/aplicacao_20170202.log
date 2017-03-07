@@ -1,0 +1,320 @@
+2017-02-02 15:07:47,252 [14] ERROR WebForLink.Web.MvcApplication - Erro na aplicação Erro inesperado 
+ Identificador: b63434504efd46c687544ec548e8a7ab
+System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em ASP._Page_Views_Fornecedores__FichaCadastral_Robo_ReceitaPF_cshtml.Execute() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Views\Fornecedores\_FichaCadastral_Robo_ReceitaPF.cshtml:linha 4
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   em System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   em System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   em System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   em System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   em System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   em System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model)
+   em ASP._Page_Views_Fornecedores__FichaCadastral_Robo_cshtml.Execute() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Views\Fornecedores\_FichaCadastral_Robo.cshtml:linha 31
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   em System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   em System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   em System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   em System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   em System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   em System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model)
+   em ASP._Page_Views_meusdocumentos_MinhaFichaCadastral_cshtml.Execute() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Views\meusdocumentos\MinhaFichaCadastral.cshtml:linha 61
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   em System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   em System.Web.WebPages.StartPage.RunPage()
+   em System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   em System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   em System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   em System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-02-02 15:07:47,321 [14] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: PaginaInicial, UsuarioId: 351
+2017-02-02 15:07:47,383 [14] ERROR WebForLink.Web.Controllers.ConviteController - WebForLink.Domain.Infrastructure.CriptografiaException: Erro ao Descriptografar ---> System.FormatException: Comprimento inválido para uma matriz ou uma cadeia de caracteres de Base 64.
+   em System.Convert.FromBase64_Decode(Char* startInputPtr, Int32 inputLength, Byte* startDestPtr, Int32 destLength)
+   em System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   em System.Convert.FromBase64String(String s)
+   em WebForLink.Domain.Infrastructure.Criptografia.Descriptografar() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 79
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em WebForLink.Domain.Infrastructure.Criptografia.Descriptografar() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 89
+   em WebForLink.Domain.Infrastructure.Criptografia.ReadUrl(String pUrl, String key) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 150
+   em WebForLink.Domain.Infrastructure.Criptografia..ctor(EnumCripto tipo, String palavra, String chave) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 53
+   em WebForLink.Application.Services.SolicitacaoAppService.DescriptografarLinkConvite(String chaveUrl) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Service\Services\SolicitacaoDocumentoService.cs:linha 38
+   em WebForLink.Web.Controllers.ConviteController.PaginaInicial(String chave, SolicitacaoConviteVM model) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Controllers\ConviteController.cs:linha 60
+2017-02-02 15:07:47,409 [8] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Index, UsuarioId: 351
+2017-02-02 15:07:50,783 [9] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Home, Action: Acesso, UsuarioId: 351
+2017-02-02 15:07:50,851 [8] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.
+2017-02-02 15:07:56,985 [9] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Home, Action: Acesso, UsuarioId: 351
+2017-02-02 15:07:57,301 [14] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: minhafichacadastral, UsuarioId: 351
+2017-02-02 15:08:51,069 [14] ERROR WebForLink.Web.MvcApplication - Erro na aplicação Erro inesperado 
+ Identificador: f60c8d42583b419686fbe26d2a365c4c
+System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em ASP._Page_Views_Fornecedores__FichaCadastral_Robo_ReceitaPF_cshtml.Execute() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Views\Fornecedores\_FichaCadastral_Robo_ReceitaPF.cshtml:linha 4
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   em System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   em System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   em System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   em System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   em System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   em System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model)
+   em ASP._Page_Views_Fornecedores__FichaCadastral_Robo_cshtml.Execute() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Views\Fornecedores\_FichaCadastral_Robo.cshtml:linha 31
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   em System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   em System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   em System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   em System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   em System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   em System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model)
+   em ASP._Page_Views_meusdocumentos_MinhaFichaCadastral_cshtml.Execute() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Views\meusdocumentos\MinhaFichaCadastral.cshtml:linha 61
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   em System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   em System.Web.WebPages.StartPage.RunPage()
+   em System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   em System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   em System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   em System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-02-02 15:08:51,081 [14] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: PaginaInicial, UsuarioId: 351
+2017-02-02 15:08:51,155 [14] ERROR WebForLink.Web.Controllers.ConviteController - WebForLink.Domain.Infrastructure.CriptografiaException: Erro ao Descriptografar ---> System.FormatException: Comprimento inválido para uma matriz ou uma cadeia de caracteres de Base 64.
+   em System.Convert.FromBase64_Decode(Char* startInputPtr, Int32 inputLength, Byte* startDestPtr, Int32 destLength)
+   em System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   em System.Convert.FromBase64String(String s)
+   em WebForLink.Domain.Infrastructure.Criptografia.Descriptografar() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 79
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em WebForLink.Domain.Infrastructure.Criptografia.Descriptografar() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 89
+   em WebForLink.Domain.Infrastructure.Criptografia.ReadUrl(String pUrl, String key) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 150
+   em WebForLink.Domain.Infrastructure.Criptografia..ctor(EnumCripto tipo, String palavra, String chave) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 53
+   em WebForLink.Application.Services.SolicitacaoAppService.DescriptografarLinkConvite(String chaveUrl) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Service\Services\SolicitacaoDocumentoService.cs:linha 38
+   em WebForLink.Web.Controllers.ConviteController.PaginaInicial(String chave, SolicitacaoConviteVM model) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Controllers\ConviteController.cs:linha 60
+2017-02-02 15:08:51,346 [8] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.
+2017-02-02 15:08:51,354 [8] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.
+2017-02-02 15:08:53,731 [1] ERROR WebForLink.Web.MvcApplication - Aplicação Iniciada
+2017-02-02 15:08:54,450 [1] ERROR WebForLink.Web.Mappers.MappingProfile - Mapper not initialized. Call Initialize with appropriate configuration. If you are trying to use mapper instances through a container or otherwise, make sure you do not have any calls to the static Mapper.Map methods, and if you're using ProjectTo or UseAsDataSource extension methods, make sure you pass in the appropriate IConfigurationProvider instance.
+2017-02-02 15:08:57,051 [14] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Index, UsuarioId: 351
+2017-02-02 15:09:03,084 [7] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Home, Action: Acesso, UsuarioId: 351
+2017-02-02 15:09:10,919 [8] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Home, Action: Acesso, UsuarioId: 351
+2017-02-02 15:09:15,201 [7] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: minhafichacadastral, UsuarioId: 351
+2017-02-02 15:11:26,522 [20] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: DadosBancarios, Action: incluir, UsuarioId: 351
+2017-02-02 15:11:41,320 [19] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: DadosEnderecos, Action: incluir, UsuarioId: 351
+2017-02-02 15:14:47,125 [20] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: minhafichacadastral, UsuarioId: 351
+2017-02-02 15:17:54,615 [20] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: minhafichacadastral, UsuarioId: 351
+2017-02-02 15:18:26,567 [29] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Documento, Action: BuscaServicos, UsuarioId: 351
+2017-02-02 15:19:08,511 [36] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: minhafichacadastral, UsuarioId: 351
+2017-02-02 15:20:08,896 [35] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: minhafichacadastral, UsuarioId: 351
+2017-02-02 15:20:14,769 [34] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Documento, Action: BuscaMateriais, UsuarioId: 351
+2017-02-02 15:20:16,661 [34] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Documento, Action: BuscaMateriais, UsuarioId: 351
+2017-02-02 15:20:18,027 [26] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Documento, Action: BuscaMateriais, UsuarioId: 351
+2017-02-02 15:20:21,703 [23] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Documento, Action: BuscaServicos, UsuarioId: 351
+2017-02-02 15:20:23,162 [26] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Documento, Action: BuscaServicos, UsuarioId: 351
+2017-02-02 15:20:24,278 [35] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Documento, Action: BuscaServicos, UsuarioId: 351
+2017-02-02 15:20:50,296 [33] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: minhafichacadastral, UsuarioId: 351
+2017-02-02 15:23:53,416 [30] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Documento, Action: BuscaServicos, UsuarioId: 351
+2017-02-02 15:23:54,964 [29] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Documento, Action: BuscaServicos, UsuarioId: 351
+2017-02-02 15:23:56,421 [33] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Documento, Action: BuscaServicos, UsuarioId: 351
+2017-02-02 15:24:36,557 [27] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: minhafichacadastral, UsuarioId: 351
+2017-02-02 15:34:44,412 [21] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.
+2017-02-02 15:34:44,416 [21] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.
+2017-02-02 15:34:59,479 [49] ERROR WebForLink.Web.MvcApplication - Aplicação Iniciada
+2017-02-02 15:35:00,914 [49] ERROR WebForLink.Web.Mappers.MappingProfile - Mapper not initialized. Call Initialize with appropriate configuration. If you are trying to use mapper instances through a container or otherwise, make sure you do not have any calls to the static Mapper.Map methods, and if you're using ProjectTo or UseAsDataSource extension methods, make sure you pass in the appropriate IConfigurationProvider instance.
+2017-02-02 15:35:50,630 [1] ERROR WebForLink.Web.MvcApplication - Aplicação Iniciada
+2017-02-02 15:35:51,694 [1] ERROR WebForLink.Web.Mappers.MappingProfile - Mapper not initialized. Call Initialize with appropriate configuration. If you are trying to use mapper instances through a container or otherwise, make sure you do not have any calls to the static Mapper.Map methods, and if you're using ProjectTo or UseAsDataSource extension methods, make sure you pass in the appropriate IConfigurationProvider instance.
+2017-02-02 15:35:54,991 [8] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Index, UsuarioId: 351
+2017-02-02 15:39:21,116 [5] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: minhafichacadastral, UsuarioId: 351
+2017-02-02 15:40:38,794 [12] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: minhafichacadastral, UsuarioId: 351
+2017-02-02 15:42:25,320 [15] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Documento, Action: BuscaServicos, UsuarioId: 351
+2017-02-02 15:42:26,754 [15] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Documento, Action: BuscaServicos, UsuarioId: 351
+2017-02-02 15:42:28,462 [14] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Documento, Action: BuscaServicos, UsuarioId: 351
+2017-02-02 15:42:34,881 [14] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: minhafichacadastral, UsuarioId: 351
+2017-02-02 15:43:50,067 [15] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Documento, Action: BuscaServicos, UsuarioId: 351
+2017-02-02 15:43:51,197 [6] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Documento, Action: BuscaServicos, UsuarioId: 351
+2017-02-02 15:43:52,272 [15] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Documento, Action: BuscaServicos, UsuarioId: 351
+2017-02-02 15:44:25,600 [10] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: minhafichacadastral, UsuarioId: 351
+2017-02-02 15:49:52,129 [24] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.
+2017-02-02 15:49:52,141 [24] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.
+2017-02-02 15:49:59,230 [34] ERROR WebForLink.Web.MvcApplication - Aplicação Iniciada
+2017-02-02 15:50:01,616 [34] ERROR WebForLink.Web.Mappers.MappingProfile - Mapper not initialized. Call Initialize with appropriate configuration. If you are trying to use mapper instances through a container or otherwise, make sure you do not have any calls to the static Mapper.Map methods, and if you're using ProjectTo or UseAsDataSource extension methods, make sure you pass in the appropriate IConfigurationProvider instance.
+2017-02-02 15:50:04,117 [25] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Index, UsuarioId: 351
+2017-02-02 15:50:09,747 [27] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: minhafichacadastral, UsuarioId: 351
+2017-02-02 15:52:01,041 [1] ERROR WebForLink.Web.MvcApplication - Aplicação Iniciada
+2017-02-02 15:52:02,422 [1] ERROR WebForLink.Web.Mappers.MappingProfile - Mapper not initialized. Call Initialize with appropriate configuration. If you are trying to use mapper instances through a container or otherwise, make sure you do not have any calls to the static Mapper.Map methods, and if you're using ProjectTo or UseAsDataSource extension methods, make sure you pass in the appropriate IConfigurationProvider instance.
+2017-02-02 15:52:05,281 [9] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Index, UsuarioId: 351
+2017-02-02 15:52:05,283 [11] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: minhafichacadastral, UsuarioId: 351
+2017-02-02 15:52:33,308 [11] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Documento, Action: BuscaMateriais, UsuarioId: 351
+2017-02-02 15:52:34,402 [7] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Documento, Action: BuscaMateriais, UsuarioId: 351
+2017-02-02 15:52:35,552 [11] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Documento, Action: BuscaMateriais, UsuarioId: 351
+2017-02-02 15:52:39,326 [11] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: minhafichacadastral, UsuarioId: 351
+2017-02-02 15:58:38,048 [11] ERROR WebForLink.Web.MvcApplication - Erro na aplicação Erro inesperado 
+ Identificador: ef409aa47c98435c96f2c8bf3787610c
+System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em ASP._Page_Views_Shared_EditorTemplates_Collection_cshtml.Execute() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Views\Shared\EditorTemplates\Collection.cshtml:linha 4
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   em System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   em System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   em System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   em System.Web.Mvc.Html.TemplateHelpers.ExecuteTemplate(HtmlHelper html, ViewDataDictionary viewData, String templateName, DataBoundControlMode mode, GetViewNamesDelegate getViewNames, GetDefaultActionsDelegate getDefaultActions)
+   em System.Web.Mvc.Html.TemplateHelpers.TemplateHelper(HtmlHelper html, ModelMetadata metadata, String htmlFieldName, String templateName, DataBoundControlMode mode, Object additionalViewData, ExecuteTemplateDelegate executeTemplate)
+   em System.Web.Mvc.Html.TemplateHelpers.TemplateHelper(HtmlHelper html, ModelMetadata metadata, String htmlFieldName, String templateName, DataBoundControlMode mode, Object additionalViewData)
+   em System.Web.Mvc.Html.TemplateHelpers.TemplateFor[TContainer,TValue](HtmlHelper`1 html, Expression`1 expression, String templateName, String htmlFieldName, DataBoundControlMode mode, Object additionalViewData, TemplateHelperDelegate templateHelper)
+   em System.Web.Mvc.Html.TemplateHelpers.TemplateFor[TContainer,TValue](HtmlHelper`1 html, Expression`1 expression, String templateName, String htmlFieldName, DataBoundControlMode mode, Object additionalViewData)
+   em System.Web.Mvc.Html.EditorExtensions.EditorFor[TModel,TValue](HtmlHelper`1 html, Expression`1 expression)
+   em ASP._Page_Views_Fornecedores__FichaCadastral_DadosEnderecos_Editavel_cshtml.Execute() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Views\Fornecedores\_FichaCadastral_DadosEnderecos_Editavel.cshtml:linha 83
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   em System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   em System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   em System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   em System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   em System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   em System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model)
+   em ASP._Page_Views_meusdocumentos_MinhaFichaCadastral_cshtml.Execute() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Views\meusdocumentos\MinhaFichaCadastral.cshtml:linha 64
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   em System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   em System.Web.WebPages.StartPage.RunPage()
+   em System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   em System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   em System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   em System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   em System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   em System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-02-02 15:58:38,189 [11] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: PaginaInicial, UsuarioId: 351
+2017-02-02 15:58:38,308 [11] ERROR WebForLink.Web.Controllers.ConviteController - WebForLink.Domain.Infrastructure.CriptografiaException: Erro ao Descriptografar ---> System.FormatException: Comprimento inválido para uma matriz ou uma cadeia de caracteres de Base 64.
+   em System.Convert.FromBase64_Decode(Char* startInputPtr, Int32 inputLength, Byte* startDestPtr, Int32 destLength)
+   em System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   em System.Convert.FromBase64String(String s)
+   em WebForLink.Domain.Infrastructure.Criptografia.Descriptografar() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 79
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em WebForLink.Domain.Infrastructure.Criptografia.Descriptografar() na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 89
+   em WebForLink.Domain.Infrastructure.Criptografia.ReadUrl(String pUrl, String key) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 150
+   em WebForLink.Domain.Infrastructure.Criptografia..ctor(EnumCripto tipo, String palavra, String chave) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Domain\Services\ChMasterData\Criptografia.cs:linha 53
+   em WebForLink.Application.Services.SolicitacaoAppService.DescriptografarLinkConvite(String chaveUrl) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Service\Services\SolicitacaoDocumentoService.cs:linha 38
+   em WebForLink.Web.Controllers.ConviteController.PaginaInicial(String chave, SolicitacaoConviteVM model) na C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Web\Controllers\ConviteController.cs:linha 60
+2017-02-02 15:58:38,379 [5] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Index, UsuarioId: 351
+2017-02-02 16:13:45,039 [37] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: GestaoDocumento, Action: Index, UsuarioId: 351
+2017-02-02 16:13:49,572 [33] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: GestaoDocumento, Action: Index, UsuarioId: 351
+2017-02-02 16:13:49,899 [33] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: GestaoDocumento, Action: listar, UsuarioId: 351
+2017-02-02 16:22:32,313 [47] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: meusdocumentoslst, UsuarioId: 351
+2017-02-02 16:37:33,058 [64] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: enviarlst, UsuarioId: 351
+2017-02-02 16:37:48,064 [66] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: enviadoslst, UsuarioId: 351
+2017-02-02 16:37:53,287 [66] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: enviadoslst, UsuarioId: 351
+2017-02-02 16:37:58,227 [66] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: enviadosfrm, UsuarioId: 351
+2017-02-02 16:38:20,689 [67] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Destinatario, Action: destinatariolst, UsuarioId: 351
+2017-02-02 16:38:20,689 [67] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-02 16:38:20,760 [67] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-02 16:38:20,761 [67] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-02 16:38:25,648 [67] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-02 16:45:26,595 [80] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Destinatario, Action: editar, UsuarioId: 351
+2017-02-02 16:45:26,596 [80] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuting(ActionExecutingContext filterContext)
+2017-02-02 16:45:26,698 [80] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnActionExecuted(ActionExecutedContext filterContext)
+2017-02-02 16:45:26,699 [80] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuting(ResultExecutingContext filterContext)
+2017-02-02 16:45:30,515 [80] ERROR WebForLink.Web.Infrastructure.WebForLinkFilter - filterContext
+System.Exception: OnResultExecuted(ResultExecutedContext filterContext)
+2017-02-02 16:45:43,555 [78] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: MeusDocumentos, Action: minhafichacadastral, UsuarioId: 351
+2017-02-02 16:48:25,235 [77] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.
+2017-02-02 16:48:25,239 [77] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.

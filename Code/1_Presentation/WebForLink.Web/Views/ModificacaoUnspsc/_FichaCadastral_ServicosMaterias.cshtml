@@ -1,0 +1,115 @@
+﻿@model IEnumerable<WebForLink.Web.ViewModels.FornecedorUnspscVM>
+@using WebForLink.Domain.Enums
+
+@Styles.Render("~/style/date")
+@Scripts.Render("~/bundles/date")
+
+@{
+    var vServicos = Model.Where(u => u.UsnpscCodigo >= 70000000).ToArray();
+    var vMateriais = Model.Where(u => u.UsnpscCodigo < 70000000).ToArray();
+    var servicos = "";
+    var materiais = "";
+    var dataUnspsc = "";
+
+    if (vServicos.Length > 0)
+    {
+        servicos = String.Join("|", vServicos.Select(x => x.UsnpscId.ToString()));
+    }
+    if (vMateriais.Length > 0)
+    {
+        materiais = String.Join("|", vMateriais.Select(x => x.UsnpscId.ToString()));
+    }
+
+    if (ViewBag.DataAtuUnspsc != null)
+    {
+        var dtUnspsc = (DateTime)ViewBag.DataAtuUnspsc;
+        dataUnspsc = dtUnspsc.ToString("dd/MM/yyyy");
+    }
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var HabilitaEdicaoUnspsc = $("#HabilitaEdicaoUnspsc").val() == "True";
+        if (HabilitaEdicaoUnspsc) {
+            $('#divEditarServicoMaterial').toggleClass("hidden");
+        }
+    });
+</script>
+
+<div class="box box-primary">
+    <div class="box-change">
+        <div id="alertaSucessoUnspsc" class="alert alert-success" role="alert" onclick="ocultarMensagem(this)"></div>
+        <div id="alertaErroUnspsc" class="alert alert-danger" role="alert" onclick="ocultarMensagem(this)"></div>
+    </div>
+    <div class="box-header"><h3 class="box-title">Servicos / Materiais / Equipamentos oferecidos ao Mercado</h3></div>
+    <div class="box-body">
+        <div class="aguarde-interno" id="divAguardeUnspsc">
+            <div>
+                <i class="fa fa-refresh fa-spin"></i> Aguarde...
+            </div>
+        </div>
+        @if (!String.IsNullOrEmpty(dataUnspsc)) { 
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Atualizado pelo fornecedor em:</label>
+                @dataUnspsc
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        }        
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Serviços</h3>
+                </div>
+                <div class="box-body">
+                    <input type="hidden" name="ServicosSelecionados" id="ServicosSelecionados" value="@servicos">
+                    <table id="tblServicosSelecionados" class="table table-condensed">
+                        <tbody>
+                            @foreach (var item in vServicos)
+                            {
+                                <tr id="@Html.Raw("servicoTR" + item.UsnpscId)">
+                                    <td class="no-border" width="20"><i class="fa fa-check-circle"></i></td>
+                                    <td class="no-border">@item.UsnpscDescricao</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Materiais</h3>
+                </div>
+                <div class="box-body">
+                    <input type="hidden" name="MateriaisSelecionados" id="MateriaisSelecionados" value="@materiais">
+                    <table id="tblMateriaisSelecionados" class="table table-condensed">
+                        <tbody>
+                            @foreach (var item in vMateriais)
+                            {
+                                <tr id="@Html.Raw("MaterialTR" + item.UsnpscId)">
+                                    <td class="no-border" width="20"><i class="fa fa-check-circle"></i></td>
+                                    <td class="no-border">@item.UsnpscDescricao</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div id="divEditarServicoMaterial" class="text-right text-nowrap hidden">
+            <button type="button" class="btn btn-primary" onclick="consultarSolicitacoesEmAberto('Unspsc', @Convert.ToInt32(EnumTiposFluxo.ModificacaoServicoMaterial));">Editar</button>
+        </div>
+    </div><!-- /.box-body -->
+</div><!-- /.box -->
+
+@section Scripts {
+<script src="~/Scripts/Views/Fornecedores/Modal/modalServicos.js"></script>
+<script src="~/Scripts/Views/Fornecedores/Modal/modalMateriais.js"></script>
+}
+@Html.Partial("../Fornecedores/_ModalServicos")
+@Html.Partial("../Fornecedores/_ModalMateriais")

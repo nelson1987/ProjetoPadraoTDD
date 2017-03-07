@@ -1,0 +1,103 @@
+﻿@model WebForLink.Web.ViewModels.Novo.PesquisaCategoriaVM
+
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="/@ViewBag.NomeController">
+                <i class="fa fa-envelope"></i>@ViewBag.NomeController
+            </a>
+        </li>
+        <li class="active">@ViewBag.NomeAcao</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="alert alert-success" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick="$(this).fadeOut('fast');"></div>
+        <div class="alert alert-error" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick="$(this).fadeOut('fast');"></div>
+    </div>
+    <div id="boxGrid" class="box box-primary">
+        <div class="box-body">
+            <div class="form-group">
+                <form action="/Categoria/CategoriaLst" method="post">
+                    <input data-val="true" data-val-number="The field Pagina must be a number." id="Filtro_Pagina" name="Filtro.Pagina" type="hidden" value="">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <label for="Filtro_Descricao">Descricao</label>
+                            <input class="form-control input-sm" id="Filtro_Descricao" name="Filtro.Descricao" type="text" value="">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="Filtro_Codigo">Codigo</label>
+                            <input class="form-control input-sm" id="Filtro_Codigo" name="Filtro.Codigo" type="text" value="">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <button type="button" class="btn btn-primary pull-left" onclick="location.href='/Categoria/CategoriaFrm'"><i class="fa fa-plus"></i>&nbsp; Nova Categoria</button>
+                            @*<label>&nbsp;</label>*@
+                            <button type="submit" class="btn btn-primary" onclick="$('#Filtro_Pagina').val('1');"><i class="fa fa-search"></i>&nbsp;Consultar</button>
+                            <button type="button" class="btn btn-default" onclick="$('#Filtro_Descricao').val(''); $('#Filtro_Codigo').val('');"><i class="glyphicon glyphicon-erase"></i>&nbsp;Limpar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <table class="table table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th class="text-center" colspan="2">
+                            @Html.DisplayNameFor(x => x.Grid.FirstOrDefault().Descricao)
+                        </th>
+                        <th class="text-center col-md-1" colspan="1">
+                            @Html.DisplayNameFor(x => x.Grid.FirstOrDefault().Codigo)
+                        </th>
+                        <th class="text-center col-md-1" colspan="1">
+                            @Html.DisplayNameFor(x => x.Grid.FirstOrDefault().Ativo)
+                        </th>
+                        <th class="text-center col-md-1" colspan="5">Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Grid)
+                    {
+                        <tr id="trCat1">
+                            <td id="tdCat1" colspan="2">
+                                @item.Descricao
+                            </td>
+                            <td class="text-center">
+                                @item.Codigo
+                            </td>
+                            <td class="text-center">
+                                @item.Ativo
+                            </td>
+                            <td class="text-right text-nowrap">
+                                <button class="btn btn-primary btn-xs" onclick="location.href='@item.UrlEditar'; "><i class="fa fa-plus"></i> Nova Subcategoria</button>
+                                <button class="btn btn-primary btn-xs" onclick="location.href='@item.UrlNovaSubCategoria'; ">Editar</button>
+                                <button class="btn btn-danger btn-xs" onclick="location.href='@item.UrlEditar';">Excluir</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br>
+            <ul class="pager">
+                <li class="previous">
+                    <a href="#" onclick="Paginacao(2);">Próxima&nbsp;&nbsp;<i class="fa fa-angle-right fa-lg"></i></a>
+                </li>
+                <li class="previous">
+                    <a href="#" onclick="Paginacao(2);">Última&nbsp;&nbsp;<i class="fa fa-angle-double-right fa-lg"></i></a>
+                </li>
+                <li class="previous text">
+                    <span>Página 1 de 2</span>
+                </li>
+                <li class="next text">
+                    <span>Total de Registros: 15</span>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div><!-- /.box-body -->
+    </div>
+</section>

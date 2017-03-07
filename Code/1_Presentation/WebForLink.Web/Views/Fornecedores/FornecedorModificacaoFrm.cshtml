@@ -1,0 +1,197 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+
+<style>
+    .fileUpload {
+        position: relative;
+        overflow: hidden;
+        height: 30px;
+        width: 150px;
+    }
+
+        .fileUpload input.upload {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+
+    #uploadFile {
+        position: relative;
+        border: 0;
+        background-color: transparent;
+        text-align: center;
+    }
+</style>
+
+<section class="content-header">
+    <h1>
+        Cadastro de Fornecedores
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-envelope"></i> Fornecedores</li>
+        <li class="active">Cadastro de Fornecedores</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-body">
+            <div class="text-center text-nowrap">
+                <h4>Modificar Fornecedor</h4>
+                <button type="button" class="btn btn-default" onclick="location.href = '@Url.Action("FornecedoresLst")'; ">Voltar</button>
+                @if (ViewBag.Ampliar == true)
+                {
+                    <button id="btnExpandir" class="btn btn-primary" onclick="location.href = '@Url.Action("FornecedoresExpandirFrm", "Expansao", new { chaveurl = ViewBag.ChaveUrl })'; ">Ampliar</button>
+                }
+                @if (ViewBag.StatusFornecedor == 1)
+                {
+                    <button id="btnBloquear" class="btn btn-primary" onclick="location.href = '@Url.Action("FornecedoresBloqueioFrm", "Bloqueio", new { chaveurl = ViewBag.ChaveUrl })'; ">Bloquear</button>
+                }
+                @if (ViewBag.StatusFornecedor == 2)
+                {
+                    <button id="btnDesbloquear" class="btn btn-primary" onclick="location.href = '@Url.Action("FornecedoresDesbloqueioFrm", "Desbloqueio", new { chaveurl = ViewBag.ChaveUrl })'; ">Desbloquear</button>
+                }
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    @Html.HiddenFor(x => x.ContratanteID)
+    @Html.Hidden("FornecedorID", Model.ID)
+    @Html.HiddenFor(x => x.ContratanteFornecedorID)
+    @Html.HiddenFor(x => x.HabilitaEdicao)
+    @Html.Hidden("CategoriaContratanteID", Model.CategoriaId)
+    @Html.Hidden("TpPapel", 10)
+
+    @if (ViewBag.StatusFornecedor == 2)
+    {
+        @Html.Partial("../Fornecedores/_FichaCadastral_Bloqueado", Model)
+    }
+
+    @Html.Partial("../Fornecedores/_FichaCadastral_FornecedorRobo", Model)
+
+    @Html.Partial("../Fornecedores/_FichaCadastral_DadosGerais", Model)
+
+    @using (Html.BeginForm("Salvar", "DadosEndereco", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.ID)
+        @Html.HiddenFor(x => x.ContratanteID)
+        @Html.HiddenFor(x => x.ContratanteFornecedorID)
+        @Html.HiddenFor(x => x.PJPFID)
+        @Html.HiddenFor(x => x.SolicitacaoID)
+        @Html.HiddenFor(x => x.ActionOrigem)
+        @Html.HiddenFor(x => x.ControllerOrigem)
+
+        <div id="dadosEnderecos">
+            @Html.Partial("../Fornecedores/_FichaCadastral_DadosEnderecos", Model)
+        </div>
+    }
+
+    @using (Html.BeginForm("Salvar", "DadosBancario", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.ID)
+        @Html.HiddenFor(x => x.ContratanteID)
+        @Html.HiddenFor(x => x.ContratanteFornecedorID)
+        @Html.HiddenFor(x => x.PJPFID)
+        @Html.HiddenFor(x => x.SolicitacaoID)
+        @Html.HiddenFor(x => x.ActionOrigem)
+        @Html.HiddenFor(x => x.ControllerOrigem)
+
+        <div id="dadosBancarios">
+            @Html.Partial("../Fornecedores/_FichaCadastral_DadosBancario", Model.DadosBancarios)
+        </div>
+    }
+
+    @using (Ajax.BeginForm("Salvar", "DadosContatos", new AjaxOptions { OnSuccess = "renderizarDadosAjaxBeginForm(data, status, 'DadosContatos')" }))
+    {
+        @Html.HiddenFor(x => x.ID)
+        @Html.HiddenFor(x => x.ContratanteID)
+        @Html.HiddenFor(x => x.ContratanteFornecedorID)
+
+        <div id="dadosContatos">
+            @Html.Partial("../Fornecedores/_FichaCadastral_Contatos", Model.DadosContatos)
+        </div>
+
+    }
+
+    @if (Model.TipoFornecedor != 2) { 
+        using (Html.BeginForm("Salvar", "ModificacaoDocumento", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.ID)
+            @Html.HiddenFor(x => x.ContratanteID)
+            @Html.HiddenFor(x => x.ContratanteFornecedorID)
+            @Html.HiddenFor(x => x.PJPFID)
+            @Html.HiddenFor(x => x.SolicitacaoID)
+            @Html.HiddenFor(x => x.ActionOrigem)
+            @Html.HiddenFor(x => x.ControllerOrigem)
+
+            <div id="documentos">
+                @Html.Partial("../Fornecedores/_FichaCadastral_Anexos", Model.SolicitacaoFornecedor)
+            </div>
+        }
+    }
+
+    @using (Ajax.BeginForm("SalvarUnspsc", "DadosUnspsc", new AjaxOptions { OnSuccess = "renderizarDadosAjaxBeginForm(data, status, 'Unspsc')" }))
+    {
+        @Html.HiddenFor(x => x.ID)
+        @Html.HiddenFor(x => x.ContratanteID)
+        @Html.HiddenFor(x => x.ContratanteFornecedorID)
+        @Html.HiddenFor(x => x.PJPFID)
+
+        <div id="Unspsc">
+            @Html.Partial("../Fornecedores/_FichaCadastral_ServicosMaterias", Model.FornecedoresUnspsc)
+        </div>
+
+    }
+
+    @Html.Partial("../Fornecedores/_FichaCadastral_Observacao", Model)
+    @using (Ajax.BeginForm("SalvarQuestionarioDinamico", "DadosQuestionarioDinamico", new AjaxOptions { OnSuccess = "renderizarDadosAjaxBeginForm(data, status, 'QuestionarioDinamico')" }))
+    {
+        @Html.HiddenFor(x => x.ID)
+        @Html.HiddenFor(x => x.ContratanteID)
+        @Html.HiddenFor(x => x.ContratanteFornecedorID)
+        @Html.HiddenFor(x => x.Solicitacao.ID)
+        @Html.HiddenFor(x => x.CategoriaId)
+
+        <div id="dadosQuestionarioDinamico">
+            @Html.Partial("../Fornecedores/_FichaCadastral_QuestionarioDinamico", Model.Questionarios)
+        </div>
+    }
+    <div class="box box-primary">
+        <div class="box-body">
+            <div class="text-center text-nowrap">
+                <button type="button" class="btn btn-default" onclick="location.href = '@Url.Action("FornecedoresLst")'; ">Voltar</button>
+                @if (ViewBag.Ampliar == true)
+                {
+                    <button id="btnExpandir" class="btn btn-primary" onclick="location.href = '@Url.Action("FornecedoresExpandirFrm", "Expansao", new { chaveurl = ViewBag.ChaveUrl })'; ">Ampliar</button>
+                }
+                @if (ViewBag.Bloqueio == true)
+                {
+                    <button id="btnBloquear" class="btn btn-primary" onclick="location.href = '@Url.Action("FornecedoresBloqueioFrm", "Bloqueio", new { chaveurl = ViewBag.ChaveUrl })'; ">Bloquear</button>
+                }
+                @if (ViewBag.Desbloqueio == true)
+                {
+                    <button id="btnDesbloquear" class="btn btn-primary" onclick="location.href = '@Url.Action("FornecedoresDesbloqueioFrm", "Desbloqueio", new { chaveurl = ViewBag.ChaveUrl })'; ">Desbloquear</button>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts{
+<script src="~/Scripts/Views/Shared/DadosFornecedor.js"></script>
+<script src="~/Scripts/Views/Shared/FileUpload.js"></script>
+<script src="~/Scripts/plugins/jqueryUiWidget/jquery.ui.widget.js"></script>
+<script src="~/Scripts/jquery.fileupload.js"></script>
+}

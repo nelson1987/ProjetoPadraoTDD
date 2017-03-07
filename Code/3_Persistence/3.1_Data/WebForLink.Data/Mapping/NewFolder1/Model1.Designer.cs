@@ -1,0 +1,2 @@
+﻿// Seeing this comment implies that the code generation for file 'C:\RepositorioTFS\WEBFORLINKv2\Code\WebForLink\WebForLink.Data\Mapping\NewFolder1\Model1.edmx'
+// failed. See the ErrorList for details.

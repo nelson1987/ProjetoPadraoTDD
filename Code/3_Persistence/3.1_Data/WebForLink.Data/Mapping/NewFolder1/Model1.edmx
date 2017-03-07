@@ -1,0 +1,909 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ChMasterDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Arquivo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDocumentoAnexado" Type="int" Nullable="false" />
+          <Property Name="NomeOriginal" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="JaBaixado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Banco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFichaCadastral" Type="int" Nullable="false" />
+          <Property Name="Numero" Type="int" Nullable="false" />
+          <Property Name="Agencia" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="AgenciaDv" Type="varchar" MaxLength="1" />
+          <Property Name="Conta" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="ContaDv" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Carrinho">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CodigoClienteUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DataConvite" Type="datetime" Nullable="false" />
+          <Property Name="StatusConvite" Type="int" Nullable="false" />
+          <Property Name="CnpjConvidado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RadicalConvidado" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contato">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFichaCadastral" Type="int" Nullable="false" />
+          <Property Name="NOME" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="241" Nullable="false" />
+          <Property Name="TELEFONE" Type="varchar" MaxLength="14" />
+          <Property Name="CELULAR" Type="varchar" MaxLength="14" />
+        </EntityType>
+        <EntityType Name="DocumentoAnexado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFichaCadastral" Type="int" Nullable="false" />
+          <Property Name="IdDocumentoSolicitado" Type="int" />
+        </EntityType>
+        <EntityType Name="DocumentosSolicitacao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdSolicitacao" Type="int" Nullable="false" />
+          <Property Name="DescricaoDocumento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdTipoDocumentoCH" Type="int" />
+        </EntityType>
+        <EntityType Name="Endereco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFichaCadastral" Type="int" Nullable="false" />
+          <Property Name="Tipo" Type="int" Nullable="false" />
+          <Property Name="Logradouro" Type="varchar" MaxLength="255" />
+          <Property Name="Numero" Type="varchar" MaxLength="50" />
+          <Property Name="Complemento" Type="varchar" MaxLength="255" />
+          <Property Name="CEP" Type="varchar" MaxLength="9" />
+          <Property Name="Bairro" Type="varchar" MaxLength="100" />
+          <Property Name="Cidade" Type="varchar" MaxLength="100" />
+          <Property Name="UF" Type="varchar" MaxLength="2" />
+          <Property Name="Pais" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="FichaCadastral">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="int" />
+          <Property Name="IdSolicitacao" Type="int" />
+        </EntityType>
+        <EntityType Name="ListaDocumento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdListaSolicitante" Type="int" Nullable="false" />
+          <Property Name="IdTipoDocumentoCH" Type="int" Nullable="false" />
+          <Property Name="IdDescricaoDocumentoCH" Type="int" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListasSolicitante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdSolicitante" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Responsavel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdSolicitado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Solicitacao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdSolicitante" Type="int" Nullable="false" />
+          <Property Name="IdSolicitado" Type="int" Nullable="false" />
+          <Property Name="IdFichaCadastral" Type="int" />
+        </EntityType>
+        <EntityType Name="Solicitado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cnpj" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="RazaoSocial" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Solicitante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Codigocliente" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Arquivo_DocumentoAnexado">
+          <End Role="DocumentoAnexado" Type="Self.DocumentoAnexado" Multiplicity="1" />
+          <End Role="Arquivo" Type="Self.Arquivo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentoAnexado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Arquivo">
+              <PropertyRef Name="IdDocumentoAnexado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Banco_FichaCadastral">
+          <End Role="FichaCadastral" Type="Self.FichaCadastral" Multiplicity="1" />
+          <End Role="Banco" Type="Self.Banco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FichaCadastral">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Banco">
+              <PropertyRef Name="IdFichaCadastral" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contato_FichaCadastral">
+          <End Role="FichaCadastral" Type="Self.FichaCadastral" Multiplicity="1" />
+          <End Role="Contato" Type="Self.Contato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FichaCadastral">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contato">
+              <PropertyRef Name="IdFichaCadastral" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentoAnexado_FichaCadastral">
+          <End Role="FichaCadastral" Type="Self.FichaCadastral" Multiplicity="1" />
+          <End Role="DocumentoAnexado" Type="Self.DocumentoAnexado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FichaCadastral">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocumentoAnexado">
+              <PropertyRef Name="IdFichaCadastral" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentosSolicitacao_Solicitacao">
+          <End Role="Solicitacao" Type="Self.Solicitacao" Multiplicity="1" />
+          <End Role="DocumentosSolicitacao" Type="Self.DocumentosSolicitacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitacao">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocumentosSolicitacao">
+              <PropertyRef Name="IdSolicitacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Endereco_FichaCadastral">
+          <End Role="FichaCadastral" Type="Self.FichaCadastral" Multiplicity="1" />
+          <End Role="Endereco" Type="Self.Endereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FichaCadastral">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Endereco">
+              <PropertyRef Name="IdFichaCadastral" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListaDocumento_ListasSolicitante">
+          <End Role="ListasSolicitante" Type="Self.ListasSolicitante" Multiplicity="1" />
+          <End Role="ListaDocumento" Type="Self.ListaDocumento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ListasSolicitante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListaDocumento">
+              <PropertyRef Name="IdListaSolicitante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListasSolicitante_Solicitante">
+          <End Role="Solicitante" Type="Self.Solicitante" Multiplicity="1" />
+          <End Role="ListasSolicitante" Type="Self.ListasSolicitante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListasSolicitante">
+              <PropertyRef Name="IdSolicitante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Responsavel_Solicitado">
+          <End Role="Solicitado" Type="Self.Solicitado" Multiplicity="1" />
+          <End Role="Responsavel" Type="Self.Responsavel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Responsavel">
+              <PropertyRef Name="IdSolicitado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitacao_FichaCadastral">
+          <End Role="FichaCadastral" Type="Self.FichaCadastral" Multiplicity="0..1" />
+          <End Role="Solicitacao" Type="Self.Solicitacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FichaCadastral">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Solicitacao">
+              <PropertyRef Name="IdFichaCadastral" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitacao_Solicitado">
+          <End Role="Solicitado" Type="Self.Solicitado" Multiplicity="1" />
+          <End Role="Solicitacao" Type="Self.Solicitacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Solicitacao">
+              <PropertyRef Name="IdSolicitado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitacao_Solicitante">
+          <End Role="Solicitante" Type="Self.Solicitante" Multiplicity="1" />
+          <End Role="Solicitacao" Type="Self.Solicitacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Solicitacao">
+              <PropertyRef Name="IdSolicitante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ChMasterDataModelStoreContainer">
+          <EntitySet Name="Arquivo" EntityType="Self.Arquivo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Banco" EntityType="Self.Banco" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Carrinho" EntityType="Self.Carrinho" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contato" EntityType="Self.Contato" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentoAnexado" EntityType="Self.DocumentoAnexado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentosSolicitacao" EntityType="Self.DocumentosSolicitacao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Endereco" EntityType="Self.Endereco" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FichaCadastral" EntityType="Self.FichaCadastral" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaDocumento" EntityType="Self.ListaDocumento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListasSolicitante" EntityType="Self.ListasSolicitante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Responsavel" EntityType="Self.Responsavel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Solicitacao" EntityType="Self.Solicitacao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Solicitado" EntityType="Self.Solicitado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Solicitante" EntityType="Self.Solicitante" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Arquivo_DocumentoAnexado" Association="Self.FK_Arquivo_DocumentoAnexado">
+            <End Role="DocumentoAnexado" EntitySet="DocumentoAnexado" />
+            <End Role="Arquivo" EntitySet="Arquivo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Banco_FichaCadastral" Association="Self.FK_Banco_FichaCadastral">
+            <End Role="FichaCadastral" EntitySet="FichaCadastral" />
+            <End Role="Banco" EntitySet="Banco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contato_FichaCadastral" Association="Self.FK_Contato_FichaCadastral">
+            <End Role="FichaCadastral" EntitySet="FichaCadastral" />
+            <End Role="Contato" EntitySet="Contato" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentoAnexado_FichaCadastral" Association="Self.FK_DocumentoAnexado_FichaCadastral">
+            <End Role="FichaCadastral" EntitySet="FichaCadastral" />
+            <End Role="DocumentoAnexado" EntitySet="DocumentoAnexado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentosSolicitacao_Solicitacao" Association="Self.FK_DocumentosSolicitacao_Solicitacao">
+            <End Role="Solicitacao" EntitySet="Solicitacao" />
+            <End Role="DocumentosSolicitacao" EntitySet="DocumentosSolicitacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Endereco_FichaCadastral" Association="Self.FK_Endereco_FichaCadastral">
+            <End Role="FichaCadastral" EntitySet="FichaCadastral" />
+            <End Role="Endereco" EntitySet="Endereco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListaDocumento_ListasSolicitante" Association="Self.FK_ListaDocumento_ListasSolicitante">
+            <End Role="ListasSolicitante" EntitySet="ListasSolicitante" />
+            <End Role="ListaDocumento" EntitySet="ListaDocumento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListasSolicitante_Solicitante" Association="Self.FK_ListasSolicitante_Solicitante">
+            <End Role="Solicitante" EntitySet="Solicitante" />
+            <End Role="ListasSolicitante" EntitySet="ListasSolicitante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Responsavel_Solicitado" Association="Self.FK_Responsavel_Solicitado">
+            <End Role="Solicitado" EntitySet="Solicitado" />
+            <End Role="Responsavel" EntitySet="Responsavel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitacao_FichaCadastral" Association="Self.FK_Solicitacao_FichaCadastral">
+            <End Role="FichaCadastral" EntitySet="FichaCadastral" />
+            <End Role="Solicitacao" EntitySet="Solicitacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitacao_Solicitado" Association="Self.FK_Solicitacao_Solicitado">
+            <End Role="Solicitado" EntitySet="Solicitado" />
+            <End Role="Solicitacao" EntitySet="Solicitacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitacao_Solicitante" Association="Self.FK_Solicitacao_Solicitante">
+            <End Role="Solicitante" EntitySet="Solicitante" />
+            <End Role="Solicitacao" EntitySet="Solicitacao" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ChMasterDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Arquivo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDocumentoAnexado" Type="Int32" Nullable="false" />
+          <Property Name="NomeOriginal" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="JaBaixado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DocumentoAnexado" Relationship="Self.FK_Arquivo_DocumentoAnexado" FromRole="Arquivo" ToRole="DocumentoAnexado" />
+        </EntityType>
+        <EntityType Name="Banco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFichaCadastral" Type="Int32" Nullable="false" />
+          <Property Name="Numero" Type="Int32" Nullable="false" />
+          <Property Name="Agencia" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AgenciaDv" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Conta" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContaDv" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FichaCadastral" Relationship="Self.FK_Banco_FichaCadastral" FromRole="Banco" ToRole="FichaCadastral" />
+        </EntityType>
+        <EntityType Name="Carrinho">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodigoClienteUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DataConvite" Type="DateTime" Nullable="false" />
+          <Property Name="StatusConvite" Type="Int32" Nullable="false" />
+          <Property Name="CnpjConvidado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RadicalConvidado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contato">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFichaCadastral" Type="Int32" Nullable="false" />
+          <Property Name="NOME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="241" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONE" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="CELULAR" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FichaCadastral" Relationship="Self.FK_Contato_FichaCadastral" FromRole="Contato" ToRole="FichaCadastral" />
+        </EntityType>
+        <EntityType Name="DocumentoAnexado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFichaCadastral" Type="Int32" Nullable="false" />
+          <Property Name="IdDocumentoSolicitado" Type="Int32" />
+          <NavigationProperty Name="Arquivo" Relationship="Self.FK_Arquivo_DocumentoAnexado" FromRole="DocumentoAnexado" ToRole="Arquivo" />
+          <NavigationProperty Name="FichaCadastral" Relationship="Self.FK_DocumentoAnexado_FichaCadastral" FromRole="DocumentoAnexado" ToRole="FichaCadastral" />
+        </EntityType>
+        <EntityType Name="DocumentosSolicitacao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdSolicitacao" Type="Int32" Nullable="false" />
+          <Property Name="DescricaoDocumento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdTipoDocumentoCH" Type="Int32" />
+          <NavigationProperty Name="Solicitacao" Relationship="Self.FK_DocumentosSolicitacao_Solicitacao" FromRole="DocumentosSolicitacao" ToRole="Solicitacao" />
+        </EntityType>
+        <EntityType Name="Endereco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFichaCadastral" Type="Int32" Nullable="false" />
+          <Property Name="Tipo" Type="Int32" Nullable="false" />
+          <Property Name="Logradouro" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Numero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Complemento" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CEP" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Bairro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cidade" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UF" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Pais" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FichaCadastral" Relationship="Self.FK_Endereco_FichaCadastral" FromRole="Endereco" ToRole="FichaCadastral" />
+        </EntityType>
+        <EntityType Name="FichaCadastral">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="IdSolicitacao" Type="Int32" />
+          <NavigationProperty Name="Banco" Relationship="Self.FK_Banco_FichaCadastral" FromRole="FichaCadastral" ToRole="Banco" />
+          <NavigationProperty Name="Contato" Relationship="Self.FK_Contato_FichaCadastral" FromRole="FichaCadastral" ToRole="Contato" />
+          <NavigationProperty Name="DocumentoAnexado" Relationship="Self.FK_DocumentoAnexado_FichaCadastral" FromRole="FichaCadastral" ToRole="DocumentoAnexado" />
+          <NavigationProperty Name="Endereco" Relationship="Self.FK_Endereco_FichaCadastral" FromRole="FichaCadastral" ToRole="Endereco" />
+          <NavigationProperty Name="Solicitacao" Relationship="Self.FK_Solicitacao_FichaCadastral" FromRole="FichaCadastral" ToRole="Solicitacao" />
+        </EntityType>
+        <EntityType Name="ListaDocumento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdListaSolicitante" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoDocumentoCH" Type="Int32" Nullable="false" />
+          <Property Name="IdDescricaoDocumentoCH" Type="Int32" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ListasSolicitante" Relationship="Self.FK_ListaDocumento_ListasSolicitante" FromRole="ListaDocumento" ToRole="ListasSolicitante" />
+        </EntityType>
+        <EntityType Name="ListasSolicitante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdSolicitante" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ListaDocumento" Relationship="Self.FK_ListaDocumento_ListasSolicitante" FromRole="ListasSolicitante" ToRole="ListaDocumento" />
+          <NavigationProperty Name="Solicitante" Relationship="Self.FK_ListasSolicitante_Solicitante" FromRole="ListasSolicitante" ToRole="Solicitante" />
+        </EntityType>
+        <EntityType Name="Responsavel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="IdSolicitado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Solicitado" Relationship="Self.FK_Responsavel_Solicitado" FromRole="Responsavel" ToRole="Solicitado" />
+        </EntityType>
+        <EntityType Name="Solicitacao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdSolicitante" Type="Int32" Nullable="false" />
+          <Property Name="IdSolicitado" Type="Int32" Nullable="false" />
+          <Property Name="IdFichaCadastral" Type="Int32" />
+          <NavigationProperty Name="DocumentosSolicitacao" Relationship="Self.FK_DocumentosSolicitacao_Solicitacao" FromRole="Solicitacao" ToRole="DocumentosSolicitacao" />
+          <NavigationProperty Name="FichaCadastral" Relationship="Self.FK_Solicitacao_FichaCadastral" FromRole="Solicitacao" ToRole="FichaCadastral" />
+          <NavigationProperty Name="Solicitado" Relationship="Self.FK_Solicitacao_Solicitado" FromRole="Solicitacao" ToRole="Solicitado" />
+          <NavigationProperty Name="Solicitante" Relationship="Self.FK_Solicitacao_Solicitante" FromRole="Solicitacao" ToRole="Solicitante" />
+        </EntityType>
+        <EntityType Name="Solicitado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cnpj" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RazaoSocial" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Responsavel" Relationship="Self.FK_Responsavel_Solicitado" FromRole="Solicitado" ToRole="Responsavel" />
+          <NavigationProperty Name="Solicitacao" Relationship="Self.FK_Solicitacao_Solicitado" FromRole="Solicitado" ToRole="Solicitacao" />
+        </EntityType>
+        <EntityType Name="Solicitante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Codigocliente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ListasSolicitante" Relationship="Self.FK_ListasSolicitante_Solicitante" FromRole="Solicitante" ToRole="ListasSolicitante" />
+          <NavigationProperty Name="Solicitacao" Relationship="Self.FK_Solicitacao_Solicitante" FromRole="Solicitante" ToRole="Solicitacao" />
+        </EntityType>
+        <Association Name="FK_Arquivo_DocumentoAnexado">
+          <End Role="DocumentoAnexado" Type="Self.DocumentoAnexado" Multiplicity="1" />
+          <End Role="Arquivo" Type="Self.Arquivo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentoAnexado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Arquivo">
+              <PropertyRef Name="IdDocumentoAnexado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Banco_FichaCadastral">
+          <End Role="FichaCadastral" Type="Self.FichaCadastral" Multiplicity="1" />
+          <End Role="Banco" Type="Self.Banco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FichaCadastral">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Banco">
+              <PropertyRef Name="IdFichaCadastral" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contato_FichaCadastral">
+          <End Role="FichaCadastral" Type="Self.FichaCadastral" Multiplicity="1" />
+          <End Role="Contato" Type="Self.Contato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FichaCadastral">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contato">
+              <PropertyRef Name="IdFichaCadastral" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentoAnexado_FichaCadastral">
+          <End Role="FichaCadastral" Type="Self.FichaCadastral" Multiplicity="1" />
+          <End Role="DocumentoAnexado" Type="Self.DocumentoAnexado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FichaCadastral">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocumentoAnexado">
+              <PropertyRef Name="IdFichaCadastral" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentosSolicitacao_Solicitacao">
+          <End Role="Solicitacao" Type="Self.Solicitacao" Multiplicity="1" />
+          <End Role="DocumentosSolicitacao" Type="Self.DocumentosSolicitacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitacao">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocumentosSolicitacao">
+              <PropertyRef Name="IdSolicitacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Endereco_FichaCadastral">
+          <End Role="FichaCadastral" Type="Self.FichaCadastral" Multiplicity="1" />
+          <End Role="Endereco" Type="Self.Endereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FichaCadastral">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Endereco">
+              <PropertyRef Name="IdFichaCadastral" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitacao_FichaCadastral">
+          <End Role="FichaCadastral" Type="Self.FichaCadastral" Multiplicity="0..1" />
+          <End Role="Solicitacao" Type="Self.Solicitacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitacao">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FichaCadastral">
+              <PropertyRef Name="IdSolicitacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListaDocumento_ListasSolicitante">
+          <End Role="ListasSolicitante" Type="Self.ListasSolicitante" Multiplicity="1" />
+          <End Role="ListaDocumento" Type="Self.ListaDocumento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ListasSolicitante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListaDocumento">
+              <PropertyRef Name="IdListaSolicitante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListasSolicitante_Solicitante">
+          <End Role="Solicitante" Type="Self.Solicitante" Multiplicity="1" />
+          <End Role="ListasSolicitante" Type="Self.ListasSolicitante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListasSolicitante">
+              <PropertyRef Name="IdSolicitante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Responsavel_Solicitado">
+          <End Role="Solicitado" Type="Self.Solicitado" Multiplicity="1" />
+          <End Role="Responsavel" Type="Self.Responsavel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Responsavel">
+              <PropertyRef Name="IdSolicitado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitacao_Solicitado">
+          <End Role="Solicitado" Type="Self.Solicitado" Multiplicity="1" />
+          <End Role="Solicitacao" Type="Self.Solicitacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Solicitacao">
+              <PropertyRef Name="IdSolicitado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitacao_Solicitante">
+          <End Role="Solicitante" Type="Self.Solicitante" Multiplicity="1" />
+          <End Role="Solicitacao" Type="Self.Solicitacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Solicitacao">
+              <PropertyRef Name="IdSolicitante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ChMasterDataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Arquivo" EntityType="Self.Arquivo" />
+          <EntitySet Name="Banco" EntityType="Self.Banco" />
+          <EntitySet Name="Carrinho" EntityType="Self.Carrinho" />
+          <EntitySet Name="Contato" EntityType="Self.Contato" />
+          <EntitySet Name="DocumentoAnexado" EntityType="Self.DocumentoAnexado" />
+          <EntitySet Name="DocumentosSolicitacao" EntityType="Self.DocumentosSolicitacao" />
+          <EntitySet Name="Endereco" EntityType="Self.Endereco" />
+          <EntitySet Name="FichaCadastral" EntityType="Self.FichaCadastral" />
+          <EntitySet Name="ListaDocumento" EntityType="Self.ListaDocumento" />
+          <EntitySet Name="ListasSolicitante" EntityType="Self.ListasSolicitante" />
+          <EntitySet Name="Responsavel" EntityType="Self.Responsavel" />
+          <EntitySet Name="Solicitacao" EntityType="Self.Solicitacao" />
+          <EntitySet Name="Solicitado" EntityType="Self.Solicitado" />
+          <EntitySet Name="Solicitante" EntityType="Self.Solicitante" />
+          <AssociationSet Name="FK_Arquivo_DocumentoAnexado" Association="Self.FK_Arquivo_DocumentoAnexado">
+            <End Role="DocumentoAnexado" EntitySet="DocumentoAnexado" />
+            <End Role="Arquivo" EntitySet="Arquivo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Banco_FichaCadastral" Association="Self.FK_Banco_FichaCadastral">
+            <End Role="FichaCadastral" EntitySet="FichaCadastral" />
+            <End Role="Banco" EntitySet="Banco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contato_FichaCadastral" Association="Self.FK_Contato_FichaCadastral">
+            <End Role="FichaCadastral" EntitySet="FichaCadastral" />
+            <End Role="Contato" EntitySet="Contato" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentoAnexado_FichaCadastral" Association="Self.FK_DocumentoAnexado_FichaCadastral">
+            <End Role="FichaCadastral" EntitySet="FichaCadastral" />
+            <End Role="DocumentoAnexado" EntitySet="DocumentoAnexado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentosSolicitacao_Solicitacao" Association="Self.FK_DocumentosSolicitacao_Solicitacao">
+            <End Role="Solicitacao" EntitySet="Solicitacao" />
+            <End Role="DocumentosSolicitacao" EntitySet="DocumentosSolicitacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Endereco_FichaCadastral" Association="Self.FK_Endereco_FichaCadastral">
+            <End Role="FichaCadastral" EntitySet="FichaCadastral" />
+            <End Role="Endereco" EntitySet="Endereco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitacao_FichaCadastral" Association="Self.FK_Solicitacao_FichaCadastral">
+            <End Role="FichaCadastral" EntitySet="FichaCadastral" />
+            <End Role="Solicitacao" EntitySet="Solicitacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListaDocumento_ListasSolicitante" Association="Self.FK_ListaDocumento_ListasSolicitante">
+            <End Role="ListasSolicitante" EntitySet="ListasSolicitante" />
+            <End Role="ListaDocumento" EntitySet="ListaDocumento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListasSolicitante_Solicitante" Association="Self.FK_ListasSolicitante_Solicitante">
+            <End Role="Solicitante" EntitySet="Solicitante" />
+            <End Role="ListasSolicitante" EntitySet="ListasSolicitante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Responsavel_Solicitado" Association="Self.FK_Responsavel_Solicitado">
+            <End Role="Solicitado" EntitySet="Solicitado" />
+            <End Role="Responsavel" EntitySet="Responsavel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitacao_Solicitado" Association="Self.FK_Solicitacao_Solicitado">
+            <End Role="Solicitado" EntitySet="Solicitado" />
+            <End Role="Solicitacao" EntitySet="Solicitacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitacao_Solicitante" Association="Self.FK_Solicitacao_Solicitante">
+            <End Role="Solicitante" EntitySet="Solicitante" />
+            <End Role="Solicitacao" EntitySet="Solicitacao" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ChMasterDataModelStoreContainer" CdmEntityContainer="ChMasterDataEntities">
+          <EntitySetMapping Name="Arquivo">
+            <EntityTypeMapping TypeName="ChMasterDataModel.Arquivo">
+              <MappingFragment StoreEntitySet="Arquivo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdDocumentoAnexado" ColumnName="IdDocumentoAnexado" />
+                <ScalarProperty Name="NomeOriginal" ColumnName="NomeOriginal" />
+                <ScalarProperty Name="JaBaixado" ColumnName="JaBaixado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banco">
+            <EntityTypeMapping TypeName="ChMasterDataModel.Banco">
+              <MappingFragment StoreEntitySet="Banco">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdFichaCadastral" ColumnName="IdFichaCadastral" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Agencia" ColumnName="Agencia" />
+                <ScalarProperty Name="AgenciaDv" ColumnName="AgenciaDv" />
+                <ScalarProperty Name="Conta" ColumnName="Conta" />
+                <ScalarProperty Name="ContaDv" ColumnName="ContaDv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carrinho">
+            <EntityTypeMapping TypeName="ChMasterDataModel.Carrinho">
+              <MappingFragment StoreEntitySet="Carrinho">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LoginUsuario" ColumnName="LoginUsuario" />
+                <ScalarProperty Name="CodigoClienteUsuario" ColumnName="CodigoClienteUsuario" />
+                <ScalarProperty Name="DataConvite" ColumnName="DataConvite" />
+                <ScalarProperty Name="StatusConvite" ColumnName="StatusConvite" />
+                <ScalarProperty Name="CnpjConvidado" ColumnName="CnpjConvidado" />
+                <ScalarProperty Name="RadicalConvidado" ColumnName="RadicalConvidado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contato">
+            <EntityTypeMapping TypeName="ChMasterDataModel.Contato">
+              <MappingFragment StoreEntitySet="Contato">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdFichaCadastral" ColumnName="IdFichaCadastral" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="TELEFONE" ColumnName="TELEFONE" />
+                <ScalarProperty Name="CELULAR" ColumnName="CELULAR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentoAnexado">
+            <EntityTypeMapping TypeName="ChMasterDataModel.DocumentoAnexado">
+              <MappingFragment StoreEntitySet="DocumentoAnexado">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdFichaCadastral" ColumnName="IdFichaCadastral" />
+                <ScalarProperty Name="IdDocumentoSolicitado" ColumnName="IdDocumentoSolicitado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentosSolicitacao">
+            <EntityTypeMapping TypeName="ChMasterDataModel.DocumentosSolicitacao">
+              <MappingFragment StoreEntitySet="DocumentosSolicitacao">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdSolicitacao" ColumnName="IdSolicitacao" />
+                <ScalarProperty Name="DescricaoDocumento" ColumnName="DescricaoDocumento" />
+                <ScalarProperty Name="IdTipoDocumentoCH" ColumnName="IdTipoDocumentoCH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Endereco">
+            <EntityTypeMapping TypeName="ChMasterDataModel.Endereco">
+              <MappingFragment StoreEntitySet="Endereco">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdFichaCadastral" ColumnName="IdFichaCadastral" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+                <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+                <ScalarProperty Name="UF" ColumnName="UF" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FichaCadastral">
+            <EntityTypeMapping TypeName="ChMasterDataModel.FichaCadastral">
+              <MappingFragment StoreEntitySet="FichaCadastral">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IdSolicitacao" ColumnName="IdSolicitacao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaDocumento">
+            <EntityTypeMapping TypeName="ChMasterDataModel.ListaDocumento">
+              <MappingFragment StoreEntitySet="ListaDocumento">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdListaSolicitante" ColumnName="IdListaSolicitante" />
+                <ScalarProperty Name="IdTipoDocumentoCH" ColumnName="IdTipoDocumentoCH" />
+                <ScalarProperty Name="IdDescricaoDocumentoCH" ColumnName="IdDescricaoDocumentoCH" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListasSolicitante">
+            <EntityTypeMapping TypeName="ChMasterDataModel.ListasSolicitante">
+              <MappingFragment StoreEntitySet="ListasSolicitante">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdSolicitante" ColumnName="IdSolicitante" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Responsavel">
+            <EntityTypeMapping TypeName="ChMasterDataModel.Responsavel">
+              <MappingFragment StoreEntitySet="Responsavel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IdSolicitado" ColumnName="IdSolicitado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Solicitacao">
+            <EntityTypeMapping TypeName="ChMasterDataModel.Solicitacao">
+              <MappingFragment StoreEntitySet="Solicitacao">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdSolicitante" ColumnName="IdSolicitante" />
+                <ScalarProperty Name="IdSolicitado" ColumnName="IdSolicitado" />
+                <ScalarProperty Name="IdFichaCadastral" ColumnName="IdFichaCadastral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Solicitado">
+            <EntityTypeMapping TypeName="ChMasterDataModel.Solicitado">
+              <MappingFragment StoreEntitySet="Solicitado">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Cnpj" ColumnName="Cnpj" />
+                <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Solicitante">
+            <EntityTypeMapping TypeName="ChMasterDataModel.Solicitante">
+              <MappingFragment StoreEntitySet="Solicitante">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Codigocliente" ColumnName="Codigocliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

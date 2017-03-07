@@ -1,0 +1,35 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FichaCadastralWebForLinkVM
+
+@Html.HiddenFor(x => Model.ContratanteID)
+@Html.Hidden("FornecedorID", Model.ID)
+@Html.HiddenFor(x => Model.ContratanteFornecedorID)
+@Html.HiddenFor(x => Model.HabilitaEdicao)
+@Html.HiddenFor(x => Model.HabilitaEdicaoUnspsc)
+@Html.HiddenFor(x => Model.PJPFID)
+@Html.Hidden("CategoriaContratanteID", Model.CategoriaId)
+@Html.Hidden("TpPapel", 50)
+
+@using (Html.BeginForm("SalvarDocumentos", "Documento", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => Model.ID)
+    @Html.Hidden("Solicitacao_ID",Model.SolicitacaoID)
+    @Html.HiddenFor(x => Model.ContratanteID)
+    @Html.HiddenFor(x => Model.ContratanteFornecedorID)
+    @Html.HiddenFor(x => Model.PJPFID)
+    @Html.HiddenFor(x => Model.ChaveUrl)
+    @Html.HiddenFor(x => Model.SolicitacaoID)
+    @Html.HiddenFor(x => Model.ActionOrigem)
+    @Html.HiddenFor(x => Model.ControllerOrigem)
+    @Html.HiddenFor(x => Model.AtualizacaoDocumento)
+    //Model.ProrrogacaoPrazo = new WebForLink.Web.ViewModels.ProrrogacaoPrazoVM() { };
+    <!--PRORROGAÇÃO PRAZO-->
+    @Html.Partial("../Fornecedores/_FichaCadastral_Prorrogacao_Editavel", Model.ProrrogacaoPrazo)
+    <div id="documentos">
+        @{
+    ViewBag.HabilitaEdicao = Model.HabilitaEdicao;
+    ViewBag.DataProrrogacao = Model.DataProrrogacao;
+        }
+        @Html.Partial("../Fornecedores/_FichaCadastral_Anexos_Editavel", Model.SolicitacaoFornecedor.Documentos)
+    </div>
+}

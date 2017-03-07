@@ -1,0 +1,182 @@
+﻿@model WebForLink.Web.Areas.Administracao.Models.RoboImportacaoModel
+@Styles.Render("~/style/date")
+@Scripts.Render("~/bundles/date")
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdministracao.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+        $('#TempoExecucao').inputmask('999:99:99', { "placeholder": "hhh:mm:ss" });
+        @Html.Raw("mostraStatus('"+Model.Status+"');")
+    });
+
+    function Acao() {
+        var acao = $('#acao').val();
+
+        if (acao == "Iniciar") IniciarExecucao();
+        if (acao == "Parar") PararExecucao();
+        if (acao == "MudarTempo") MudarTempoExecucao();
+        if (acao == "Carregar") CarregarServico();
+    }
+
+    function IniciarExecucao() {
+        ajax("IniciarExecucao", null);
+    }
+
+    function PararExecucao() {
+        ajax("PararExecucao", null);
+    }
+
+    function CarregarServico() {
+        ajax("CarregarServico", $('#TempoExecucao').val());
+    }
+
+    function MudarTempoExecucao() {
+        ajax("ModificarTempo", $('#TempoExecucao').val());
+    }
+
+    function ajax(action, tmp) {
+        $('.aguarde').show();
+
+        $.ajax({
+            url: '/Robo/' + action,
+            type: "POST",
+            data: {
+                tempo: tmp
+            },
+            dataType: "json",
+            async: true,
+            success: function (data) {
+                carregarModel(data);
+            },
+            error: function (xhr, textStatus, error) {
+                console.log(error);
+            }
+        });
+
+        $('.aguarde').hide();
+    }
+
+    function carregarModel(data) {
+        $('#UltimaExecucao').text(data.UltimaExecucao);
+        $('#ProximaExecucao').text(data.ProximaExecucao);
+        $('#TempoExecucao').val(data.TempoExecucao);
+
+        mostraStatus(data.Status);
+    }
+
+    function mostraStatus(status) {
+        $('#alertRobo').removeClass("hidden");
+
+        if (status == "Ativo") {
+            $('#alertRobo').removeClass("alert-danger");
+            $('#alertRobo').addClass("alert-success");
+            $('#iRobo').removeClass("fa-ban");
+            $('#iRobo').addClass("fa-check");
+            $('#spanRobo').empty().text("Robô funcionando Normalmente!");
+            $('#btnIniciar').hide();
+            $('#btnParar').show();
+            $('#btnCarregar').hide();
+            $('#btnModificarTempo').show();
+        }
+        else if (status == "Parado") {
+            $('#alertRobo').removeClass("alert-success");
+            $('#alertRobo').addClass("alert-danger");
+            $('#iRobo').removeClass("fa-check");
+            $('#iRobo').addClass("fa-ban");
+            $('#spanRobo').empty().text("Robô Parado!");
+            $('#btnIniciar').show();
+            $('#btnParar').hide();
+            $('#btnCarregar').hide();
+            $('#btnModificarTempo').hide();
+        }
+        else {
+            $('#alertRobo').removeClass("alert-success");
+            $('#alertRobo').addClass("alert-danger");
+            $('#iRobo').removeClass("fa-check");
+            $('#iRobo').addClass("fa-ban");
+            $('#spanRobo').empty().text("Sem serviço de Robô!");
+            $('#btnIniciar').hide();
+            $('#btnParar').hide();
+            $('#btnCarregar').show();
+            $('#btnModificarTempo').hide();
+        }
+
+        $('#alert_confirm').hide();
+    }    
+</script>
+
+<section class="content-header">
+    <h1>Administração</h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-cogs"></i> Administração</li>
+        <li class="active">Robo Importação</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div id="FichaAlertaOkTop" class="alert alert-success" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick="$(this).fadeOut('fast')"></div>
+    </div>
+    <div id="boxGrid" class="box box-primary">
+        <div class="box-header"><h3 class="box-title">Robô Importação</h3></div>
+        <div class="box-body">
+            @using (Html.BeginForm())
+            {
+                <div class="row">
+                    <div class="form-group">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <input type="hidden" name="acao" id="acao" value="" />
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.UltimaExecucao, new { @class = "control-label" })<br />
+                            <span id="UltimaExecucao">@Html.DisplayFor(model => model.UltimaExecucao)</span>
+                        </div>
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.TempoExecucao, new { @class = "control-label" })
+                            @Html.EditorFor(model => model.TempoExecucao, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                            @Html.ValidationMessageFor(model => model.TempoExecucao, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-2">
+                            <label>&nbsp;</label><br />
+                            <button id="btnModificarTempo" type="button" class="btn btn-primary" onclick="$('#alert_confirm span').text('Tem certeza que deseja modificar o tempo de execução?'); $('#alert_confirm').fadeIn('fast'); $('#acao').val('MudarTempo');">Modificar Intervalo</button>
+                        </div>
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.ProximaExecucao, new { @class = "control-label" })<br />
+                            <span id="ProximaExecucao">@Html.DisplayFor(model => model.ProximaExecucao)</span>
+                        </div>
+                        
+                        
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="box-footer">
+            <br />
+            <div class="col-md-4">
+                <div id="alertRobo" class="alert alert-success alert-dismissable hidden">
+                    <i id="iRobo" class="fa fa-check"></i>
+                    <b><span id="spanRobo">Robô funcionando Normalmente!</span></b>
+                    <div style="float: right;">
+                        <button id="btnIniciar" type="button" class="btn btn-success btn-xs" onclick="$('#alert_confirm span').text('Tem certeza que deseja Iniciar o Robô?'); $('#alert_confirm').fadeIn('fast'); $('#acao').val('Iniciar');">Iniciar</button>
+                        <button id="btnParar" type="button" class="btn btn-danger btn-xs" onclick="$('#alert_confirm span').text('Tem certeza que deseja Parar o Robô?'); $('#alert_confirm').fadeIn('fast'); $('#acao').val('Parar');">Parar</button>
+                        <button id="btnCarregar" type="button" class="btn btn-success btn-xs" onclick="$('#alert_confirm span').text('Tem certeza que deseja Carregar o Serviço de Robô?'); $('#alert_confirm').fadeIn('fast'); $('#acao').val('Carregar');">Carregar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div id="alert_confirm" class="alert alert-warning" role="alert" style="display: none;">
+                <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-primary btn-xs" onclick="Acao();">Sim</button>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-default btn-xs" onclick="$('#alert_confirm').fadeOut('fast');">Não</button>
+            </div>
+        </div>
+
+    </div>
+</section>

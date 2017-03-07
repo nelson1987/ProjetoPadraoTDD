@@ -1,0 +1,67 @@
+﻿@model WebForLink.Web.ViewModels.IDadoGeral
+<div id="boxGrid" class="box box-primary">
+    <div class="box-header"><h3 class="box-title">Dados Gerais</h3></div>
+    <div class="box-body">
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Documento, htmlAttributes: new { @class = "control-label" })&nbsp;<span class="text-danger" style="font-weight:bold;">*</span><br />
+                @Html.TextBoxFor(model => model.Documento, new { @class = "form-control input-sm", disabled = true })
+                @Html.ValidationMessageFor(model => model.Documento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="control-label">&nbsp;</label><br />
+                <button type="button" class="btn btn-primary" onclick="ConsultaRobo();">Validar em Orgãos Públicos</button>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.RazaoSocial, htmlAttributes: new { @class = "control-label" })
+                <span class="text-danger" style="font-weight:bold;">*</span><br />
+                @Html.TextBoxFor(model => model.RazaoSocial, new { @class = "form-control input-sm", disabled = true })
+                @Html.ValidationMessageFor(model => model.RazaoSocial, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.NomeFantasia, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.NomeFantasia, new { @class = "form-control input-sm", disabled = true })
+                @Html.ValidationMessageFor(model => model.NomeFantasia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Cnae, htmlAttributes: new { @class = "control-label" }) <br />
+                @Html.TextBoxFor(model => model.Cnae, new { @class = "form-control input-sm" })
+                @Html.ValidationMessageFor(model => model.Cnae, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.InscricaoEstadual, htmlAttributes: new { @class = "control-label" })
+                    &nbsp;
+                    @if (Model.TipoFornecedor != 3)
+                    {
+                        <span class="text-danger" style="font-weight:bold;">*</span><br />
+                    }
+                    @Html.TextBoxFor(model => model.InscricaoEstadual, new { @class = "form-control input-sm" })
+                    @Html.ValidationMessageFor(model => model.InscricaoEstadual, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.InscricaoMunicipal, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.InscricaoMunicipal, new { @class = "form-control input-sm" })
+                @Html.ValidationMessageFor(model => model.InscricaoMunicipal, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div id="alertConfirmOrgaos" class="alert alert-warning hidden text-center" role="alert">
+            <span>Tem certeza que deseja validar a sua ficha em orgão públicos?</span><br /><br />
+            <button type="button" id="btnSimFicha" class="btn btn-primary btn-xs" onclick="$('form').submit();">Sim</button>&nbsp;&nbsp;&nbsp;
+            <button type="button" id="btnNaoFicha" class="btn btn-default btn-xs" onclick="$('#alertConfirmOrgaos').toggleClass('hidden')">Não</button>
+        </div>
+    </div>
+</div>

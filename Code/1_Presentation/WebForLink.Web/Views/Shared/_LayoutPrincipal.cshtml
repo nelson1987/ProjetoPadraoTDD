@@ -1,0 +1,73 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>@*@HttpContext.Current.Application["NomeSistema"].ToString()*@</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    @Styles.Render("~/style/bootstrap")
+
+    <link href="~/Content/institucional.css" rel="stylesheet">
+    @*<link href="~/Content/font-awesome.min.css" rel="stylesheet" />*@
+</head>
+<body>
+    <nav class="navbar navbar-default " role="navigation">
+        <div class="">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div> <!-- /.navbar-header -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="@Url.Action("Index")" class="nav-link">Planos</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="nav-link">&nbsp;</a></li>
+                    @*<li><a href="#objetivo" class="nav-link">Serviços</a></li>*@
+                    <li><button class="btn btn-warning btn-sm navbar-btn" onclick="$('#acessoModal').modal('show')">Acessar</button></li>
+                </ul>
+            </div> <!-- /.navbar-collapse -->
+        </div> <!-- /.container -->
+    </nav> <!-- /.navbar -->
+    <div class="" id="divAcesso">
+        <div class="modal fade" id="acessoModal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                @Html.Partial("../Home/_Acesso", new WebForLink.Web.ViewModels.AcessoVM())
+            </div>
+        </div>
+    </div>
+    @RenderBody()
+    <footer>
+        <div class="container clearfix">
+            <p class="pull-left">
+                Copyright &copy; CH Consultoria 2016
+            </p>
+            <!--
+            <p class="pull-right">img src="img/logo_ch.jpg" /
+            </p> -->
+        </div> <!-- /.container -->
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery-2.x")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/date")
+    <script>
+        $(".nav-link").click(function (e) {
+            e.preventDefault();
+            var link = $(this);
+            var href = link.attr("href");
+            $("html,body").animate({ scrollTop: $(href).offset().top - 80 }, 200);
+            link.closest(".navbar").find(".navbar-toggle:not(.collapsed)").click();
+        });
+        $(document).ready(function () {
+            $('.carousel').carousel();
+        })
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

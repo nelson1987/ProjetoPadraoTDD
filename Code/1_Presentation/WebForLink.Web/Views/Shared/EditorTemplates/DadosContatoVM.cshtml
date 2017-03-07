@@ -1,0 +1,66 @@
+﻿@model WebForLink.Web.ViewModels.DadosContatoVM
+
+@using (Html.BeginCollectionItem("DadosContatos"))
+{
+    <div class="contato" name="contato">
+        @if (ViewBag.EscolherContato != null)
+        {
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="radio">
+                        <label>
+                            <input type="Radio" id="UsarContato" name="UsarContato" value="@Model.ContatoID" @(ViewBag.UsarContato == Model.ContatoID ? "checked" : "") /><b>  @(Model.ContatoID != 0 ? "Usar este Contato" : "Novo Contato")  </b>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="col-xs-6 col-md-6">
+            @Html.HiddenFor(x => x.ContatoID)
+            @Html.HiddenFor(x => x.PjPfId)
+            <div class="form-group">
+                <label>Nome Contato</label>
+                @Html.TextBoxFor(x => x.NomeContato, new { @class = "form-control input-sm" })
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-6">
+            <div class="form-group">
+                <label>E-mail</label>
+                @if (Model.Estrangeiro)
+                {
+                    <span class="text-danger" style="font-weight:bold;">*</span><br />
+                    @Html.ValidationMessageFor(x => x.EmailContato, "", new { @class = "text-danger" })
+                }
+
+                @Html.TextBoxFor(x => x.EmailContato, new { @class = "form-control input-sm" })
+                @Html.ValidationMessageFor(x => x.EmailContato, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-xs-4 col-md-3">
+            <div class="form-group">
+                <label>Telefone</label>
+                @Html.TextBoxFor(x => x.Telefone, new { @class = "form-control input-sm TelefoneMask" })
+            </div>
+        </div>
+        <div class="col-xs-4 col-md-3">
+            <div class="form-group">
+                <label>Celular</label>
+                @Html.TextBoxFor(x => x.Celular, new { @class = "form-control input-sm TelefoneMask" })
+            </div>
+        </div>
+        <div class="col-md_1">
+            <label>&nbsp;</label><br />
+            <button type="button" class="btn btn-danger" onclick="exibirConfirmacaoExclusao(this)"><i class="fa fa-trash-o fa-lg"></i></button>
+        </div>
+        <br />
+        <div class="clearfix"></div>
+        <div class="col-md-12">
+            <div class="alert alert-warning text-center hidden" role="alert">
+                <span>Tem certeza que deseja excluir este Contato?</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-primary btn-xs" onclick="excluirDados(this);">Sim</button>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-default btn-xs" onclick="$(this).parent('div').toggleClass('hidden');">Não</button>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+}

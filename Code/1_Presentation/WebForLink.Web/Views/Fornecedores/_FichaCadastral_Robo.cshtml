@@ -1,0 +1,71 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FornecedoresVM
+
+@if (Model != null)
+{
+
+    <script src="~/Scripts/Views/Shared/Robo.js"></script>
+
+    <div id="divOrgaosPublico" class="box box-primary" style="display: none;">
+        <div class="box-header"><h3 class="box-title">Orgãos Públicos</h3></div>
+        <div class="box-body">
+            <input type="hidden" id="CodeCNPJ" name="CodeCNPJ" />
+            <input type="hidden" id="CNPJSit" name="CNPJSit" />
+            <input type="hidden" id="CodeCPF" name="CodeCPF" />
+            <input type="hidden" id="CPFSit" name="CPFSit" />
+            <input type="hidden" id="CodeSintegra" name="CodeSintegra" value="" />
+            <input type="hidden" id="CodeSimples" name="CodeSimples" value="" />
+            <input type="hidden" id="ProximosPapeis" name="ProximosPapeis" value="" />
+
+            <div class="form-group">
+                <div></div>
+            </div>
+
+            <div class="panel-group" id="accordion-robo">
+
+                @******************************************RECEITA FEDERAL CNPJ************************************************@
+
+                @Html.Partial("../Fornecedores/_FichaCadastral_Robo_ReceitaPJ", Model)
+
+                @*******************************************RECEITA FEDERAL CPF************************************************@
+
+                @Html.Partial("../Fornecedores/_FichaCadastral_Robo_ReceitaPF", Model)
+
+                @*******************************************SINTEGRA***********************************************************@
+
+                @Html.Partial("../Fornecedores/_FichaCadastral_Robo_Sintegra", Model)
+
+                @*******************************************SIMPLES NACIONAL***************************************************@
+
+                @Html.Partial("../Fornecedores/_FichaCadastral_Robo_Simples", Model)
+
+            </div>
+            <div class="clearfix"></div>
+        </div><!-- /.box-body -->
+        @if (ViewBag.MinhaFicha == null)
+        {
+        <div class="box-footer" id="divBtnContinuar">
+            <div class="text-right text-nowrap">
+                <button type="button" class="btn btn-primary" onclick="$('#alert_confirm_Continuar').fadeIn('fast'); " id="BtnEnviarSol">Enviar Solicitacao</button>
+                <button type="button" class="btn btn-default" onclick="$('#alert_confirm_Cancelar').fadeIn('fast');">Cancelar Solicitação</button>
+            </div>
+
+            <div id="alert_confirm_Continuar" class="alert alert-warning text-center" role="alert" style="display: none;">
+                <span>
+                    <b>Tem certeza que deseja enviar a Solicitação ao fornecedor?</b>
+                </span><br />
+                <button type="submit" class="btn btn-primary btn-xs" onclick="$('#alert_confirm_Continuar').fadeOut('fast'); $('#Acao').val('Continuar');">Sim</button>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-default btn-xs" onclick="$('#alert_confirm_Continuar').fadeOut('fast');">Não</button>
+            </div>
+
+            <div id="alert_confirm_Cancelar" class="alert alert-warning text-center" role="alert" style="display: none;">
+                <span>
+                    <b>Tem certeza que deseja Cancelar a Solicitação?</b>
+                </span><br />
+                <button type="submit" class="btn btn-primary btn-xs" onclick="$('#alert_confirm_Continuar').fadeOut('fast'); $('#Acao').val('Cancelar');">Sim</button>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-default btn-xs" onclick="$('#alert_confirm_Continuar').fadeOut('fast');">Não</button>
+            </div>
+        </div>
+        }
+
+    </div>
+}

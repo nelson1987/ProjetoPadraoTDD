@@ -1,0 +1,175 @@
+﻿@using WebForLink.Web.Areas.Administracao.Models
+@model WebForLink.Web.Areas.Administracao.Models.UsuarioAdministracaoModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/style/date")
+@Scripts.Render("~/bundles/date")
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$('[disable-input]').prop('disabled', @(ViewBag.Acao == "Excluir" ? "true" : "false"));
+
+        $('#CPF').inputmask('999.999.999-99');
+
+        if ('@(ViewBag.MensagemSucesso)' != '') {
+            $('.alert').fadeIn('slow');
+            $('.alert').text('@Html.Raw(ViewBag.MensagemSucesso)');
+            setTimeout('$(".alert").fadeOut("slow")', 10000);
+        }
+    });
+
+    function adicionarContato() {
+        var shtml
+        shtml = '<div id="contato" name="contato">';
+        shtml += '<div class="col-xs-6 col-md-6">';
+        shtml += '<input type="hidden" id="ContatoID" name="ContatoID" value="0" />'
+        shtml += '<div class="form-group">';
+        shtml += '<div class="input-group">';
+        shtml += '<div class="input-group-btn">';
+        shtml += '<button type="button" class="btn btn-danger" onclick="removerContato(this);"><i class="fa fa-trash"></i></button>';
+        shtml += '</div>';
+        shtml += '<input type="text" class="form-control input-sm" name="EmailContato" value=""/>';
+        shtml += '</div>';
+        shtml += '</div>';
+        shtml += '</div>';
+        shtml += '<div class="clearfix"></div>';
+        shtml += '</div>';
+        $('#divContatos').append(shtml);
+    }
+
+    function removerContato(o) {
+        $(o).parent('div').parent('div').parent('div').parent('div').parent('div').remove();
+    }
+
+</script>
+
+<section class="content-header">
+    <h1>
+        Minha Conta
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-users"></i> Contas</li>
+        <li class="active">Minha Conta</li>
+    </ol>
+</section>
+
+
+<!-- FORM -->
+<section class="content">
+    <div class="row">
+        <div class="alert alert-success" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick="$(this).fadeOut('fast')"></div>
+    </div>
+    <div id="boxForm" class="box box-primary">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            @*@Html.Hidden("Acao", (string)ViewBag.Acao)*@
+            <div class="box-header">
+                <h3 class="box-title">Usuário</h3>
+            </div>
+            <div class="box-body">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        @Html.TextBoxFor(model => model.Nome, Model.Nome, new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>CPF</label>
+                        <!--, data-inputmask="'mask': '999.999.999-99'"-->
+                        @Html.TextBoxFor(model => model.CPF, Model.CPF, new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Cargo</label>
+                        @Html.TextBoxFor(model => model.Cargo, Model.Cargo, new {@class = "form-control input-sm"})
+                    </div>
+                </div> 
+                @Html.HiddenFor(model => model.ContratanteId)
+                @*<div class="clearfix"></div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Pertence a Empresa</label>
+                        @Html.DropDownListFor(model => model.ContratanteId, (SelectList)ViewBag.Contratante_ID, new { @class = "form-control input-sm" })
+                    </div>
+                </div>*@
+                <div class="clearfix"></div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email)
+                        @Html.TextBoxFor(model => model.Email, Model.Email, new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Dominio)
+                        @Html.TextBoxFor(model => model.Dominio, Model.Dominio, new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ExpiraEmDias)
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.ExpiraEmDias, Model.Dominio, new { @class = "form-control input-sm", maxlength = "3" })
+                            <div class="input-group-addon">dias</div>
+                        </div>
+                    </div>
+                </div>                
+                @Html.HiddenFor(model => model.Login)
+                <div class="clearfix"></div>
+                @if (Model.PerfilList.Any())
+                {
+                <div class="col-md-4">
+                    @Html.Partial("_Perfis", Model)
+                </div>
+                }
+                @if (Model.PapelList.Any())
+                {
+                <div class="col-md-4">
+                    @Html.Partial("_Papeis", Model)
+                </div>
+                }
+                <div class="clearfix"></div>
+            </div>
+            <div class="box-footer">
+                <div class="text-right text-nowrap">
+                    <button type="button" class="btn btn-primary" onclick="$('#alert_confirm span').text('Tem certeza que deseja salvar esta @ViewBag.Page?'); $('#alert_confirm').fadeIn('fast');">Salvar</button>
+                    @*<button type="button" class="btn btn-default" onclick="location.href='@Url.Action("GerenciarContasLst")';">Cancelar</button>*@
+                </div>
+                <div id="alert_confirm" class="alert alert-warning" role="alert" style="display: none;">
+                    <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="submit" class="btn btn-primary btn-xs">Sim</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-default btn-xs" onclick="$('#alert_confirm').fadeOut('fast');">Não</button>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<script type="text/javascript">
+    $("li.parent-list ul").hide(); //hide the child lists
+    $("li.parent-list i").click(function () {
+        $(this).toggleClass('fa-caret-down'); // toggle the font-awesome icon class on click
+        $(this).addClass('fa-caret-up'); // toggle the font-awesome icon class on click
+        $(this).next("ul").toggle(); // toggle the visibility of the child list on click
+    });
+    // check-uncheck all
+    $(document).on('change', 'input[id="all"]', function () {
+        $('.canine').prop("checked", this.checked);
+    });
+    // parent/child check-uncheck all
+    $(function () {
+        $('.parent').on('click', function () {
+            $(this).closest('ul li').find(':checkbox').prop('checked', this.checked);
+        });
+    });
+</script>

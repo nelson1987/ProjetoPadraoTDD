@@ -1,0 +1,144 @@
+﻿@model WebForLink.Web.ViewModels.AcessoVM
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>WebForLink</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    @Styles.Render("~/style/site")
+    @Styles.Render("~/style/siteInterno")
+
+    @if (!Request.UserAgent.Contains("MSIE 8.0") && !Request.UserAgent.Contains("MSIE 7.0") && !Request.UserAgent.Contains("MSIE 6.0"))
+    {
+        //@Scripts.Render("~/bundles/jquery-2.x")
+        @Scripts.Render("~/bundles/jquery")
+    }
+    else
+    {
+        @Scripts.Render("~/bundles/jquery-1.x")
+    }
+    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            @Html.Raw((bool)ViewBag.ExibeModalAcesso ? "$('#acessoModal').modal('show')" : "$('#acessoModal').modal('hide')")
+        });
+    </script>
+    <style>
+        .navbar-default {
+            background-color: rgb(47, 119, 144) !important;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default " role="navigation" style="height:30px; margin-bottom: 0px;" style="background-color: rgb(47, 119, 144) !important;">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div> <!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav" style="padding-top: 0px;height: 30px;">
+                <li><a href="@Url.Action("Index","Adesao")" class="nav-link">Planos</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style="padding-top: 2px; height: 30px;">
+                <li><button class="btn btn-warning btn-sm navbar-btn" onclick="$('#acessoModal').modal('show')">Acessar</button></li>
+            </ul>
+        </div> <!-- /.navbar-collapse -->
+    </nav> <!-- /.navbar -->
+    <div id="divAcesso">
+        <div class="modal fade" id="acessoModal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                @Html.Partial("../Home/_Acesso", Model)
+            </div>
+        </div>
+    </div>
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+        </ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <div class="text-center">
+                    <img style="max-width: 100%;" src="~/Content/images/img1.png"><br />
+                </div>
+                <div class="carousel-caption">
+                </div>
+            </div>
+            <div class="item">
+                <div class="text-center">
+                    <img style="max-width: 100%;" src="~/Content/images/img2.png">
+                </div>
+                <div class="carousel-caption">
+                </div>
+            </div>
+            <div class="item">
+                <div class="text-center">
+                    <img style="max-width: 100%;" src="~/Content/images/img3.png">
+                </div>
+                <div class="carousel-caption">
+                </div>
+            </div>
+            <div class="item">
+                <div class="text-center">
+                    <img style="max-width: 100%;" src="~/Content/images/img4.png">
+                </div>
+                <div class="carousel-caption">
+                </div>
+            </div>
+            <div class="item">
+                <div class="text-center">
+                    <img style="max-width: 100%;" src="~/Content/images/img5.png">
+                </div>
+                <div class="carousel-caption">
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Próximo</span>
+        </a>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p class="pull-left">
+                Copyright &copy; CH Consultoria 2016
+            </p>
+        </div> <!-- /.container -->
+    </footer>
+
+    @section Script{
+        <script type="text/javascript">
+            $(".nav-link").click(function (e) {
+                e.preventDefault();
+                var link = $(this);
+                var href = link.attr("href");
+                $("html,body").animate({ scrollTop: $(href).offset().top - 80 }, 200);
+                link.closest(".navbar").find(".navbar-toggle:not(.collapsed)").click();
+            });
+
+            $(document).ready(function () {
+                $('.carousel').carousel();
+            })
+        </script>
+    }
+</body>
+</html>

@@ -1,0 +1,225 @@
+2017-01-09 10:56:53,620 [92] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Assinar, UsuarioId: 0
+2017-01-09 11:05:24,874 [83] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Assinar, UsuarioId: 0
+2017-01-09 11:06:41,866 [93] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Assinar, UsuarioId: 0
+2017-01-09 11:13:31,292 [94] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.
+2017-01-09 11:26:31,891 [105] ERROR WebForLink.Web.MvcApplication - Aplicação Iniciada
+2017-01-09 11:26:32,848 [105] ERROR WebForLink.Web.Mappers.MappingProfile - 
+Unmapped members were found. Review the types and members below.
+Add a custom mapping expression, ignore, add a custom resolver, or modify the source/destination type
+======================================================================
+BancoVM -> Banco (Destination member list)
+WebForLink.Web.ViewModels.BancoVM -> WebForLink.Domain.Entities.Banco (Destination member list)
+
+Unmapped properties:
+FichaCadastral
+ValidationResult
+======================================================================
+Banco -> BancoVM (Destination member list)
+WebForLink.Domain.Entities.Banco -> WebForLink.Web.ViewModels.BancoVM (Destination member list)
+
+Unmapped properties:
+Arquivo
+ArquivoDescricao
+BancoList
+=========================================================================================
+SolicitacaoConviteVM -> Solicitacao (Destination member list)
+WebForLink.Web.ViewModels.SolicitacaoConviteVM -> WebForLink.Domain.Entities.Solicitacao (Destination member list)
+
+Unmapped properties:
+IdSolicitante
+IdSolicitado
+StatusSolicitacao
+DataCriacao
+DataReenvio
+DataCancelamento
+DataVisualizado
+FichaCadastralObrigatoria
+DocumentoSolicitacao
+Solicitado
+Solicitante
+ValidationResult
+============================================================================
+EnderecoVM -> Endereco (Destination member list)
+WebForLink.Web.ViewModels.EnderecoVM -> WebForLink.Domain.Entities.Endereco (Destination member list)
+
+Unmapped properties:
+FichaCadastral
+ValidationResult
+================================================================================================
+DocumentoSolicitacao -> DocumentoAnexadoVM (Destination member list)
+WebForLink.Domain.Entities.DocumentoSolicitacao -> WebForLink.Web.ViewModels.DocumentoAnexadoVM (Destination member list)
+
+Unmapped properties:
+IdFichaCadastral
+Validade
+=============================================================================================
+EnviarEmailSolicitacaoVM -> Solicitacao (Destination member list)
+WebForLink.Web.ViewModels.EnviarEmailSolicitacaoVM -> WebForLink.Domain.Entities.Solicitacao (Destination member list)
+
+Unmapped properties:
+Id
+IdSolicitante
+IdSolicitado
+IdFichaCadastral
+StatusSolicitacao
+DataCriacao
+DataReenvio
+DataCancelamento
+DataVisualizado
+FichaCadastralObrigatoria
+DocumentoSolicitacao
+FichaCadastral
+Solicitado
+Solicitante
+ValidationResult
+=========================================================================================
+Solicitacao -> SolicitacaoConviteVM (Destination member list)
+WebForLink.Domain.Entities.Solicitacao -> WebForLink.Web.ViewModels.SolicitacaoConviteVM (Destination member list)
+
+Unmapped properties:
+NomeFantasia
+IdCriptografado
+========================================================================================
+FichaCadastralVM -> FichaCadastral (Destination member list)
+WebForLink.Web.ViewModels.FichaCadastralVM -> WebForLink.Domain.Entities.FichaCadastral (Destination member list)
+
+Unmapped properties:
+Solicitacao
+ValidationResult
+==========================================================================
+ContatoVM -> Contato (Destination member list)
+WebForLink.Web.ViewModels.ContatoVM -> WebForLink.Domain.Entities.Contato (Destination member list)
+
+Unmapped properties:
+FichaCadastral
+ValidationResult
+============================================================================
+Endereco -> EnderecoVM (Destination member list)
+WebForLink.Domain.Entities.Endereco -> WebForLink.Web.ViewModels.EnderecoVM (Destination member list)
+
+Unmapped properties:
+TipoList
+EstadosList
+========================================================================================
+FichaCadastral -> FichaCadastralVM (Destination member list)
+WebForLink.Domain.Entities.FichaCadastral -> WebForLink.Web.ViewModels.FichaCadastralVM (Destination member list)
+
+Unmapped properties:
+ContratanteID
+
+2017-01-09 11:26:35,191 [104] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: PaginaInicial, UsuarioId: 0
+2017-01-09 11:26:45,813 [103] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Assinar, UsuarioId: 0
+2017-01-09 11:35:30,932 [94] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: PaginaInicial, UsuarioId: 0
+2017-01-09 11:35:31,106 [95] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Index, UsuarioId: 0
+2017-01-09 11:35:31,574 [103] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: PaginaInicial, UsuarioId: 0
+2017-01-09 11:35:31,613 [104] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Index, UsuarioId: 0
+2017-01-09 11:37:08,389 [94] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Assinar, UsuarioId: 0
+2017-01-09 11:37:21,472 [95] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.
+2017-01-09 11:37:39,911 [1] ERROR WebForLink.Web.MvcApplication - Aplicação Iniciada
+2017-01-09 11:37:41,827 [1] ERROR WebForLink.Web.Mappers.MappingProfile - 
+Unmapped members were found. Review the types and members below.
+Add a custom mapping expression, ignore, add a custom resolver, or modify the source/destination type
+======================================================================
+Banco -> BancoVM (Destination member list)
+WebForLink.Domain.Entities.Banco -> WebForLink.Web.ViewModels.BancoVM (Destination member list)
+
+Unmapped properties:
+Arquivo
+ArquivoDescricao
+BancoList
+=========================================================================================
+SolicitacaoConviteVM -> Solicitacao (Destination member list)
+WebForLink.Web.ViewModels.SolicitacaoConviteVM -> WebForLink.Domain.Entities.Solicitacao (Destination member list)
+
+Unmapped properties:
+IdSolicitante
+IdSolicitado
+StatusSolicitacao
+DataCriacao
+DataReenvio
+DataCancelamento
+DataVisualizado
+FichaCadastralObrigatoria
+DocumentoSolicitacao
+Solicitado
+Solicitante
+ValidationResult
+======================================================================
+BancoVM -> Banco (Destination member list)
+WebForLink.Web.ViewModels.BancoVM -> WebForLink.Domain.Entities.Banco (Destination member list)
+
+Unmapped properties:
+FichaCadastral
+ValidationResult
+========================================================================================
+FichaCadastralVM -> FichaCadastral (Destination member list)
+WebForLink.Web.ViewModels.FichaCadastralVM -> WebForLink.Domain.Entities.FichaCadastral (Destination member list)
+
+Unmapped properties:
+Solicitacao
+ValidationResult
+============================================================================
+EnderecoVM -> Endereco (Destination member list)
+WebForLink.Web.ViewModels.EnderecoVM -> WebForLink.Domain.Entities.Endereco (Destination member list)
+
+Unmapped properties:
+FichaCadastral
+ValidationResult
+==========================================================================
+ContatoVM -> Contato (Destination member list)
+WebForLink.Web.ViewModels.ContatoVM -> WebForLink.Domain.Entities.Contato (Destination member list)
+
+Unmapped properties:
+FichaCadastral
+ValidationResult
+========================================================================================
+FichaCadastral -> FichaCadastralVM (Destination member list)
+WebForLink.Domain.Entities.FichaCadastral -> WebForLink.Web.ViewModels.FichaCadastralVM (Destination member list)
+
+Unmapped properties:
+ContratanteID
+================================================================================================
+DocumentoSolicitacao -> DocumentoAnexadoVM (Destination member list)
+WebForLink.Domain.Entities.DocumentoSolicitacao -> WebForLink.Web.ViewModels.DocumentoAnexadoVM (Destination member list)
+
+Unmapped properties:
+IdFichaCadastral
+Validade
+=============================================================================================
+EnviarEmailSolicitacaoVM -> Solicitacao (Destination member list)
+WebForLink.Web.ViewModels.EnviarEmailSolicitacaoVM -> WebForLink.Domain.Entities.Solicitacao (Destination member list)
+
+Unmapped properties:
+Id
+IdSolicitante
+IdSolicitado
+IdFichaCadastral
+StatusSolicitacao
+DataCriacao
+DataReenvio
+DataCancelamento
+DataVisualizado
+FichaCadastralObrigatoria
+DocumentoSolicitacao
+FichaCadastral
+Solicitado
+Solicitante
+ValidationResult
+============================================================================
+Endereco -> EnderecoVM (Destination member list)
+WebForLink.Domain.Entities.Endereco -> WebForLink.Web.ViewModels.EnderecoVM (Destination member list)
+
+Unmapped properties:
+TipoList
+EstadosList
+=========================================================================================
+Solicitacao -> SolicitacaoConviteVM (Destination member list)
+WebForLink.Domain.Entities.Solicitacao -> WebForLink.Web.ViewModels.SolicitacaoConviteVM (Destination member list)
+
+Unmapped properties:
+NomeFantasia
+IdCriptografado
+
+2017-01-09 11:37:44,063 [104] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Index, UsuarioId: 0
+2017-01-09 11:38:37,304 [103] ERROR WebForLink.Web.Filters.BreadCrumbAttribute - Controller: Convite, Action: Assinar, UsuarioId: 0
+2017-01-09 11:41:01,741 [104] ERROR WebForLink.Web.MvcApplication - Referência de objeto não definida para uma instância de um objeto.

@@ -1,0 +1,91 @@
+﻿@model WebForLink.Web.Controllers.Grid<WebForLink.Web.Controllers.ListaGrid>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(x => x.Retorno.FirstOrDefault().Id)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(x => x.Retorno.FirstOrDefault().Tipo)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(x => x.Retorno.FirstOrDefault().Nome)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(x => x.Retorno.FirstOrDefault().Validade)
+                        </th>
+                        <th class="text-center" colspan="2">
+                            Opções
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Retorno)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Tipo</td>
+                            <td>@item.Nome</td>
+                            <td style="color:@item.ValidadeCor.ToString();">@item.Validade</td>
+                            <td>@item.UrlEditar</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <br />
+    <div class="clearfix"></div>
+    <div class="col-lg-3">
+        <span>Total de Registros: @Model.TotalRegistros (@Model.PrimeiroRegistro até @Model.UltimoRegistro) </span><br />
+        <span>Página @Model.Pager.CurrentPage de @Model.Pager.TotalPages</span>
+    </div>
+    <div class="col-lg-2 col-lg-offset-1">
+        <select class="form-control" id="slc_totalEmTela" style="padding-bottom: 6px; height: 29px;">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+    </div>
+    <div class="col-lg-5 col-lg-offset-1">
+        <!-- pager -->
+        @if (Model.Pager.EndPage > 1)
+            {
+            <ul class="pagination pull-right">
+                @if (Model.Pager.CurrentPage > 1)
+                {
+                    <li onclick="listarGrid({ page: 1, registros: @Model.TotalLinhas});">
+                        <a href="#">First</a>
+                    </li>
+                    @*<li>
+                            @Html.ActionLink("Previous", "Index", new { page = Model.Pager.CurrentPage - 1 })
+                        </li>*@
+                    }
+
+                @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                    {
+                    <li class="@(page == Model.Pager.CurrentPage ? "active" : "")" onclick="listarGrid({ page: @page, registros: @Model.TotalLinhas });">
+                        <a href="#">@page.ToString()</a>
+                    </li>
+                    }
+
+                @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                    {
+                    @*<li>
+                            @Html.ActionLink("Next", "Index", new { page = Model.Pager.CurrentPage + 1 })
+                        </li>*@
+                    <li onclick="listarGrid({ page: @Model.Pager.TotalPages, registros: @Model.TotalLinhas});">
+                        <a href="#">Last</a>
+                    </li>
+                    }
+            </ul>
+            }
+    </div>
+</div>

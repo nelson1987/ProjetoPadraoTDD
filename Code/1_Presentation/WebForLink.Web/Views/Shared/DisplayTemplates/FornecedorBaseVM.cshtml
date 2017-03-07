@@ -1,0 +1,64 @@
+﻿@using WebForLink.Domain.Infrastructure;
+
+@model WebForLink.Web.ViewModels.FornecedorBaseVM
+
+@{
+    string categoriaCSS = "text-center";
+    string categoriaTitle = string.Empty;
+    string categoriaValor = Model.CategoriaNome;
+
+    string orgaosPublicosCSS = "text-center";
+    string orgaosPublicosTitle = "Validação Ativa";
+    string orgaosPublicosValor = (Model.ExecutaRobo.HasValue && Model.ExecutaRobo.Value) ? "A" : "-";
+
+    string conviteCSS = "text-center";
+    string conviteTitle = "Convite Enviado";
+    string conviteValor = Model.DataConvite;
+    
+    string prazoCSS = "text-center";
+    string prazoTitle = "Prazo";
+    string prazoValor = Model.DataPrazo;
+    
+    if (string.IsNullOrEmpty(Model.DataConvite))
+    {
+        conviteCSS = "danger text-center";
+        conviteTitle = "Sem Convite!";
+        conviteValor = "-";
+    }
+
+    if (!Model.ExecutaRobo.HasValue)
+    {
+        orgaosPublicosCSS = "danger text-center";
+        orgaosPublicosTitle = "Validação Inativa!";
+    }
+
+    if (string.IsNullOrEmpty(Model.CategoriaNome))
+    {
+        categoriaCSS = "danger text-center";
+        categoriaTitle = "Sem Categoria!";
+        categoriaValor = "-";
+    }
+    
+    if (string.IsNullOrEmpty(Model.DataPrazo))
+    {
+        prazoCSS = "danger text-center";
+        prazoTitle = "Sem Prazo!";
+        prazoValor = "-";
+    }
+}
+
+<tr>
+    <td class="text-center">@(!string.IsNullOrEmpty(Model.CNPJ) ? Mascara.MascararCNPJouCPF(Model.CNPJ) : Mascara.MascararCNPJouCPF(Model.CPF))</td>
+    <td>@(!string.IsNullOrEmpty(Model.RazaoSocial) ? Model.RazaoSocial : Model.Nome)</td>
+    <td class="@orgaosPublicosCSS" data-container="body" data-toggle="tooltip" title="@orgaosPublicosTitle" data-placement="right">@orgaosPublicosValor</td>
+    <td class="@categoriaCSS" data-container="body" data-toggle="tooltip" title="@categoriaTitle" data-placement="right">@categoriaValor</td>
+    <td class="@conviteCSS" data-container="body" data-toggle="tooltip" title="@conviteTitle" data-placement="right">@conviteValor</td>
+    <td class="@prazoCSS" data-container="body" data-toggle="tooltip" title="@prazoTitle" data-placement="right">@prazoValor</td>
+    
+    <td class="text-center text-nowrap">
+        <button class="btn btn-primary btn-xs" onclick="location.href='@Model.UrlEditar'">Editar</button>
+        <button class="btn btn-danger btn-xs" onclick="location.href='@Model.UrlExcluir'">Excluir</button>
+    </td>
+</tr>
+
+

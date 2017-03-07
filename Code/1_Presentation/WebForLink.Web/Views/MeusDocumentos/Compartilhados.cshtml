@@ -1,0 +1,182 @@
+﻿@model WebForLink.Web.ViewModels.DocumentosCompartilhadosVM
+
+@{
+    Layout = null;
+    ViewBag.Title = "WebForLink";
+}
+
+<!DOCTYPE html> 
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/style/bootstrap")
+    @Styles.Render("~/style/azul")
+
+
+    @Styles.Render("~/style/date")
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js.js"></script>
+
+        <style>
+            .knob {
+                display: none;
+            }
+        </style>
+
+    <![endif]-->
+    <!--[if lt IE 8]>
+        <script>
+            location.href = 'Compatibilidade.html'
+        </script>
+    <![endif]-->
+
+</head>
+<body class="skin-blue">
+    <header class="header">
+
+
+
+        <div class="logo" style="cursor:default;">
+            <img src="~/Content/images/webforlink3_200x45_ed.png" />
+        </div>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <div class="col-xs-1 col-md-1">
+                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+            </div>
+            <div class="navbar-right" style="padding-right: 20px;">
+                <ul class="nav navbar-nav">
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="glyphicon glyphicon-user"></i>
+                            <span><i class="caret"></i></span>
+                        </a>
+                        <ul class="dropdown-menu" style="width: auto;">
+                            <li class="user-footer">
+                                <div class="text-center">
+                                    <a href="@Url.Action("Index", new { area = "", controller = "Home" })" class="btn btn-default btn-flat">Sair</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- MENU -->
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+        <aside class="left-side sidebar-offcanvas">
+            <section class="sidebar">
+                <div class="user-panel">
+                    <div class="logo-cliente">
+                        @if (ViewBag.Imagem == "semfoto.png" || ViewBag.Imagem == "semlogo.png")
+                        {
+                            <img src="~/Content/images/@ViewBag.Imagem" />
+                        }
+                        else
+                        {
+                            <img src="~/ImagensUsuarios/@ViewBag.Imagem" />
+                        }
+                    </div>
+                </div>
+
+            </section>
+        </aside>
+
+        <aside class="right-side">
+            <section class="content-header">
+                <h1>
+                    Documentos
+                    <!-- small>Control panel</!--small -->
+                </h1>
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="alert alert-success" role="alert" style="display: none; font-size: 14px; font-weight: bold; text-align: center;" onclick="$(this).fadeOut('fast')"></div>
+                </div>
+                <div id="boxGrid" class="box box-primary">
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-condensed">
+                                <thead>
+                                    @if (Model.DocumentosCompartilhados.Any())
+                                    {
+                                        <tr>
+                                            <th class="text-center">
+                                                Tipo de Documento
+                                            </th>
+                                            <th class="text-center">
+                                                Descrição do Documento
+                                            </th>
+                                            <th class="text-center">
+                                                Documento
+                                            </th>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <th colspan="3">
+                                                &nbsp;
+                                            </th>
+                                        </tr>
+                                    }
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.DocumentosCompartilhados)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.TipoDocumento)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.DescricaoDocumento)
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="@item.UrlArquivo" target="_blank">@Html.DisplayFor(modelItem => item.NomeArquivo)</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                    @if (!Model.DocumentosCompartilhados.Any())
+                                    {
+                                        <tr class="warning">
+                                            <td colspan="10" class="text-warning text-center">
+                                                A pesquisa não retornou nenhum resultado!
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+                @if (Model.FichaCadastral != null)
+                {
+                    @Html.Partial("~/Views/MeusDocumentos/_MinhaFicha_Bloqueada.cshtml", Model.FichaCadastral)
+                }
+            </section><!-- /.content -->
+        </aside>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/date")
+</body>
+</html>

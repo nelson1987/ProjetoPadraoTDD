@@ -1,0 +1,99 @@
+﻿@model WebForLink.Web.Areas.Administracao.Models.PerfilAdministracaoModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdministracao.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        Perfil
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-cogs"></i> Administração</li>
+        <li class="active">Perfil</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Dados do Perfil</h3>
+                </div>
+                <div class="box-body">
+                    @using (Html.BeginForm("PerfilEditarFrm", "Perfil"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                        <div class="form-group">
+                            @Html.HiddenFor(model => model.Id)
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Nome, new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Descricao, new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                                        @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ContratanteId, "Empresa", new { @class = "control-label" })
+                                        @Html.DropDownListFor(model => model.ContratanteId, (SelectList)ViewBag.CONTRATANTE_ID, new { @class = "form-control input-sm" })
+                                        @Html.ValidationMessageFor(model => model.ContratanteId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-4">
+                                <ul class="span4">
+                                    <li><input type="checkbox" id="all" name="check-all" /> <b>Todas as Funções</b> </li>
+                                    @for (var i = 0; i < Model.FuncaoList.Count; i++)
+                                    {
+                                        var funcao = Model.FuncaoList[i];
+                                        <li class="checkbox">
+                                            &emsp;
+                                            <label>
+                                                @Html.Hidden("FuncaoList[" + @i + "].Id", funcao.Id)
+                                                @Html.Hidden("FuncaoList[" + @i + "].Nome", funcao.Nome)
+                                                @Html.Hidden("FuncaoList[" + @i + "].Descricao", funcao.Descricao)
+                                                @Html.Hidden("FuncaoList[" + @i + "].AplicacaoId", funcao.AplicacaoId)
+                                                <input type="checkbox"
+                                                       name="SelectedGroupsFuncao"
+                                                       class="canine"
+                                                       value="@funcao.Id" id="@funcao.Id"
+                                                       @{ if (Model.SelectedGroupsFuncao != null) { if (Model.SelectedGroupsFuncao.Contains(funcao.Id)) { <text> checked='checked' </text>  } } } />
+                                                @funcao.Nome
+                                            </label>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <div class="text-right text-nowrap">
+                                <button type="button" class="btn btn-primary" onclick="$('#alert_confirm span').text('Tem certeza que deseja salvar esta @ViewBag.Page?'); $('#alert_confirm').fadeIn('fast');">Salvar</button>
+                                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("PerfilLst")';">Cancelar</button>
+                            </div>
+                            <div id="alert_confirm" class="alert alert-warning" role="alert" style="display: none;">
+                                <span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="submit" class="btn btn-primary btn-xs">Sim</button>&nbsp;&nbsp;&nbsp;
+                                <button type="button" class="btn btn-default btn-xs" onclick="$('#alert_confirm').fadeOut('fast');">Não</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

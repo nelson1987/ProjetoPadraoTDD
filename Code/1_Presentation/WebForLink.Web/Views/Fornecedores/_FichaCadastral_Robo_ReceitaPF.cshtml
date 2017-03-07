@@ -1,0 +1,67 @@
+﻿@model WebForLink.Web.ViewModels.WebForLink.FornecedoresVM
+
+@if (Model.RoboReceitaCPF != null)
+{
+    <div id="callReceitaCPF" class="panel panel-@Model.RoboReceitaCPF.cssCor">
+        <div id="callReceitaCPFHeading" class="panel-heading panel-heading-@Model.RoboReceitaCPF.cssCor">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#bodyReceitaCPF">
+                    <b>Receita Federal Pessoa Física:</b><span>@Html.Raw(Model.RoboReceitaCPF.Code != null ? Model.RoboReceitaCPF.Data.Message : "")</span>
+                </a>
+            </h4>
+        </div>
+        <div id="bodyReceitaCPF" class="panel-collapse collapse" role="tabpanel">
+            <div class="panel-body">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Nome</label><br />
+                        <span id="span_RoboReceitaCPF_Data_Nome">@Html.DisplayTextFor(model => model.RoboReceitaCPF.Data.Nome)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCPF.Data.Nome)
+                        @Html.HiddenFor(model => model.RoboReceitaCPF.Code)
+                        @Html.HiddenFor(model => model.RoboReceitaCPF.Data.Message)
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Situação Cadastral</label><br />
+                        <span id="span_RoboReceitaCPF_Data_SituacaoCadastral">@Html.DisplayTextFor(model => model.RoboReceitaCPF.Data.SituacaoCadastral)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCPF.Data.SituacaoCadastral)
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Data Emissão</label><br />
+                        <span id="span_RoboReceitaCPF_Data_DataEmissao">@Html.DisplayTextFor(model => model.RoboReceitaCPF.Data.DataEmissao)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCPF.Data.DataEmissao)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Hora Emissão</label><br />
+                        <span id="span_RoboReceitaCPF_Data_HoraEmissao">@Html.DisplayTextFor(model => model.RoboReceitaCPF.Data.HoraEmissao)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCPF.Data.HoraEmissao)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Contingência</label><br />
+                        <span id="span_RoboReceitaCPF_Data_Contingencia">@Html.DisplayTextFor(model => model.RoboReceitaCPF.Data.Contingencia)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCPF.Data.Contingencia)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Comprovante</label><br />
+                        <span id="span_RoboReceitaCPF_Data_Comprovante">@Html.DisplayTextFor(model => model.RoboReceitaCPF.Data.Comprovante)&nbsp;</span>
+                        @Html.HiddenFor(model => model.RoboReceitaCPF.Data.Comprovante)
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+}
+
+                

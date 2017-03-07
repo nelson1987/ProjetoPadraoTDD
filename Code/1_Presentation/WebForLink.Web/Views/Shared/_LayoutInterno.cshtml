@@ -1,0 +1,252 @@
+﻿@using WebForLink.Web.Helpers
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/siteInterno")
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.png"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js.js"></script>
+
+        <style>
+            .knob { display: none; }
+        </style>
+
+    <![endif]-->
+    <!--[if lt IE 8]>
+        <script>
+            location.href = "Compatibilidade.html"
+        </script>
+    <![endif]-->
+
+    <style>
+        .logo-rodape {
+            background-color: #f1f1f2;
+            bottom: 0px;
+            padding-left: 0px;
+            position: fixed;
+            width: 240px;
+        }
+    </style>
+    @RenderSection("styles", false)
+</head>
+<body class="skin-blue">
+@Html.Aguarde()
+<header class="header">
+    <div class="nome-cliente-mobile col-md-12">
+        <img src="~/Content/images/webforlink_logo.png"/>
+    </div>
+    <nav class="navbar navbar-static-top" role="navigation">
+        <div class="col-xs-1 col-md-1" style="z-index: 2">
+            <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+        </div>
+        <div style="z-index: 2;">
+            <div class="navbar-right">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu dropdown-li-custom">
+                        <a href="#" class="dropdown-toggle dropdown-a-custom" data-toggle="dropdown">
+                            <i class="glyphicon glyphicon-user"></i>
+                            <span>Administrador <i class="caret"></i></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="@Url.Action("MinhaContaFrm", new {area = "Administracao", controller = "Usuario"})" class="btn btn-default btn-flat">Minha Conta</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="@Url.Action("Index", new {area = "", controller = "Home"})" class="btn btn-default btn-flat">Sair</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<!-- MENU -->
+<div class="wrapper row-offcanvas row-offcanvas-left">
+    <aside class="left-side sidebar-offcanvas">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="logo-cliente">
+                    <button type="button" class="btn btn-default" onclick=" window.location.href = '/HomeAdmin/LogoFoto'; "><i class=" fa fa-pencil"></i> Inserir Logo</button>
+                    <img src="~/Content/images/ch_logo.png"/>
+                </div>
+            </div>
+            <ul class="sidebar2-menu">
+                <li>
+                    <a href="/HomeAdmin">
+                        <div>
+                            <i class="fa fa-home"></i>Home
+                        </div>
+                    </a>
+                </li>
+                <li onclick="$(this).children('ul').slideToggle('slow'); ">
+                    <div>
+                        <i class="fa fa-cube"></i>Fornecedores
+                    </div>
+                    <ul style="display: none;">
+                        <li id="">
+                            <a href="/Categoria/CategoriaLst">
+                                <div>
+                                    <i class="fa fa-angle-double-right"></i>Configurar Categoria (Grupo Contas)
+                                </div>
+                            </a>
+                        </li>
+                        <li id="">
+                            <a href="/Documento/ListaDocumentosLst">
+                                <div>
+                                    <i class="fa fa-angle-double-right"></i>Configurar Lista de Documentos
+                                </div>
+                            </a>
+                        </li>
+                        <li id="">
+                            <a href="/Fornecedores/FornecedoresLst">
+                                <div>
+                                    <i class="fa fa-angle-double-right"></i>Gestão de Fornecedores
+                                </div>
+                            </a>
+                        </li>
+                        <li id="">
+                            <a href="/Fornecedores/FornecedoresFrm">
+                                <div>
+                                    <i class="fa fa-angle-double-right"></i>Novo Fornecedor
+                                </div>
+                            </a>
+                        </li>
+                        <li id="">
+                            <a href="/Importacao/CarregarArquivo">
+                                <div>
+                                    <i class="fa fa-angle-double-right"></i>Importação
+                                </div>
+                            </a>
+                        </li>
+                        <li id="">
+                            <a href="/Importacao/Listar">
+                                <div>
+                                    <i class="fa fa-angle-double-right"></i>Gestão de Importados
+                                </div>
+                            </a>
+                        </li>
+                        <li id="">
+                            <a href="/Aprovacao/AprovacaoLst">
+                                <div>
+                                    <i class="fa fa-angle-double-right"></i>Aprovação
+                                </div>
+                            </a>
+                        </li>
+                        <li id="">
+                            <a href="/ControleSolicitacao/FornecedoresControleSolicitacoesLst">
+                                <div>
+                                    <i class="fa fa-angle-double-right"></i>Acompanhamento
+                                </div>
+                            </a>
+                        </li>
+                        <li id="">
+                            <a href="/PreCadastroFornecedor/PreCadastroLst">
+                                <div>
+                                    <i class="fa fa-angle-double-right"></i>Lista de pré-cadastrados
+                                </div>
+                            </a>
+                        </li>
+                        <li id="">
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-angle-double-right"></i>Meu Plano
+                                </div>
+                            </a>
+                        </li>
+                        <li id="">
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-angle-double-right"></i>Estatística
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li onclick="$(this).children('ul').slideToggle('slow'); ">
+                    <div>
+                        <i class="fa fa-archive"></i>Meus Documentos
+                    </div>
+                    <ul style="display: none;">
+                        <li id="">
+                            <a href="/MeusDocumentos/MinhaFichaCadastral">
+                                <div>
+                                    <i class="fa fa-angle-double-right"></i>Minha Ficha Cadastral
+                                </div>
+                            </a>
+                        </li>
+                        <li id="">
+                            <a href="/MeusDocumentos/MeusDocumentosLst">
+                                <div>
+                                    <i class="fa fa-angle-double-right"></i>Cadastro de Documentos
+                                </div>
+                            </a>
+                        </li>
+                        <li id="">
+                            <a href="/MeusDocumentos/EnviarLst">
+                                <div>
+                                    <i class="fa fa-angle-double-right"></i>Enviar
+                                </div>
+                            </a>
+                        </li>
+                        <li id="">
+                            <a href="/MeusDocumentos/EnviadosLst">
+                                <div>
+                                    <i class="fa fa-angle-double-right"></i>Documentos Enviados
+                                </div>
+                            </a>
+                        </li>
+                        <li id="">
+                            <a href="/Destinatario/DestinatarioLst">
+                                <div>
+                                    <i class="fa fa-angle-double-right"></i>Destinatários
+                                </div>
+                            </a>
+                        </li>
+                        <li id="">
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-angle-double-right"></i>Documentos Enviados
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="logo-rodape text-center">
+                <img src="~/Content/images/footer_logo.png"/>
+            </div>
+        </section>
+    </aside>
+    <aside class="right-side">
+        @if (IsSectionDefined("rodaRobo"))
+        {
+            @RenderSection("rodaRobo")
+        }
+        @RenderBody()
+    </aside>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script src="~/Scripts/adminLte.js"></script>
+@if (IsSectionDefined("scripts"))
+{
+    @RenderSection("scripts")
+}
+</body>
+</html>
