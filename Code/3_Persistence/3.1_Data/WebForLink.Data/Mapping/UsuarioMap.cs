@@ -1,7 +1,7 @@
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
 using WebForLink.Domain.Entities;
 
-namespace WebForLink.Data.Context.Mapping
+namespace WebForLink.Win.Banco
 {
     public class UsuarioMap : EntityTypeConfiguration<Usuario>
     {
@@ -12,19 +12,19 @@ namespace WebForLink.Data.Context.Mapping
 
             // Properties
             Property(t => t.Login)
-                .IsRequired()
-                .HasMaxLength(150);
+                .IsRequired();
 
             // Table & Column Mappings
-            ToTable("Arquivo");
-            Property(t => t.Id).HasColumnName("Id");
+            ToTable("WFL_USUARIO");
+            Property(t => t.Id).HasColumnName("ID_USUARIO");
+            Property(t => t.Login).HasColumnName("LOGIN");
 
-            Ignore(t => t.ValidationResult);
-            Ignore(t => t.EhValido);
-            // Relationships
-            //HasRequired(t => t.DocumentoAnexado)
-            //    .WithMany(t => t.Arquivos)
-            //    .HasForeignKey(d => d.IdDocumentoAnexado);
+            HasRequired(x => x.Contratante)
+                .WithMany(x => x.Usuarios);
+            HasMany(x => x.Perfis)
+                .WithMany(x => x.Usuarios);
+            HasMany(x => x.Papeis)
+                .WithMany(x => x.Usuarios);
         }
     }
 }

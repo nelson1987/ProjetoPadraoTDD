@@ -13,6 +13,8 @@ namespace WebForLink.CrossCutting.InversionControl.Modules
             Bind(typeof (IService<>)).To(typeof (Service<>));
 
             Bind<IUsuarioService>().To<UsuarioService>();
+
+            Bind<IEmpresaService>().To<EmpresaService>();
         }
     }
 }

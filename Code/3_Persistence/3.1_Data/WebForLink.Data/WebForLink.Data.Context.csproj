@@ -71,7 +71,17 @@
     <Compile Include="Interfaces\IContextManager.cs" />
     <Compile Include="Interfaces\IDbContext.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Mapping\AplicacaoMap.cs" />
+    <Compile Include="Mapping\ClienteMap.cs" />
+    <Compile Include="Mapping\ContratanteMap.cs" />
+    <Compile Include="Mapping\EmpresaMap.cs" />
+    <Compile Include="Mapping\FabricanteMap.cs" />
+    <Compile Include="Mapping\FornecedorMap.cs" />
+    <Compile Include="Mapping\SolicitacaoCadastroMap.cs" />
+    <Compile Include="Mapping\SolicitacaoMap.cs" />
+    <Compile Include="Mapping\SolicitacaoModificacaoBancoMap.cs" />
     <Compile Include="Mapping\UsuarioMap.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitOfWork.cs" />
     <Compile Include="WebForLinkContexto.cs" />

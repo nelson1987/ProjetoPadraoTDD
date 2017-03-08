@@ -55,10 +55,12 @@ namespace WebForLink.Domain.Entities
         {
             return Perfis.Any(x => x == perfil);
         }
-
-        public void AdicionarEmpresa(Empresa sorteq)
+        
+        public void AdicionarEmpresa(Empresa empresa)
         {
-            Empresas.Add(sorteq);
+            if(empresa is Cliente)
+                SetDadosGerais((Cliente)empresa);
+            Empresas.Add(empresa);
         }
 
         public void SetDadosGerais(Cliente empresa)

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace WebForLink.Domain.Entities.Tipos
 {
@@ -7,21 +8,32 @@ namespace WebForLink.Domain.Entities.Tipos
         public Cliente(string razaoSocial, string documento, TipoEmpresa tipo)
             : base(razaoSocial, documento, tipo)
         {
-            Fornecedores = new List<Fornecedor>();
-            Fabricantes = new List<Fabricante>();
+            //Fabricantes = new List<Fabricante>();
         }
-
-        public List<Fornecedor> Fornecedores { get; private set; }
-        public List<Fabricante> Fabricantes { get; private set; }
-
-        public void AdicionarFabricante(Fabricante Fabricante)
+        public int Tipagem { get; private set; }
+        public List<Fornecedor> Fornecedores
         {
-            Fabricantes.Add(Fabricante);
+            get
+            {
+                return Contratantes.Cast<Fornecedor>().ToList();
+            }
+        }
+        public List<Fabricante> Fabricantes
+        {
+            get
+            {
+                return Contratantes.Cast<Fabricante>().ToList();
+            }
         }
 
-        public void AdicionarFornecedor(Fornecedor fornecedor)
-        {
-            Fornecedores.Add(fornecedor);
-        }
+        //public void AdicionarFabricante(Fabricante Fabricante)
+        //{
+        //    Fabricantes.Add(Fabricante);
+        //}
+
+        //public void AdicionarFornecedor(Fornecedor fornecedor)
+        //{
+        //    Fornecedores.Add(fornecedor);
+        //}
     }
 }

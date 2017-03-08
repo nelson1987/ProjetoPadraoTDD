@@ -15,6 +15,10 @@ namespace WebForLink.CrossCutting.InversionControl.Modules
             Bind<IUsuarioRepository>().To<UsuarioEntityRepository>();
             Bind<IUsuarioReadOnlyRepository>().To<UsuarioDapperRepository>();
             Bind<IReadOnlyRepository<Usuario>>().To<UsuarioDapperRepository>();
+
+            Bind<IEmpresaRepository>().To<EmpresaEntityRepository>();
+            Bind<IEmpresaReadOnlyRepository>().To<EmpresaDapperRepository>();
+            Bind<IReadOnlyRepository<Empresa>>().To<EmpresaDapperRepository>();
         }
     }
 }

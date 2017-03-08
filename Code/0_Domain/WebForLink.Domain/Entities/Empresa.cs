@@ -5,6 +5,10 @@ using WebForLink.Domain.Entities.Tipos;
 
 namespace WebForLink.Domain.Entities
 {
+    /// <summary>
+    /// 
+    /// Fornecedor
+    /// </summary>
     public abstract class Empresa
     {
         private Empresa()

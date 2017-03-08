@@ -193,6 +193,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Administrador\AdministradorAreaRegistration.cs" />
+    <Compile Include="Areas\Administrador\Controllers\EmpresaController.cs" />
     <Compile Include="Areas\Administrador\Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -267,6 +268,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administrador\Models\" />
+    <Folder Include="Areas\Administrador\Views\Empresa\" />
     <Folder Include="Areas\Administrador\Views\Shared\" />
     <Folder Include="Areas\Administrador\Views\Usuario\" />
   </ItemGroup>

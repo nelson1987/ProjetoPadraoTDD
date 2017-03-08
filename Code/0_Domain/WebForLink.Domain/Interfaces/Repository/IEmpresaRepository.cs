@@ -3,9 +3,7 @@ using WebForLink.Domain.Interfaces.Repository.Common;
 
 namespace WebForLink.Domain.Interfaces.Repository
 {
-    public interface IUsuarioRepository : IRepository<Usuario>
+    public interface IEmpresaRepository : IRepository<Empresa>
     {
-        Usuario BuscarArquivo(int id);
-        Usuario BuscarFichaCompleta(int id);
     }
 }

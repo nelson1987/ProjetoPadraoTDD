@@ -1,11 +1,11 @@
 ﻿using WebForLink.Domain.Entities;
+using WebForLink.Domain.Interfaces.Repository.Common;
 
 namespace WebForLink.Domain.Interfaces.Repository
 {
-    public interface IUsuarioRepository
+    public interface IUsuarioRepository : IRepository<Usuario>
     {
-        void CriarUsuarioComPlano(int plano, Usuario usuario, Categoria convite, Adesao adesao);
-
-        void CriarUsuarioSemPlano(Usuario usuario, Categoria convite);
+        Usuario BuscarArquivo(int id);
+        Usuario BuscarFichaCompleta(int id);
     }
 }

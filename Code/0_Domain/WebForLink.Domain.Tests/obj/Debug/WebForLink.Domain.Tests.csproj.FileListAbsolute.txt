@@ -1,6 +1,5 @@
 C:\0_Padrao\ProjetoTDD\Code\0_Domain\WebForLink.Domain.Tests\bin\Debug\WebForLink.Domain.Tests.dll
 C:\0_Padrao\ProjetoTDD\Code\0_Domain\WebForLink.Domain.Tests\bin\Debug\WebForLink.Domain.Tests.pdb
-C:\0_Padrao\ProjetoTDD\Code\0_Domain\WebForLink.Domain.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\0_Padrao\ProjetoTDD\Code\0_Domain\WebForLink.Domain.Tests\bin\Debug\WebForLink.Domain.dll
 C:\0_Padrao\ProjetoTDD\Code\0_Domain\WebForLink.Domain.Tests\bin\Debug\WebForLink.Domain.pdb
 C:\0_Padrao\ProjetoTDD\Code\0_Domain\WebForLink.Domain.Tests\obj\Debug\WebForLink.Domain.Tests.csprojResolveAssemblyReference.cache

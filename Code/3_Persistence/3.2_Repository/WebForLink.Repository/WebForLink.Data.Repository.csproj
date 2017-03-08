@@ -76,9 +76,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dapper\Common\Repository.cs" />
+    <Compile Include="Dapper\EmpresaDapperRepository.cs" />
     <Compile Include="Dapper\UsuarioDapperRepository.cs" />
     <Compile Include="EntityFramework\Common\Repository.cs" />
     <Compile Include="EntityFramework\Common\RepositoryWebForLinkException.cs" />
+    <Compile Include="EntityFramework\EmpresaEntityRepository.cs" />
     <Compile Include="EntityFramework\UsuarioEntityRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

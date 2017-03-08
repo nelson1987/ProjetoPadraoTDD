@@ -14,15 +14,14 @@ namespace WebForLink.Domain.Entities
             Contratantes = new List<Contratante>();
         }
 
+        public int Id { get; set; }
+        public bool EhValido { get; }
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
         public bool Ativo { get; private set; }
-        public List<Contratante> Contratantes { get; private set; }
+        public List<Contratante> Contratantes { get; private set; }        
         public List<Perfil> Perfis { get; private set; }
 
-
-        public int Id { get; set; }
-        public bool EhValido { get; }
         public ValidationResult ValidationResult
         {
             get

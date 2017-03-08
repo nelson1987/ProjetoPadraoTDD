@@ -9,6 +9,7 @@ namespace WebForLink.CrossCutting.InversionControl.Modules
         public override void Load()
         {
             Bind<IUsuarioAppService>().To<UsuarioAppService>();
+            Bind<IEmpresaAppService>().To<EmpresaAppService>();
         }
     }
 }
