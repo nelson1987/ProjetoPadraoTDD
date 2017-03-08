@@ -4,6 +4,7 @@ using WebForLink.Domain.Validation;
 
 namespace WebForLink.Domain.Entities
 {
+    /*
     public class Usuario : ISelfValidation
     {
         protected Usuario()
@@ -35,5 +36,5 @@ namespace WebForLink.Domain.Entities
         }
 
         public ValidationResult ValidationResult { get; private set; }
-    }
+    }*/
 }

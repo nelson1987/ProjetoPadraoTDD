@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using WebForLink.Domain.Entities.Validations;
+using WebForLink.Domain.Interfaces.Validation;
+using WebForLink.Domain.Validation;
 
 namespace WebForLink.Domain.Entities
 {
-    public class Usuario
+    public class Usuario : ISelfValidation
     {
         private Usuario()
         {
@@ -58,5 +61,17 @@ namespace WebForLink.Domain.Entities
         {
             Papeis.Add(papelDeSolicitante);
         }
+
+        public bool EhValido
+        {
+            get
+            {
+                var validacaoExterna = new UsuarioValidation();
+                ValidationResult = validacaoExterna.Validar(this);
+                return ValidationResult.EstaValidado;
+            }
+        }
+
+        public ValidationResult ValidationResult { get; private set; }
     }
 }
