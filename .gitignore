@@ -31,3 +31,7 @@ Code/1_Presentation/WebForLink\.Web/obj/
 *.user
 
 Code/1_Presentation/WebForLink\.Web/Properties/PublishProfiles/
+
+Code/1_Presentation/MasterData\.Web/bin/
+
+Code/1_Presentation/MasterData\.Web/obj/
