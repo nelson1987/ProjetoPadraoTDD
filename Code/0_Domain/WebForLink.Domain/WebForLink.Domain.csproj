@@ -51,8 +51,60 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\AplicacaoBuilder.cs" />
+    <Compile Include="Entities\Aplicacao.cs" />
+    <Compile Include="Entities\Arquivo.cs" />
+    <Compile Include="Entities\Banco.cs" />
+    <Compile Include="Entities\Categorias\CategoriaEmpresa.cs" />
+    <Compile Include="Entities\Categorias\CategoriaEmpresaCh.cs" />
+    <Compile Include="Entities\Compartilhamento.cs" />
+    <Compile Include="Entities\ConfiguracaoSistema.cs" />
+    <Compile Include="Entities\Contato.cs" />
+    <Compile Include="Entities\Contratante.cs" />
+    <Compile Include="Entities\Documento.cs" />
+    <Compile Include="Entities\Empresa.cs" />
+    <Compile Include="Entities\Endereco.cs" />
+    <Compile Include="Entities\Etapa.cs" />
+    <Compile Include="Entities\FichaCadastral.cs" />
+    <Compile Include="Entities\Fluxo.cs" />
+    <Compile Include="Entities\GrupoContratante.cs" />
+    <Compile Include="Entities\Importacao.cs" />
+    <Compile Include="Entities\Material.cs" />
+    <Compile Include="Entities\Papel.cs" />
+    <Compile Include="Entities\Passo.cs" />
+    <Compile Include="Entities\Perfil.cs" />
+    <Compile Include="Entities\PreCadastro.cs" />
+    <Compile Include="Entities\Robo.cs" />
+    <Compile Include="Entities\Servico.cs" />
+    <Compile Include="Entities\Solicitacao.cs" />
     <Compile Include="Entities\Solicitante.cs" />
     <Compile Include="Entities\Specifications\UsuarioSpecs.cs" />
+    <Compile Include="Entities\Status\StatusEmpresa.cs" />
+    <Compile Include="Entities\Status\StatusPreCadastro.cs" />
+    <Compile Include="Entities\Status\StatusSolicitacao.cs" />
+    <Compile Include="Entities\Tipos\Cliente.cs" />
+    <Compile Include="Entities\Tipos\Fabricante.cs" />
+    <Compile Include="Entities\Tipos\FichaCompartilhada.cs" />
+    <Compile Include="Entities\Tipos\FichaConvite.cs" />
+    <Compile Include="Entities\Tipos\FichaEmpresa.cs" />
+    <Compile Include="Entities\Tipos\FichaPreCadastro.cs" />
+    <Compile Include="Entities\Tipos\FichaSolicitacao.cs" />
+    <Compile Include="Entities\Tipos\Fornecedor.cs" />
+    <Compile Include="Entities\Tipos\ImportacaoEmpresa.cs" />
+    <Compile Include="Entities\Tipos\ImportacaoFabricante.cs" />
+    <Compile Include="Entities\Tipos\RoboCorreios.cs" />
+    <Compile Include="Entities\Tipos\RoboReceitaFederal.cs" />
+    <Compile Include="Entities\Tipos\RoboSimplesNacional.cs" />
+    <Compile Include="Entities\Tipos\RoboSintegra.cs" />
+    <Compile Include="Entities\Tipos\RoboSuframa.cs" />
+    <Compile Include="Entities\Tipos\SolicitacaoCadastro.cs" />
+    <Compile Include="Entities\Tipos\SolicitacaoModificacaoBanco.cs" />
+    <Compile Include="Entities\Tipos\TipoContratante.cs" />
+    <Compile Include="Entities\Tipos\TipoEmpresa.cs" />
+    <Compile Include="Entities\Tipos\TipoFluxo.cs" />
+    <Compile Include="Entities\Tipos\TipoSolicitacao.cs" />
+    <Compile Include="Entities\Tipos\TipoUnspsc.cs" />
+    <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Entities\Validations\UsuarioValidation.cs" />
     <Compile Include="Entities\Validations\ValidationMessages.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -111,6 +163,7 @@
       <LastGenOutput>ValidationMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
