@@ -17,6 +17,7 @@ namespace MasterData.Web.Areas.Administrador.Controllers
         // GET: Administrador/Usuario
         public ActionResult Index()
         {
+            Usuario login = _contratanteConfiguracaoEmailBp.ProcessoLoginConvencional("", "");
             var usuarios = new List<Usuario>();
             return View();
         }

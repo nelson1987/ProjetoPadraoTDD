@@ -70,7 +70,6 @@ D:\GIT_Repositorio\ProjetoPadraoTDD\Code\1_Presentation\MasterData.Web\bin\WebFo
 D:\GIT_Repositorio\ProjetoPadraoTDD\Code\1_Presentation\MasterData.Web\bin\WebForLink.CrossCutting.InversionControl.dll
 D:\GIT_Repositorio\ProjetoPadraoTDD\Code\1_Presentation\MasterData.Web\bin\WebForLink.Domain.dll
 D:\GIT_Repositorio\ProjetoPadraoTDD\Code\1_Presentation\MasterData.Web\bin\WebForLink.Data.Context.dll
-D:\GIT_Repositorio\ProjetoPadraoTDD\Code\1_Presentation\MasterData.Web\bin\LinqKit.dll
 D:\GIT_Repositorio\ProjetoPadraoTDD\Code\1_Presentation\MasterData.Web\bin\CommonServiceLocator.NinjectAdapter.Unofficial.dll
 D:\GIT_Repositorio\ProjetoPadraoTDD\Code\1_Presentation\MasterData.Web\bin\WebForLink.Data.Repository.dll
 D:\GIT_Repositorio\ProjetoPadraoTDD\Code\1_Presentation\MasterData.Web\bin\Dapper.dll
@@ -84,6 +83,5 @@ D:\GIT_Repositorio\ProjetoPadraoTDD\Code\1_Presentation\MasterData.Web\bin\Ninje
 D:\GIT_Repositorio\ProjetoPadraoTDD\Code\1_Presentation\MasterData.Web\bin\Ninject.Web.Mvc.xml
 D:\GIT_Repositorio\ProjetoPadraoTDD\Code\1_Presentation\MasterData.Web\bin\Ninject.Web.WebApi.xml
 D:\GIT_Repositorio\ProjetoPadraoTDD\Code\1_Presentation\MasterData.Web\bin\WebForLink.Data.Context.pdb
-D:\GIT_Repositorio\ProjetoPadraoTDD\Code\1_Presentation\MasterData.Web\bin\LinqKit.xml
 D:\GIT_Repositorio\ProjetoPadraoTDD\Code\1_Presentation\MasterData.Web\bin\WebForLink.Data.Repository.pdb
 D:\GIT_Repositorio\ProjetoPadraoTDD\Code\1_Presentation\MasterData.Web\bin\Dapper.xml

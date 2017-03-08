@@ -66,7 +66,7 @@ namespace WebForLink.Application.Services
 
         public Usuario ProcessoLoginConvencional(string usuario, string senha)
         {
-            throw new NotImplementedException();
+           return _Solicitanteservice.Get(x => x.Login == usuario);
         }
     }
 }
