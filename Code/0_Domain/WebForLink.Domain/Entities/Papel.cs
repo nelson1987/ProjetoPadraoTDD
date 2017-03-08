@@ -2,20 +2,22 @@
 
 namespace WebForLink.Domain.Entities
 {
-    public class Perfil
+    public class Papel
     {
-        protected Perfil()
+        private Papel()
         {
         }
 
-        public Perfil(string nome) : this()
+        public Papel(string nome)
+            : this()
         {
             Nome = nome;
         }
 
         public int Id { get; private set; }
         public string Nome { get; private set; }
-        public List<Usuario> Usuarios { get; private set; }
         public Contratante Contratante { get; private set; }
+        public List<Usuario> Usuarios { get; private set; }
+        public List<Etapa> Etapas { get; private set; }
     }
 }

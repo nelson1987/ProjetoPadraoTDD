@@ -18,7 +18,7 @@ namespace WebForLink.Domain.Entities
             Email = email;
         }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
         public string Login { get; private set; }
         public string Email { get; private set; }
         public string CodigoCliente { get; private set; }
