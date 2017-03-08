@@ -11,7 +11,7 @@
         {
             RazaoSocial = razaoSocial;
         }
-
+        
         public int Id { get; private set; }
         public string RazaoSocial { get; private set; }
         public string Documento { get; private set; }

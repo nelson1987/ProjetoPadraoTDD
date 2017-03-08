@@ -1,6 +1,10 @@
-﻿namespace WebForLink.Domain.Entities
+﻿using System;
+using WebForLink.Domain.Interfaces.Validation;
+using WebForLink.Domain.Validation;
+
+namespace WebForLink.Domain.Entities
 {
-    public class Contato
+    public class Contato : ISelfValidation
     {
         private Contato()
         {
@@ -14,7 +18,15 @@
             Celular = celular;
         }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
+        public bool EhValido { get; }
+        public ValidationResult ValidationResult
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
         public string Nome { get; private set; }
         public string Email { get; private set; }
         public string Telefone { get; private set; }

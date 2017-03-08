@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using WebForLink.Domain.Entities;
+using WebForLink.Domain.Interfaces.Validation;
+using WebForLink.Domain.Validation;
 
 namespace WebForLink.Domain
 {
-    public class Etapa
+    public class Etapa : ISelfValidation
     {
         protected Etapa()
         {
@@ -16,7 +19,15 @@ namespace WebForLink.Domain
             Nome = nome;
         }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
+        public bool EhValido { get; }
+        public ValidationResult ValidationResult
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
         public string Nome { get; private set; }
         public bool Aprovado { get; private set; }
         public List<Passo> Passos { get; private set; }

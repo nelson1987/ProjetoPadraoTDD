@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using WebForLink.Domain.Interfaces.Validation;
+using WebForLink.Domain.Validation;
 
 namespace WebForLink.Domain.Entities
 {
-    public class Passo
+    public class Passo : ISelfValidation
     {
         private Passo()
         {
@@ -16,7 +19,15 @@ namespace WebForLink.Domain.Entities
             Papeis.AddRange(papel);
         }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
+        public bool EhValido { get; }
+        public ValidationResult ValidationResult
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
         public string Descricao { get; private set; }
         public bool Aprovado { get; private set; }
         public List<Papel> Papeis { get; private set; }

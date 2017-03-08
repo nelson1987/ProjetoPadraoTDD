@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using WebForLink.Domain.Interfaces.Validation;
+using WebForLink.Domain.Validation;
 
 namespace WebForLink.Domain.Entities
 {
-    public class Documento
+    public class Documento : ISelfValidation
     {
         private Documento()
         {
@@ -14,8 +17,7 @@ namespace WebForLink.Domain.Entities
         {
             Nome = nome;
         }
-
-        public int Id { get; private set; }
+        
         public string Nome { get; private set; }
         public List<Arquivo> Arquivos { get; private set; }
         public Empresa Empresa { get; private set; }
@@ -23,6 +25,15 @@ namespace WebForLink.Domain.Entities
         public void AdicionarArquivo(params Arquivo[] file)
         {
             Arquivos.AddRange(file);
+        }
+        public int Id { get; set; }
+        public bool EhValido { get; }
+        public ValidationResult ValidationResult
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

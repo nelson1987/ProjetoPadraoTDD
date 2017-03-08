@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using WebForLink.Domain.Interfaces.Validation;
+using WebForLink.Domain.Validation;
 
 namespace WebForLink.Domain.Entities
 {
-    public class Compartilhamento
+    public class Compartilhamento : ISelfValidation
     {
         private Compartilhamento()
         {
@@ -28,7 +30,15 @@ namespace WebForLink.Domain.Entities
             DataExpiracao = Criacao.AddDays(30);
         }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
+        public bool EhValido { get; }
+        public ValidationResult ValidationResult
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
         public Usuario Usuario { get; private set; }
         public DateTime Criacao { get; private set; }
         public FichaCadastral FichaCadastral { get; private set; }

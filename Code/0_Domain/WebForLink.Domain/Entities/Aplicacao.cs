@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebForLink.Domain.Interfaces.Validation;
+using WebForLink.Domain.Validation;
 
 namespace WebForLink.Domain.Entities
 {
-    public class Aplicacao
+    public class Aplicacao : ISelfValidation
     {
         public Aplicacao()
         {
@@ -12,12 +14,23 @@ namespace WebForLink.Domain.Entities
             Contratantes = new List<Contratante>();
         }
 
-        public int Id { get; private set; }
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
         public bool Ativo { get; private set; }
         public List<Contratante> Contratantes { get; private set; }
         public List<Perfil> Perfis { get; private set; }
+
+
+        public int Id { get; set; }
+        public bool EhValido { get; }
+        public ValidationResult ValidationResult
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
 
         public void SetNome(string nome)
         {

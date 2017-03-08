@@ -27,7 +27,7 @@ namespace WebForLink.Domain.Entities
             Contratante = contratante;
         }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
         public string Login { get; private set; }
         public Contratante Contratante { get; private set; }
         public Aplicacao Aplicacao { get; private set; }

@@ -49,5 +49,14 @@ namespace WebForLink.Domain.Entities
         {
             FichaCadastral.Anexos.Add(documento);
         }
+        public int Id { get; set; }
+        public bool EhValido { get; }
+        public ValidationResult ValidationResult
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

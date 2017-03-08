@@ -1,6 +1,10 @@
-﻿namespace WebForLink.Domain.Entities
+﻿using System;
+using WebForLink.Domain.Interfaces.Validation;
+using WebForLink.Domain.Validation;
+
+namespace WebForLink.Domain.Entities
 {
-    public class ConfiguracaoSistema
+    public class ConfiguracaoSistema : ISelfValidation
     {
         private ConfiguracaoSistema()
         {
@@ -13,7 +17,15 @@
             Contratante = contratante;
         }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
+        public bool EhValido { get; }
+        public ValidationResult ValidationResult
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
         public string CaminhoArquivo { get; private set; }
         public Contratante Contratante { get; private set; }
     }

@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using WebForLink.Domain.Entities.Tipos;
+using WebForLink.Domain.Interfaces.Validation;
+using WebForLink.Domain.Validation;
 
 namespace WebForLink.Domain.Entities
 {
-    public class Fluxo
+    public class Fluxo : ISelfValidation
     {
         private Fluxo()
         {
@@ -20,7 +22,15 @@ namespace WebForLink.Domain.Entities
             TipoEmpresa = tipoEmpresa;
         }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
+        public bool EhValido { get; }
+        public ValidationResult ValidationResult
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
         public string Nome { get; private set; }
         public TipoFluxo TipoFluxo { get; private set; }
         public TipoEmpresa TipoEmpresa { get; private set; }

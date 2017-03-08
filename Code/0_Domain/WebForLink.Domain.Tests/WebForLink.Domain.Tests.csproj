@@ -66,6 +66,12 @@
     <Compile Include="Entities\UsuarioTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebForLink.Domain\WebForLink.Domain.csproj">
+      <Project>{145d4549-2631-4298-ad0d-4d6defe9a2a9}</Project>
+      <Name>WebForLink.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

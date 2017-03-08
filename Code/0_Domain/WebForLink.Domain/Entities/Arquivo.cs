@@ -1,8 +1,10 @@
 ﻿using System;
+using WebForLink.Domain.Interfaces.Validation;
+using WebForLink.Domain.Validation;
 
 namespace WebForLink.Domain.Entities
 {
-    public class Arquivo
+    public class Arquivo : ISelfValidation
     {
         private Arquivo()
         {
@@ -14,7 +16,16 @@ namespace WebForLink.Domain.Entities
             Nome = nome;
         }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
+        public bool EhValido { get; }
+        public ValidationResult ValidationResult
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+        
         public string Nome { get; private set; }
         public string Tipo { get; private set; }
         public DateTime Upload { get; private set; }
