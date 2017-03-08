@@ -134,6 +134,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -177,8 +181,8 @@
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -191,33 +195,29 @@
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Routing" />
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    <Reference Include="System.Web.WebPages">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    <Reference Include="System.Web.WebPages.Deployment">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    <Reference Include="System.Web.WebPages.Razor">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
@@ -1501,27 +1501,15 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\Padrao_Sistema\Correios.Net-master\Correios.Net-master\src\Correios.Net.csproj">
-      <Project>{8990b1df-7741-477d-9419-a5b288f2d1c7}</Project>
-      <Name>Correios.Net</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ConsultaCH.Cpf\ConsultaCH.Cpf.csproj">
       <Project>{f829ccd1-72b4-4ad2-9e0f-bb5ff984722f}</Project>
       <Name>ConsultaCH.Cpf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ConsultaGeolocation\ConsultaGeolocation.csproj">
-      <Project>{d0b27d27-9c94-4994-b9c5-941a09679807}</Project>
-      <Name>ConsultaGeolocation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Uol.PagSeguro\Uol.PagSeguro.csproj">
-      <Project>{babc5658-6afd-4f8e-81f1-434553663d99}</Project>
-      <Name>Uol.PagSeguro</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebForLink.CrossCutting\WebForLink.CrossCutting.InversionControl.csproj">
+    <ProjectReference Include="..\..\4_Injection\WebForLink.CrossCutting\WebForLink.CrossCutting.InversionControl.csproj">
       <Project>{03bfc84e-7968-4221-b593-ec80e82f8420}</Project>
       <Name>WebForLink.CrossCutting.InversionControl</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebForLink.Data\WebForLink.Data.Context.csproj">
+    <ProjectReference Include="..\..\3_Persistence\3.1_Data\WebForLink.Data\WebForLink.Data.Context.csproj">
       <Project>{b2563bbc-430e-4167-965c-02db9784d388}</Project>
       <Name>WebForLink.Data.Context</Name>
     </ProjectReference>
@@ -1529,7 +1517,7 @@
       <Project>{145d4549-2631-4298-ad0d-4d6defe9a2a9}</Project>
       <Name>WebForLink.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebForLink.Service\WebForLink.Application.csproj">
+    <ProjectReference Include="..\..\2_Application\WebForLink.Service\WebForLink.Application.csproj">
       <Project>{5c19fb78-f531-466a-8823-bbbb75b7fc1d}</Project>
       <Name>WebForLink.Application</Name>
     </ProjectReference>

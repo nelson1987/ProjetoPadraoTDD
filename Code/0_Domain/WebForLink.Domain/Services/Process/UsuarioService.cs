@@ -3,77 +3,39 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using WebForLink.Domain.Entities.WebForLink;
-using WebForLink.Domain.Infrastructure;
-using WebForLink.Domain.Infrastructure.Exceptions;
-using WebForLink.Domain.Infrastructure.FiltrosDTO;
+using WebForLink.Domain.Entities;
 using WebForLink.Domain.Interfaces.Repository;
 using WebForLink.Domain.Interfaces.Service;
 using WebForLink.Domain.Services.Common;
 
 namespace WebForLink.Domain.Services.Process
 {
-    public class UsuarioWebForLinkService : Service<Usuario>, IUsuarioWebForLinkService
+    public class UsuarioService : Service<Usuario>, IUsuarioService
     {
-        private readonly IContratanteConfiguracaoWebForLinkRepository _contratanteConfiguracao;
-        private readonly IContratanteWebForLinkRepository _contratanteRepository;
-        private readonly IDescricaoDocumentosWebForLinkRepository _descricaoDocumentos;
-        private readonly IDescricaoDocumentosChWebForLinkRepository _descricaoDocumentosCH;
-        private readonly IFornecedorCategoriaWebForLinkRepository _fornecedorCategoria;
-        private readonly IFornecedorWebForLinkRepository _fornecedorRepository;
-        private readonly IPapelWebForLinkRepository _papelRepository;
-        private readonly IPerfilWebForLinkRepository _perfilRepository;
-        private readonly IFornecedorCategoriaChWebForLinkRepository _pjpfCategoriaCH;
-        private readonly IUsuarioSenhasHistWebForLinkRepository _processoSenhasHist;
-        private readonly ITipoDocumentoWebForLinkRepository _tipoDocumentos;
-        private readonly ITipoDocumentosChWebForLinkRepository _tipoDocumentosCH;
-        private readonly IUsuarioWebForLinkRepository _usuarioRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
 
-        public UsuarioWebForLinkService(
-            IUsuarioWebForLinkRepository productReviewRepository,
-            IFornecedorWebForLinkRepository fornecedorRepository,
-            IContratanteWebForLinkRepository contratanteRepository,
-            IPapelWebForLinkRepository papelRepository,
-            IPerfilWebForLinkRepository perfilRepository,
-            IFornecedorCategoriaWebForLinkRepository fornecedorCategoria,
-            IDescricaoDocumentosWebForLinkRepository descricaoDocumentos,
-            IContratanteConfiguracaoWebForLinkRepository contratanteConfiguracao,
-            ITipoDocumentosChWebForLinkRepository tipoDocumentosCH,
-            ITipoDocumentoWebForLinkRepository tipoDocumentos,
-            IDescricaoDocumentosChWebForLinkRepository descricaoDocumentosCH,
-            IFornecedorCategoriaChWebForLinkRepository pjpfCategoriaCH,
-            IUsuarioSenhasHistWebForLinkRepository processoSenhasHist) : base(productReviewRepository)
+        public UsuarioService(
+            IUsuarioRepository productReviewRepository)
+            : base(productReviewRepository)
         {
             try
             {
-                _fornecedorRepository = fornecedorRepository;
-                _contratanteRepository = contratanteRepository;
-                _papelRepository = papelRepository;
-                _perfilRepository = perfilRepository;
-                _fornecedorCategoria = fornecedorCategoria;
-                _descricaoDocumentos = descricaoDocumentos;
-                _contratanteConfiguracao = contratanteConfiguracao;
-                _tipoDocumentosCH = tipoDocumentosCH;
-                _tipoDocumentos = tipoDocumentos;
-                _descricaoDocumentosCH = descricaoDocumentosCH;
-                _pjpfCategoriaCH = pjpfCategoriaCH;
-                _processoSenhasHist = processoSenhasHist;
                 _usuarioRepository = productReviewRepository;
             }
             catch (Exception ex)
             {
-                throw new ServiceWebForLinkException(ex.Message);
+                throw new Exception(ex.Message);
             }
         }
 
         public void ContabilizarErroLogin(Usuario usuario)
         {
-            usuario.CONTA_TENTATIVA = usuario.CONTA_TENTATIVA + 1;
-            if (usuario.CONTA_TENTATIVA > 9)
-                usuario.ATIVO = false;
-            AlterarUsuario(usuario);
+            //usuario.CONTA_TENTATIVA = usuario.CONTA_TENTATIVA + 1;
+            //if (usuario.CONTA_TENTATIVA > 9)
+            //    usuario.ATIVO = false;
+            //AlterarUsuario(usuario);
         }
-
+        /*
         public void IncluirUsuario(Contratante contratante, CONTRATANTE_CONFIGURACAO config, Usuario usuario)
         {
             try
@@ -180,8 +142,8 @@ namespace WebForLink.Domain.Services.Process
         {
             try
             {
-                var idPapeis = new int[1] {idPapel};
-                var idPerfis = new int[1] {idPerfil};
+                var idPapeis = new int[1] { idPapel };
+                var idPerfis = new int[1] { idPerfil };
                 IncluirNovoUsuarioPadrao(login, senha, idPapeis, idPerfis);
             }
             catch (Exception ex)
@@ -216,10 +178,10 @@ namespace WebForLink.Domain.Services.Process
 
                 _usuarioRepository.Add(usuarioInclusao);
             }
-                //catch (DbEntityValidationException e)
-                //{
-                //    throw;
-                //}
+            //catch (DbEntityValidationException e)
+            //{
+            //    throw;
+            //}
             catch (Exception ex)
             {
                 throw new ServiceWebForLinkException("IncluirNovoUsuarioPadrao", ex);
@@ -535,6 +497,6 @@ namespace WebForLink.Domain.Services.Process
         public RetornoPesquisa<Usuario> PesquisarUsuarios(GerenciarContasFiltrosDTO filtros, int pagina, int qtdLinhas)
         {
             throw new NotImplementedException();
-        }
+        }*/
     }
 }

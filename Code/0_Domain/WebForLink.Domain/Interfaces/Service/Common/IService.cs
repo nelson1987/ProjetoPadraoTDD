@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using WebForLink.Domain.Infrastructure;
 using WebForLink.Domain.Validation;
 
 namespace WebForLink.Domain.Interfaces.Service.Common
@@ -20,7 +19,7 @@ namespace WebForLink.Domain.Interfaces.Service.Common
         ValidationResult Delete(TEntity entity);
         List<ValidationResult> Delete(List<TEntity> entity);
 
-        RetornoPesquisa<TEntity> BuscarPesquisa(Expression<Func<TEntity, bool>> filtros, int tamanhoPagina, int pagina,
-            Func<TEntity, IComparable> ordenacao);
+        //RetornoPesquisa<TEntity> BuscarPesquisa(Expression<Func<TEntity, bool>> filtros, int tamanhoPagina, int pagina,
+        //    Func<TEntity, IComparable> ordenacao);
     }
 }

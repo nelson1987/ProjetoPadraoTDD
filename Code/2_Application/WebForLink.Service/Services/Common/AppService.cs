@@ -1,5 +1,5 @@
-﻿using Microsoft.Practices.ServiceLocation;
-using System.Data.Entity.Validation;
+﻿using System.Data.Entity.Validation;
+using Microsoft.Practices.ServiceLocation;
 using WebForLink.Application.Interfaces.Common;
 using WebForLink.Data.Context.Interfaces;
 using WebForLink.Domain.Validation;

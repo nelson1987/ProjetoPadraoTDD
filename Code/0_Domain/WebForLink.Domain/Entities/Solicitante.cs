@@ -1,19 +1,16 @@
-using System.Collections.Generic;
 using WebForLink.Domain.Entities.Validations;
 using WebForLink.Domain.Interfaces.Validation;
 using WebForLink.Domain.Validation;
 
 namespace WebForLink.Domain.Entities
 {
-    public class Solicitante : ISelfValidation
+    public class Usuario : ISelfValidation
     {
-        public Solicitante()
+        protected Usuario()
         {
-            ListasDocumentosSolicitante = new List<ListasSolicitante>();
-            Solicitacao = new List<Solicitacao>();
         }
 
-        public Solicitante(string codigoCliente, string login, string email)
+        public Usuario(string codigoCliente, string login, string email)
             : this()
         {
             CodigoCliente = codigoCliente;
@@ -21,19 +18,17 @@ namespace WebForLink.Domain.Entities
             Email = email;
         }
 
-        public int Id { get; set; }
-        public string Login { get; set; }
-        public string Email { get; set; }
-        public string CodigoCliente { get; set; }
-        public string NomeEmpresa { get; set; }
-        public virtual ICollection<ListasSolicitante> ListasDocumentosSolicitante { get; set; }
-        public virtual ICollection<Solicitacao> Solicitacao { get; set; }
+        public int Id { get; private set; }
+        public string Login { get; private set; }
+        public string Email { get; private set; }
+        public string CodigoCliente { get; private set; }
+        public string NomeEmpresa { get; private set; }
 
         public bool EhValido
         {
             get
             {
-                var validacaoExterna = new SolicitanteValidacao();
+                var validacaoExterna = new UsuarioValidation();
                 ValidationResult = validacaoExterna.Validar(this);
                 return ValidationResult.EstaValidado;
             }

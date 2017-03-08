@@ -7,7 +7,6 @@ using Microsoft.Practices.ServiceLocation;
 using WebForLink.Data.Context;
 using WebForLink.Data.Context.Config;
 using WebForLink.Data.Context.Interfaces;
-using WebForLink.Domain.Infrastructure;
 using WebForLink.Domain.Interfaces.Repository.Common;
 using WebForLink.Repository.Infrastructure;
 
@@ -25,16 +24,7 @@ namespace WebForLink.Data.Repository.EntityFramework.Common
         {
             var typeofT = typeof (T);
 
-            if (typeofT.Name == typeof (ChMasterDataContext).Name)
-            {
-                var contextManager =
-                    ServiceLocator.Current.GetInstance<IContextManager<ChMasterDataContext>>()
-                        as ContextManager<ChMasterDataContext>;
-
-                _dbContext = contextManager.GetContext();
-                _dbSet = _dbContext.Set<TEntity>();
-            }
-            else if (typeofT.Name == typeof (WebForLinkContexto).Name)
+            if (typeofT.Name == typeof (WebForLinkContexto).Name)
             {
                 var contextManager = ServiceLocator.Current.GetInstance<IContextManager<WebForLinkContexto>>()
                     as ContextManager<WebForLinkContexto>;
@@ -58,6 +48,22 @@ namespace WebForLink.Data.Repository.EntityFramework.Common
         {
             get { return _dbSet; }
         }
+
+        #region Dispose
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        //public RetornoPesquisa<TEntity> Pesquisar(Expression<Func<TEntity, bool>> filtros, int tamanhoPagina, int pagina,
+        //    Func<TEntity, IComparable> ordenacao, bool @readonly = false)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        #endregion
 
         public virtual void Add(TEntity entity)
         {
@@ -132,80 +138,6 @@ namespace WebForLink.Data.Repository.EntityFramework.Common
                 : DbSet.Where(predicate);
         }
 
-        public RetornoPesquisa<TEntity> Pesquisar(Expression<Func<TEntity, bool>> filtros, int tamanhoPagina, int pagina,
-            Func<TEntity, IComparable> ordenacao)
-        {
-            try
-            {
-                IQueryable<TEntity> registros = All()
-                    .AsQueryable()
-                    .Where(filtros);
-                IQueryable<TEntity> lista = registros
-                    .OrderBy(ordenacao)
-                    .Skip(tamanhoPagina * (pagina - 1))
-                    .Take(tamanhoPagina)
-                    .AsQueryable();
-                return new RetornoPesquisa<TEntity>
-                {
-                    TotalRegistros = registros.Count(),
-                    RegistrosPagina = lista.ToList(),
-                    TotalPaginas = (int)Math.Ceiling(registros.Count() / (double)tamanhoPagina)
-                };
-            }
-            catch (Exception ex)
-            {
-                throw new RepositoryWebForLinkException("Erro ao buscar um destinatário por Id", ex);
-            }
-        }
-        public RetornoPesquisa<TEntity> PesquisarInvertido(Expression<Func<TEntity, bool>> filtros, int tamanhoPagina, int pagina,
-            Func<TEntity, IComparable> ordenacao)
-        {
-            try
-            {
-                IQueryable<TEntity> registros = All()
-                    .AsQueryable()
-                    .Where(filtros);
-                IQueryable<TEntity> lista = registros
-                    .OrderByDescending(ordenacao)
-                    .Skip(tamanhoPagina * (pagina - 1))
-                    .Take(tamanhoPagina)
-                    .AsQueryable();
-                return new RetornoPesquisa<TEntity>
-                {
-                    TotalRegistros = registros.Count(),
-                    RegistrosPagina = lista.ToList(),
-                    TotalPaginas = (int)Math.Ceiling(registros.Count() / (double)tamanhoPagina)
-                };
-            }
-            catch (Exception ex)
-            {
-                throw new RepositoryWebForLinkException("Erro ao buscar um destinatário por Id", ex);
-            }
-        }
-
-        #region Dispose
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        //public RetornoPesquisa<TEntity> Pesquisar(Expression<Func<TEntity, bool>> filtros, int tamanhoPagina, int pagina,
-        //    Func<TEntity, IComparable> ordenacao, bool @readonly = false)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        #endregion
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposing) return;
-
-            if (Context == null) return;
-            Context.Dispose();
-        }
-
         public TEntity GetAllReferences(int id)
         {
             return DbSet.Find(id);
@@ -220,11 +152,6 @@ namespace WebForLink.Data.Repository.EntityFramework.Common
                 }
         }
 
-        public RetornoPesquisa<TEntity> Pesquisar(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Add(List<TEntity> entity)
         {
             throw new NotImplementedException();
@@ -235,5 +162,70 @@ namespace WebForLink.Data.Repository.EntityFramework.Common
             return DbSet.FirstOrDefault(predicate);
         }
 
+        //public RetornoPesquisa<TEntity> Pesquisar(Expression<Func<TEntity, bool>> filtros, int tamanhoPagina, int pagina,
+        //    Func<TEntity, IComparable> ordenacao)
+        //{
+        //    try
+        //    {
+        //        var registros = All()
+        //            .AsQueryable()
+        //            .Where(filtros);
+        //        var lista = registros
+        //            .OrderBy(ordenacao)
+        //            .Skip(tamanhoPagina*(pagina - 1))
+        //            .Take(tamanhoPagina)
+        //            .AsQueryable();
+        //        return new RetornoPesquisa<TEntity>
+        //        {
+        //            TotalRegistros = registros.Count(),
+        //            RegistrosPagina = lista.ToList(),
+        //            TotalPaginas = (int) Math.Ceiling(registros.Count()/(double) tamanhoPagina)
+        //        };
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new RepositoryWebForLinkException("Erro ao buscar um destinatário por Id", ex);
+        //    }
+        //}
+
+        //public RetornoPesquisa<TEntity> PesquisarInvertido(Expression<Func<TEntity, bool>> filtros, int tamanhoPagina,
+        //    int pagina,
+        //    Func<TEntity, IComparable> ordenacao)
+        //{
+        //    try
+        //    {
+        //        var registros = All()
+        //            .AsQueryable()
+        //            .Where(filtros);
+        //        var lista = registros
+        //            .OrderByDescending(ordenacao)
+        //            .Skip(tamanhoPagina*(pagina - 1))
+        //            .Take(tamanhoPagina)
+        //            .AsQueryable();
+        //        return new RetornoPesquisa<TEntity>
+        //        {
+        //            TotalRegistros = registros.Count(),
+        //            RegistrosPagina = lista.ToList(),
+        //            TotalPaginas = (int) Math.Ceiling(registros.Count()/(double) tamanhoPagina)
+        //        };
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new RepositoryWebForLinkException("Erro ao buscar um destinatário por Id", ex);
+        //    }
+        //}
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposing) return;
+
+            if (Context == null) return;
+            Context.Dispose();
+        }
+
+        //public RetornoPesquisa<TEntity> Pesquisar(TEntity entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

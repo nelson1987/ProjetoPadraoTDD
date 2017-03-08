@@ -8,10 +8,9 @@ namespace WebForLink.CrossCutting.InversionControl.Modules
     {
         public override void Load()
         {
-            Bind<IDbContext>().To<ChMasterDataContext>();
             Bind<IDbContext>().To<WebForLinkContexto>();
-            Bind(typeof(IContextManager<>)).To(typeof(ContextManager<>));
-            Bind(typeof(IUnitOfWork<>)).To((typeof(UnitOfWork<>)));
+            Bind(typeof (IContextManager<>)).To(typeof (ContextManager<>));
+            Bind(typeof (IUnitOfWork<>)).To((typeof (UnitOfWork<>)));
         }
     }
 }

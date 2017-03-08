@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 14 for Web
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0_Domain", "0_Domain", "{9548B344-895C-4D02-9FC6-226F7941470C}"
 EndProject
@@ -15,8 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4_Injection", "4_Injection"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebForLink.Domain", "0_Domain\WebForLink.Domain\WebForLink.Domain.csproj", "{145D4549-2631-4298-AD0D-4D6DEFE9A2A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebForLink.Web", "1_Presentation\WebForLink.Web\WebForLink.Web.csproj", "{C7C591A4-07F7-44C7-A760-80D66B85EC96}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebForLink.Application", "2_Application\WebForLink.Service\WebForLink.Application.csproj", "{5C19FB78-F531-466A-8823-BBBB75B7FC1D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.1_Data", "3.1_Data", "{23E3055A-FC66-4FE6-825D-02F1C7A73FFE}"
@@ -28,6 +26,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebForLink.Data.Repository", "3_Persistence\3.2_Repository\WebForLink.Repository\WebForLink.Data.Repository.csproj", "{D0B96B04-FDA2-4E6F-ACB9-78404C66B01D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebForLink.CrossCutting.InversionControl", "4_Injection\WebForLink.CrossCutting\WebForLink.CrossCutting.InversionControl.csproj", "{03BFC84E-7968-4221-B593-EC80E82F8420}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterData.Web", "1_Presentation\MasterData.Web\MasterData.Web.csproj", "{EEEF80FD-F819-4A07-A1DD-B9A127FC20DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,12 +42,6 @@ Global
 		{145D4549-2631-4298-AD0D-4D6DEFE9A2A9}.Desenvolvimento|Any CPU.Build.0 = Desenvolvimento|Any CPU
 		{145D4549-2631-4298-AD0D-4D6DEFE9A2A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{145D4549-2631-4298-AD0D-4D6DEFE9A2A9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C7C591A4-07F7-44C7-A760-80D66B85EC96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C7C591A4-07F7-44C7-A760-80D66B85EC96}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C7C591A4-07F7-44C7-A760-80D66B85EC96}.Desenvolvimento|Any CPU.ActiveCfg = Desenvolvimento|Any CPU
-		{C7C591A4-07F7-44C7-A760-80D66B85EC96}.Desenvolvimento|Any CPU.Build.0 = Desenvolvimento|Any CPU
-		{C7C591A4-07F7-44C7-A760-80D66B85EC96}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C7C591A4-07F7-44C7-A760-80D66B85EC96}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5C19FB78-F531-466A-8823-BBBB75B7FC1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5C19FB78-F531-466A-8823-BBBB75B7FC1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C19FB78-F531-466A-8823-BBBB75B7FC1D}.Desenvolvimento|Any CPU.ActiveCfg = Desenvolvimento|Any CPU
@@ -72,18 +66,24 @@ Global
 		{03BFC84E-7968-4221-B593-EC80E82F8420}.Desenvolvimento|Any CPU.Build.0 = Desenvolvimento|Any CPU
 		{03BFC84E-7968-4221-B593-EC80E82F8420}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03BFC84E-7968-4221-B593-EC80E82F8420}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEEF80FD-F819-4A07-A1DD-B9A127FC20DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEEF80FD-F819-4A07-A1DD-B9A127FC20DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEEF80FD-F819-4A07-A1DD-B9A127FC20DA}.Desenvolvimento|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEEF80FD-F819-4A07-A1DD-B9A127FC20DA}.Desenvolvimento|Any CPU.Build.0 = Debug|Any CPU
+		{EEEF80FD-F819-4A07-A1DD-B9A127FC20DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEEF80FD-F819-4A07-A1DD-B9A127FC20DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{145D4549-2631-4298-AD0D-4D6DEFE9A2A9} = {9548B344-895C-4D02-9FC6-226F7941470C}
-		{C7C591A4-07F7-44C7-A760-80D66B85EC96} = {C6D9F5FB-E067-4D6C-B0D6-1D9D9C04AD23}
 		{5C19FB78-F531-466A-8823-BBBB75B7FC1D} = {486539F1-1A2A-4D5D-AF47-794B5B561DE2}
 		{23E3055A-FC66-4FE6-825D-02F1C7A73FFE} = {D9D6A934-B9DC-4E15-B02B-A61AFDB1F145}
 		{00E19AD0-6657-4DD1-AB43-1C77F6F15006} = {D9D6A934-B9DC-4E15-B02B-A61AFDB1F145}
 		{B2563BBC-430E-4167-965C-02DB9784D388} = {23E3055A-FC66-4FE6-825D-02F1C7A73FFE}
 		{D0B96B04-FDA2-4E6F-ACB9-78404C66B01D} = {00E19AD0-6657-4DD1-AB43-1C77F6F15006}
 		{03BFC84E-7968-4221-B593-EC80E82F8420} = {043354F3-1C09-494A-B309-B6B1EF1EF6AD}
+		{EEEF80FD-F819-4A07-A1DD-B9A127FC20DA} = {C6D9F5FB-E067-4D6C-B0D6-1D9D9C04AD23}
 	EndGlobalSection
 EndGlobal

@@ -1,3 +1,0 @@
-﻿namespace WebForLink.Repository.Interfaces
-{
-}

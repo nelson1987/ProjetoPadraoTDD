@@ -47,127 +47,14 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aggregates\Agregadores.cs" />
-    <Compile Include="Aggregates\CriacaoContratante.cs" />
-    <Compile Include="Aggregates\CriacaoUsuario.cs" />
-    <Compile Include="Biblioteca\Geral.cs" />
-    <Compile Include="Biblioteca\RoboSintegra.cs" />
-    <Compile Include="Entities\Arquivo.cs" />
-    <Compile Include="Entities\Banco.cs" />
-    <Compile Include="Entities\Carrinho.cs" />
-    <Compile Include="Entities\Contato.cs" />
-    <Compile Include="Entities\DocumentoAnexado.cs" />
-    <Compile Include="Entities\DocumentosSolicitacao.cs" />
-    <Compile Include="Entities\Endereco.cs" />
-    <Compile Include="Entities\FichaCadastral.cs" />
-    <Compile Include="Entities\ListaDocumento.cs" />
-    <Compile Include="Entities\ListasSolicitante.cs" />
-    <Compile Include="Entities\Responsavel.cs" />
-    <Compile Include="Entities\SimplesNacional.cs" />
-    <Compile Include="Entities\Solicitacao.cs" />
-    <Compile Include="Entities\Solicitado.cs" />
     <Compile Include="Entities\Solicitante.cs" />
-    <Compile Include="Entities\Specifications\ResponsavelSpecs.cs" />
-    <Compile Include="Entities\Specifications\SolicitadoSpec.cs" />
-    <Compile Include="Entities\Specifications\SolicitanteSpecs.cs" />
-    <Compile Include="Entities\Validations\ResponsavelValidation.cs" />
-    <Compile Include="Entities\Validations\SolicitacaoDocumentoValidation.cs" />
-    <Compile Include="Entities\Validations\SolicitadoValidation.cs" />
-    <Compile Include="Entities\Validations\SolicitanteValidation.cs" />
+    <Compile Include="Entities\Specifications\UsuarioSpecs.cs" />
+    <Compile Include="Entities\Validations\UsuarioValidation.cs" />
     <Compile Include="Entities\Validations\ValidationMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ValidationMessages.resx</DependentUpon>
     </Compile>
-    <Compile Include="Entities\WebForLink\Compartilhamentos.cs" />
-    <Compile Include="Entities\WebForLink\DocumentosCompartilhados.cs" />
-    <Compile Include="Entities\WebForLink\PROCEDURE.cs" />
-    <Compile Include="Entities\WebForLink\QIC_QUESTIONARIO.cs" />
-    <Compile Include="Entities\WebForLink\QIC_QUESTIONARIO_CATEGORIA.cs" />
-    <Compile Include="Entities\WebForLink\QIC_QUEST_ABA.cs" />
-    <Compile Include="Entities\WebForLink\QIC_QUEST_ABA_PERG.cs" />
-    <Compile Include="Entities\WebForLink\QIC_QUEST_ABA_PERG_PAPEL.cs" />
-    <Compile Include="Entities\WebForLink\QIC_QUEST_ABA_PERG_RESP.cs" />
-    <Compile Include="Entities\WebForLink\T_BANCO.cs" />
-    <Compile Include="Entities\WebForLink\T_PAIS.cs" />
-    <Compile Include="Entities\WebForLink\T_UF.cs" />
-    <Compile Include="Entities\WebForLink\T_UNSPSC.cs" />
-    <Compile Include="Entities\WebForLink\WAC_ACESSO_LOG.cs" />
-    <Compile Include="Entities\WebForLink\WAC_APLICACAO.cs" />
-    <Compile Include="Entities\WebForLink\WAC_FUNCAO.cs" />
-    <Compile Include="Entities\WebForLink\WAC_PERFIL.cs" />
-    <Compile Include="Entities\WebForLink\WFD_ARQUIVOS.cs" />
-    <Compile Include="Entities\WebForLink\WFD_CONFIG.cs" />
-    <Compile Include="Entities\WebForLink\WFD_CONTRATANTE.cs" />
-    <Compile Include="Entities\WebForLink\WFD_CONTRATANTE_CONFIG.cs" />
-    <Compile Include="Entities\WebForLink\WFD_CONTRATANTE_CONFIG_EMAIL.cs" />
-    <Compile Include="Entities\WebForLink\WFD_CONTRATANTE_LOG.cs" />
-    <Compile Include="Entities\WebForLink\WFD_CONTRATANTE_ORG_COMPRAS.cs" />
-    <Compile Include="Entities\WebForLink\WFD_CONTRATANTE_PJPF.cs" />
-    <Compile Include="Entities\WebForLink\DescricaoDeDocumentos.cs" />
-    <Compile Include="Entities\WebForLink\WFD_DESCRICAO_DOCUMENTOS_CH.cs" />
-    <Compile Include="Entities\WebForLink\WFD_DESTINATARIO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_GRUPO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_INFORM_COMPL.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_BANCO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_BASE.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_BASE_CONTATOS.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_BASE_CONVITE.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_BASE_ENDERECO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_BASE_IMPORTACAO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_BASE_UNSPSC.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_CATEGORIA.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_CATEGORIA_CH.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_CONTATOS.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_CONTRATANTE_ORG_COMPRAS.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_DOCUMENTOS.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_DOCUMENTOS_VERSAO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_ENDERECO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_INFORM_COMPL.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_LISTA_DOCUMENTOS.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_ROBO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_ROBO_LOG.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_SOLICITACAO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_SOLICITACAO_DOCUMENTOS.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_STATUS.cs" />
-    <Compile Include="Entities\WebForLink\WFD_PJPF_UNSPSC.cs" />
-    <Compile Include="Entities\WebForLink\WFD_SOLICITACAO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_SOLICITACAO_PRORROGACAO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_SOLICITACAO_STATUS.cs" />
-    <Compile Include="Entities\WebForLink\WFD_SOLICITACAO_TRAMITE.cs" />
-    <Compile Include="Entities\WebForLink\WFD_SOL_BLOQ.cs" />
-    <Compile Include="Entities\WebForLink\WFD_SOL_CAD_PJPF.cs" />
-    <Compile Include="Entities\WebForLink\WFD_SOL_DESBLOQ.cs" />
-    <Compile Include="Entities\WebForLink\WFD_SOL_DOCUMENTOS.cs" />
-    <Compile Include="Entities\WebForLink\WFD_SOL_MENSAGEM.cs" />
-    <Compile Include="Entities\WebForLink\WFD_SOL_MOD_BANCO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_SOL_MOD_CONTATO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_SOL_MOD_DGERAIS_SEQ.cs" />
-    <Compile Include="Entities\WebForLink\WFD_SOL_MOD_ENDERECO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_SOL_UNSPSC.cs" />
-    <Compile Include="Entities\WebForLink\WFD_TIPO_CADASTRO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_TIPO_CONTRATANTE.cs" />
-    <Compile Include="Entities\WebForLink\WFD_TIPO_DOCUMENTOS.cs" />
-    <Compile Include="Entities\WebForLink\WFD_TIPO_DOCUMENTOS_CH.cs" />
-    <Compile Include="Entities\WebForLink\WFD_T_DESCRICAO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_T_FUNCAO_BLOQUEIO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_T_GRUPO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_T_PERIODICIDADE.cs" />
-    <Compile Include="Entities\WebForLink\WFD_T_STATUS_PRECADASTRO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_T_TP_CONTATO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_T_TP_EMAIL.cs" />
-    <Compile Include="Entities\WebForLink\WFD_T_TP_ENDERECO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_T_TP_PJPF.cs" />
-    <Compile Include="Entities\WebForLink\WFD_T_VISAO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_USUARIO.cs" />
-    <Compile Include="Entities\WebForLink\WFD_USUARIO_SENHAS_HIST.cs" />
-    <Compile Include="Entities\WebForLink\WFL_FLUXO.cs" />
-    <Compile Include="Entities\WebForLink\WFL_FLUXO_SEQUENCIA.cs" />
-    <Compile Include="Entities\WebForLink\WFL_FLUXO_SEQ_PRE_REQUIS.cs" />
-    <Compile Include="Entities\WebForLink\Papel.cs" />
-    <Compile Include="Entities\WebForLink\WFL_T_TP_FLUXO.cs" />
-    <Compile Include="Entities\WebForLink\WFL_T_TP_PAPEL.cs" />
     <Compile Include="Enums\CasosPreCadastroEnum.cs" />
     <Compile Include="Enums\EnumColunasPlanilha.cs" />
     <Compile Include="Enums\EnumPapeisWorkflow.cs" />
@@ -347,7 +234,6 @@
     <Compile Include="Services\Process\UsuarioSenhaHistoricoService.cs" />
     <Compile Include="Services\Process\UsuarioService.cs" />
     <Compile Include="Services\Process\VisaoService.cs" />
-    <Compile Include="Validation\StatusSolicitacaoException.cs" />
     <Compile Include="Validation\Validation.cs" />
     <Compile Include="Validation\ValidationError.cs" />
     <Compile Include="Validation\ValidationResult.cs" />
@@ -358,12 +244,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ValidationMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ConsultaGeolocation\ConsultaGeolocation.csproj">
-      <Project>{d0b27d27-9c94-4994-b9c5-941a09679807}</Project>
-      <Name>ConsultaGeolocation</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using WebForLink.Domain.Infrastructure;
-using WebForLink.Domain.Infrastructure.Exceptions;
 using WebForLink.Domain.Interfaces.Repository.Common;
 using WebForLink.Domain.Interfaces.Service.Common;
 using WebForLink.Domain.Interfaces.Validation;
@@ -153,18 +151,18 @@ namespace WebForLink.Domain.Services.Common
             return validation;
         }
 
-        public RetornoPesquisa<TEntity> BuscarPesquisa(Expression<Func<TEntity, bool>> filtros, int tamanhoPagina,
-            int pagina, Func<TEntity, IComparable> ordenacao)
-        {
-            try
-            {
-                return _repository.Pesquisar(filtros, tamanhoPagina, pagina, ordenacao);
-            }
-            catch (Exception ex)
-            {
-                throw new ServiceWebForLinkException("Erro ao buscar um destinatário por Id", ex);
-            }
-        }
+        //public RetornoPesquisa<TEntity> BuscarPesquisa(Expression<Func<TEntity, bool>> filtros, int tamanhoPagina,
+        //    int pagina, Func<TEntity, IComparable> ordenacao)
+        //{
+        //    try
+        //    {
+        //        return _repository.Pesquisar(filtros, tamanhoPagina, pagina, ordenacao);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new ServiceWebForLinkException("Erro ao buscar um destinatário por Id", ex);
+        //    }
+        //}
 
         #endregion
     }
