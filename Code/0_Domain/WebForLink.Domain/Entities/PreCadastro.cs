@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using WebForLink.Domain.Entities.Categorias;
 using WebForLink.Domain.Entities.Status;
 using WebForLink.Domain.Entities.Tipos;
+using WebForLink.Domain.Validation;
 
 namespace WebForLink.Domain.Entities
 {
@@ -20,8 +22,7 @@ namespace WebForLink.Domain.Entities
             Documento = documento;
             Tipo = tipo;
         }
-
-        public int Id { get; private set; }
+        
         public string RazaoSocial { get; private set; }
         public string Documento { get; private set; }
         public TipoEmpresa Tipo { get; private set; }
